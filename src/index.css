@@ -1,6 +1,5 @@
 body {
   margin: 0;
-  font-family: 'Neucha', cursive;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
@@ -21,4 +20,16 @@ code {
 
 .app {
   min-height: 100vh;
+}
+
+.disabledbutton {
+  pointer-events: none;
+  opacity: 0.4;
+}
+.connectedDot {
+  height: 5px;
+  width: 5px;
+  background-color: green;
+  border-radius: 50%;
+  display: inline-block;
 }

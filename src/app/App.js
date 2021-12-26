@@ -1,10 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { SideBar } from "../components/sidebar/SideBar";
+import { Header } from "../components/header/Header";
+import { Home } from "../components/home/Home";
 
 const App = () => {
   return (
     <div className="app">
-      <SideBar />
+      <Header />
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -13,9 +14,5 @@ const App = () => {
     </div>
   );
 };
-
-const Home = () => {
-  return <h2></h2>;
-}
 
 export default App;
