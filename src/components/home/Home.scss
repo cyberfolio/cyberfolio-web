@@ -1,0 +1,33 @@
+@import "../../css/variables.scss";
+@import "../../css/button.scss";
+
+.home {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  padding-top: 10px;
+  height: 100%;
+
+  &__header {
+    height: 150px;
+    width: 100%;
+    &__content {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      &__bundle {
+        @extend .button;
+      }
+    }
+  }
+  &__eth {
+    margin-top: 10px;
+    padding: 20px;
+    border: 1px solid white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+  }
+}

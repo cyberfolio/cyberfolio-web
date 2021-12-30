@@ -1,6 +1,6 @@
 import React from "react";
 import Metamask from "../../assets/metamask.png";
-import "./Header.css";
+import "./Header.scss";
 
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
