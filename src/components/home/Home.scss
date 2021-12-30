@@ -8,7 +8,7 @@
   max-width: 1480px;
   margin: 0 auto;
 
-  &__assets {
+  &__header {
     padding-top: 10px;
     width: 60%;
     margin: 0 auto;
@@ -37,6 +37,7 @@
       padding: 0 21px;
       margin: 0 auto;
       margin-top: 30px;
+      padding-bottom: 20px;
       &__label {
         padding-left: 2px;
         color: darken($textColorDark, 40%);
@@ -46,6 +47,9 @@
         font-weight: 600;
         color: $textColorDark;
       }
+    }
+    &__assets {
+      width: 100%;
     }
   }
   &__utilities {

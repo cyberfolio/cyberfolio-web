@@ -1,0 +1,34 @@
+@import "../../css/variables.scss";
+@import "../../css/shared.scss";
+
+.assets {
+  width: 100%;
+  &__links {
+    display: flex;
+    border-bottom: 1px solid $border;
+    padding: 0 20px;
+
+    &__link {
+      padding: 20px 40px;
+      margin-right: 20px;
+      color: $textColorDark;
+      @extend .unselectable;
+      &:hover {
+        background-color: lighten($background-dark, 20%);
+        border-radius: 8px 8px 0 0;
+        cursor: pointer;
+      }
+      &--active {
+        background-color: unset !important;
+        border-bottom: 1px solid red;
+        border-radius: unset !important;
+      }
+    }
+  }
+
+  &__table {
+    padding: 0 20px;
+    padding-top: 20px;
+    width: 100%;
+  }
+}
