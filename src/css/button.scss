@@ -7,9 +7,9 @@
   padding: 10px;
   border: 1px solid $border;
   border-radius: 8px;
-  width: 140px;
-  color: white;
+  color: $textColorDark;
   font-weight: 500;
+  font-size: 16px;
   &:hover {
     cursor: pointer;
     background-color: $bottonHover;

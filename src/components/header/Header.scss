@@ -5,26 +5,29 @@
   background-color: #1d1d21;
   color: white;
   height: 56px;
+  border-bottom: 1px solid $border;
 }
 .header-content {
-  max-width: 1280px;
+  max-width: 1480px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
   height: 100%;
   padding: 0 20px;
 }
 .header-brand {
-  font-size: 20px;
+  font-size: 22px;
+  font-weight: 600;
 }
 
 .metamask-button {
   display: flex;
+  justify-content: center;
   align-items: center;
   padding: 5px 10px 5px 10px;
-  border: 1px solid white;
-  border-radius: 15px;
+  border-radius: 8px;
   cursor: pointer;
 }
 
@@ -34,11 +37,11 @@
 
 .metamask-button:hover {
   background-color: $bottonHover;
-  color: rgb(39, 35, 35);
 }
 .metamask-button-img {
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
+  margin-right: 3px;
 }
 .metamask-button-text {
   padding-left: 5px;
