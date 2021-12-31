@@ -16,6 +16,20 @@ const assets = [
     value: 2000,
     place: "wallet2",
   },
+  {
+    name: "IME",
+    price: 0.04,
+    balance: 24027,
+    value: 846,
+    place: "wallet3",
+  },
+  {
+    name: "PTP",
+    price: 1.95,
+    balance: 356.1645,
+    value: 693,
+    place: "wallet2",
+  },
 ];
 
 export const AssetTable = () => {
@@ -33,7 +47,8 @@ export const AssetTable = () => {
           return (
             <div
               className={`asset-table__assets__asset ${
-                index === 0 ? "asset-table__assets__asset--first" : ""
+                index === 0 ? "asset-table__assets__asset--first" :
+                index === assets.length - 1 ? "asset-table__assets__asset--last" : ""
               }`}
             >
               <div className="asset-table__assets__asset__item">{name}</div>
