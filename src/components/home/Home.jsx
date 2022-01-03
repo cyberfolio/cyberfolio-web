@@ -3,7 +3,7 @@ import "./Home.scss";
 
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { Plus } from "react-bootstrap-icons";
+import { Plus, ChevronDown } from "react-bootstrap-icons";
 import { Utilities } from "../utilities/Utilities";
 import { Assets } from "../assets/Assets";
 
@@ -55,9 +55,23 @@ export const Home = () => {
             FTX Account <Plus color="white" size={20} />
           </div>
         </div>
-        <div className="home__header__total-balance">
-          <div className="home__header__total-balance__label">Net Worth</div>
-          <div className="home__header__total-balance__value">$10,000,883</div>
+        <div className="home__header__second">
+          <div className="home__header__second__total-balance">
+            <div className="home__header__second__total-balance__label">
+              Net Worth
+            </div>
+            <div className="home__header__second__total-balance__value">
+              $10,000,883
+            </div>
+          </div>
+          <div className="home__header__second__filter">
+            <div className="home__header__second__filter__button">
+              All Networks
+              <div className="home__header__second__filter__button__arrow">
+                <ChevronDown color="white" size={15} />
+              </div>
+            </div>
+          </div>
         </div>
         <div className="home__assets">
           <Assets />
