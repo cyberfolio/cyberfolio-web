@@ -11,7 +11,7 @@
     &__link {
       padding: 20px 40px;
       margin-right: 20px;
-      color: $textColorDark;
+      color: $text-color-dark;
       @extend .unselectable;
       &:hover {
         background-color: lighten($background-dark, 20%);

@@ -1,20 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./Home.scss";
 
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Plus, ChevronDown } from "react-bootstrap-icons";
 import { Utilities } from "../utilities/Utilities";
 import { Assets } from "../assets/Assets";
+import { ACTIONS } from "../../state/actions";
+import { ChainsDropDown } from "./chains-dropdown/ChainsDropDown";
 
 export const Home = () => {
   const evmAddress = useSelector((state) => state.evmAddress);
+  const dispatch = useDispatch();
+  const [chainsDropDownOpen, setChainsDropDownOpen] = useState(false);
+  const [selectedChain, setSelectedChain] = useState(false);
+  const filterButtonRef = useRef()
+
 
   // Example api endpoint to get eth balance
   const getEthBalance = async (address) => {
     if (address) {
       try {
-       await axios.get(
+        await axios.get(
           `http://localhost:5000/api/ethereum/eth-balance?address=${address}`
         );
       } catch (err) {
@@ -22,6 +29,29 @@ export const Home = () => {
       }
     }
   };
+
+  useEffect(() => {
+    const checkIfClickedOutside = e => {
+      if (chainsDropDownOpen && filterButtonRef.current && !filterButtonRef.current.contains(e.target)) {
+        setChainsDropDownOpen(false)
+      }
+    }
+    document.addEventListener("mousedown", checkIfClickedOutside)
+    return () => {
+      // Cleanup the event listener
+      document.removeEventListener("mousedown", checkIfClickedOutside)
+    }
+  }, [chainsDropDownOpen])
+
+  useEffect(() => {
+    dispatch({
+      type: ACTIONS.FILTER_ASSETS_BY_CHAIN,
+      payload: {
+        data: selectedChain,
+      },
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedChain]);
 
   useEffect(() => {
     getEthBalance(evmAddress);
@@ -64,12 +94,17 @@ export const Home = () => {
             </div>
           </div>
           <div className="home__header__second__filter">
-            <div className="home__header__second__filter__button">
+            <div
+              className="home__header__second__filter__button"
+              onClick={() => setChainsDropDownOpen(!chainsDropDownOpen)}
+              ref={filterButtonRef}
+            >
               All Networks
               <div className="home__header__second__filter__button__arrow">
                 <ChevronDown color="white" size={15} />
               </div>
             </div>
+            {chainsDropDownOpen && <ChainsDropDown />}
           </div>
         </div>
         <div className="home__assets">
@@ -79,7 +114,6 @@ export const Home = () => {
       <div className="home__utilities">
         <Utilities />
       </div>
-      {/*<div className="home__eth">ETH BALANCE: {ethBalance}</div>*/}
     </div>
   );
 };

@@ -45,17 +45,18 @@
         flex-direction: column;
         &__label {
           padding-left: 2px;
-          color: darken($textColorDark, 40%);
+          color: darken($text-color-dark, 40%);
         }
         &__value {
           font-size: 30px;
           font-weight: 600;
-          color: $textColorDark;
+          color: $text-color-dark;
         }
       }
       &__filter {
         display: flex;
         flex-direction: column;
+        position: relative;
         &__button {
           font-size: 0.8rem;
           @extend .button;

@@ -13,6 +13,13 @@ const reducer = (state = initialState, action) => {
       };
     }
 
+    case ACTIONS.FILTER_ASSETS_BY_CHAIN: {
+      return {
+        ...state,
+        chain: action.payload.data,
+      };
+    }
+
     default:
       return {
         ...state,

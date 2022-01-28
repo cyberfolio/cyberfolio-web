@@ -14,9 +14,7 @@ export const Header = () => {
     <div className="header">
       <div className="header-content">
         <div className="header-brand">Cyberfolio</div>
-        <div>
           <ConnectWallet />
-        </div>
       </div>
     </div>
   );
@@ -46,8 +44,6 @@ const ConnectWallet = () => {
       setDisabled(false);
     }
   };
-
-
 
   const renderTooltip = (props) => {
     if (evmAddress)
