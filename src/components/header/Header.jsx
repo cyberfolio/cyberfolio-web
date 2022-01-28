@@ -1,10 +1,11 @@
 import React from "react";
-import Metamask from "../../assets/metamask.png";
 import "./Header.scss";
+import { toast } from 'react-toastify';
 
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
+import Metamask from "../../assets/metamask.png";
 import { ACTIONS } from "../../state/actions";
 import { truncateEthAddress } from '../../utils'
 
@@ -41,8 +42,8 @@ const ConnectWallet = () => {
         },
       });
     } catch (error) {
+      toast.error(error.message)
       setDisabled(false);
-      console.error(error);
     }
   };
 

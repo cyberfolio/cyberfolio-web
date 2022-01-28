@@ -3,6 +3,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.scss";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import App from "./app/App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
@@ -13,6 +16,7 @@ ReactDOM.render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
       <React.StrictMode>
+        <ToastContainer />
         <App />
       </React.StrictMode>
     </PersistGate>
