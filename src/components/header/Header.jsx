@@ -70,7 +70,7 @@ const ConnectWallet = () => {
           <img className="metamask-button-img" src={Metamask} alt="metamask" />
           {evmAddress ? <span className="connectedDot"></span> : <></>}
           <div className="metamask-button-text" onClick={onClickConnect}>
-            {evmAddress ? "" : "Connect Your Wallet"}
+            {evmAddress ? "" : "Connect Metamask"}
           </div>
         </div>
       </OverlayTrigger>
