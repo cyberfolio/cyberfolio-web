@@ -4,46 +4,11 @@ import "./ChainsDropDown.scss";
 import { ACTIONS } from "../../../state/actions";
 import { useDispatch } from "react-redux";
 
+import { chainsInfo } from '../../../utils'
+
 export const ChainsDropDown = () => {
   const dispatch = useDispatch();
-  const chains = [
-    {
-      name: "All Networks",
-      image: "http://localhost:3000/blockchain.svg",
-    },
-    {
-      name: "Ethereum",
-      image: "https://chain-icons.s3.amazonaws.com/ethereum.png",
-    },
-    {
-      name: "Avalanche",
-      image: "https://chain-icons.s3.amazonaws.com/avalanche.png",
-    },
-    {
-      name: "Solana",
-      image: "http://localhost:3000/solana.svg",
-    },
-    {
-      name: "Polkadot",
-      image: "http://localhost:3000/polkadot.svg",
-    },
-    {
-      name: "Polygon",
-      image: "http://localhost:3000/polygon.svg",
-    },
-    {
-      name: "BSC",
-      image: "https://chain-icons.s3.amazonaws.com/bsc.png",
-    },
-    {
-      name: "Arbitrum",
-      image: "https://chain-icons.s3.amazonaws.com/arbitrum.png",
-    },
-    {
-      name: "Optimism",
-      image: "https://chain-icons.s3.amazonaws.com/optimism.png",
-    },
-  ];
+
 
   const setChain = (chain, image) => {
     dispatch({
@@ -59,7 +24,7 @@ export const ChainsDropDown = () => {
 
   return (
     <div className="chains-dropdown">
-      {chains.map(({ name, image }) => {
+      {chainsInfo.map(({ name, image }) => {
         return (
           <div
             key={name}
