@@ -2,6 +2,10 @@ import { ACTIONS } from "./actions";
 
 const initialState = {
   evmAddress: "",
+  chain: {
+    name: "All Networks",
+    image: "",
+  },
 };
 
 const reducer = (state = initialState, action) => {

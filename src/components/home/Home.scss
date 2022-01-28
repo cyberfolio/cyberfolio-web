@@ -61,6 +61,10 @@
           font-size: 0.8rem;
           @extend .button;
           padding: 18px;
+          &__icon {
+            width: 1.5rem;
+            margin-right: 10px;
+          }
           &__arrow {
             margin-left: 5px;
           }

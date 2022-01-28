@@ -5,13 +5,17 @@ import classnames from "classnames";
 
 import { getDexTokens, getCexTokens } from "../../services/AssetService";
 import { AssetTable } from "../asset-table/AssetTable";
+import { useSelector } from "react-redux";
 
 export const Assets = () => {
   const [activeTab, setActiveTab] = useState("All");
   const [dexTokens, setDexTokens] = useState([]);
+  const [filteredDexTokens, setFilteredDexTokens] = useState([]);
+  const [isFiltered, setIsFiltered] = useState(false);
   const [cexTokens, setCexTokens] = useState([]);
+  const [assetsToShow, setAssetsToShow] = useState([]);
 
-
+  const chain = useSelector((state) => state.chain);
 
   const getAllAssets = () => {
     const dexTokens = getDexTokens();
@@ -20,17 +24,29 @@ export const Assets = () => {
     setCexTokens(cexTokens);
   };
 
-  const assetsToShow = () => {
-    if (activeTab === "All") {
-      return [...dexTokens, ...cexTokens];
+  useEffect(() => {
+    if (activeTab === "All" && filteredDexTokens.length > 0 && isFiltered) {
+      setAssetsToShow([...filteredDexTokens, ...cexTokens]);
+    }
+    if (activeTab === "All" && filteredDexTokens.length === 0 && !isFiltered) {
+      setAssetsToShow([...dexTokens, ...cexTokens]);
+    }
+    if (activeTab === "All" && filteredDexTokens.length === 0 && isFiltered) {
+      setAssetsToShow(cexTokens);
     }
     if (activeTab === "CEX") {
-      return cexTokens;
+      setAssetsToShow(cexTokens);
     }
-    if (activeTab === "DEX") {
-      return dexTokens;
+    if (activeTab === "DEX" && filteredDexTokens.length === 0 && !isFiltered) {
+      setAssetsToShow(dexTokens);
     }
-  };
+    if (activeTab === "DEX" && filteredDexTokens.length === 0 && isFiltered) {
+      setAssetsToShow([]);
+    }
+    if (activeTab === "DEX" && filteredDexTokens.length > 0) {
+      setAssetsToShow(filteredDexTokens);
+    }
+  }, [activeTab, dexTokens, filteredDexTokens, cexTokens, isFiltered]);
 
   const onTabClick = (tabName) => {
     setActiveTab(tabName);
@@ -39,6 +55,20 @@ export const Assets = () => {
   useEffect(() => {
     getAllAssets();
   }, []);
+
+  useEffect(() => {
+    if (chain.name !== "All Networks") {
+      const filtered = dexTokens.filter(
+        (dexToken) => dexToken.chain === chain.name
+      );
+      setIsFiltered(true);
+      setFilteredDexTokens(filtered);
+    }
+    if (chain.name === "All Networks") {
+      setIsFiltered(false);
+      setFilteredDexTokens([]);
+    }
+  }, [chain, dexTokens]);
 
   return (
     <div className="assets">
@@ -81,7 +111,7 @@ export const Assets = () => {
         </div>
       </div>
       <div className="assets__table">
-        <AssetTable assets={assetsToShow()} />
+        <AssetTable assets={assetsToShow} />
       </div>
     </div>
   );
