@@ -5,7 +5,7 @@ export const getDexTokens = () => {
       price: 4000,
       balance: 10,
       value: 40000,
-      place: "wallet1",
+      place: "main",
       chain: "Avalanche",
     },
     {
@@ -13,7 +13,7 @@ export const getDexTokens = () => {
       price: 0.8,
       balance: 2400,
       value: 2000,
-      place: "wallet2",
+      place: "main",
       chain: "Avalanche",
     },
     {

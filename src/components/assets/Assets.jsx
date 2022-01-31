@@ -103,11 +103,11 @@ export const Assets = () => {
         <div
           className={classnames(
             "assets__links__link",
-            activeTab === "NFTs" && "assets__links__link--active"
+            activeTab === "Pools" && "assets__links__link--active"
           )}
-          onClick={() => onTabClick("NFTs")}
+          onClick={() => onTabClick("Pools")}
         >
-          NFTs
+          Pools
         </div>
       </div>
       <div className="assets__table">

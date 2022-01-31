@@ -8,6 +8,9 @@ import { Utilities } from "../utilities/Utilities";
 import { Assets } from "../assets/Assets";
 import { ChainsDropDown } from "./chains-dropdown/ChainsDropDown";
 
+const availableChains = ["Ethereum Wallet", "Solana Wallet", "Polkadot Wallet"];
+const availableCexes = ["Binance Account", "FTX Account", "Kucoin Account", "Gateio Account"];
+
 export const Home = () => {
   const evmAddress = useSelector((state) => state.evmAddress);
   const chain = useSelector((state) => state.chain);
@@ -39,28 +42,22 @@ export const Home = () => {
     <div className="home">
       <div className="home__header">
         <div className="home__header__add-wallets">
-          <div className="home__header__add-wallets__bundle">
-            Ethereum Wallet
-            <Plus color="white" size={20} />
-          </div>
-          <div className="home__header__add-wallets__bundle">
-            Solana Wallet
-            <Plus color="white" size={20} />
-          </div>
-          <div className="home__header__add-wallets__bundle">
-            Polkadot Wallet
-            <Plus color="white" size={20} />
-          </div>
-          <div className="home__header__add-wallets__bundle">
-            Matic Wallet
-            <Plus color="white" size={20} />
-          </div>
-          <div className="home__header__add-wallets__bundle">
-            Binance Account <Plus color="white" size={20} />
-          </div>
-          <div className="home__header__add-wallets__bundle">
-            FTX Account <Plus color="white" size={20} />
-          </div>
+          {availableChains.map((chain) => {
+            return (
+              <div className="home__header__add-wallets__bundle">
+                {chain}
+                <Plus color="white" size={20} />
+              </div>
+            );
+          })}
+           {availableCexes.map((chain) => {
+            return (
+              <div className="home__header__add-wallets__bundle">
+                {chain}
+                <Plus color="white" size={20} />
+              </div>
+            );
+          })}
         </div>
         <div className="home__header__second">
           <div className="home__header__second__total-balance">
