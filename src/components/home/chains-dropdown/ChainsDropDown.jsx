@@ -35,6 +35,7 @@ export const ChainsDropDown = () => {
               className="chains-dropdown__item__image"
               src={image}
               alt={name}
+              height={25}
             />
             <div className="chains-dropdown__item__name"> {name} </div>
           </div>

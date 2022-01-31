@@ -10,38 +10,43 @@ export const truncateEthAddress = (address) => {
 export const chainsInfo = [
   {
     name: "All Networks",
-    image: "http://localhost:3000/blockchain.svg",
+    image: "http://localhost:3000/logos/blockchain.svg",
+  },
+  {
+    name: "Bitcoin",
+    image: "http://localhost:3000/logos/bitcoin.svg",
   },
   {
     name: "Ethereum",
-    image: "https://chain-icons.s3.amazonaws.com/ethereum.png",
-  },
-  {
-    name: "Avalanche",
-    image: "https://chain-icons.s3.amazonaws.com/avalanche.png",
-  },
-  {
-    name: "Solana",
-    image: "http://localhost:3000/solana.svg",
-  },
-  {
-    name: "Polkadot",
-    image: "http://localhost:3000/polkadot.svg",
-  },
-  {
-    name: "Polygon",
-    image: "http://localhost:3000/polygon.svg",
+    image: "http://localhost:3000/logos/ethereum.svg",
   },
   {
     name: "BSC",
-    image: "https://chain-icons.s3.amazonaws.com/bsc.png",
+    image: "http://localhost:3000/logos/bsc.svg",
   },
   {
+    name: "Avalanche",
+    image: "http://localhost:3000/logos/avalanche.svg",
+  },
+  {
+    name: "Solana",
+    image: "http://localhost:3000/logos/solana.svg",
+  },
+  {
+    name: "Polkadot",
+    image: "http://localhost:3000/logos/polkadot.svg",
+  },
+  {
+    name: "Polygon",
+    image: "http://localhost:3000/logos/polygon.svg",
+  },
+
+  {
     name: "Arbitrum",
-    image: "https://chain-icons.s3.amazonaws.com/arbitrum.png",
+    image: "http://localhost:3000/logos/arbitrum.svg",
   },
   {
     name: "Optimism",
-    image: "https://chain-icons.s3.amazonaws.com/optimism.png",
+    image: "http://localhost:3000/logos/optimism.svg",
   },
 ];

@@ -77,6 +77,7 @@ export const Home = () => {
                 className="home__header__second__filter__button__icon"
                 src={chain.image}
                 alt={chain.name}
+                height={25}
               />
               {chain.name}
               <div className="home__header__second__filter__button__arrow">
