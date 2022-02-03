@@ -41,3 +41,5 @@ export const AssetTable = ({ assets }) => {
     </div>
   );
 };
+
+AssetTable.whyDidYouRender = true

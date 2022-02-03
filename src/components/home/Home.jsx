@@ -1,49 +1,22 @@
 import React, { useEffect, useState } from "react";
 import "./Home.scss";
 
-import axios from "axios";
-import Web3 from 'web3';
 import { useSelector } from "react-redux";
 import { Plus, ChevronDown } from "react-bootstrap-icons";
 import { Utilities } from "../utilities/Utilities";
 import { Assets } from "../assets/Assets";
 import { ChainsDropDown } from "./chains-dropdown/ChainsDropDown";
-import { toast } from "react-toastify";
 
 const availableChains = ["Ethereum Wallet", "Solana Wallet", "Polkadot Wallet"];
 const availableCexes = ["Binance Account", "FTX Account", "Kucoin Account", "Gateio Account"];
 
 export const Home = () => {
-  const evmAddress = useSelector((state) => state.evmAddress);
   const chain = useSelector((state) => state.chain);
-
   const [chainsDropDownOpen, setChainsDropDownOpen] = useState(false);
-  // Example api endpoint to get eth balance
-  const getEthBalance = async (address) => {
-    if (address) {
-      try {
-        await axios.get(
-          `http://localhost:5000/api/ethereum/eth-balance?address=${address}`
-        );
-      } catch (err) {
-        console.error(err);
-      }
-    }
-  };
-
-  useEffect(() => {
-   if(!window.ethereum) {
-     toast.error("Install Metamask to use the app")
-   }
-  }, []);
 
   useEffect(() => {
     setChainsDropDownOpen(false);
   }, [chain]);
-
-  useEffect(() => {
-    getEthBalance(evmAddress);
-  }, [evmAddress]);
 
   return (
     <div className="home">
@@ -104,3 +77,6 @@ export const Home = () => {
     </div>
   );
 };
+
+Home.whyDidYouRender = true
+

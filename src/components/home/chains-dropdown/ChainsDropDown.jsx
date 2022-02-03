@@ -44,3 +44,6 @@ export const ChainsDropDown = () => {
     </div>
   );
 };
+
+ChainsDropDown.whyDidYouRender = true
+
