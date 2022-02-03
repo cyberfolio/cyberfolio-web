@@ -1,5 +1,6 @@
 @import "../../css/variables.scss";
 @import "../../css/button.scss";
+@import "../../css/shared.scss";
 
 .home {
   display: flex;
@@ -57,6 +58,7 @@
         display: flex;
         flex-direction: column;
         position: relative;
+        @extend .unselectable;
         &__button {
           font-size: 0.8rem;
           @extend .button;

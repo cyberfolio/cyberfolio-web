@@ -1,13 +1,15 @@
 import React from "react";
 import "./Header.scss";
 import { toast } from 'react-toastify';
-
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import Web3 from "web3";
 
 import Metamask from "../../assets/metamask.png";
 import { ACTIONS } from "../../state/actions";
 import { truncateEthAddress } from '../../utils'
+let web3 = new Web3()
+
 
 export const Header = () => {
   return (
@@ -32,6 +34,7 @@ const ConnectWallet = () => {
       const metamask = await window.ethereum.request({
         method: "eth_requestAccounts",
       });
+      
       setDisabled(false);
       dispatch({
         type: ACTIONS.SET_EVM_ADDRESS,

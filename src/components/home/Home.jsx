@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import "./Home.scss";
 
 import axios from "axios";
+import Web3 from 'web3';
 import { useSelector } from "react-redux";
 import { Plus, ChevronDown } from "react-bootstrap-icons";
 import { Utilities } from "../utilities/Utilities";
 import { Assets } from "../assets/Assets";
 import { ChainsDropDown } from "./chains-dropdown/ChainsDropDown";
+import { toast } from "react-toastify";
 
 const availableChains = ["Ethereum Wallet", "Solana Wallet", "Polkadot Wallet"];
 const availableCexes = ["Binance Account", "FTX Account", "Kucoin Account", "Gateio Account"];
@@ -16,7 +18,6 @@ export const Home = () => {
   const chain = useSelector((state) => state.chain);
 
   const [chainsDropDownOpen, setChainsDropDownOpen] = useState(false);
-
   // Example api endpoint to get eth balance
   const getEthBalance = async (address) => {
     if (address) {
@@ -29,6 +30,12 @@ export const Home = () => {
       }
     }
   };
+
+  useEffect(() => {
+   if(!window.ethereum) {
+     toast.error("Install Metamask to use the app")
+   }
+  }, []);
 
   useEffect(() => {
     setChainsDropDownOpen(false);
@@ -44,16 +51,16 @@ export const Home = () => {
         <div className="home__header__add-wallets">
           {availableChains.map((chain) => {
             return (
-              <div className="home__header__add-wallets__bundle">
+              <div className="home__header__add-wallets__bundle" key={chain}>
                 {chain}
                 <Plus color="white" size={20} />
               </div>
             );
           })}
-           {availableCexes.map((chain) => {
+           {availableCexes.map((cex) => {
             return (
-              <div className="home__header__add-wallets__bundle">
-                {chain}
+              <div className="home__header__add-wallets__bundle" key={cex}>
+                {cex}
                 <Plus color="white" size={20} />
               </div>
             );

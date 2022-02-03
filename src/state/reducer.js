@@ -4,7 +4,7 @@ const initialState = {
   evmAddress: "",
   chain: {
     name: "All Networks",
-    image: "",
+    image: `${process.env.REACT_APP_URL}/logos/blockchain.svg`,
   },
 };
 
