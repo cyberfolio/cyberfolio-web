@@ -1,13 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./Header.scss";
-import { toast } from "react-toastify";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-
-import detectEthereumProvider from "@metamask/detect-provider";
+import { useSelector } from "react-redux";
 
 import Metamask from "../../assets/metamask.png";
-import { ACTIONS } from "../../state/actions";
 import { truncateEthAddress } from "../../utils";
 import { useMetamaskLogin } from "./useMetamaskLogin";
 
@@ -23,40 +19,13 @@ export const Header = () => {
 };
 
 const ConnectWallet = () => {
-  const [disabled, setDisabled] = useState("");
-  const [connecting, setConnecting] = useState(false);
-  const dispatch = useDispatch();
   const evmAddress = useSelector((state) => state.evmAddress);
-  const { isConnected } = useMetamaskLogin(connecting);
-
-  useEffect(() => {
-    if (isConnected) {
-      setDisabled(false);
-      setConnecting(false);
-    }
-  }, [isConnected]);
-
-  useEffect(() => {
-    const init = async () => {
-      const provider = await detectEthereumProvider();
-      if (provider) {
-        startApp(provider);
-      } else {
-        toast.error("Please install MetaMask!");
-      }
-      function startApp(provider) {
-        if (provider !== window.ethereum) {
-          toast.error("Do you have multiple wallets installed?");
-        }
-      }
-    };
-    init();
-  }, []);
-
-  const requestMetamaskToConnect = async () => {
-    setDisabled(true);
-    setConnecting(true);
-  };
+  const {
+    isConnecting,
+    isConnectedSuccessfully,
+    signAndVerifyMessage,
+    disconnectMetamask,
+  } = useMetamaskLogin();
 
   const renderTooltip = (props) => {
     if (evmAddress)
@@ -72,15 +41,6 @@ const ConnectWallet = () => {
     );
   };
 
-  const disconnectMetamask = () => {
-    dispatch({
-      type: ACTIONS.SET_EVM_ADDRESS,
-      payload: {
-        data: "",
-      },
-    });
-  };
-
   return (
     <div className="metamask">
       <OverlayTrigger
@@ -88,20 +48,20 @@ const ConnectWallet = () => {
         delay={{ show: 50, hide: 100 }}
         overlay={renderTooltip}
       >
-        <div className={`metamask-button ${disabled ? "disabledbutton" : ""}`}>
+        <div
+          className={`metamask-button ${isConnecting ? "disabledbutton" : ""}`}
+        >
           <img className="metamask-button-img" src={Metamask} alt="metamask" />
           {evmAddress ? <span className="connectedDot"></span> : <></>}
           <div
             className="metamask-button-text"
-            onClick={
-              !evmAddress ? requestMetamaskToConnect : disconnectMetamask
-            }
+            onClick={!evmAddress ? signAndVerifyMessage : disconnectMetamask}
           >
-            {!evmAddress && !connecting && "Connect Metamask"}
+            {!evmAddress && !isConnecting && "Connect Metamask"}
             {evmAddress &&
-              isConnected &&
+              isConnectedSuccessfully &&
               `Connected to ${truncateEthAddress(evmAddress)}`}
-            {!evmAddress && connecting && "Connecting..."}
+            {!evmAddress && isConnecting && "Connecting..."}
           </div>
         </div>
       </OverlayTrigger>
