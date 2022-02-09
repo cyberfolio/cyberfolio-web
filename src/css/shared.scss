@@ -5,3 +5,9 @@
   -webkit-user-select: none;
   -o-user-select: none;
 }
+
+.flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

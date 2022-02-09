@@ -5,14 +5,17 @@
   width: 100%;
   &__links {
     display: flex;
+    flex-wrap: wrap;
     border-bottom: 1px solid $border;
     padding: 0 20px;
-
     &__link {
       padding: 20px 40px;
       margin-right: 20px;
       color: $text-color-dark;
+      border-bottom: 1px solid transparent;
+      width: 50px;
       @extend .unselectable;
+      @extend .flexCenter;
       &:hover {
         background-color: lighten($background-dark, 20%);
         border-radius: 8px 8px 0 0;
@@ -26,7 +29,6 @@
       }
     }
   }
-
   &__table {
     padding: 0 20px;
     padding-top: 20px;
