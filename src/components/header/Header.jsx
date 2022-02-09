@@ -22,7 +22,6 @@ const ConnectWallet = () => {
   const evmAddress = useSelector((state) => state.evmAddress);
   const {
     isConnecting,
-    isConnectedSuccessfully,
     signAndVerifyMessage,
     disconnectMetamask,
   } = useMetamaskLogin();
@@ -50,17 +49,13 @@ const ConnectWallet = () => {
       >
         <div
           className={`metamask-button ${isConnecting ? "disabledbutton" : ""}`}
+          onClick={!evmAddress ? signAndVerifyMessage : disconnectMetamask}
         >
           <img className="metamask-button-img" src={Metamask} alt="metamask" />
           {evmAddress ? <span className="connectedDot"></span> : <></>}
-          <div
-            className="metamask-button-text"
-            onClick={!evmAddress ? signAndVerifyMessage : disconnectMetamask}
-          >
+          <div className="metamask-button-text">
             {!evmAddress && !isConnecting && "Connect Metamask"}
-            {evmAddress &&
-              isConnectedSuccessfully &&
-              `Connected to ${truncateEthAddress(evmAddress)}`}
+            {evmAddress && `Connected to ${truncateEthAddress(evmAddress)}`}
             {!evmAddress && isConnecting && "Connecting..."}
           </div>
         </div>

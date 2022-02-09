@@ -1,68 +1,68 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import detectEthereumProvider from "@metamask/detect-provider";
 import { ethers } from "ethers";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { ACTIONS } from "../../state/actions";
-
-let message = "I confirm that I'm the owner of this wallet";
+import { getNonce, validateSignature } from "../../services/LoginService";
 
 export const useMetamaskLogin = () => {
   const dispatch = useDispatch();
   const [isConnecting, setIsConnecting] = useState(false);
-  const [isConnectedSuccessfully, setIsConnectedSuccessfully] = useState(false);
 
-  useEffect(() => {
-    const init = async () => {
-      const provider = await detectEthereumProvider();
-      if (provider) {
-        startApp(provider);
-      } else {
-        toast.error("Please install MetaMask!");
+  const checkIfMetamaskPresent = async () => {
+    const provider = await detectEthereumProvider();
+    if (provider) {
+      startApp(provider);
+    } else {
+      throw new Error("Please install MetaMask!");
+    }
+    function startApp(provider) {
+      if (provider !== window.ethereum) {
+        throw new Error("Do you have multiple wallets installed?");
       }
-      function startApp(provider) {
-        if (provider !== window.ethereum) {
-          toast.error("Do you have multiple wallets installed?");
-        }
-      }
-    };
-    init();
-  }, []);
+    }
+  };
 
   const signAndVerifyMessage = async () => {
     try {
+      await checkIfMetamaskPresent();
       setIsConnecting(true);
+
       // Connect Metamask
       const provider = new ethers.providers.Web3Provider(window.ethereum);
-      await provider.send("eth_requestAccounts", []);
+      const evmWalletAddresses = await provider.send("eth_requestAccounts", []);
 
       // Sign Message
       const signer = provider.getSigner();
-      const signature = await signer.signMessage(message);
-      const walletAddress = await signer.getAddress();
+      const nonce = await getNonce({ evmAddress: evmWalletAddresses[0] });
+      const signature = await signer.signMessage(nonce);
+      const evmAddress = await signer.getAddress();
 
       // Verify  Message
-      const signerAddress = ethers.utils.verifyMessage(message, signature);
-      if (signerAddress === walletAddress) {
-        setIsConnectedSuccessfully(true);
+      const signerAddress = ethers.utils.verifyMessage(nonce, signature);
+      if (signerAddress !== evmAddress) {
         setIsConnecting(false);
-        toast.success("Successfully logged in!");
-        dispatch({
-          type: ACTIONS.SET_EVM_ADDRESS,
-          payload: {
-            data: signerAddress,
-          },
-        });
-      } else {
-        setIsConnecting(false);
-        setIsConnectedSuccessfully(false);
-        toast.error("Your message could not be verified!");
+        throw new Error("Your message could not be verified!");
       }
+      const user = await validateSignature({
+        evmAddress,
+        nonce,
+        signature,
+      });
+      console.log(user);
+      setIsConnecting(false);
+      toast.success("Successfully logged in!");
+      dispatch({
+        type: ACTIONS.SET_EVM_ADDRESS,
+        payload: {
+          data: signerAddress,
+        },
+      });
     } catch (error) {
       if (error?.code !== 4001) {
         toast.error(error.message);
       }
-      setIsConnectedSuccessfully(false);
       setIsConnecting(false);
     }
   };
@@ -78,7 +78,6 @@ export const useMetamaskLogin = () => {
 
   return {
     isConnecting,
-    isConnectedSuccessfully,
     signAndVerifyMessage,
     disconnectMetamask,
   };
