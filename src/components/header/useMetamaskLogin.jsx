@@ -52,7 +52,6 @@ export const useMetamaskLogin = () => {
       });
       console.log(user);
       setIsConnecting(false);
-      toast.success("Successfully logged in!");
       dispatch({
         type: ACTIONS.SET_EVM_ADDRESS,
         payload: {

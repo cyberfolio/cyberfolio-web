@@ -15,11 +15,15 @@ export const getNonce = async ({ evmAddress }) => {
 
 export const validateSignature = async ({ evmAddress, nonce, signature }) => {
   try {
-    const res = await mainInstance.post("/login/validateSignature", {
-      evmAddress,
-      nonce,
-      signature,
-    });
+    const res = await mainInstance.post(
+      "/login/validateSignature",
+      {
+        evmAddress,
+        nonce,
+        signature,
+      },
+      { withCredentials: true }
+    );
     if (res?.data) {
       return res?.data;
     } else {
