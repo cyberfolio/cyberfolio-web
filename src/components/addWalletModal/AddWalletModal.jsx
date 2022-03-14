@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./AddWalletModal.scss";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -8,13 +8,14 @@ import classnames from "classnames";
 import { addWallet } from "../../services/WalletService";
 import { ACTIONS } from "../../state/actions";
 import useKeypress from "../../utils/useKeyPress";
+import useIsClickedOutside from "../../utils/useIsClickedOutside";
 
 export const AddWalletModal = () => {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const isWalletModalOpen = useSelector((state) => state.isWalletModalOpen);
   const dispatch = useDispatch();
- 
+  const modalRef = useRef();
 
   const add = async () => {
     try {
@@ -22,7 +23,8 @@ export const AddWalletModal = () => {
       dispatch({
         type: ACTIONS.OPEN_WALLET_MODAL,
         payload: {
-          data: false,
+          open: false,
+          chain: "",
         },
       });
       setName("");
@@ -35,11 +37,15 @@ export const AddWalletModal = () => {
   useKeypress("Escape", () => {
     close();
   });
+  useIsClickedOutside(modalRef, () => {
+    close();
+  });
   const close = () => {
     dispatch({
       type: ACTIONS.OPEN_WALLET_MODAL,
       payload: {
-        data: false,
+        open: false,
+        chain: "",
       },
     });
   };
@@ -48,14 +54,14 @@ export const AddWalletModal = () => {
     <div
       className={classnames(
         "add-wallet-modal",
-        isWalletModalOpen && "add-wallet-modal--active"
+        isWalletModalOpen?.open && "add-wallet-modal--active"
       )}
     >
-      <div className="add-wallet-modal__content">
+      <div className="add-wallet-modal__content" ref={modalRef}>
         <div className="add-wallet-modal__content__header">
           <div />
           <div className="add-wallet-modal__content__header__title">
-            Add Evm Wallet
+            Add {isWalletModalOpen?.chain}
           </div>
           <div
             className="add-wallet-modal__content__header__exit"

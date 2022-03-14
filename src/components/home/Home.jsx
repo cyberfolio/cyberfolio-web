@@ -11,7 +11,7 @@ import { ChainsDropDown } from "./chains-dropdown/ChainsDropDown";
 import { AddWalletModal } from "../addWalletModal/AddWalletModal";
 import { ACTIONS } from "../../state/actions";
 
-const availableChains = ["Bitcoin Wallet", "Ethereum Wallet", "Solana Wallet", "Polkadot Wallet"];
+const availableChains = ["Bitcoin Wallet", "Evm Wallet", "Solana Wallet", "Polkadot Wallet"];
 const availableCexes = ["Binance Account", "FTX Account", "Kucoin Account", "Gateio Account"];
 
 export const Home = () => {
@@ -23,11 +23,12 @@ export const Home = () => {
     setChainsDropDownOpen(false);
   }, [chain]);
 
-  const openWalletModal = () => {
+  const openWalletModal = (chain) => {
     dispatch({
       type: ACTIONS.OPEN_WALLET_MODAL,
       payload: {
-        data: true
+        open: true, 
+        chain
       },
     });
   }
@@ -37,8 +38,9 @@ export const Home = () => {
       <div className="home__header">
         <div className="home__header__add-wallets">
           {availableChains.map((chain) => {
+            console.log(chain)
             return (
-              <div className="home__header__add-wallets__bundle" key={chain} onClick={openWalletModal}>
+              <div className="home__header__add-wallets__bundle" key={chain} onClick={() => openWalletModal(chain)}>
                 {chain}
                 <Plus color="white" size={20} />
               </div>

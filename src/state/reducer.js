@@ -6,7 +6,10 @@ const initialState = {
     name: "All Networks",
     image: `${process.env.REACT_APP_URL}/logos/blockchain.svg`,
   },
-  isWalletModalOpen: false,
+  isWalletModalOpen: {
+    open: false,
+    chain: "",
+  },
 };
 
 const reducer = (state = initialState, action) => {
@@ -28,7 +31,10 @@ const reducer = (state = initialState, action) => {
     case ACTIONS.OPEN_WALLET_MODAL: {
       return {
         ...state,
-        isWalletModalOpen: action.payload.data,
+        isWalletModalOpen: {
+          open: action.payload.open,
+          chain: action.payload.chain,
+        },
       };
     }
 
