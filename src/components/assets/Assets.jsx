@@ -9,6 +9,7 @@ import { AssetTable } from "../assetTable/AssetTable";
 import { useSelector } from "react-redux";
 
 export const Assets = () => {
+  const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("All");
   const [dexTokens, setDexTokens] = useState([]);
   const [filteredDexTokens, setFilteredDexTokens] = useState([]);
@@ -21,18 +22,21 @@ export const Assets = () => {
 
   const getAllAssets = async () => {
     try {
+      setLoading(true)
       const dexTokensBitcoin = await getDexTokens({ chain: "Bitcoin" });
       const dexTokensEthereum = await getDexTokens({ chain: "Ethereum" });
       const dexTokensAvalanche = await getDexTokens({ chain: "Avalanche" });
       const dexTokensArbitrum = await getDexTokens({ chain: "Arbitrum" });
 
       setDexTokens([...dexTokensBitcoin, ...dexTokensEthereum, ...dexTokensAvalanche, ...dexTokensArbitrum, ]);
+      setLoading(false)
 
       const cexTokens = getCexTokens();
       setCexTokens(cexTokens);
     }
     catch(e) {
       toast.error(e.message)
+      setLoading(false)
     }
  
   };
@@ -126,7 +130,7 @@ export const Assets = () => {
         </div>
       </div>
       <div className="assets__table">
-        <AssetTable assets={assetsToShow} />
+        <AssetTable assets={assetsToShow} loading={loading} />
       </div>
     </div>
   );

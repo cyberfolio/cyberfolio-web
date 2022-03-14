@@ -1,4 +1,5 @@
 @import "../../css/variables.scss";
+@import "../../css/shared.scss";
 
 .asset-table {
   border: 1px solid $border;
@@ -20,10 +21,23 @@
       color: k;
       font-weight: 700;
       font-size: 0.8rem;
+      &--left {
+        text-align: left;
+      }
+      &--right {
+        text-align: right;
+      }
     }
   }
   &__assets {
     width: 100%;
+    &__loading {
+      height: 50vh;
+      @extend .flexCenter;
+      &--white {
+        color: $text-color-dark;
+      }
+    }
     &__asset {
       border-bottom: 1px solid $border;
       width: 100%;
@@ -51,6 +65,9 @@
         font-size: 0.8rem;
         &--right {
           text-align: right;
+        }
+        &--left {
+          text-align: left;
         }
       }
     }
