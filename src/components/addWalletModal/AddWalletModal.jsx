@@ -9,37 +9,38 @@ import { addWallet } from "../../services/WalletService";
 import { ACTIONS } from "../../state/actions";
 import useKeypress from "../../utils/useKeyPress";
 import useIsClickedOutside from "../../utils/useIsClickedOutside";
+import { isValidWalletAddress } from "../../utils";
 
 export const AddWalletModal = () => {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
-  const isWalletModalOpen = useSelector((state) => state.isWalletModalOpen);
+  const { chain, open } = useSelector((state) => state.isWalletModalOpen);
   const dispatch = useDispatch();
   const modalRef = useRef();
 
   const add = async () => {
+    const isValid = isValidWalletAddress({ address, chain });
+    if (!isValid) {
+      toast.error("Address is not valid");
+      return;
+    }
     try {
-      await addWallet({ name, address });
-      dispatch({
-        type: ACTIONS.OPEN_WALLET_MODAL,
-        payload: {
-          open: false,
-          chain: "",
-        },
-      });
+      await addWallet({ name, address, chain });
+      close();
       setName("");
       setAddress("");
+      toast.success("Wallet added.");
     } catch (e) {
       toast.error(e.message);
     }
   };
-
   useKeypress("Escape", () => {
     close();
   });
   useIsClickedOutside(modalRef, () => {
     close();
   });
+
   const close = () => {
     dispatch({
       type: ACTIONS.OPEN_WALLET_MODAL,
@@ -54,14 +55,14 @@ export const AddWalletModal = () => {
     <div
       className={classnames(
         "add-wallet-modal",
-        isWalletModalOpen?.open && "add-wallet-modal--active"
+        open && "add-wallet-modal--active"
       )}
     >
       <div className="add-wallet-modal__content" ref={modalRef}>
         <div className="add-wallet-modal__content__header">
           <div />
           <div className="add-wallet-modal__content__header__title">
-            Add {isWalletModalOpen?.chain}
+            Add {chain} Wallet
           </div>
           <div
             className="add-wallet-modal__content__header__exit"

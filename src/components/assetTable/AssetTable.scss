@@ -5,6 +5,8 @@
   width: 100%;
   border-radius: 8px;
   padding: 0 20px;
+  height: 60vh;
+  overflow-y: scroll;
   &__header {
     padding-top: 20px;
     display: flex;
@@ -47,6 +49,9 @@
         text-align: center;
         color: $text-color-dark;
         font-size: 0.8rem;
+        &--right {
+          text-align: right;
+        }
       }
     }
   }

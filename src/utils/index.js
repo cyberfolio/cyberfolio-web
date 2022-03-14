@@ -1,4 +1,6 @@
-// Captures 0x + 4 characters, then the last 4 characters.
+import { ethers } from "ethers";
+import * as solanaWeb3 from "@solana/web3.js";
+
 const truncateRegex = /^(0x[a-zA-Z0-9]{4})[a-zA-Z0-9]+([a-zA-Z0-9]{4})$/;
 
 export const truncateEthAddress = (address) => {
@@ -50,3 +52,30 @@ export const chainsInfo = [
     image: "http://localhost:4000/logos/optimism.svg",
   },
 ];
+
+const validateBtcAddress = (address) => {
+  if (address.length < 26 || address.length > 35) {
+    return false;
+  }
+  let re = /^[A-Z0-9]+$/i;
+  if (!re.test(address)) {
+    return false;
+  }
+  return true;
+};
+
+export const isValidWalletAddress = async ({ address, chain }) => {
+  let isValid = false;
+  if (chain) {
+    if (chain === "Bitcoin") {
+      isValid = validateBtcAddress();
+    }
+    if (chain === "Evm") {
+      isValid = ethers.utils.isAddress(address);
+    } else if (chain === "Solana") {
+      const publicKey = new solanaWeb3.PublicKey(address);
+      isValid = await solanaWeb3.PublicKey.isOnCurve(publicKey);
+    }
+  }
+  return isValid;
+};

@@ -1,11 +1,11 @@
 import { mainInstance } from "../config/axios";
 
-export const addWallet = async ({ address, name }) => {
+export const addWallet = async ({ address, name, chain }) => {
   try {
     const res = await mainInstance.post(
       "/wallets/add",
       {
-        wallets: [{ name, address }],
+        wallets: [{ name, address, chain }],
       },
       { withCredentials: true }
     );

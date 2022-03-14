@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Assets.scss";
 
 import classnames from "classnames";
+import { toast } from "react-toastify";
 
 import { getDexTokens, getCexTokens } from "../../services/AssetService";
 import { AssetTable } from "../assetTable/AssetTable";
@@ -13,15 +14,26 @@ export const Assets = () => {
   const [filteredDexTokens, setFilteredDexTokens] = useState([]);
   const [isFiltered, setIsFiltered] = useState(false);
   const [cexTokens, setCexTokens] = useState([]);
+  const [filteredCexTokens, setFilteredCexTokens] = useState([]);
   const [assetsToShow, setAssetsToShow] = useState([]);
 
   const chain = useSelector((state) => state.chain);
 
-  const getAllAssets = () => {
-    const dexTokens = getDexTokens();
-    const cexTokens = getCexTokens();
-    setDexTokens(dexTokens);
-    setCexTokens(cexTokens);
+  const getAllAssets = async () => {
+    try {
+      const dexTokensEthereum = await getDexTokens({ chain: "Ethereum" });
+      const dexTokensAvalanche = await getDexTokens({ chain: "Avalanche" });
+      const dexTokensArbitrum = await getDexTokens({ chain: "Arbitrum" });
+
+      setDexTokens([...dexTokensEthereum, ...dexTokensAvalanche, ...dexTokensArbitrum]);
+
+      const cexTokens = getCexTokens();
+      setCexTokens(cexTokens);
+    }
+    catch(e) {
+      toast.error(e.message)
+    }
+ 
   };
 
   useEffect(() => {
@@ -32,7 +44,7 @@ export const Assets = () => {
       setAssetsToShow([...dexTokens, ...cexTokens]);
     }
     if (activeTab === "All" && filteredDexTokens.length === 0 && isFiltered) {
-      setAssetsToShow(cexTokens);
+      setAssetsToShow([]);
     }
     if (activeTab === "CEX") {
       setAssetsToShow(cexTokens);
@@ -63,12 +75,14 @@ export const Assets = () => {
       );
       setIsFiltered(true);
       setFilteredDexTokens(filtered);
+      setFilteredCexTokens([])
     }
     if (chain.name === "All Networks") {
       setIsFiltered(false);
       setFilteredDexTokens([]);
+      setFilteredCexTokens(cexTokens)
     }
-  }, [chain, dexTokens]);
+  }, [chain, dexTokens, cexTokens]);
 
   return (
     <div className="assets">

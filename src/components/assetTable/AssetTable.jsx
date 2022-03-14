@@ -31,7 +31,7 @@ export const AssetTable = ({ assets }) => {
                 <div className="asset-table__assets__asset__item">
                   {balance}
                 </div>
-                <div className="asset-table__assets__asset__item">{value}</div>
+                <div className="asset-table__assets__asset__item asset-table__assets__asset__item--right">${value}</div>
                 <div className="asset-table__assets__asset__item">{place}</div>
                 <div className="asset-table__assets__asset__item">{chain ? chain : '' }</div>
               </div>

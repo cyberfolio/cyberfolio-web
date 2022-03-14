@@ -1,38 +1,20 @@
-export const getDexTokens = () => {
-  return [
-    {
-      name: "KLO",
-      price: 4000,
-      balance: 10,
-      value: 40000,
-      place: "main",
-      chain: "Avalanche",
-    },
-    {
-      name: "CRA",
-      price: 0.8,
-      balance: 2400,
-      value: 2000,
-      place: "main",
-      chain: "Avalanche",
-    },
-    {
-      name: "IME",
-      price: 0.04,
-      balance: 24027,
-      value: 846,
-      place: "wallet3",
-      chain: "Avalanche",
-    },
-    {
-      name: "PTP",
-      price: 1.95,
-      balance: 356.1645,
-      value: 693,
-      place: "wallet2",
-      chain: "Avalanche",
-    },
-  ];
+import { mainInstance } from "../config/axios";
+
+export const getDexTokens = async ({ chain }) => {
+  try {
+    const res = await mainInstance.get(
+      `/tokens/dex?chain=${chain}`,
+
+      { withCredentials: true }
+    );
+    if (res?.data) {
+      return res.data;
+    } else {
+      throw new Error("Something went wrong");
+    }
+  } catch (e) {
+    throw new Error(e?.response?.data);
+  }
 };
 
 export const getCexTokens = () => {
