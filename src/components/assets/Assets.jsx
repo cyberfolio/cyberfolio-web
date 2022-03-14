@@ -4,7 +4,7 @@ import "./Assets.scss";
 import classnames from "classnames";
 
 import { getDexTokens, getCexTokens } from "../../services/AssetService";
-import { AssetTable } from "../asset-table/AssetTable";
+import { AssetTable } from "../assetTable/AssetTable";
 import { useSelector } from "react-redux";
 
 export const Assets = () => {

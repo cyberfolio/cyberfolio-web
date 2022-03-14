@@ -5,27 +5,14 @@ body {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-.unselectable {
-  user-select: none;
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  -o-user-select: none;
+input,
+select,
+textarea,
+button {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace !important;
 }
 
 .app {
   min-height: 100vh;
-}
-
-.disabledbutton {
-  pointer-events: none;
-  opacity: 0.4;
-}
-.connectedDot {
-  height: 5px;
-  width: 5px;
-  background-color: green;
-  border-radius: 50%;
-  display: inline-block;
 }

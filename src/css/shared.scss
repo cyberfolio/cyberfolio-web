@@ -1,3 +1,17 @@
+@import "./variables.scss";
+
+.disabledbutton {
+  pointer-events: none;
+  opacity: 0.4;
+}
+.connectedDot {
+  height: 5px;
+  width: 5px;
+  background-color: green;
+  border-radius: 50%;
+  display: inline-block;
+}
+
 .unselectable {
   user-select: none;
   -moz-user-select: none;
@@ -10,4 +24,43 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.textInput {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background-color: $bottonHover;
+  color: $text-color-dark;
+  outline: none;
+  padding-left: 24px;
+  padding-right: 24px;
+  font-family: Graphik;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 10px;
+  border: 1px solid $border;
+  border-radius: 8px;
+  color: $text-color-dark;
+  font-weight: 500;
+  font-size: 16px;
+  &:hover {
+    cursor: pointer;
+    background-color: $bottonHover;
+  }
+}
+
+.button-borderless {
+  @extend .button;
+  border: unset;
 }

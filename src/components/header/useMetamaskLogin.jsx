@@ -45,12 +45,11 @@ export const useMetamaskLogin = () => {
         setIsConnecting(false);
         throw new Error("Your message could not be verified!");
       }
-      const user = await validateSignature({
+      await validateSignature({
         evmAddress,
         nonce,
         signature,
       });
-      console.log(user);
       setIsConnecting(false);
       dispatch({
         type: ACTIONS.SET_EVM_ADDRESS,

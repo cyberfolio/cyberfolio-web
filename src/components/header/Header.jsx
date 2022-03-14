@@ -35,7 +35,7 @@ const ConnectWallet = () => {
       );
     return (
       <Tooltip id="button-tooltip" {...props}>
-        This will be your key identifier
+        The account you choose will be your key identifier
       </Tooltip>
     );
   };

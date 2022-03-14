@@ -1,22 +1,36 @@
 import React, { useEffect, useState } from "react";
 import "./Home.scss";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Plus, ChevronDown } from "react-bootstrap-icons";
+
 import { Utilities } from "../utilities/Utilities";
 import { Assets } from "../assets/Assets";
-import { ChainsDropDown } from "./chains-dropdown/ChainsDropDown";
 
-const availableChains = ["Ethereum Wallet", "Solana Wallet", "Polkadot Wallet"];
+import { ChainsDropDown } from "./chains-dropdown/ChainsDropDown";
+import { AddWalletModal } from "../addWalletModal/AddWalletModal";
+import { ACTIONS } from "../../state/actions";
+
+const availableChains = ["Bitcoin Wallet", "Ethereum Wallet", "Solana Wallet", "Polkadot Wallet"];
 const availableCexes = ["Binance Account", "FTX Account", "Kucoin Account", "Gateio Account"];
 
 export const Home = () => {
   const chain = useSelector((state) => state.chain);
+  const dispatch = useDispatch();
   const [chainsDropDownOpen, setChainsDropDownOpen] = useState(false);
 
   useEffect(() => {
     setChainsDropDownOpen(false);
   }, [chain]);
+
+  const openWalletModal = () => {
+    dispatch({
+      type: ACTIONS.OPEN_WALLET_MODAL,
+      payload: {
+        data: true
+      },
+    });
+  }
 
   return (
     <div className="home">
@@ -24,7 +38,7 @@ export const Home = () => {
         <div className="home__header__add-wallets">
           {availableChains.map((chain) => {
             return (
-              <div className="home__header__add-wallets__bundle" key={chain}>
+              <div className="home__header__add-wallets__bundle" key={chain} onClick={openWalletModal}>
                 {chain}
                 <Plus color="white" size={20} />
               </div>
@@ -74,6 +88,7 @@ export const Home = () => {
       <div className="home__utilities">
         <Utilities />
       </div>
+      <AddWalletModal />
     </div>
   );
 };
