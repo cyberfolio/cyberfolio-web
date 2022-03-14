@@ -68,7 +68,7 @@ export const isValidWalletAddress = async ({ address, chain }) => {
   let isValid = false;
   if (chain) {
     if (chain === "Bitcoin") {
-      isValid = validateBtcAddress();
+      isValid = validateBtcAddress(address);
     }
     if (chain === "Evm") {
       isValid = ethers.utils.isAddress(address);

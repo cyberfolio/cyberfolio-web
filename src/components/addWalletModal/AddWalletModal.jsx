@@ -19,9 +19,9 @@ export const AddWalletModal = () => {
   const modalRef = useRef();
 
   const add = async () => {
-    const isValid = isValidWalletAddress({ address, chain });
+    const isValid = await isValidWalletAddress({ address, chain });
     if (!isValid) {
-      toast.error("Address is not valid");
+      toast.error(`${chain} address is not valid`);
       return;
     }
     try {

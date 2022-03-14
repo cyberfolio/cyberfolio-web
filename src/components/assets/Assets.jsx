@@ -21,11 +21,12 @@ export const Assets = () => {
 
   const getAllAssets = async () => {
     try {
+      const dexTokensBitcoin = await getDexTokens({ chain: "Bitcoin" });
       const dexTokensEthereum = await getDexTokens({ chain: "Ethereum" });
       const dexTokensAvalanche = await getDexTokens({ chain: "Avalanche" });
       const dexTokensArbitrum = await getDexTokens({ chain: "Arbitrum" });
 
-      setDexTokens([...dexTokensEthereum, ...dexTokensAvalanche, ...dexTokensArbitrum]);
+      setDexTokens([...dexTokensBitcoin, ...dexTokensEthereum, ...dexTokensAvalanche, ...dexTokensArbitrum, ]);
 
       const cexTokens = getCexTokens();
       setCexTokens(cexTokens);
