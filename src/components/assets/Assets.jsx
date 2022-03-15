@@ -15,30 +15,36 @@ export const Assets = () => {
   const [filteredDexTokens, setFilteredDexTokens] = useState([]);
   const [isFiltered, setIsFiltered] = useState(false);
   const [cexTokens, setCexTokens] = useState([]);
-  const [filteredCexTokens, setFilteredCexTokens] = useState([]);
   const [assetsToShow, setAssetsToShow] = useState([]);
 
   const chain = useSelector((state) => state.chain);
 
   const getAllAssets = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       const dexTokensBitcoin = await getDexTokens({ chain: "Bitcoin" });
       const dexTokensEthereum = await getDexTokens({ chain: "Ethereum" });
       const dexTokensAvalanche = await getDexTokens({ chain: "Avalanche" });
       const dexTokensArbitrum = await getDexTokens({ chain: "Arbitrum" });
+      const dexTokensPolygon = await getDexTokens({ chain: "Polygon" });
+      const dexTokensSmartChain = await getDexTokens({ chain: "SmartChain" });
 
-      setDexTokens([...dexTokensBitcoin, ...dexTokensEthereum, ...dexTokensAvalanche, ...dexTokensArbitrum, ]);
-      setLoading(false)
+      setDexTokens([
+        ...dexTokensBitcoin,
+        ...dexTokensEthereum,
+        ...dexTokensAvalanche,
+        ...dexTokensArbitrum,
+        ...dexTokensPolygon,
+        ...dexTokensSmartChain,
+      ]);
+      setLoading(false);
 
       const cexTokens = getCexTokens();
       setCexTokens(cexTokens);
+    } catch (e) {
+      toast.error(e.message);
+      setLoading(false);
     }
-    catch(e) {
-      toast.error(e.message)
-      setLoading(false)
-    }
- 
   };
 
   useEffect(() => {
@@ -80,12 +86,10 @@ export const Assets = () => {
       );
       setIsFiltered(true);
       setFilteredDexTokens(filtered);
-      setFilteredCexTokens([])
     }
     if (chain.name === "All Networks") {
       setIsFiltered(false);
       setFilteredDexTokens([]);
-      setFilteredCexTokens(cexTokens)
     }
   }, [chain, dexTokens, cexTokens]);
 
@@ -136,5 +140,4 @@ export const Assets = () => {
   );
 };
 
-Assets.whyDidYouRender = true
-
+Assets.whyDidYouRender = true;

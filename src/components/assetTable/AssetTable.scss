@@ -18,7 +18,7 @@
     &__item {
       width: 20%;
       text-align: center;
-      color: k;
+      color: $text-color-dark;
       font-weight: 700;
       font-size: 0.8rem;
       &--left {
@@ -44,7 +44,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 0;
+      padding: 20px;
+
       &--first {
         border-top: 1px solid $border !important;
       }
@@ -63,6 +64,11 @@
         text-align: center;
         color: $text-color-dark;
         font-size: 0.8rem;
+
+        &__image {
+          width: 20px;
+          margin-right: 10px;
+        }
         &--right {
           text-align: right;
         }
