@@ -4,22 +4,14 @@ import "./AssetTable.scss";
 import classnames from "classnames";
 
 export const AssetTable = ({ assets, loading }) => {
-
-
   return (
     <div className="asset-table">
       <div className="asset-table__header">
-        <div className="asset-table__header__item asset-table__header__item--left">
-          ASSET
-        </div>
-        <div className="asset-table__header__item asset-table__header__item--left">
-          PRICE
-        </div>
+        <div className="asset-table__header__item ">ASSET</div>
+        <div className="asset-table__header__item ">PRICE</div>
         <div className="asset-table__header__item">BALANCE</div>
-        <div className="asset-table__header__item asset-table__header__item--right">
-          VALUE
-        </div>
-        <div className="asset-table__header__item">PLACE</div>
+        <div className="asset-table__header__item ">VALUE</div>
+        <div className="asset-table__header__item">WALLET NAME</div>
         <div className="asset-table__header__item">CHAIN</div>
       </div>
       <div className="asset-table__assets">
@@ -32,7 +24,10 @@ export const AssetTable = ({ assets, loading }) => {
         )}
         {assets &&
           assets.map(
-            ({ name, price, balance, value, place, chain, logo }, index) => {
+            (
+              { name, price, balance, value, chain, logo, walletName },
+              index
+            ) => {
               return (
                 <div
                   key={name + index}
@@ -42,7 +37,7 @@ export const AssetTable = ({ assets, loading }) => {
                     assets.length - 1 && "asset-table__assets__asset--last"
                   )}
                 >
-                  <div className="asset-table__assets__asset__item asset-table__assets__asset__item--left">
+                  <div className="asset-table__assets__asset__item ">
                     {logo && (
                       <img
                         src={logo}
@@ -52,17 +47,17 @@ export const AssetTable = ({ assets, loading }) => {
                     )}
                     {name}
                   </div>
-                  <div className="asset-table__assets__asset__item asset-table__assets__asset__item--left">
+                  <div className="asset-table__assets__asset__item ">
                     $ {price}
                   </div>
                   <div className="asset-table__assets__asset__item">
                     {balance}
                   </div>
-                  <div className="asset-table__assets__asset__item asset-table__assets__asset__item--right">
+                  <div className="asset-table__assets__asset__item">
                     {value}
                   </div>
                   <div className="asset-table__assets__asset__item">
-                    {place}
+                    {walletName}
                   </div>
                   <div className="asset-table__assets__asset__item">
                     {chain ? chain : ""}
