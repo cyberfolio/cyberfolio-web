@@ -23,7 +23,7 @@ export const chainsInfo = [
     image: "http://localhost:4000/logos/ethereum.svg",
   },
   {
-    name: "BSC",
+    name: "Smart Chain",
     image: "http://localhost:4000/logos/bsc.svg",
   },
   {

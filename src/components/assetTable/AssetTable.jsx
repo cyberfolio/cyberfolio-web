@@ -7,12 +7,18 @@ export const AssetTable = ({ assets, loading }) => {
   return (
     <div className="asset-table">
       <div className="asset-table__header">
-        <div className="asset-table__header__item ">ASSET</div>
+        <div className="asset-table__header__item asset-table__header__item--first">
+          ASSET
+        </div>
         <div className="asset-table__header__item ">PRICE</div>
         <div className="asset-table__header__item">BALANCE</div>
-        <div className="asset-table__header__item ">VALUE</div>
-        <div className="asset-table__header__item">WALLET NAME</div>
-        <div className="asset-table__header__item">CHAIN</div>
+        <div className="asset-table__header__item ">CHAIN</div>
+        <div className="asset-table__header__item asset-table__header__item--center">
+          WALLET NAME
+        </div>
+        <div className="asset-table__header__item asset-table__header__item--last">
+          VALUE
+        </div>
       </div>
       <div className="asset-table__assets">
         {loading && (
@@ -25,9 +31,12 @@ export const AssetTable = ({ assets, loading }) => {
         {assets &&
           assets.map(
             (
-              { name, price, balance, value, chain, logo, walletName },
+              { name, symbol, price, balance, value, chain, logo, walletName },
               index
             ) => {
+              if (!symbol) {
+                return <div key={name + index}></div>;
+              }
               return (
                 <div
                   key={name + index}
@@ -37,30 +46,30 @@ export const AssetTable = ({ assets, loading }) => {
                     assets.length - 1 && "asset-table__assets__asset--last"
                   )}
                 >
-                  <div className="asset-table__assets__asset__item ">
+                  <div className="asset-table__assets__asset__item asset-table__assets__asset__item--first ">
                     {logo && (
                       <img
                         src={logo}
-                        alt={name}
+                        alt={symbol}
                         className="asset-table__assets__asset__item__image"
                       />
                     )}
-                    {name}
+                    {symbol}
                   </div>
                   <div className="asset-table__assets__asset__item ">
-                    $ {price}
+                    {price}
                   </div>
                   <div className="asset-table__assets__asset__item">
                     {balance}
                   </div>
                   <div className="asset-table__assets__asset__item">
-                    {value}
+                    {chain ? chain : ""}
                   </div>
-                  <div className="asset-table__assets__asset__item">
+                  <div className="asset-table__assets__asset__item asset-table__assets__asset__item--center">
                     {walletName}
                   </div>
-                  <div className="asset-table__assets__asset__item">
-                    {chain ? chain : ""}
+                  <div className="asset-table__assets__asset__item asset-table__assets__asset__item--last">
+                    {value}
                   </div>
                 </div>
               );

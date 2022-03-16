@@ -9,18 +9,28 @@
   height: 60vh;
   overflow-y: scroll;
   &__header {
-    padding-top: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding-bottom: 10px;
+    padding: 20px;
     &__item {
-      width: 20%;
+      display: flex;
+      justify-content: flex-start;
+      width: 16.6%;
       text-align: center;
       color: $text-color-dark;
       font-weight: 700;
-      font-size: 0.8rem;
+      font-size: 14px;
+      &--first {
+        width: 22%;
+      }
+      &--center {
+        justify-content: center;
+      }
+      &--last {
+        justify-content: flex-end;
+      }
       &--left {
         text-align: left;
       }
@@ -60,20 +70,30 @@
       }
 
       &__item {
-        width: 20%;
         text-align: center;
         color: $text-color-dark;
-        font-size: 0.8rem;
-
-        &__image {
-          width: 20px;
-          margin-right: 10px;
+        font-size: 13px;
+        width: 16.6%;
+        display: flex;
+        justify-content: flex-start;
+        &--first {
+          width: 22%;
+        }
+        &--center {
+          justify-content: center;
+        }
+        &--last {
+          justify-content: flex-end;
         }
         &--right {
           text-align: right;
         }
         &--left {
           text-align: left;
+        }
+        &__image {
+          width: 20px;
+          margin-right: 10px;
         }
       }
     }
