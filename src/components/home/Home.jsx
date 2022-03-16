@@ -10,9 +10,15 @@ import { Assets } from "../assets/Assets";
 import { ChainsDropDown } from "./chains-dropdown/ChainsDropDown";
 import { AddWalletModal } from "../addWalletModal/AddWalletModal";
 import { ACTIONS } from "../../state/actions";
+import useKeypress from "../../utils/useKeyPress";
 
 const availableChains = ["Bitcoin", "Evm", "Solana", "Polkadot"];
-const availableCexes = ["Binance Account", "FTX Account", "Kucoin Account", "Gateio Account"];
+const availableCexes = [
+  "Binance Account",
+  "FTX Account",
+  "Kucoin Account",
+  "Gateio Account",
+];
 
 export const Home = () => {
   const chain = useSelector((state) => state.chain);
@@ -23,15 +29,19 @@ export const Home = () => {
     setChainsDropDownOpen(false);
   }, [chain]);
 
+  useKeypress("Escape", () => {
+    setChainsDropDownOpen(false);
+  });
+
   const openWalletModal = (chain) => {
     dispatch({
       type: ACTIONS.OPEN_WALLET_MODAL,
       payload: {
-        open: true, 
-        chain
+        open: true,
+        chain,
       },
     });
-  }
+  };
 
   return (
     <div className="home">
@@ -39,13 +49,17 @@ export const Home = () => {
         <div className="home__header__add-wallets">
           {availableChains.map((chain) => {
             return (
-              <div className="home__header__add-wallets__bundle" key={chain} onClick={() => openWalletModal(chain)}>
+              <div
+                className="home__header__add-wallets__bundle"
+                key={chain}
+                onClick={() => openWalletModal(chain)}
+              >
                 {chain} Wallet
                 <Plus color="white" size={20} />
               </div>
             );
           })}
-           {availableCexes.map((cex) => {
+          {availableCexes.map((cex) => {
             return (
               <div className="home__header__add-wallets__bundle" key={cex}>
                 {cex}
@@ -94,5 +108,4 @@ export const Home = () => {
   );
 };
 
-Home.whyDidYouRender = true
-
+Home.whyDidYouRender = true;
