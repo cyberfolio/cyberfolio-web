@@ -19,7 +19,7 @@
   }
   &__content {
     box-shadow: 0 4px 18px rgb(7 7 22 / 20%);
-    max-width: 650px;
+    max-width: 550px;
     max-height: 100%;
     background-color: $background;
     border-radius: 12px;
@@ -41,16 +41,24 @@
     }
     &__body {
       @extend .flexCenter;
-      flex-direction: row;
-      width: 100%;
+      justify-content: flex-start !important;
+      align-items: flex-start;
+      flex-direction: column;
+      width: 70%;
+      margin: 0 auto;
       padding-bottom: 20px;
       &__input {
         @extend .textInput;
+        margin-bottom: 10px;
         margin-right: 10px;
       }
-      &__button {
-        @extend .button;
-        margin-left: 10px;
+      &__button__wrapper {
+        width: 100%;
+        @extend .flexCenter;
+        justify-content: flex-end;
+        &__button {
+          @extend .button;
+        }
       }
     }
   }

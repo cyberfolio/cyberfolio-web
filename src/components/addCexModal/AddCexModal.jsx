@@ -2,23 +2,24 @@ import React, { useRef, useState } from "react";
 import "./AddCexModal.scss";
 
 import { useSelector, useDispatch } from "react-redux";
-import { toast } from "react-toastify";
 import classnames from "classnames";
 
 import { ACTIONS } from "../../state/actions";
 import useKeypress from "../../utils/useKeyPress";
 import useIsClickedOutside from "../../utils/useIsClickedOutside";
+import { toast } from "react-toastify";
 
-export const AddCexModal = ( { name }) => {
+export const AddCexModal = () => {
   const [apiKey, setApiKey] = useState("");
   const [apiSecret, setApiSecret] = useState("");
-  const { chain, open } = useSelector((state) => state.isWalletModalOpen);
+  const { name, open } = useSelector((state) => state.isAddCexModalOpen);
   const dispatch = useDispatch();
   const modalRef = useRef();
 
   const add = async () => {
-  
-    
+    if(!apiKey || !apiSecret) {
+      toast.error("Please enter api key and secret.")
+    }
   };
 
   useKeypress("Escape", () => {
@@ -30,31 +31,25 @@ export const AddCexModal = ( { name }) => {
 
   const close = () => {
     dispatch({
-      type: ACTIONS.OPEN_WALLET_MODAL,
+      type: ACTIONS.OPEN_ADD_CEX_MODAL,
       payload: {
         open: false,
-        chain: "",
+        name: "",
       },
     });
   };
 
   return (
     <div
-      className={classnames(
-        "add-cex-modal",
-        open && "add-dex-modal--active"
-      )}
+      className={classnames("add-cex-modal", open && "add-cex-modal--active")}
     >
-      <div className="add-dex-modal__content" ref={modalRef}>
+      <div className="add-cex-modal__content" ref={modalRef}>
         <div className="add-cex-modal__content__header">
           <div />
           <div className="add-cex-modal__content__header__title">
-            Add {chain} Wallet
+            Add {name}
           </div>
-          <div
-            className="add-cex-modal__content__header__exit"
-            onClick={close}
-          >
+          <div className="add-cex-modal__content__header__exit" onClick={close}>
             X
           </div>
         </div>
@@ -63,21 +58,23 @@ export const AddCexModal = ( { name }) => {
             className="add-cex-modal__content__body__input"
             value={apiKey}
             onChange={(e) => setApiKey(e.target.value)}
-            placeholder="Enter Wallet Address"
+            placeholder="Enter Api Key"
             maxLength="42"
           />
           <input
             className="add-cex-modal__content__body__input"
             value={apiSecret}
             onChange={(e) => setApiSecret(e.target.value)}
-            placeholder="Enter Wallet Name"
+            placeholder="Enter Api Secret"
             maxLength="42"
           />
           <div
-            className="add-cex-modal__content__body__button"
+            className="add-cex-modal__content__body__button__wrapper"
             onClick={add}
           >
-            Add
+            <div className="add-cex-modal__content__body__button__wrapper__button">
+              Add
+            </div>
           </div>
         </div>
       </div>

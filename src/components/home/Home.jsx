@@ -8,7 +8,6 @@ import { Utilities } from "../utilities/Utilities";
 import { Assets } from "../assets/Assets";
 
 import { ChainsDropDown } from "./chains-dropdown/ChainsDropDown";
-import { AddWalletModal } from "../addWalletModal/AddWalletModal";
 import { ACTIONS } from "../../state/actions";
 import useKeypress from "../../utils/useKeyPress";
 
@@ -43,6 +42,16 @@ export const Home = () => {
     });
   };
 
+  const openAddCexModal = (name) => {
+    dispatch({
+      type: ACTIONS.OPEN_ADD_CEX_MODAL,
+      payload: {
+        open: true,
+        name,
+      },
+    });
+  };
+
   return (
     <div className="home">
       <div className="home__header">
@@ -61,7 +70,11 @@ export const Home = () => {
           })}
           {availableCexes.map((cex) => {
             return (
-              <div className="home__header__add-wallets__bundle" key={cex}>
+              <div
+                className="home__header__add-wallets__bundle"
+                key={cex}
+                onClick={() => openAddCexModal(cex)}
+              >
                 {cex}
                 <Plus color="white" size={20} />
               </div>
@@ -103,7 +116,6 @@ export const Home = () => {
       <div className="home__utilities">
         <Utilities />
       </div>
-      <AddWalletModal />
     </div>
   );
 };

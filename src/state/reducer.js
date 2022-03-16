@@ -10,6 +10,10 @@ const initialState = {
     open: false,
     chain: "",
   },
+  isAddCexModalOpen: {
+    open: false,
+    name: "",
+  },
 };
 
 const reducer = (state = initialState, action) => {
@@ -34,6 +38,16 @@ const reducer = (state = initialState, action) => {
         isWalletModalOpen: {
           open: action.payload.open,
           chain: action.payload.chain,
+        },
+      };
+    }
+
+    case ACTIONS.OPEN_ADD_CEX_MODAL: {
+      return {
+        ...state,
+        isAddCexModalOpen: {
+          open: action.payload.open,
+          name: action.payload.name,
         },
       };
     }
