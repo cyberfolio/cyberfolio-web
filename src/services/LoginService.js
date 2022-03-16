@@ -1,5 +1,31 @@
 import { mainInstance } from "../config/axios";
 
+export const isAuthenticated = async () => {
+  try {
+    const res = await mainInstance.get("/authenticated", {
+      withCredentials: true,
+    });
+    if (res?.data) {
+      return res?.data?.keyIdentifier;
+    } else {
+      return false;
+    }
+  } catch (e) {
+    return false;
+  }
+};
+
+export const logout = async () => {
+  try {
+    await mainInstance.get("/logout", {
+      withCredentials: true,
+    });
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
+
 export const getNonce = async ({ evmAddress }) => {
   try {
     const res = await mainInstance.post("/login/metamask", { evmAddress });

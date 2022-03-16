@@ -6,8 +6,8 @@ import { useSelector } from "react-redux";
 import Metamask from "../../assets/metamask.png";
 import { truncateEthAddress } from "../../utils";
 import { useMetamaskLogin } from "./useMetamaskLogin";
-
 export const Header = () => {
+
   return (
     <div className="header">
       <div className="header-content">
@@ -25,6 +25,7 @@ const ConnectWallet = () => {
     signAndVerifyMessage,
     disconnectMetamask,
   } = useMetamaskLogin();
+
 
   const renderTooltip = (props) => {
     if (evmAddress)
