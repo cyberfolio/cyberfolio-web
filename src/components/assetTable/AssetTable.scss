@@ -77,6 +77,15 @@
         width: 16.6%;
         display: flex;
         justify-content: flex-start;
+        &__chain {
+          font-size: 10px;
+        }
+        &--asset {
+          display: flex;
+          justify-content: center;
+          align-items: flex-start;
+          flex-direction: column;
+        }
         &--first {
           width: 22%;
         }

@@ -12,7 +12,6 @@ export const AssetTable = ({ assets, loading }) => {
         </div>
         <div className="asset-table__header__item ">PRICE</div>
         <div className="asset-table__header__item">BALANCE</div>
-        <div className="asset-table__header__item ">CHAIN</div>
         <div className="asset-table__header__item asset-table__header__item--center">
           WALLET NAME
         </div>
@@ -46,24 +45,26 @@ export const AssetTable = ({ assets, loading }) => {
                     assets.length - 1 && "asset-table__assets__asset--last"
                   )}
                 >
-                  <div className="asset-table__assets__asset__item asset-table__assets__asset__item--first ">
-                    {logo && (
-                      <img
-                        src={logo}
-                        alt={symbol}
-                        className="asset-table__assets__asset__item__image"
-                      />
-                    )}
-                    {symbol}
+                  <div className="asset-table__assets__asset__item asset-table__assets__asset__item--asset asset-table__assets__asset__item--first ">
+                    <div>
+                      {logo && (
+                        <img
+                          src={logo}
+                          alt={symbol}
+                          className="asset-table__assets__asset__item__image"
+                        />
+                      )}
+                      {symbol}
+                    </div>
+                    <div className="asset-table__assets__asset__item__chain">
+                      {chain}
+                    </div>
                   </div>
                   <div className="asset-table__assets__asset__item ">
                     {price}
                   </div>
                   <div className="asset-table__assets__asset__item">
                     {balance}
-                  </div>
-                  <div className="asset-table__assets__asset__item">
-                    {chain ? chain : ""}
                   </div>
                   <div className="asset-table__assets__asset__item asset-table__assets__asset__item--center">
                     {walletName}

@@ -8,17 +8,31 @@ import { ACTIONS } from "../../state/actions";
 import useKeypress from "../../utils/useKeyPress";
 import useIsClickedOutside from "../../utils/useIsClickedOutside";
 import { toast } from "react-toastify";
+import { addCex } from "../../services/CexService";
 
 export const AddCexModal = () => {
   const [apiKey, setApiKey] = useState("");
   const [apiSecret, setApiSecret] = useState("");
+  const [loading, setLoading] = useState("");
   const { name, open } = useSelector((state) => state.isAddCexModalOpen);
   const dispatch = useDispatch();
   const modalRef = useRef();
 
   const add = async () => {
-    if(!apiKey || !apiSecret) {
-      toast.error("Please enter api key and secret.")
+    setLoading(true);
+    if (!apiKey || !apiSecret) {
+      toast.error("Please enter api key and secret.");
+      setLoading(false);
+      return;
+    }
+    try {
+      await addCex({ apiKey, apiSecret, cexName: name });
+      toast.success(`${name} added`);
+      setLoading(false);
+      close();
+    } catch (e) {
+      toast.error(e.message);
+      setLoading(false);
     }
   };
 
@@ -73,6 +87,11 @@ export const AddCexModal = () => {
             onClick={add}
           >
             <div className="add-cex-modal__content__body__button__wrapper__button">
+              {loading && (
+                <div className="fa-1x">
+                  <i className="fas fa-sync fa-spin"></i>
+                </div>
+              )}{"  "}
               Add
             </div>
           </div>
