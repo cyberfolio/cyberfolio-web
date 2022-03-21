@@ -23,7 +23,7 @@
     align-items: center;
     &:hover {
       cursor: pointer;
-      background-color: $bottonHover;
+      background-color: $button-hover-color;
       border-radius: 8px;
     }
     &__image {

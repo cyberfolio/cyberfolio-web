@@ -33,7 +33,7 @@
   height: 36px;
   border-radius: 8px;
   border: 1px solid transparent;
-  background-color: $bottonHover;
+  background-color: $button-hover-color;
   color: $text-color-dark;
   outline: none;
   padding-left: 24px;
@@ -56,7 +56,7 @@
   font-size: 16px;
   &:hover {
     cursor: pointer;
-    background-color: $bottonHover;
+    background-color: $button-hover-color;
   }
 }
 

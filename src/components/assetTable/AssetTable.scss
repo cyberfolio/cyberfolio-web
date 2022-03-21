@@ -67,7 +67,7 @@
       &:hover {
         border-bottom: 1px solid transparent !important;
         border-radius: 8px;
-        background-color: $bottonHover;
+        background-color: $button-hover-color;
       }
 
       &__item {
@@ -78,7 +78,9 @@
         display: flex;
         justify-content: flex-start;
         &__chain {
-          font-size: 10px;
+          padding-top: 5px;
+          font-size: 12px;
+          color: $fainted-color;
         }
         &--asset {
           display: flex;
