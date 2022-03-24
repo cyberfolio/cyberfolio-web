@@ -2,14 +2,10 @@ import { mainInstance } from "../config/axios";
 
 export const isAuthenticated = async () => {
   try {
-    const res = await mainInstance.get("/authenticated", {
+    const res = await mainInstance.get("/auth/isAuthenticated", {
       withCredentials: true,
     });
-    if (res?.data) {
-      return res?.data?.keyIdentifier;
-    } else {
-      return false;
-    }
+    return res?.data?.keyIdentifier;
   } catch (e) {
     return false;
   }
@@ -17,7 +13,7 @@ export const isAuthenticated = async () => {
 
 export const logout = async () => {
   try {
-    await mainInstance.get("/logout", {
+    await mainInstance.get("/auth/logout", {
       withCredentials: true,
     });
     return true;
@@ -28,7 +24,7 @@ export const logout = async () => {
 
 export const getNonce = async ({ evmAddress }) => {
   try {
-    const res = await mainInstance.post("/login/metamask", { evmAddress });
+    const res = await mainInstance.post("/auth/login/metamask", { evmAddress });
     if (res?.data?.nonce) {
       return res?.data?.nonce;
     } else {
@@ -42,7 +38,7 @@ export const getNonce = async ({ evmAddress }) => {
 export const validateSignature = async ({ evmAddress, nonce, signature }) => {
   try {
     const res = await mainInstance.post(
-      "/login/validateSignature",
+      "/auth/login/validateSignature",
       {
         evmAddress,
         nonce,

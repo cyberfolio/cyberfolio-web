@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import classnames from "classnames";
 
-import { addWallet } from "../../services/WalletService";
+import { addWallet } from "../../services/wallet";
 import { ACTIONS } from "../../state/actions";
 import useKeypress from "../../utils/useKeyPress";
 import useIsClickedOutside from "../../utils/useIsClickedOutside";

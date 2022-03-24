@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import {  useState } from "react";
 import detectEthereumProvider from "@metamask/detect-provider";
 import { ethers } from "ethers";
 import { toast } from "react-toastify";
@@ -6,30 +6,13 @@ import { useDispatch } from "react-redux";
 import { ACTIONS } from "../../state/actions";
 import {
   getNonce,
-  isAuthenticated,
   logout,
   validateSignature,
-} from "../../services/LoginService";
+} from "../../services/auth";
 
 export const useMetamaskLogin = () => {
   const dispatch = useDispatch();
   const [isConnecting, setIsConnecting] = useState(false);
-
-  const checkIsAuthenticated = useCallback(async () => {
-    const keyIdentifier = await isAuthenticated();
-    if (keyIdentifier) {
-      dispatch({
-        type: ACTIONS.SET_EVM_ADDRESS,
-        payload: {
-          data: keyIdentifier,
-        },
-      });
-    }
-  }, [dispatch]);
-
-  useEffect(() => {
-    checkIsAuthenticated();
-  }, [checkIsAuthenticated]);
 
   const checkIfMetamaskPresent = async () => {
     const provider = await detectEthereumProvider();

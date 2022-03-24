@@ -11,8 +11,8 @@ export const addCex = async ({ apiKey, apiSecret, cexName }) => {
       },
       { withCredentials: true }
     );
-    if (res?.data) {
-      return true;
+    if (res?.data?.assets) {
+      return res?.data?.assets;
     } else {
       throw new Error("Something went wrong");
     }

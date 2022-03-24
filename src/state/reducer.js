@@ -14,6 +14,7 @@ const initialState = {
     open: false,
     name: "",
   },
+  cexAssets: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -49,6 +50,13 @@ const reducer = (state = initialState, action) => {
           open: action.payload.open,
           name: action.payload.name,
         },
+      };
+    }
+
+    case ACTIONS.SET_CEX_ASSETS: {
+      return {
+        ...state,
+        cexAssets: [...state.cexAssets, ...action.payload.cexAssets],
       };
     }
 

@@ -4,7 +4,7 @@ import "./Assets.scss";
 import classnames from "classnames";
 import { toast } from "react-toastify";
 
-import { getDexTokens, getCexTokens } from "../../services/AssetService";
+import { getCexTokens, getDexTokens } from "../../services/asset";
 import { AssetTable } from "../assetTable/AssetTable";
 import { useSelector } from "react-redux";
 
@@ -18,34 +18,42 @@ export const Assets = () => {
   const [assetsToShow, setAssetsToShow] = useState([]);
 
   const chain = useSelector((state) => state.chain);
+  const cexAssets = useSelector((state) => state.cexAssets);
+  const isAuthenticated = useSelector((state) => state.evmAddress);
 
   const getAllAssets = async () => {
     try {
       setLoading(true);
       const dexTokensBitcoin = await getDexTokens({ chain: "Bitcoin" });
       const dexTokensEthereum = await getDexTokens({ chain: "Ethereum" });
-      const dexTokensAvalanche = await getDexTokens({ chain: "Avalanche" });
-      const dexTokensArbitrum = await getDexTokens({ chain: "Arbitrum" });
-      const dexTokensPolygon = await getDexTokens({ chain: "Polygon" });
-      const dexTokensSmartChain = await getDexTokens({ chain: "SmartChain" });
-
+      // const dexTokensAvalanche = await getDexTokens({ chain: "Avalanche" });
+      // const dexTokensArbitrum = await getDexTokens({ chain: "Arbitrum" });
+      // const dexTokensPolygon = await getDexTokens({ chain: "Polygon" });
+      // const dexTokensSmartChain = await getDexTokens({ chain: "SmartChain" });
       setDexTokens([
         ...dexTokensBitcoin,
         ...dexTokensEthereum,
-        ...dexTokensAvalanche,
-        ...dexTokensArbitrum,
-        ...dexTokensPolygon,
-        ...dexTokensSmartChain,
+        // ...dexTokensAvalanche,
+        // ...dexTokensArbitrum,
+        //...dexTokensPolygon,
+        // ...dexTokensSmartChain,
       ]);
-      setLoading(false);
 
-      const cexTokens = getCexTokens();
-      setCexTokens(cexTokens);
+      const cexTokensBinance = await getCexTokens({ cexName: "binance" });
+      console.log(cexTokensBinance)
+      setCexTokens(cexTokensBinance)
+      setLoading(false);
     } catch (e) {
       toast.error(e.message);
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (Array.isArray(cexAssets) && cexAssets.length > 0) {
+      setCexTokens(cexAssets);
+    }
+  }, [cexAssets]);
 
   useEffect(() => {
     if (activeTab === "All" && filteredDexTokens.length > 0 && isFiltered) {
@@ -76,8 +84,10 @@ export const Assets = () => {
   };
 
   useEffect(() => {
-    getAllAssets();
-  }, []);
+    if(isAuthenticated) {
+      getAllAssets();
+    }
+  }, [isAuthenticated]);
 
   useEffect(() => {
     if (chain.name !== "All Networks") {

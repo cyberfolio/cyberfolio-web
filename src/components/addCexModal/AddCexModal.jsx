@@ -8,7 +8,7 @@ import { ACTIONS } from "../../state/actions";
 import useKeypress from "../../utils/useKeyPress";
 import useIsClickedOutside from "../../utils/useIsClickedOutside";
 import { toast } from "react-toastify";
-import { addCex } from "../../services/CexService";
+import { addCex } from "../../services/cex";
 
 export const AddCexModal = () => {
   const [apiKey, setApiKey] = useState("");
@@ -26,7 +26,14 @@ export const AddCexModal = () => {
       return;
     }
     try {
-      await addCex({ apiKey, apiSecret, cexName: name });
+      const cexName = name.split(' ').shift()
+      const cexAssets = await addCex({ apiKey, apiSecret, cexName });
+      dispatch({
+        type: ACTIONS.SET_CEX_ASSETS,
+        payload: {
+          cexAssets
+        },
+      });      
       toast.success(`${name} added`);
       setLoading(false);
       close();
@@ -73,14 +80,12 @@ export const AddCexModal = () => {
             value={apiKey}
             onChange={(e) => setApiKey(e.target.value)}
             placeholder="Enter Api Key"
-            maxLength="42"
           />
           <input
             className="add-cex-modal__content__body__input"
             value={apiSecret}
             onChange={(e) => setApiSecret(e.target.value)}
             placeholder="Enter Api Secret"
-            maxLength="42"
           />
           <div
             className="add-cex-modal__content__body__button__wrapper"
@@ -88,7 +93,7 @@ export const AddCexModal = () => {
           >
             <div className="add-cex-modal__content__body__button__wrapper__button">
               {loading && (
-                <div className="fa-1x">
+                <div className="fa-1x add-cex-modal__content__body__button__wrapper__button__loading">
                   <i className="fas fa-sync fa-spin"></i>
                 </div>
               )}{"  "}

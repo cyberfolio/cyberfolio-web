@@ -58,6 +58,9 @@
         justify-content: flex-end;
         &__button {
           @extend .button;
+          &__loadng {
+            margin-right: 5px;
+          }
         }
       }
     }

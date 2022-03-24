@@ -17,28 +17,19 @@ export const getDexTokens = async ({ chain }) => {
   }
 };
 
-export const getCexTokens = () => {
-  return [
-    {
-      name: "BNB",
-      price: 370,
-      balance: 10,
-      value: 3700,
-      place: "Binance",
-    },
-    {
-      name: "HOLO",
-      price: 0.01,
-      balance: 2400,
-      value: 24,
-      place: "FTX",
-    },
-    {
-      name: "DENT",
-      price: 0.001,
-      balance: 2400,
-      value: 2.4,
-      place: "FTX",
-    },
-  ];
+export const getCexTokens = async ({ cexName }) => {
+  try {
+    const res = await mainInstance.get(
+      `/cex/assets/${cexName}`,
+
+      { withCredentials: true }
+    );
+    if (res?.data?.assets) {
+      return res.data?.assets;
+    } else {
+      throw new Error("Something went wrong");
+    }
+  } catch (e) {
+    throw new Error(e?.response?.data);
+  }
 };
