@@ -3,7 +3,7 @@ import { mainInstance } from "../config/axios";
 export const getDexTokens = async ({ chain }) => {
   try {
     const res = await mainInstance.get(
-      `/tokens/dex?chain=${chain}`,
+      `dex/assets/${chain}`,
 
       { withCredentials: true }
     );

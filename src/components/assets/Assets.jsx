@@ -34,7 +34,6 @@ export const Assets = () => {
       dexTokens.sort(function (a, b) {
         return b.value - a.value;
       });
-
       setDexTokens(dexTokens);
 
       const cexTokensBinance = await getCexTokens({ cexName: "binance" });
@@ -42,6 +41,7 @@ export const Assets = () => {
         return b.value - a.value;
       });
       setCexTokens(cexTokensBinance);
+      
       setLoading(false);
     } catch (e) {
       toast.error(e.message);
