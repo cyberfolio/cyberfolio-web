@@ -30,18 +30,18 @@ export const Assets = () => {
       // const dexTokensArbitrum = await getDexTokens({ chain: "Arbitrum" });
       // const dexTokensPolygon = await getDexTokens({ chain: "Polygon" });
       // const dexTokensSmartChain = await getDexTokens({ chain: "SmartChain" });
-      setDexTokens([
-        ...dexTokensBitcoin,
-        ...dexTokensEthereum,
-        // ...dexTokensAvalanche,
-        // ...dexTokensArbitrum,
-        //...dexTokensPolygon,
-        // ...dexTokensSmartChain,
-      ]);
+      const dexTokens = [...dexTokensBitcoin, ...dexTokensEthereum];
+      dexTokens.sort(function (a, b) {
+        return b.value - a.value;
+      });
+
+      setDexTokens(dexTokens);
 
       const cexTokensBinance = await getCexTokens({ cexName: "binance" });
-      console.log(cexTokensBinance)
-      setCexTokens(cexTokensBinance)
+      cexTokensBinance.sort(function (a, b) {
+        return b.value - a.value;
+      });
+      setCexTokens(cexTokensBinance);
       setLoading(false);
     } catch (e) {
       toast.error(e.message);
@@ -84,7 +84,7 @@ export const Assets = () => {
   };
 
   useEffect(() => {
-    if(isAuthenticated) {
+    if (isAuthenticated) {
       getAllAssets();
     }
   }, [isAuthenticated]);
