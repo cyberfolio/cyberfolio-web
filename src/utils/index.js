@@ -42,7 +42,6 @@ export const chainsInfo = [
     name: "Polygon",
     image: "http://localhost:4000/logos/polygon.svg",
   },
-
   {
     name: "Arbitrum",
     image: "http://localhost:4000/logos/arbitrum.svg",
@@ -50,6 +49,22 @@ export const chainsInfo = [
   {
     name: "Optimism",
     image: "http://localhost:4000/logos/optimism.svg",
+  },
+  {
+    name: "Binance",
+    image: "http://localhost:4000/logos/binance.svg",
+  },
+  {
+    name: "Kucoin",
+    image: "http://localhost:4000/logos/kucoin.png",
+  },
+  {
+    name: "Gateio",
+    image: "http://localhost:4000/logos/gateio.svg",
+  },
+  {
+    name: "FTX",
+    image: "http://localhost:4000/logos/ftx.svg",
   },
 ];
 

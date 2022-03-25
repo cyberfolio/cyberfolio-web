@@ -5,8 +5,8 @@ import { useSelector, useDispatch } from "react-redux";
 import classnames from "classnames";
 
 import { ACTIONS } from "../../state/actions";
-import useKeypress from "../../utils/useKeyPress";
-import useIsClickedOutside from "../../utils/useIsClickedOutside";
+import useKeypress from "../hooks/useKeyPress";
+import useIsClickedOutside from "../hooks/useIsClickedOutside";
 import { toast } from "react-toastify";
 import { addCex } from "../../services/cex";
 

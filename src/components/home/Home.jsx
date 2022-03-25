@@ -9,7 +9,7 @@ import { Assets } from "../assets/Assets";
 
 import { ChainsDropDown } from "./chains-dropdown/ChainsDropDown";
 import { ACTIONS } from "../../state/actions";
-import useKeypress from "../../utils/useKeyPress";
+import useKeypress from "../hooks/useKeyPress";
 
 const availableChains = ["Bitcoin", "Evm", "Solana", "Polkadot"];
 const availableCexes = [

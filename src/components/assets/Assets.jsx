@@ -91,11 +91,14 @@ export const Assets = () => {
 
   useEffect(() => {
     if (chain.name !== "All Networks") {
-      const filtered = dexTokens.filter(
+      const filteredDex = dexTokens.filter(
         (dexToken) => dexToken.chain === chain.name
       );
+      const filteredCex = cexTokens.filter(
+        (ceToken) => ceToken.cexName === chain.name
+      );
       setIsFiltered(true);
-      setFilteredDexTokens(filtered);
+      setFilteredDexTokens([...filteredDex, ...filteredCex]);
     }
     if (chain.name === "All Networks") {
       setIsFiltered(false);

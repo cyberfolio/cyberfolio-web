@@ -7,8 +7,8 @@ import classnames from "classnames";
 
 import { addWallet } from "../../services/wallet";
 import { ACTIONS } from "../../state/actions";
-import useKeypress from "../../utils/useKeyPress";
-import useIsClickedOutside from "../../utils/useIsClickedOutside";
+import useKeypress from "../hooks/useKeyPress";
+import useIsClickedOutside from "../hooks/useIsClickedOutside";
 import { isValidWalletAddress } from "../../utils";
 
 export const AddWalletModal = () => {

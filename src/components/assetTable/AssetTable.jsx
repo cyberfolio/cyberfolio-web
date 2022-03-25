@@ -30,7 +30,17 @@ export const AssetTable = ({ assets, loading }) => {
         {assets &&
           assets.map(
             (
-              { name, symbol, price, balance, value, chain, logo, walletName, cexName },
+              {
+                name,
+                symbol,
+                price,
+                balance,
+                value,
+                chain,
+                logo,
+                walletName,
+                cexName,
+              },
               index
             ) => {
               if (!symbol) {
@@ -57,6 +67,13 @@ export const AssetTable = ({ assets, loading }) => {
                       {symbol.toUpperCase()}
                     </div>
                     <div className="asset-table__assets__asset__item__chain">
+                      <img
+                        src={`http://localhost:4000/logos/${(
+                          cexName || chain
+                        ).toLowerCase()}.svg`}
+                        alt={cexName || chain}
+                        className="asset-table__assets__asset__item__chain__logo"
+                      />
                       {cexName}
                       {chain}
                     </div>
