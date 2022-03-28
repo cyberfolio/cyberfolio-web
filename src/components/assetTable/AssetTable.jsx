@@ -55,27 +55,39 @@ export const AssetTable = ({ assets, loading }) => {
                     assets.length - 1 && "asset-table__assets__asset--last"
                   )}
                 >
-                  <div className="asset-table__assets__asset__item asset-table__assets__asset__item--asset asset-table__assets__asset__item--first ">
-                    <div>
-                      {logo && (
-                        <img
-                          src={logo}
-                          alt={symbol}
-                          className="asset-table__assets__asset__item__image"
-                        />
-                      )}
-                      {symbol.toUpperCase()}
-                    </div>
-                    <div className="asset-table__assets__asset__item__chain">
+                  <div
+                    className="asset-table__assets__asset__item 
+                                asset-table__assets__asset__item--asset 
+                                asset-table__assets__asset__item--first"
+                  >
+                    {logo && (
                       <img
-                        src={`http://localhost:4000/logos/${(
-                          cexName || chain
-                        ).toLowerCase()}.svg`}
-                        alt={cexName || chain}
-                        className="asset-table__assets__asset__item__chain__logo"
+                        src={logo}
+                        alt={symbol}
+                        className="asset-table__assets__asset__item__image"
                       />
-                      {cexName}
-                      {chain}
+                    )}
+
+                    {!logo && (
+                      <div className="asset-table__assets__asset__item__noimage">
+                        {symbol.toUpperCase().slice(0, 3)}
+                      </div>
+                    )}
+                    <div className="asset-table__assets__asset__item__chain">
+                      <div className="asset-table__assets__asset__item__chain__name">
+                        {symbol.toUpperCase()}
+                      </div>
+                      <div className="asset-table__assets__asset__item__chain__area">
+                        <img
+                          src={`http://localhost:4000/logos/${(
+                            cexName || chain
+                          ).toLowerCase()}.svg`}
+                          alt={cexName || chain}
+                          className="asset-table__assets__asset__item__chain__logo"
+                        />
+                        {cexName}
+                        {chain}
+                      </div>
                     </div>
                   </div>
                   <div className="asset-table__assets__asset__item ">
