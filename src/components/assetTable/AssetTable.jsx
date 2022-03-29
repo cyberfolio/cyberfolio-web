@@ -2,6 +2,7 @@ import React from "react";
 import "./AssetTable.scss";
 
 import classnames from "classnames";
+import { capitalizeFirstLetter } from "../../utils";
 
 export const AssetTable = ({ assets, loading }) => {
   return (
@@ -85,8 +86,8 @@ export const AssetTable = ({ assets, loading }) => {
                           alt={cexName || chain}
                           className="asset-table__assets__asset__item__chain__logo"
                         />
-                        {cexName}
-                        {chain}
+                        {capitalizeFirstLetter(cexName)}
+                        {capitalizeFirstLetter(chain)}
                       </div>
                     </div>
                   </div>
