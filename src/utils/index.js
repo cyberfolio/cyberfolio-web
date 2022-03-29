@@ -101,3 +101,10 @@ export const capitalizeFirstLetter = (string) => {
   }
   return "";
 };
+
+export const toUsd = (value) => {
+  return value.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+};

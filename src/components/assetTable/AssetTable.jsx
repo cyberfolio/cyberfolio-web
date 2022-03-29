@@ -2,7 +2,7 @@ import React from "react";
 import "./AssetTable.scss";
 
 import classnames from "classnames";
-import { capitalizeFirstLetter } from "../../utils";
+import { capitalizeFirstLetter, toUsd } from "../../utils";
 
 export const AssetTable = ({ assets, loading }) => {
   return (
@@ -92,7 +92,7 @@ export const AssetTable = ({ assets, loading }) => {
                     </div>
                   </div>
                   <div className="asset-table__assets__asset__item ">
-                    {price}
+                    {toUsd(price)}
                   </div>
                   <div className="asset-table__assets__asset__item">
                     {balance}
@@ -101,7 +101,7 @@ export const AssetTable = ({ assets, loading }) => {
                     {walletName}
                   </div>
                   <div className="asset-table__assets__asset__item asset-table__assets__asset__item--last">
-                    {value}
+                    {toUsd(value)}
                   </div>
                 </div>
               );
