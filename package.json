@@ -2,6 +2,13 @@
   "name": "cyberfolio-web",
   "version": "0.1.0",
   "private": true,
+    "scripts": {
+    "dev": "react-scripts start",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
   "dependencies": {
     "@metamask/detect-provider": "^1.2.0",
     "@solana/web3.js": "^1.36.0",
@@ -25,12 +32,8 @@
     "web-vitals": "^1.0.1",
     "web3": "^1.7.0"
   },
-  "scripts": {
-    "dev": "react-scripts start",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+  "devDependencies": {
+    "@welldone-software/why-did-you-render": "^6.2.3"
   },
   "eslintConfig": {
     "extends": [
@@ -50,7 +53,7 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "@welldone-software/why-did-you-render": "^6.2.3"
+  "engines": {
+    "node": "<=16.13.1"
   }
 }

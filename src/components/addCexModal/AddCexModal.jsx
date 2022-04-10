@@ -1,18 +1,19 @@
 import React, { useRef, useState } from "react";
-import "./AddCexModal.scss";
-
 import { useSelector, useDispatch } from "react-redux";
 import classnames from "classnames";
+import { toast } from "react-toastify";
 
+import { addCex } from "../../services/cex";
 import { ACTIONS } from "../../state/actions";
 import useKeypress from "../hooks/useKeyPress";
 import useIsClickedOutside from "../hooks/useIsClickedOutside";
-import { toast } from "react-toastify";
-import { addCex } from "../../services/cex";
+
+import "./AddCexModal.scss";
 
 export const AddCexModal = () => {
   const [apiKey, setApiKey] = useState("");
   const [apiSecret, setApiSecret] = useState("");
+  const [passphrase, setPassphrase] = useState("");
   const [loading, setLoading] = useState("");
   const { name, open } = useSelector((state) => state.isAddCexModalOpen);
   const dispatch = useDispatch();
@@ -25,9 +26,14 @@ export const AddCexModal = () => {
       setLoading(false);
       return;
     }
+    if(name.split(' ').shift().toLowerCase() === "kucoin" && !passphrase) {
+      toast.error("Please enter passphrase.");
+      setLoading(false);
+      return;
+    }
     try {
       const cexName = name.split(' ').shift()
-      const cexAssets = await addCex({ apiKey, apiSecret, cexName });
+      const cexAssets = await addCex({ apiKey, apiSecret, cexName, passphrase });
       dispatch({
         type: ACTIONS.SET_CEX_ASSETS,
         payload: {
@@ -87,18 +93,24 @@ export const AddCexModal = () => {
             onChange={(e) => setApiSecret(e.target.value)}
             placeholder="Enter Api Secret"
           />
+           <input
+            className="add-cex-modal__content__body__input"
+            value={passphrase}
+            onChange={(e) => setPassphrase(e.target.value)}
+            placeholder="Enter Passphrase"
+          />
           <div
             className="add-cex-modal__content__body__button__wrapper"
             onClick={add}
           >
-            <div className="add-cex-modal__content__body__button__wrapper__button">
+            <button className="add-cex-modal__content__body__button__wrapper__button" disabled={loading}>
               {loading && (
-                <div className="fa-1x add-cex-modal__content__body__button__wrapper__button__loading">
+                <div className="fa-1x add-cex-modal__content__body__button__wrapper__button__loading" style={{marginRight: 5}}>
                   <i className="fas fa-sync fa-spin"></i>
                 </div>
-              )}{"  "}
-              Add
-            </div>
+              )}
+             Add
+            </button>
           </div>
         </div>
       </div>

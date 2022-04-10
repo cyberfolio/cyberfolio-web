@@ -1,6 +1,6 @@
 import { mainInstance } from "../config/axios";
 
-export const addCex = async ({ apiKey, apiSecret, cexName }) => {
+export const addCex = async ({ apiKey, apiSecret, cexName, passphrase }) => {
   try {
     const res = await mainInstance.post(
       "/cex/add",
@@ -8,6 +8,7 @@ export const addCex = async ({ apiKey, apiSecret, cexName }) => {
         apiKey,
         apiSecret,
         cexName,
+        passphrase
       },
       { withCredentials: true }
     );
