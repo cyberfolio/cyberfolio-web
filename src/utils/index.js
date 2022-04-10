@@ -12,59 +12,59 @@ export const truncateEthAddress = (address) => {
 export const chainsInfo = [
   {
     name: "All Networks",
-    image: "http://localhost:4000/logos/blockchain.svg",
+    image: `${process.env.REACT_APP_URL}/logos/blockchain.svg`,
   },
   {
     name: "Bitcoin",
-    image: "http://localhost:4000/logos/bitcoin.svg",
+    image: `${process.env.REACT_APP_URL}/logos/bitcoin.svg`,
   },
   {
     name: "Ethereum",
-    image: "http://localhost:4000/logos/ethereum.svg",
+    image: `${process.env.REACT_APP_URL}/logos/ethereum.svg`,
   },
   {
     name: "Smart Chain",
-    image: "http://localhost:4000/logos/bsc.svg",
+    image: `${process.env.REACT_APP_URL}/logos/bsc.svg`,
   },
   {
     name: "Avalanche",
-    image: "http://localhost:4000/logos/avalanche.svg",
+    image: `${process.env.REACT_APP_URL}/logos/avalanche.svg`,
   },
   {
     name: "Solana",
-    image: "http://localhost:4000/logos/solana.svg",
+    image: `${process.env.REACT_APP_URL}/logos/solana.svg`,
   },
   {
     name: "Polkadot",
-    image: "http://localhost:4000/logos/polkadot.svg",
+    image: `${process.env.REACT_APP_URL}/logos/polkadot.svg`,
   },
   {
     name: "Polygon",
-    image: "http://localhost:4000/logos/polygon.svg",
+    image: `${process.env.REACT_APP_URL}/logos/polygon.svg`,
   },
   {
     name: "Arbitrum",
-    image: "http://localhost:4000/logos/arbitrum.svg",
+    image: `${process.env.REACT_APP_URL}/logos/arbitrum.svg`,
   },
   {
     name: "Optimism",
-    image: "http://localhost:4000/logos/optimism.svg",
+    image: `${process.env.REACT_APP_URL}/logos/optimism.svg`,
   },
   {
     name: "Binance",
-    image: "http://localhost:4000/logos/binance.svg",
+    image: `${process.env.REACT_APP_URL}/logos/binance.svg`,
   },
   {
     name: "Kucoin",
-    image: "http://localhost:4000/logos/kucoin.png",
+    image: `${process.env.REACT_APP_URL}/logos/kucoin.png`,
   },
   {
     name: "Gateio",
-    image: "http://localhost:4000/logos/gateio.svg",
+    image: `${process.env.REACT_APP_URL}/logos/gateio.svg`,
   },
   {
     name: "FTX",
-    image: "http://localhost:4000/logos/ftx.svg",
+    image: `${process.env.REACT_APP_URL}/logos/ftx.svg`,
   },
 ];
 
