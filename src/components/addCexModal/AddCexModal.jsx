@@ -26,20 +26,25 @@ export const AddCexModal = () => {
       setLoading(false);
       return;
     }
-    if(name.split(' ').shift().toLowerCase() === "kucoin" && !passphrase) {
+    if (name.split(" ").shift().toLowerCase() === "kucoin" && !passphrase) {
       toast.error("Please enter passphrase.");
       setLoading(false);
       return;
     }
     try {
-      const cexName = name.split(' ').shift()
-      const cexAssets = await addCex({ apiKey, apiSecret, cexName, passphrase });
+      const cexName = name.split(" ").shift();
+      const cexAssets = await addCex({
+        apiKey,
+        apiSecret,
+        cexName,
+        passphrase,
+      });
       dispatch({
         type: ACTIONS.SET_CEX_ASSETS,
         payload: {
-          cexAssets
+          cexAssets,
         },
-      });      
+      });
       toast.success(`${name} added`);
       setLoading(false);
       close();
@@ -93,23 +98,31 @@ export const AddCexModal = () => {
             onChange={(e) => setApiSecret(e.target.value)}
             placeholder="Enter Api Secret"
           />
-           <input
-            className="add-cex-modal__content__body__input"
-            value={passphrase}
-            onChange={(e) => setPassphrase(e.target.value)}
-            placeholder="Enter Passphrase"
-          />
+          {name.split(" ").shift().toLowerCase() === "kucoin" && (
+            <input
+              className="add-cex-modal__content__body__input"
+              value={passphrase}
+              onChange={(e) => setPassphrase(e.target.value)}
+              placeholder="Enter Passphrase"
+            />
+          )}
           <div
             className="add-cex-modal__content__body__button__wrapper"
             onClick={add}
           >
-            <button className="add-cex-modal__content__body__button__wrapper__button" disabled={loading}>
+            <button
+              className="add-cex-modal__content__body__button__wrapper__button"
+              disabled={loading}
+            >
               {loading && (
-                <div className="fa-1x add-cex-modal__content__body__button__wrapper__button__loading" style={{marginRight: 5}}>
+                <div
+                  className="fa-1x add-cex-modal__content__body__button__wrapper__button__loading"
+                  style={{ marginRight: 5 }}
+                >
                   <i className="fas fa-sync fa-spin"></i>
                 </div>
               )}
-             Add
+              Add
             </button>
           </div>
         </div>
