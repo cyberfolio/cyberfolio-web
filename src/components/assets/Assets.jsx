@@ -40,7 +40,11 @@ export const Assets = () => {
       cexTokensBinance.sort(function (a, b) {
         return b.value - a.value;
       });
-      setCexTokens(cexTokensBinance);
+      const cexTokensGate = await getCexTokens({ cexName: "gateio" });
+      cexTokensGate.sort(function (a, b) {
+        return b.value - a.value;
+      });
+      setCexTokens([...cexTokensBinance, ...cexTokensGate]);
       
       setLoading(false);
     } catch (e) {
