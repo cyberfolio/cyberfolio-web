@@ -6,7 +6,8 @@ import { toast } from "react-toastify";
 
 import { getCexTokens, getDexTokens } from "../../services/asset";
 import { AssetTable } from "../assetTable/AssetTable";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { ACTIONS } from "../../state/actions";
 
 export const Assets = () => {
   const [loading, setLoading] = useState(false);
@@ -16,28 +17,69 @@ export const Assets = () => {
   const [isFiltered, setIsFiltered] = useState(false);
   const [cexTokens, setCexTokens] = useState([]);
   const [assetsToShow, setAssetsToShow] = useState([]);
+  const [netWorth, setNetWorth] = useState(0);
 
   const chain = useSelector((state) => state.chain);
   const cexAssets = useSelector((state) => state.cexAssets);
   const isAuthenticated = useSelector((state) => state.evmAddress);
+  const dispatch = useDispatch((state) => state.evmAddress);
+
 
   const getAllAssets = async () => {
     try {
       setLoading(true);
       const dexTokensBitcoin = await getDexTokens({ chain: "Bitcoin" });
+      dispatch({
+        type: ACTIONS.ADD_NET_WORTH,
+        payload: {
+          data: dexTokensBitcoin?.totalTokenValue,
+        },
+      });
       const dexTokensEthereum = await getDexTokens({ chain: "Ethereum" });
-      setLoading(false);
+      dispatch({
+        type: ACTIONS.ADD_NET_WORTH,
+        payload: {
+          data: dexTokensEthereum?.totalTokenValue,
+        },
+      });
       const dexTokensAvalanche = await getDexTokens({ chain: "Avalanche" });
+      dispatch({
+        type: ACTIONS.ADD_NET_WORTH,
+        payload: {
+          data: dexTokensAvalanche?.totalTokenValue,
+        },
+      });
       const dexTokensArbitrum = await getDexTokens({ chain: "Arbitrum" });
+      dexTokensArbitrum?.totalTokenValue && setNetWorth(netWorth + dexTokensArbitrum?.totalTokenValue)
+      dispatch({
+        type: ACTIONS.ADD_NET_WORTH,
+        payload: {
+          data: dexTokensArbitrum?.totalTokenValue,
+        },
+      });
       const dexTokensPolygon = await getDexTokens({ chain: "Polygon" });
+      dexTokensPolygon?.totalTokenValue && setNetWorth(netWorth + dexTokensPolygon?.totalTokenValue)
+      dispatch({
+        type: ACTIONS.ADD_NET_WORTH,
+        payload: {
+          data: dexTokensPolygon?.totalTokenValue,
+        },
+      });
       const dexTokensSmartChain = await getDexTokens({ chain: "SmartChain" });
+      dexTokensSmartChain?.totalTokenValue && setNetWorth(netWorth + dexTokensSmartChain?.totalTokenValue)
+      dispatch({
+        type: ACTIONS.ADD_NET_WORTH,
+        payload: {
+          data: dexTokensSmartChain?.totalTokenValue,
+        },
+      });
       const dexTokens = [
-        ...dexTokensBitcoin,
-        ...dexTokensEthereum,
-        ...dexTokensAvalanche,
-        ...dexTokensArbitrum,
-        ...dexTokensPolygon,
-        ...dexTokensSmartChain,
+        ...dexTokensBitcoin?.assets,
+        ...dexTokensEthereum?.assets,
+        ...dexTokensAvalanche?.assets,
+        ...dexTokensArbitrum?.assets,
+        ...dexTokensPolygon?.assets,
+        ...dexTokensSmartChain?.assets,
       ];
       dexTokens.sort(function (a, b) {
         return b.value - a.value;
@@ -53,7 +95,6 @@ export const Assets = () => {
         return b.value - a.value;
       });
       setCexTokens([...cexTokensBinance, ...cexTokensGate]);
-
       setLoading(false);
     } catch (e) {
       toast.error(e.message);

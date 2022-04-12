@@ -16,6 +16,7 @@ const initialState = {
     name: "",
   },
   cexAssets: [],
+  netWorth : 0
 };
 
 const reducer = (state = initialState, action) => {
@@ -32,6 +33,13 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         evmAddress: action.payload.data,
+      };
+    }
+
+    case ACTIONS.ADD_NET_WORTH: {
+      return {
+        ...state,
+        netWorth: state.netWorth + action.payload.data,
       };
     }
 

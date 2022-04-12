@@ -8,7 +8,7 @@ export const getDexTokens = async ({ chain }) => {
       { withCredentials: true }
     );
     if (res?.data) {
-      return res.data?.assets;
+      return res.data;
     } else {
       throw new Error("Something went wrong");
     }

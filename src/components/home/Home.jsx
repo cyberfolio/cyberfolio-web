@@ -10,6 +10,7 @@ import { Assets } from "../assets/Assets";
 import { ChainsDropDown } from "./chains-dropdown/ChainsDropDown";
 import { ACTIONS } from "../../state/actions";
 import useKeypress from "../hooks/useKeyPress";
+import { toUsd } from "../../utils";
 
 const availableChains = ["Bitcoin", "Evm", "Solana", "Polkadot"];
 const availableCexes = [
@@ -21,6 +22,7 @@ const availableCexes = [
 
 export const Home = () => {
   const chain = useSelector((state) => state.chain);
+  const netWorth = useSelector((state) => state.netWorth);
   const dispatch = useDispatch();
   const [chainsDropDownOpen, setChainsDropDownOpen] = useState(false);
 
@@ -87,7 +89,7 @@ export const Home = () => {
               Net Worth
             </div>
             <div className="home__header__second__total-balance__value">
-              $10,000,883
+              {toUsd(netWorth)}
             </div>
           </div>
           <div className="home__header__second__filter">
