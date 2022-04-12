@@ -26,11 +26,19 @@ export const Assets = () => {
       setLoading(true);
       const dexTokensBitcoin = await getDexTokens({ chain: "Bitcoin" });
       const dexTokensEthereum = await getDexTokens({ chain: "Ethereum" });
-      // const dexTokensAvalanche = await getDexTokens({ chain: "Avalanche" });
-      // const dexTokensArbitrum = await getDexTokens({ chain: "Arbitrum" });
-      // const dexTokensPolygon = await getDexTokens({ chain: "Polygon" });
-      // const dexTokensSmartChain = await getDexTokens({ chain: "SmartChain" });
-      const dexTokens = [...dexTokensBitcoin, ...dexTokensEthereum];
+      setLoading(false);
+      const dexTokensAvalanche = await getDexTokens({ chain: "Avalanche" });
+      const dexTokensArbitrum = await getDexTokens({ chain: "Arbitrum" });
+      const dexTokensPolygon = await getDexTokens({ chain: "Polygon" });
+      const dexTokensSmartChain = await getDexTokens({ chain: "SmartChain" });
+      const dexTokens = [
+        ...dexTokensBitcoin,
+        ...dexTokensEthereum,
+        ...dexTokensAvalanche,
+        ...dexTokensArbitrum,
+        ...dexTokensPolygon,
+        ...dexTokensSmartChain,
+      ];
       dexTokens.sort(function (a, b) {
         return b.value - a.value;
       });
@@ -45,7 +53,7 @@ export const Assets = () => {
         return b.value - a.value;
       });
       setCexTokens([...cexTokensBinance, ...cexTokensGate]);
-      
+
       setLoading(false);
     } catch (e) {
       toast.error(e.message);

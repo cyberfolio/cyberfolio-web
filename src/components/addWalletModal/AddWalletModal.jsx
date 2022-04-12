@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import classnames from "classnames";
 
-import { addWallet } from "../../services/wallet";
+import { addWallet } from "../../services/dex";
 import { ACTIONS } from "../../state/actions";
 import useKeypress from "../hooks/useKeyPress";
 import useIsClickedOutside from "../hooks/useIsClickedOutside";
@@ -14,6 +14,8 @@ import { isValidWalletAddress } from "../../utils";
 export const AddWalletModal = () => {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
+  const [loading, setLoading] = useState("");
+
   const { chain, open } = useSelector((state) => state.isWalletModalOpen);
   const dispatch = useDispatch();
   const modalRef = useRef();
@@ -25,12 +27,33 @@ export const AddWalletModal = () => {
       return;
     }
     try {
+      setLoading(true);
+      dispatch({
+        type: ACTIONS.SET_LOADING,
+        payload: {
+          data: true
+        },
+      });
       await addWallet({ name, address, chain });
       close();
       setName("");
       setAddress("");
+      setLoading(false);
+      dispatch({
+        type: ACTIONS.SET_LOADING,
+        payload: {
+          data: false
+        },
+      });
       toast.success("Wallet added.");
     } catch (e) {
+      setLoading(false);
+      dispatch({
+        type: ACTIONS.SET_LOADING,
+        payload: {
+          data: false
+        },
+      });
       toast.error(e.message);
     }
   };
@@ -86,12 +109,18 @@ export const AddWalletModal = () => {
             placeholder="Enter Wallet Name"
             maxLength="20"
           />
-          <div
+          <button
             className="add-wallet-modal__content__body__button"
             onClick={add}
+            disabled={loading}
           >
+            {loading && (
+              <div className="fa-1x" style={{ marginRight: 5 }}>
+                <i className="fas fa-sync fa-spin"></i>
+              </div>
+            )}
             Add
-          </div>
+          </button>
         </div>
       </div>
     </div>

@@ -21,14 +21,32 @@ export const AddCexModal = () => {
 
   const add = async () => {
     setLoading(true);
+    dispatch({
+      type: ACTIONS.SET_LOADING,
+      payload: {
+        data: true
+      },
+    });
     if (!apiKey || !apiSecret) {
       toast.error("Please enter api key and secret.");
       setLoading(false);
+      dispatch({
+        type: ACTIONS.SET_LOADING,
+        payload: {
+          data: false
+        },
+      });
       return;
     }
     if (name.split(" ").shift().toLowerCase() === "kucoin" && !passphrase) {
       toast.error("Please enter passphrase.");
       setLoading(false);
+      dispatch({
+        type: ACTIONS.SET_LOADING,
+        payload: {
+          data: false
+        },
+      });
       return;
     }
     try {
@@ -47,10 +65,22 @@ export const AddCexModal = () => {
       });
       toast.success(`${name} added`);
       setLoading(false);
+      dispatch({
+        type: ACTIONS.SET_LOADING,
+        payload: {
+          data: false
+        },
+      });
       close();
     } catch (e) {
       toast.error(e.message);
       setLoading(false);
+      dispatch({
+        type: ACTIONS.SET_LOADING,
+        payload: {
+          data: false
+        },
+      });
     }
   };
 

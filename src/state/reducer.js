@@ -1,6 +1,7 @@
 import { ACTIONS } from "./actions";
 
 const initialState = {
+  loading: false,
   evmAddress: "",
   chain: {
     name: "All Networks",
@@ -19,6 +20,14 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+
+    case ACTIONS.SET_LOADING: {
+      return {
+        ...state,
+        loading: action.payload.data,
+      };
+    }
+
     case ACTIONS.SET_EVM_ADDRESS: {
       return {
         ...state,

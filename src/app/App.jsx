@@ -7,12 +7,13 @@ import { Header } from "../components/header/Header";
 import { Home } from "../components/home/Home";
 import { AddCexModal } from "../components/addCexModal/AddCexModal";
 import { AddWalletModal } from "../components/addWalletModal/AddWalletModal";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { isAuthenticated } from "../services/auth";
 import { ACTIONS } from "../state/actions";
 
 const App = () => {
   const dispatch = useDispatch();
+  const loading = useSelector((state) => state.loading);
 
   const checkIsAuthenticated = useCallback(async () => {
     try {
@@ -48,6 +49,7 @@ const App = () => {
 
   return (
     <div className="app">
+      {loading && <div className="app__blocker" /> }
       <Header />
       <AddWalletModal />
       <AddCexModal />

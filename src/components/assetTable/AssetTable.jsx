@@ -80,9 +80,9 @@ export const AssetTable = ({ assets, loading }) => {
                       </div>
                       <div className="asset-table__assets__asset__item__chain__area">
                         <img
-                          src={`http://localhost:4000/logos/${(
+                          src={`${process.env.REACT_APP_URL}/logos/${(
                             cexName || chain
-                          ).toLowerCase()}.svg`}
+                          ).toLowerCase().replace(/\s+/g, '')}.svg`}
                           alt={cexName || chain}
                           className="asset-table__assets__asset__item__chain__logo"
                         />

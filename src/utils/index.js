@@ -24,7 +24,7 @@ export const chainsInfo = [
   },
   {
     name: "Smart Chain",
-    image: `${process.env.REACT_APP_URL}/logos/bsc.svg`,
+    image: `${process.env.REACT_APP_URL}/logos/smartchain.svg`,
   },
   {
     name: "Avalanche",
