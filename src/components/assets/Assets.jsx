@@ -4,10 +4,10 @@ import "./Assets.scss";
 import classnames from "classnames";
 import { toast } from "react-toastify";
 
-import { getCexTokens, getDexTokens } from "../../services/asset";
+import CexService from "../../services/cex";
+import DexService from "../../services/dex";
 import { AssetTable } from "../assetTable/AssetTable";
-import { useDispatch, useSelector } from "react-redux";
-import { ACTIONS } from "../../state/actions";
+import { useSelector } from "react-redux";
 
 export const Assets = () => {
   const [loading, setLoading] = useState(false);
@@ -22,57 +22,26 @@ export const Assets = () => {
   const chain = useSelector((state) => state.chain);
   const cexAssets = useSelector((state) => state.cexAssets);
   const isAuthenticated = useSelector((state) => state.evmAddress);
-  const dispatch = useDispatch((state) => state.evmAddress);
 
 
   const getAllAssets = async () => {
     try {
       setLoading(true);
-      const dexTokensBitcoin = await getDexTokens({ chain: "Bitcoin" });
-      dispatch({
-        type: ACTIONS.ADD_NET_WORTH,
-        payload: {
-          data: dexTokensBitcoin?.totalTokenValue,
-        },
-      });
-      const dexTokensEthereum = await getDexTokens({ chain: "Ethereum" });
-      dispatch({
-        type: ACTIONS.ADD_NET_WORTH,
-        payload: {
-          data: dexTokensEthereum?.totalTokenValue,
-        },
-      });
-      const dexTokensAvalanche = await getDexTokens({ chain: "Avalanche" });
-      dispatch({
-        type: ACTIONS.ADD_NET_WORTH,
-        payload: {
-          data: dexTokensAvalanche?.totalTokenValue,
-        },
-      });
-      const dexTokensArbitrum = await getDexTokens({ chain: "Arbitrum" });
+      const dexTokensBitcoin = await DexService.getDexTokens({ chain: "Bitcoin" });
+   
+      const dexTokensEthereum = await DexService.getDexTokens({ chain: "Ethereum" });
+    
+      const dexTokensAvalanche = await DexService.getDexTokens({ chain: "Avalanche" });
+     
+      const dexTokensArbitrum = await DexService.getDexTokens({ chain: "Arbitrum" });
       dexTokensArbitrum?.totalTokenValue && setNetWorth(netWorth + dexTokensArbitrum?.totalTokenValue)
-      dispatch({
-        type: ACTIONS.ADD_NET_WORTH,
-        payload: {
-          data: dexTokensArbitrum?.totalTokenValue,
-        },
-      });
-      const dexTokensPolygon = await getDexTokens({ chain: "Polygon" });
+    
+      const dexTokensPolygon = await DexService.getDexTokens({ chain: "Polygon" });
       dexTokensPolygon?.totalTokenValue && setNetWorth(netWorth + dexTokensPolygon?.totalTokenValue)
-      dispatch({
-        type: ACTIONS.ADD_NET_WORTH,
-        payload: {
-          data: dexTokensPolygon?.totalTokenValue,
-        },
-      });
-      const dexTokensSmartChain = await getDexTokens({ chain: "SmartChain" });
+     
+      const dexTokensSmartChain = await DexService.getDexTokens({ chain: "SmartChain" });
       dexTokensSmartChain?.totalTokenValue && setNetWorth(netWorth + dexTokensSmartChain?.totalTokenValue)
-      dispatch({
-        type: ACTIONS.ADD_NET_WORTH,
-        payload: {
-          data: dexTokensSmartChain?.totalTokenValue,
-        },
-      });
+      
       const dexTokens = [
         ...dexTokensBitcoin?.assets,
         ...dexTokensEthereum?.assets,
@@ -86,11 +55,11 @@ export const Assets = () => {
       });
       setDexTokens(dexTokens);
 
-      const cexTokensBinance = await getCexTokens({ cexName: "binance" });
+      const cexTokensBinance = await CexService.getCexTokens({ cexName: "binance" });
       cexTokensBinance.sort(function (a, b) {
         return b.value - a.value;
       });
-      const cexTokensGate = await getCexTokens({ cexName: "gateio" });
+      const cexTokensGate = await CexService.getCexTokens({ cexName: "gateio" });
       cexTokensGate.sort(function (a, b) {
         return b.value - a.value;
       });
@@ -140,6 +109,7 @@ export const Assets = () => {
     if (isAuthenticated) {
       getAllAssets();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated]);
 
   useEffect(() => {

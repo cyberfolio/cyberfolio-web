@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import classnames from "classnames";
 
-import { addWallet } from "../../services/dex";
+import DexService from "../../services/dex";
 import { ACTIONS } from "../../state/actions";
 import useKeypress from "../hooks/useKeyPress";
 import useIsClickedOutside from "../hooks/useIsClickedOutside";
@@ -34,7 +34,7 @@ export const AddWalletModal = () => {
           data: true
         },
       });
-      await addWallet({ name, address, chain });
+      await DexService.addWallet({ name, address, chain });
       close();
       setName("");
       setAddress("");

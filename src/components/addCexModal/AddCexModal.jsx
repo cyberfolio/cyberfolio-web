@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import classnames from "classnames";
 import { toast } from "react-toastify";
 
-import { addCex } from "../../services/cex";
+import CexService from "../../services/cex";
 import { ACTIONS } from "../../state/actions";
 import useKeypress from "../hooks/useKeyPress";
 import useIsClickedOutside from "../hooks/useIsClickedOutside";
@@ -51,7 +51,7 @@ export const AddCexModal = () => {
     }
     try {
       const cexName = name.split(" ").shift();
-      const cexAssets = await addCex({
+      const cexAssets = await CexService.addCex({
         apiKey,
         apiSecret,
         cexName,

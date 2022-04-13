@@ -11,6 +11,7 @@ import { ChainsDropDown } from "./chains-dropdown/ChainsDropDown";
 import { ACTIONS } from "../../state/actions";
 import useKeypress from "../hooks/useKeyPress";
 import { toUsd } from "../../utils";
+import InfoService from "../../services/info";
 
 const availableChains = ["Bitcoin", "Evm", "Solana", "Polkadot"];
 const availableCexes = [
@@ -22,13 +23,21 @@ const availableCexes = [
 
 export const Home = () => {
   const chain = useSelector((state) => state.chain);
-  const netWorth = useSelector((state) => state.netWorth);
   const dispatch = useDispatch();
   const [chainsDropDownOpen, setChainsDropDownOpen] = useState(false);
+  const [netWorth, setNetworth] = useState(0);
 
   useEffect(() => {
     setChainsDropDownOpen(false);
   }, [chain]);
+
+  useEffect(() => {
+    const getTotal = async () => {
+      const net = await InfoService.getNetWorth();
+      setNetworth(net);
+    };
+    getTotal();
+  }, []);
 
   useKeypress("Escape", () => {
     setChainsDropDownOpen(false);
