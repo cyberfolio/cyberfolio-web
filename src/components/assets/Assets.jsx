@@ -55,15 +55,11 @@ export const Assets = () => {
       });
       setDexTokens(dexTokens);
 
-      const cexTokensBinance = await CexService.getCexTokens({ cexName: "binance" });
-      cexTokensBinance.sort(function (a, b) {
+      const cexTokens= await CexService.getCexTokens();
+      cexTokens.sort(function (a, b) {
         return b.value - a.value;
       });
-      const cexTokensGate = await CexService.getCexTokens({ cexName: "gateio" });
-      cexTokensGate.sort(function (a, b) {
-        return b.value - a.value;
-      });
-      setCexTokens([...cexTokensBinance, ...cexTokensGate]);
+      setCexTokens(cexTokens);
       setLoading(false);
     } catch (e) {
       toast.error(e.message);

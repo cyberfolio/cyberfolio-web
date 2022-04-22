@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 import CexService from "../../services/cex";
 import { ACTIONS } from "../../state/actions";
 import useKeypress from "../hooks/useKeyPress";
-import useIsClickedOutside from "../hooks/useIsClickedOutside";
 
 import "./AddCexModal.scss";
 
@@ -85,9 +84,6 @@ export const AddCexModal = () => {
   };
 
   useKeypress("Escape", () => {
-    close();
-  });
-  useIsClickedOutside(modalRef, () => {
     close();
   });
 

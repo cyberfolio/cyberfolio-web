@@ -23,10 +23,10 @@ class CexService {
     }
   }
 
-  static async getCexTokens({ cexName }) {
+  static async getCexTokens() {
     try {
       const res = await mainInstance.get(
-        `/cex/assets/${cexName}`,
+        `/cex/assets`,
 
         { withCredentials: true }
       );
@@ -41,5 +41,4 @@ class CexService {
   }
 }
 
-export default CexService
-
+export default CexService;
