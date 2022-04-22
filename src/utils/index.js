@@ -102,6 +102,15 @@ export const capitalizeFirstLetter = (string) => {
   return "";
 };
 
+export const arrangeCexName = (string) => {
+  if (string && string === "ftx") {
+    return "FTX";
+  } else if (string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+  return "";
+};
+
 export const toUsd = (value) => {
   return value.toLocaleString("en-US", {
     style: "currency",
