@@ -8,7 +8,6 @@ import classnames from "classnames";
 import DexService from "../../services/dex";
 import { ACTIONS } from "../../state/actions";
 import useKeypress from "../hooks/useKeyPress";
-import useIsClickedOutside from "../hooks/useIsClickedOutside";
 import { isValidWalletAddress } from "../../utils";
 
 export const AddWalletModal = () => {
@@ -58,9 +57,6 @@ export const AddWalletModal = () => {
     }
   };
   useKeypress("Escape", () => {
-    close();
-  });
-  useIsClickedOutside(modalRef, () => {
     close();
   });
 
