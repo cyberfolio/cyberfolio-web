@@ -8,11 +8,11 @@
     border-bottom: 1px solid $border;
     padding: 0 20px;
     &__link {
-      padding: 20px 40px;
+      padding: 20px 30px;
       margin-right: 20px;
       color: $text-color-dark;
       border-bottom: 1px solid transparent;
-      width: 50px;
+      
       @extend .unselectable;
       @extend .flexCenter;
       &:hover {

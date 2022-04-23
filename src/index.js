@@ -7,7 +7,7 @@ import "./index.scss";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import App from "./app/App";
+import App from "./main/App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { store, persistor } from "./state";

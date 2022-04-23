@@ -3,6 +3,7 @@ import "./Home.scss";
 
 import { useSelector, useDispatch } from "react-redux";
 import { Plus, ChevronDown } from "react-bootstrap-icons";
+import classNames from "classnames";
 
 import { Utilities } from "../utilities/Utilities";
 import { Assets } from "../assets/Assets";
@@ -21,11 +22,14 @@ const availableCexes = [
   "Gateio Account",
 ];
 
+const activeBundle = "Main";
+
 export const Home = () => {
   const chain = useSelector((state) => state.chain);
   const dispatch = useDispatch();
   const [chainsDropDownOpen, setChainsDropDownOpen] = useState(false);
   const [netWorth, setNetworth] = useState(0);
+  const [bundles, setBundles] = useState([]);
 
   useEffect(() => {
     setChainsDropDownOpen(false);
@@ -36,6 +40,7 @@ export const Home = () => {
       const net = await InfoService.getNetWorth();
       setNetworth(net);
     };
+    setBundles((old) => [...old, "Main"]);
     getTotal();
   }, []);
 
@@ -66,6 +71,25 @@ export const Home = () => {
   return (
     <div className="home">
       <div className="home__header">
+        <div className="home__header__bundle">
+          {bundles.map((bundle) => {
+            return (
+              <div
+                className={classNames(
+                  "home__header__bundle__available",
+                  bundle === activeBundle && "home__header__bundle__available--active"
+                )}
+                key={bundle}
+              >
+                {bundle} Bundle
+              </div>
+            );
+          })}
+          <div className="home__header__add-wallets__button">
+            New Bundle
+            <Plus color="white" size={20} />
+          </div>
+        </div>
         <div className="home__header__add-wallets">
           {availableChains.map((chain) => {
             return (

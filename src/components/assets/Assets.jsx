@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 
 import CexService from "../../services/cex";
 import DexService from "../../services/dex";
-import { AssetTable } from "../assetTable/AssetTable";
+import { AssetTable } from "../asset-table/AssetTable";
 import { useSelector } from "react-redux";
 
 export const Assets = () => {
@@ -166,6 +166,15 @@ export const Assets = () => {
           onClick={() => onTabClick("Pools")}
         >
           Pools
+        </div>
+        <div
+          className={classnames(
+            "assets__links__link",
+            activeTab === "Accounts" && "assets__links__link--active"
+          )}
+          onClick={() => onTabClick("Accounts")}
+        >
+          Accounts
         </div>
       </div>
       <div className="assets__table">
