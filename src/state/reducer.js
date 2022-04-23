@@ -15,13 +15,11 @@ const initialState = {
     open: false,
     name: "",
   },
-  cexAssets: [],
-  netWorth : 0
+  netWorth: 0,
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-
     case ACTIONS.SET_LOADING: {
       return {
         ...state,

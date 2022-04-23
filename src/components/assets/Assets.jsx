@@ -20,28 +20,37 @@ export const Assets = () => {
   const [netWorth, setNetWorth] = useState(0);
 
   const chain = useSelector((state) => state.chain);
-  const cexAssets = useSelector((state) => state.cexAssets);
   const isAuthenticated = useSelector((state) => state.evmAddress);
-
 
   const getAllAssets = async () => {
     try {
       setLoading(true);
-      const dexTokensBitcoin = await DexService.getDexTokens({ chain: "Bitcoin" });
-   
-      const dexTokensEthereum = await DexService.getDexTokens({ chain: "Ethereum" });
-    
-      const dexTokensAvalanche = await DexService.getDexTokens({ chain: "Avalanche" });
-     
-      const dexTokensArbitrum = await DexService.getDexTokens({ chain: "Arbitrum" });
-      dexTokensArbitrum?.totalTokenValue && setNetWorth(netWorth + dexTokensArbitrum?.totalTokenValue)
-    
-      const dexTokensPolygon = await DexService.getDexTokens({ chain: "Polygon" });
-      dexTokensPolygon?.totalTokenValue && setNetWorth(netWorth + dexTokensPolygon?.totalTokenValue)
-     
-      const dexTokensSmartChain = await DexService.getDexTokens({ chain: "SmartChain" });
-      dexTokensSmartChain?.totalTokenValue && setNetWorth(netWorth + dexTokensSmartChain?.totalTokenValue)
-      
+      const dexTokensBitcoin = await DexService.getDexTokens({
+        chain: "Bitcoin",
+      });
+      setNetWorth(netWorth + dexTokensBitcoin?.totalTokenValue);
+      const dexTokensEthereum = await DexService.getDexTokens({
+        chain: "Ethereum",
+      });
+      setNetWorth(netWorth + dexTokensEthereum?.totalTokenValue);
+
+      const dexTokensAvalanche = await DexService.getDexTokens({
+        chain: "Avalanche",
+      });
+      setNetWorth(netWorth + dexTokensAvalanche?.totalTokenValue);
+      const dexTokensArbitrum = await DexService.getDexTokens({
+        chain: "Arbitrum",
+      });
+      setNetWorth(netWorth + dexTokensArbitrum?.totalTokenValue);
+      const dexTokensPolygon = await DexService.getDexTokens({
+        chain: "Polygon",
+      });
+      setNetWorth(netWorth + dexTokensPolygon?.totalTokenValue);
+      const dexTokensSmartChain = await DexService.getDexTokens({
+        chain: "SmartChain",
+      });
+      setNetWorth(netWorth + dexTokensSmartChain?.totalTokenValue);
+
       const dexTokens = [
         ...dexTokensBitcoin?.assets,
         ...dexTokensEthereum?.assets,
@@ -55,7 +64,7 @@ export const Assets = () => {
       });
       setDexTokens(dexTokens);
 
-      const cexTokens= await CexService.getCexTokens();
+      const cexTokens = await CexService.getCexTokens();
       cexTokens.sort(function (a, b) {
         return b.value - a.value;
       });
@@ -66,12 +75,6 @@ export const Assets = () => {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    if (Array.isArray(cexAssets) && cexAssets.length > 0) {
-      setCexTokens(cexAssets);
-    }
-  }, [cexAssets]);
 
   useEffect(() => {
     if (activeTab === "All" && filteredDexTokens.length > 0 && isFiltered) {
@@ -105,7 +108,7 @@ export const Assets = () => {
     if (isAuthenticated) {
       getAllAssets();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated]);
 
   useEffect(() => {

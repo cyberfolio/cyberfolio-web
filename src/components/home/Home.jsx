@@ -13,7 +13,7 @@ import useKeypress from "../hooks/useKeyPress";
 import { toUsd } from "../../utils";
 import InfoService from "../../services/info";
 
-const availableChains = ["Bitcoin", "Evm", "Solana", "Polkadot"];
+const availableChains = ["Bitcoin", "EVM", "Solana", "Polkadot"];
 const availableCexes = [
   "Binance Account",
   "FTX Account",
@@ -70,7 +70,7 @@ export const Home = () => {
           {availableChains.map((chain) => {
             return (
               <div
-                className="home__header__add-wallets__bundle"
+                className="home__header__add-wallets__button"
                 key={chain}
                 onClick={() => openWalletModal(chain)}
               >
@@ -82,7 +82,7 @@ export const Home = () => {
           {availableCexes.map((cex) => {
             return (
               <div
-                className="home__header__add-wallets__bundle"
+                className="home__header__add-wallets__button"
                 key={cex}
                 onClick={() => openAddCexModal(cex)}
               >
