@@ -19,7 +19,7 @@
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      padding: 10px 0px 30px 20px ;
+      padding: 0px 0px 30px 20px ;
       &__available {
         @extend .button;
         margin-top: 15px;
@@ -50,7 +50,7 @@
       &__button {
         margin-top: 15px;
         margin-right: 15px;
-        font-size: 0.8rem;
+        font-size: 0.7rem;
         @extend .button;
       }
     }
