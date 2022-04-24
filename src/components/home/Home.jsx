@@ -15,12 +15,7 @@ import { toUsd } from "../../utils";
 import InfoService from "../../services/info";
 
 const availableChains = ["Bitcoin", "EVM", "Solana", "Polkadot"];
-const availableCexes = [
-  "Binance Account",
-  "FTX Account",
-  "Kucoin Account",
-  "Gateio Account",
-];
+const availableCexes = ["Binance", "FTX", "Kucoin", "Gateio"];
 
 const activeBundle = "Main";
 
@@ -30,6 +25,7 @@ export const Home = () => {
   const [chainsDropDownOpen, setChainsDropDownOpen] = useState(false);
   const [netWorth, setNetworth] = useState(0);
   const [bundles, setBundles] = useState([]);
+  const [availableAccounts, setAvailableAccounts] = useState([]);
 
   useEffect(() => {
     setChainsDropDownOpen(false);
@@ -40,8 +36,13 @@ export const Home = () => {
       const net = await InfoService.getNetWorth();
       setNetworth(net);
     };
+    const getAvailableAccounts = async () => {
+      const availableAccounts = await InfoService.getAvailableAccounts();
+      setAvailableAccounts(availableAccounts);
+    };
     setBundles((old) => [...old, "Main"]);
     getTotal();
+    getAvailableAccounts();
   }, []);
 
   useKeypress("Escape", () => {
@@ -77,7 +78,8 @@ export const Home = () => {
               <div
                 className={classNames(
                   "home__header__bundle__available",
-                  bundle === activeBundle && "home__header__bundle__available--active"
+                  bundle === activeBundle &&
+                    "home__header__bundle__available--active"
                 )}
                 key={bundle}
               >
@@ -94,24 +96,46 @@ export const Home = () => {
           {availableChains.map((chain) => {
             return (
               <div
-                className="home__header__add-wallets__button"
+                className={classNames(
+                  "home__header__add-wallets__button ",
+                  availableAccounts.includes(chain.toLowerCase()) &&
+                    "home__header__add-wallets__button--active"
+                )}
                 key={chain}
                 onClick={() => openWalletModal(chain)}
               >
-                {chain} Wallet
-                <Plus color="white" size={20} />
+                {chain}{" "}
+                {availableAccounts.includes(chain.toLowerCase())
+                  ? "Connected"
+                  : "Wallet"}
+                {availableAccounts.includes(chain.toLowerCase()) ? (
+                  <span className="connectedDotButton"></span>
+                ) : (
+                  <Plus color="white" size={20} />
+                )}{" "}
               </div>
             );
           })}
           {availableCexes.map((cex) => {
             return (
               <div
-                className="home__header__add-wallets__button"
+                className={classNames(
+                  "home__header__add-wallets__button ",
+                  availableAccounts.includes(cex.toLowerCase()) &&
+                    "home__header__add-wallets__button--active"
+                )}
                 key={cex}
                 onClick={() => openAddCexModal(cex)}
               >
-                {cex}
-                <Plus color="white" size={20} />
+                {cex}{" "}
+                {availableAccounts.includes(cex.toLowerCase())
+                  ? "Connected"
+                  : "Account"}
+                {availableAccounts.includes(cex.toLowerCase()) ? (
+                  <span className="connectedDotButton"></span>
+                ) : (
+                  <Plus color="white" size={20} />
+                )}
               </div>
             );
           })}

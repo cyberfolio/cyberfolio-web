@@ -11,6 +11,11 @@
   border-radius: 50%;
   display: inline-block;
 }
+.connectedDotButton {
+  @extend .connectedDot;
+  margin: 0 3px 0 7px;
+
+}
 
 .unselectable {
   user-select: none;

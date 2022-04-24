@@ -52,6 +52,9 @@
         margin-right: 15px;
         font-size: 0.7rem;
         @extend .button;
+        &--active {
+          border-color: green;
+        }
       }
     }
     &__second {
