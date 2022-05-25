@@ -10,17 +10,14 @@ import "react-toastify/dist/ReactToastify.css";
 import App from "./main/App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
-import { store, persistor } from "./state";
-import { PersistGate } from "redux-persist/integration/react";
+import store from "./state";
 
 ReactDOM.render(
   <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
-      <React.StrictMode>
-        <ToastContainer />
-        <App />
-      </React.StrictMode>
-    </PersistGate>
+    <React.StrictMode>
+      <ToastContainer />
+      <App />
+    </React.StrictMode>
   </Provider>,
 
   document.getElementById("root")

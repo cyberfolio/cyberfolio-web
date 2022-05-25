@@ -1,11 +1,12 @@
 import { ACTIONS } from "./actions";
+import AllNetworks from "../assets/blockchain.svg";
 
 const initialState = {
   loading: false,
   evmAddress: "",
   chain: {
     name: "All Networks",
-    image: `${process.env.REACT_APP_URL}/logos/blockchain.svg`,
+    image: AllNetworks,
   },
   isWalletModalOpen: {
     open: false,
