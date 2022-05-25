@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./Assets.scss";
+import "./index.scss";
 
 import classnames from "classnames";
 import { toast } from "react-toastify";
@@ -9,7 +9,7 @@ import DexService from "../../services/dex";
 import { AssetTable } from "../asset-table/AssetTable";
 import { useSelector } from "react-redux";
 
-export const Assets = () => {
+ const Assets = () => {
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("All");
   const [dexTokens, setDexTokens] = useState([]);
@@ -170,11 +170,11 @@ export const Assets = () => {
         <div
           className={classnames(
             "assets__links__link",
-            activeTab === "Accounts" && "assets__links__link--active"
+            activeTab === "Connected Accounts" && "assets__links__link--active"
           )}
-          onClick={() => onTabClick("Accounts")}
+          onClick={() => onTabClick("Connected Accounts")}
         >
-          Accounts
+          Connected Accounts
         </div>
       </div>
       <div className="assets__table">
@@ -184,4 +184,4 @@ export const Assets = () => {
   );
 };
 
-Assets.whyDidYouRender = true;
+export default Assets;

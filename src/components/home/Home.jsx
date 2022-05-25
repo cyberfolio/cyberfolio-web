@@ -4,9 +4,10 @@ import "./Home.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { Plus, ChevronDown } from "react-bootstrap-icons";
 import classNames from "classnames";
+import { toast } from "react-toastify";
 
 import { Utilities } from "../utilities/Utilities";
-import { Assets } from "../assets/Assets";
+import Assets from "../assets";
 
 import { ChainsDropDown } from "./chains-dropdown/ChainsDropDown";
 import { ACTIONS } from "../../state/actions";
@@ -33,14 +34,26 @@ export const Home = () => {
 
   useEffect(() => {
     const getTotal = async () => {
-      const net = await InfoService.getNetWorth();
-      setNetworth(net);
+      try {
+        const net = await InfoService.getNetWorth();
+        setNetworth(net);
+      } catch (e) {
+        if (e.status !== 401) {
+          toast.error(e.message);
+        }
+      }
     };
     const getAvailableAccounts = async () => {
-      const availableAccounts = await InfoService.getAvailableAccounts();
-      setAvailableAccounts(availableAccounts);
+      try {
+        const availableAccounts = await InfoService.getAvailableAccounts();
+        setAvailableAccounts(availableAccounts);
+      } catch (e) {
+        if (e.status !== 401) {
+          toast.error(e.message);
+        }
+      }
     };
-    setBundles((old) => [...old, "Main"]);
+    setBundles(["Main"]);
     getTotal();
     getAvailableAccounts();
   }, []);
