@@ -18,6 +18,23 @@ import FTX from "../assets/ftx.svg";
 
 const truncateRegex = /^(0x[a-zA-Z0-9]{4})[a-zA-Z0-9]+([a-zA-Z0-9]{4})$/;
 
+export const logos = {
+  allnetworks: AllNetworks,
+  bitcoin: Bitcoin,
+  ethereum: Ethereum,
+  smartchain: SmartChain,
+  avalanche: Avalanche,
+  solana: Solana,
+  polkadot: Polkadot,
+  polygon: Polygon,
+  arbitrum: Arbitrum,
+  optimism: Optimism,
+  binance: Binance,
+  kucoin: Kucoin,
+  gateio: Gateio,
+  ftx: FTX,
+};
+
 export const truncateEthAddress = (address) => {
   const match = String(address).match(truncateRegex);
   if (!match) return address;

@@ -2,9 +2,10 @@ import React from "react";
 import "./AssetTable.scss";
 
 import classnames from "classnames";
-import { arrangeCexName, capitalizeFirstLetter, toUsd } from "../../utils";
+import { arrangeCexName, capitalizeFirstLetter, toUsd, logos } from "../../utils";
 
 export const AssetTable = ({ assets, loading }) => {
+
   return (
     <div className="asset-table">
       <div className="asset-table__header">
@@ -80,9 +81,7 @@ export const AssetTable = ({ assets, loading }) => {
                       </div>
                       <div className="asset-table__assets__asset__item__chain__area">
                         <img
-                          src={`${process.env.REACT_APP_URL}/logos/${(
-                            cexName || chain
-                          ).toLowerCase().replace(/\s+/g, '')}.svg`}
+                          src={`${logos[cexName || chain]}`}
                           alt={cexName || chain}
                           className="asset-table__assets__asset__item__chain__logo"
                         />
