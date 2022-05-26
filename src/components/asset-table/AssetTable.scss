@@ -39,6 +39,7 @@
     }
   }
   &__assets {
+    min-height: 45vh;
     width: 100%;
     overflow-y: scroll;
     &__loading {
