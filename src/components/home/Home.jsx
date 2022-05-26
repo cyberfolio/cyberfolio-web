@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Plus, ChevronDown } from "react-bootstrap-icons";
 import classNames from "classnames";
 import { toast } from "react-toastify";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 import { Utilities } from "../utilities/Utilities";
 import Assets from "../assets";
@@ -82,6 +83,14 @@ export const Home = () => {
     });
   };
 
+  const renderTooltip = (props) => {
+    return (
+      <Tooltip id="button-tooltip" {...props}>
+        Coming soon
+      </Tooltip>
+    );
+  };
+
   return (
     <div className="home">
       <div className="home__header">
@@ -100,10 +109,16 @@ export const Home = () => {
               </div>
             );
           })}
-          <div className="home__header__add-wallets__button">
-            New Bundle
-            <Plus color="white" size={20} />
-          </div>
+          <OverlayTrigger
+            placement="bottom"
+            delay={{ show: 50, hide: 100 }}
+            overlay={renderTooltip}
+          >
+            <div className="home__header__add-wallets__button">
+              New Bundle
+              <Plus color="white" size={20} />
+            </div>
+          </OverlayTrigger>
         </div>
         <div className="home__header__add-wallets">
           {availableChains.map((chain) => {
