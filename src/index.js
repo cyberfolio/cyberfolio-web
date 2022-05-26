@@ -10,7 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import App from "./main/App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
-import store from "./state";
+import store from "./store";
 
 ReactDOM.render(
   <Provider store={store}>

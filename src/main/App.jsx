@@ -9,7 +9,7 @@ import { AddCexModal } from "../components/add-cex/AddCexModal";
 import { AddWalletModal } from "../components/add-wallet/AddWalletModal";
 import { useDispatch, useSelector } from "react-redux";
 import { isAuthenticated } from "../services/auth";
-import { ACTIONS } from "../state/actions";
+import { ACTIONS } from "../store/actions";
 
 const App = () => {
   const dispatch = useDispatch();

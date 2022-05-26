@@ -1,7 +1,7 @@
 import React from "react";
 import "./ChainsDropDown.scss";
 
-import { ACTIONS } from "../../../state/actions";
+import { ACTIONS } from "../../../store/actions";
 import { useDispatch } from "react-redux";
 
 import { chainsInfo } from '../../../utils'

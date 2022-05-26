@@ -4,7 +4,7 @@ import classnames from "classnames";
 import { toast } from "react-toastify";
 
 import CexService from "../../services/cex";
-import { ACTIONS } from "../../state/actions";
+import { ACTIONS } from "../../store/actions";
 import useKeypress from "../hooks/useKeyPress";
 
 import "./AddCexModal.scss";

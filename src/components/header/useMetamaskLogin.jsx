@@ -3,7 +3,7 @@ import detectEthereumProvider from "@metamask/detect-provider";
 import { ethers } from "ethers";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
-import { ACTIONS } from "../../state/actions";
+import { ACTIONS } from "../../store/actions";
 import {
   getNonce,
   logout,

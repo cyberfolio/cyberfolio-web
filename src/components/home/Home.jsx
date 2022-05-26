@@ -11,7 +11,7 @@ import { Utilities } from "../utilities/Utilities";
 import Assets from "../assets";
 
 import { ChainsDropDown } from "./chains-dropdown/ChainsDropDown";
-import { ACTIONS } from "../../state/actions";
+import { ACTIONS } from "../../store/actions";
 import useKeypress from "../hooks/useKeyPress";
 import { toUsd } from "../../utils";
 import InfoService from "../../services/info";

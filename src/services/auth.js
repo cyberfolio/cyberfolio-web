@@ -13,7 +13,7 @@ export const isAuthenticated = async () => {
 
 export const logout = async () => {
   try {
-    await mainInstance.post("/auth/logout", {
+    await mainInstance.get("/auth/logout", {
       withCredentials: true,
     });
     return true;
