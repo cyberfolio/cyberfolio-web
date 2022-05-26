@@ -49,7 +49,7 @@ const App = () => {
 
   return (
     <div className="app">
-      {loading && <div className="app__blocker" /> }
+      {loading && <div className="app__blocker" />}
       <Header />
       <AddWalletModal />
       <AddCexModal />

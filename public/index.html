@@ -1,12 +1,11 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link id="favicon" rel="icon" href="%PUBLIC_URL%/favicon-light.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta name="description" content="CyberFolio" />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link id="manifest" rel="manifest" href="%PUBLIC_URL%/manifest-light.json" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,7 +15,22 @@
     />
     <script src="https://kit.fontawesome.com/15c6664608.js" crossorigin="anonymous"></script>
 
-    
+    <script>
+      const usesDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches || false;
+      const favicon = document.getElementById('favicon');
+      const manifest = document.getElementById('manifest');
+      function switchIcon (usesDarkMode) {
+        if (usesDarkMode) { 
+          favicon.href = '%PUBLIC_URL%/favicon-light.ico';
+          manifest.href='%PUBLIC_URL%/manifest-light.json' 
+        } else {
+          favicon.href = '%PUBLIC_URL%/favicon-dark.ico';
+          manifest.href='%PUBLIC_URL%/manifest-dark.json' 
+        }
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener( "change", (e) => switchIcon(e.matches));
+      switchIcon(usesDarkMode);
+    </script>
     <title>CyberFolio</title>
   </head>
   <body>
