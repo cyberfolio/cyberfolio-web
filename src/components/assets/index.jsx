@@ -9,7 +9,7 @@ import DexService from "../../services/dex";
 import { AssetTable } from "../asset-table/AssetTable";
 import { useSelector } from "react-redux";
 
- const Assets = () => {
+const Assets = () => {
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("All");
   const [dexTokens, setDexTokens] = useState([]);
@@ -158,6 +158,7 @@ import { useSelector } from "react-redux";
         >
           DEX
         </div>
+        {/*
         <div
           className={classnames(
             "assets__links__link",
@@ -176,6 +177,7 @@ import { useSelector } from "react-redux";
         >
           Connected Accounts
         </div>
+      */}
       </div>
       <div className="assets__table">
         <AssetTable assets={assetsToShow} loading={loading} />
