@@ -23,9 +23,9 @@ const activeBundle = "Main";
 
 export const Home = () => {
   const chain = useSelector((state) => state.chain);
+  const netWorth = useSelector((state) => state.netWorth);
   const dispatch = useDispatch();
   const [chainsDropDownOpen, setChainsDropDownOpen] = useState(false);
-  const [netWorth, setNetworth] = useState(0);
   const [bundles, setBundles] = useState([]);
   const [availableAccounts, setAvailableAccounts] = useState([]);
 
@@ -36,8 +36,13 @@ export const Home = () => {
   useEffect(() => {
     const getTotal = async () => {
       try {
-        const net = await InfoService.getNetWorth();
-        setNetworth(net);
+        const netWorth = await InfoService.getNetWorth();
+        dispatch({
+          type: ACTIONS.SET_NET_WORTH,
+          payload: {
+            data: netWorth,
+          },
+        });
       } catch (e) {
         if (e.status !== 401) {
           toast.error(e.message);

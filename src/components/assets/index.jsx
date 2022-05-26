@@ -7,7 +7,9 @@ import { toast } from "react-toastify";
 import CexService from "../../services/cex";
 import DexService from "../../services/dex";
 import { AssetTable } from "../asset-table/AssetTable";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import InfoService from "../../services/info";
+import { ACTIONS } from "../../store/actions";
 
 const Assets = () => {
   const [loading, setLoading] = useState(false);
@@ -17,10 +19,10 @@ const Assets = () => {
   const [isFiltered, setIsFiltered] = useState(false);
   const [cexTokens, setCexTokens] = useState([]);
   const [assetsToShow, setAssetsToShow] = useState([]);
-  const [netWorth, setNetWorth] = useState(0);
 
   const chain = useSelector((state) => state.chain);
   const isAuthenticated = useSelector((state) => state.evmAddress);
+  const dispatch = useDispatch()
 
   const getAllAssets = async () => {
     try {
@@ -28,28 +30,22 @@ const Assets = () => {
       const dexTokensBitcoin = await DexService.getDexTokens({
         chain: "Bitcoin",
       });
-      setNetWorth(netWorth + dexTokensBitcoin?.totalTokenValue);
       const dexTokensEthereum = await DexService.getDexTokens({
         chain: "Ethereum",
       });
-      setNetWorth(netWorth + dexTokensEthereum?.totalTokenValue);
 
       const dexTokensAvalanche = await DexService.getDexTokens({
         chain: "Avalanche",
       });
-      setNetWorth(netWorth + dexTokensAvalanche?.totalTokenValue);
       const dexTokensArbitrum = await DexService.getDexTokens({
         chain: "Arbitrum",
       });
-      setNetWorth(netWorth + dexTokensArbitrum?.totalTokenValue);
       const dexTokensPolygon = await DexService.getDexTokens({
         chain: "Polygon",
       });
-      setNetWorth(netWorth + dexTokensPolygon?.totalTokenValue);
       const dexTokensSmartChain = await DexService.getDexTokens({
         chain: "SmartChain",
       });
-      setNetWorth(netWorth + dexTokensSmartChain?.totalTokenValue);
 
       const dexTokens = [
         ...dexTokensBitcoin?.assets,
@@ -69,6 +65,21 @@ const Assets = () => {
         return b.value - a.value;
       });
       setCexTokens(cexTokens);
+
+      try {
+        const netWorth = await InfoService.getNetWorth();
+        dispatch({
+          type: ACTIONS.SET_NET_WORTH,
+          payload: {
+            data: netWorth
+          },
+        });
+      } catch (e) {
+        if (e.status !== 401) {
+          toast.error(e.message);
+        }
+      }
+
       setLoading(false);
     } catch (e) {
       toast.error(e.message);

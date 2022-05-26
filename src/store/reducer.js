@@ -35,10 +35,10 @@ const reducer = (state = initialState, action) => {
       };
     }
 
-    case ACTIONS.ADD_NET_WORTH: {
+    case ACTIONS.SET_NET_WORTH: {
       return {
         ...state,
-        netWorth: state.netWorth + action.payload.data,
+        netWorth: action.payload.data,
       };
     }
 
