@@ -29,39 +29,41 @@ export const Home = () => {
   const [bundles, setBundles] = useState([]);
   const [availableAccounts, setAvailableAccounts] = useState([]);
 
+  const getTotal = async () => {
+    try {
+      const netWorth = await InfoService.getNetWorth();
+      dispatch({
+        type: ACTIONS.SET_NET_WORTH,
+        payload: {
+          data: netWorth,
+        },
+      });
+    } catch (e) {
+      if (e.status !== 401) {
+        toast.error(e.message);
+      }
+    }
+  };
+  const getAvailableAccounts = async () => {
+    try {
+      const availableAccounts = await InfoService.getAvailableAccounts();
+      setAvailableAccounts(availableAccounts);
+    } catch (e) {
+      if (e.status !== 401) {
+        toast.error(e.message);
+      }
+    }
+  };
+
   useEffect(() => {
     setChainsDropDownOpen(false);
   }, [chain]);
 
   useEffect(() => {
-    const getTotal = async () => {
-      try {
-        const netWorth = await InfoService.getNetWorth();
-        dispatch({
-          type: ACTIONS.SET_NET_WORTH,
-          payload: {
-            data: netWorth,
-          },
-        });
-      } catch (e) {
-        if (e.status !== 401) {
-          toast.error(e.message);
-        }
-      }
-    };
-    const getAvailableAccounts = async () => {
-      try {
-        const availableAccounts = await InfoService.getAvailableAccounts();
-        setAvailableAccounts(availableAccounts);
-      } catch (e) {
-        if (e.status !== 401) {
-          toast.error(e.message);
-        }
-      }
-    };
     setBundles(["Main"]);
     getTotal();
     getAvailableAccounts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useKeypress("Escape", () => {
