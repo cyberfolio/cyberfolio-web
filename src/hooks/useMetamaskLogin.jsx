@@ -1,10 +1,12 @@
 import { useState } from "react";
+
 import detectEthereumProvider from "@metamask/detect-provider";
 import { ethers } from "ethers";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
-import { ACTIONS } from "../../store/actions";
-import { getNonce, logout, validateSignature } from "../../services/auth";
+
+import { ACTIONS } from "../store/actions";
+import { getNonce, logout, validateSignature } from "../services/auth";
 
 export const useMetamaskLogin = () => {
   const dispatch = useDispatch();

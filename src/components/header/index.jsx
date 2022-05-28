@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 
 import Metamask from "../../assets/metamask.png";
 import { truncateEthAddress } from "../../utils";
-import { useMetamaskLogin } from "./useMetamaskLogin";
+import { useMetamaskLogin } from "../../hooks/useMetamaskLogin";
 
 const Index = () => {
   return (

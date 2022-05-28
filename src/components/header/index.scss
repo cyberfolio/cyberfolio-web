@@ -7,6 +7,9 @@
   color: white;
   height: 56px;
   border-bottom: 1px solid $border;
+  position: sticky;
+  top: 0;
+  z-index: 3;
 }
 .header-content {
   max-width: 1480px;
