@@ -1,17 +1,18 @@
 import React, { useCallback, useEffect } from "react";
-import "./App.scss";
+import "./index.scss";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import { Header } from "../components/header/Header";
-import { Home } from "../components/home/Home";
-import { AddCexModal } from "../components/add-cex/AddCexModal";
-import { AddWalletModal } from "../components/add-wallet/AddWalletModal";
+import Header from "../components/header";
+import Home from "../components/home";
+import AddCex from "../components/add-cex";
+import AddWallet from "../components/add-wallet";
+
 import { useDispatch, useSelector } from "react-redux";
 import { isAuthenticated } from "../services/auth";
 import { ACTIONS } from "../store/actions";
 
-const App = () => {
+const Index = () => {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.loading);
 
@@ -51,8 +52,8 @@ const App = () => {
     <div className="app">
       {loading && <div className="app__blocker" />}
       <Header />
-      <AddWalletModal />
-      <AddCexModal />
+      <AddWallet />
+      <AddCex />
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -62,4 +63,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Index;

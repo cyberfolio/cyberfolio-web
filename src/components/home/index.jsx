@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Home.scss";
+import "./index.scss";
 
 import { useSelector, useDispatch } from "react-redux";
 import { Plus, ChevronDown } from "react-bootstrap-icons";
@@ -21,7 +21,7 @@ const availableCexes = ["Binance", "FTX", "Kucoin", "Gateio"];
 
 const activeBundle = "Main";
 
-export const Home = () => {
+const Home = () => {
   const chain = useSelector((state) => state.chain);
   const netWorth = useSelector((state) => state.netWorth);
   const dispatch = useDispatch();
@@ -214,4 +214,4 @@ export const Home = () => {
   );
 };
 
-Home.whyDidYouRender = true;
+export default Home

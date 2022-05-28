@@ -1,4 +1,6 @@
 import React, { useRef, useState } from "react";
+import "./index.scss";
+
 import { useSelector, useDispatch } from "react-redux";
 import classnames from "classnames";
 import { toast } from "react-toastify";
@@ -7,9 +9,8 @@ import CexService from "../../services/cex";
 import { ACTIONS } from "../../store/actions";
 import useKeypress from "../../hooks/useKeyPress";
 
-import "./AddCexModal.scss";
 
-export const AddCexModal = () => {
+ const AddCex = () => {
   const [apiKey, setApiKey] = useState("");
   const [apiSecret, setApiSecret] = useState("");
   const [passphrase, setPassphrase] = useState("");
@@ -156,3 +157,5 @@ export const AddCexModal = () => {
     </div>
   );
 };
+
+export default AddCex

@@ -1,13 +1,14 @@
 import React from "react";
-import "./Header.scss";
+import "./index.scss";
+
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useSelector } from "react-redux";
 
 import Metamask from "../../assets/metamask.png";
 import { truncateEthAddress } from "../../utils";
 import { useMetamaskLogin } from "./useMetamaskLogin";
-export const Header = () => {
 
+const Index = () => {
   return (
     <div className="header">
       <div className="header-content">
@@ -65,4 +66,4 @@ const ConnectWallet = () => {
   );
 };
 
-Header.whyDidYouRender = true;
+export default Index

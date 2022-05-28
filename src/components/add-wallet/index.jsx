@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import "./AddWalletModal.scss";
+import "./index.scss";
 
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
@@ -10,7 +10,7 @@ import { ACTIONS } from "../../store/actions";
 import useKeypress from "../../hooks/useKeyPress";
 import { isValidWalletAddress } from "../../utils";
 
-export const AddWalletModal = () => {
+ const AddWallet = () => {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [loading, setLoading] = useState("");
@@ -122,3 +122,5 @@ export const AddWalletModal = () => {
     </div>
   );
 };
+
+export default AddWallet
