@@ -24,6 +24,8 @@ const activeBundle = "Main";
 const Home = () => {
   const chain = useSelector((state) => state.chain);
   const netWorth = useSelector((state) => state.netWorth);
+  const evmAddress = useSelector((state) => state.evmAddress);
+
   const dispatch = useDispatch();
   const [chainsDropDownOpen, setChainsDropDownOpen] = useState(false);
   const [bundles, setBundles] = useState([]);
@@ -71,23 +73,27 @@ const Home = () => {
   });
 
   const openWalletModal = (chain) => {
-    dispatch({
-      type: ACTIONS.OPEN_WALLET_MODAL,
-      payload: {
-        open: true,
-        chain,
-      },
-    });
+    if (evmAddress) {
+      dispatch({
+        type: ACTIONS.OPEN_WALLET_MODAL,
+        payload: {
+          open: true,
+          chain,
+        },
+      });
+    }
   };
 
   const openAddCexModal = (name) => {
-    dispatch({
-      type: ACTIONS.OPEN_ADD_CEX_MODAL,
-      payload: {
-        open: true,
-        name,
-      },
-    });
+    if (evmAddress) {
+      dispatch({
+        type: ACTIONS.OPEN_ADD_CEX_MODAL,
+        payload: {
+          open: true,
+          name,
+        },
+      });
+    }
   };
 
   const renderTooltip = (props) => {
@@ -214,4 +220,4 @@ const Home = () => {
   );
 };
 
-export default Home
+export default Home;

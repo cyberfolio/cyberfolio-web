@@ -16,6 +16,7 @@ import { isValidWalletAddress } from "../../utils";
   const [loading, setLoading] = useState("");
 
   const { chain, open } = useSelector((state) => state.isWalletModalOpen);
+
   const dispatch = useDispatch();
   const modalRef = useRef();
 
