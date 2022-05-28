@@ -1,10 +1,10 @@
 import React from "react";
-import "./AssetTable.scss";
+import "./index.scss";
 
 import classnames from "classnames";
 import { arrangeCexName, capitalizeFirstLetter, toUsd, logos } from "../../utils";
 
-export const AssetTable = ({ assets, loading }) => {
+export const Index = ({ assets, loading }) => {
 
   return (
     <div className="asset-table">
@@ -111,4 +111,4 @@ export const AssetTable = ({ assets, loading }) => {
   );
 };
 
-AssetTable.whyDidYouRender = true;
+export default Index

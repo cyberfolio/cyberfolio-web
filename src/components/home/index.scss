@@ -7,13 +7,13 @@
   min-height: calc(100vh - 56px);
   max-width: 1480px;
   margin: 0 auto;
+  border-left: 1px solid $border;
 
   &__header {
     padding-top: 10px;
     width: 70%;
     height: 100%;
     margin: 0 auto;
-    border-left: 1px solid $border;
     &__bundle {
       display: flex;
       align-items: center;

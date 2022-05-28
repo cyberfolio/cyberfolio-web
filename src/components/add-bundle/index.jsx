@@ -1,4 +1,6 @@
 import React, { useRef, useState } from "react";
+import "./index.scss";
+
 import { useSelector, useDispatch } from "react-redux";
 import classnames from "classnames";
 import { toast } from "react-toastify";
@@ -7,9 +9,7 @@ import CexService from "../../services/cex";
 import { ACTIONS } from "../../state/actions";
 import useKeypress from "../../hooks/useKeyPress";
 
-import "./AddCexModal.scss";
-
-export const AddCexModal = () => {
+const Index = () => {
   const [apiKey, setApiKey] = useState("");
   const [apiSecret, setApiSecret] = useState("");
   const [passphrase, setPassphrase] = useState("");
@@ -23,7 +23,7 @@ export const AddCexModal = () => {
     dispatch({
       type: ACTIONS.SET_LOADING,
       payload: {
-        data: true
+        data: true,
       },
     });
     if (!apiKey || !apiSecret) {
@@ -32,7 +32,7 @@ export const AddCexModal = () => {
       dispatch({
         type: ACTIONS.SET_LOADING,
         payload: {
-          data: false
+          data: false,
         },
       });
       return;
@@ -43,7 +43,7 @@ export const AddCexModal = () => {
       dispatch({
         type: ACTIONS.SET_LOADING,
         payload: {
-          data: false
+          data: false,
         },
       });
       return;
@@ -67,7 +67,7 @@ export const AddCexModal = () => {
       dispatch({
         type: ACTIONS.SET_LOADING,
         payload: {
-          data: false
+          data: false,
         },
       });
       close();
@@ -77,7 +77,7 @@ export const AddCexModal = () => {
       dispatch({
         type: ACTIONS.SET_LOADING,
         payload: {
-          data: false
+          data: false,
         },
       });
     }
@@ -98,15 +98,11 @@ export const AddCexModal = () => {
   };
 
   return (
-    <div
-      className={classnames("addbundle", open && "addbundle--active")}
-    >
+    <div className={classnames("addbundle", open && "addbundle--active")}>
       <div className="addbundle__content" ref={modalRef}>
         <div className="addbundle__content__header">
           <div />
-          <div className="addbundle__content__header__title">
-            Add {name}
-          </div>
+          <div className="addbundle__content__header__title">Add {name}</div>
           <div className="addbundle__content__header__exit" onClick={close}>
             X
           </div>
@@ -156,3 +152,5 @@ export const AddCexModal = () => {
     </div>
   );
 };
+
+export default Index;

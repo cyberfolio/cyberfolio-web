@@ -3,13 +3,14 @@ import "./index.scss";
 
 import classnames from "classnames";
 import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
 
 import CexService from "../../services/cex";
 import DexService from "../../services/dex";
-import { AssetTable } from "../asset-table/AssetTable";
-import { useDispatch, useSelector } from "react-redux";
 import InfoService from "../../services/info";
 import { ACTIONS } from "../../store/actions";
+
+import AssetTable from "../asset-table";
 
 const Assets = () => {
   const [loading, setLoading] = useState(false);
