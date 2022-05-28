@@ -9,7 +9,7 @@
   border-bottom: 1px solid $border;
   position: sticky;
   top: 0;
-  z-index: 3;
+  z-index: $header_index;
 }
 .header-content {
   max-width: 1480px;

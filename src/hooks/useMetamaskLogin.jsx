@@ -39,6 +39,12 @@ export const useMetamaskLogin = () => {
       const signer = provider.getSigner();
       const nonce = await getNonce({ evmAddress: evmWalletAddresses[0] });
       const signature = await signer.signMessage(nonce);
+      dispatch({
+        type: ACTIONS.SET_LOADING,
+        payload: {
+          data: true,
+        },
+      });
       const evmAddress = await signer.getAddress();
 
       // Verify  Message
@@ -64,6 +70,13 @@ export const useMetamaskLogin = () => {
         toast.error(error.message);
       }
       setIsConnecting(false);
+    } finally {
+      dispatch({
+        type: ACTIONS.SET_LOADING,
+        payload: {
+          data: false,
+        },
+      });
     }
   };
 

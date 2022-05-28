@@ -2,19 +2,19 @@ import React, { useCallback, useEffect } from "react";
 import "./index.scss";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import Header from "../components/header";
 import Home from "../components/home";
 import AddCex from "../components/add-cex";
 import AddWallet from "../components/add-wallet";
+import Loading from "../components/loading";
 
-import { useDispatch, useSelector } from "react-redux";
 import { isAuthenticated } from "../services/auth";
 import { ACTIONS } from "../store/actions";
 
 const Index = () => {
   const dispatch = useDispatch();
-  const loading = useSelector((state) => state.loading);
 
   const checkIsAuthenticated = useCallback(async () => {
     try {
@@ -50,7 +50,7 @@ const Index = () => {
 
   return (
     <div className="app">
-      {loading && <div className="app__blocker" />}
+      <Loading />
       <Header />
       <AddWallet />
       <AddCex />

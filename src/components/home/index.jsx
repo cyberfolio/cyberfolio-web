@@ -7,7 +7,7 @@ import classNames from "classnames";
 import toast from "react-hot-toast";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
-import { Utilities } from "../utilities/Utilities";
+import Utilities from "../utilities";
 import Assets from "../assets";
 
 import { ChainsDropDown } from "./chains-dropdown/ChainsDropDown";
