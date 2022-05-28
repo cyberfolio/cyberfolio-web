@@ -2,7 +2,7 @@ import { mainInstance } from "../config/axios";
 
 export const isAuthenticated = async () => {
   try {
-    const res = await mainInstance.get("/auth/isAuthenticated", {
+    const res = await mainInstance.get("/auth/is-authenticated", {
       withCredentials: true,
     });
     return res?.data?.keyIdentifier;
@@ -38,7 +38,7 @@ export const getNonce = async ({ evmAddress }) => {
 export const validateSignature = async ({ evmAddress, nonce, signature }) => {
   try {
     const res = await mainInstance.post(
-      "/auth/login/validateSignature",
+      "/auth/login/validate-signature",
       {
         evmAddress,
         nonce,
