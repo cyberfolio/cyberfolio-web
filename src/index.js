@@ -1,19 +1,18 @@
-import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 import ReactDOM from "react-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.scss";
 
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { Provider } from "react-redux";
+import { Toaster } from "react-hot-toast";
 
 import Components from "./components";
-import { Provider } from "react-redux";
 import store from "./store";
 
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
-      <ToastContainer />
+      <Toaster position="top-center" reverseOrder={false} />
       <Components />
     </React.StrictMode>
   </Provider>,

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./index.scss";
 
 import classnames from "classnames";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 
 import CexService from "../../services/cex";

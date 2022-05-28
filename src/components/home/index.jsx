@@ -4,7 +4,7 @@ import "./index.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { Plus, ChevronDown } from "react-bootstrap-icons";
 import classNames from "classnames";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 import { Utilities } from "../utilities/Utilities";

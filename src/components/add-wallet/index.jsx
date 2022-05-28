@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import "./index.scss";
 
 import { useSelector, useDispatch } from "react-redux";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 import classnames from "classnames";
 
 import DexService from "../../services/dex";

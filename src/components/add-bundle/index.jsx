@@ -3,7 +3,7 @@ import "./index.scss";
 
 import { useSelector, useDispatch } from "react-redux";
 import classnames from "classnames";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 
 import CexService from "../../services/cex";
 import { ACTIONS } from "../../state/actions";
