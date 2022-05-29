@@ -8,7 +8,7 @@ import SmartChain from "../assets/smartchain.svg";
 import Avalanche from "../assets/avalanche.svg";
 import Solana from "../assets/solana.svg";
 import Polkadot from "../assets/polkadot.svg";
-import Polygon from "../assets/polkadot.svg";
+import Polygon from "../assets/polygon.svg";
 import Arbitrum from "../assets/arbitrum.svg";
 import Optimism from "../assets/optimism.svg";
 import Binance from "../assets/binance.svg";

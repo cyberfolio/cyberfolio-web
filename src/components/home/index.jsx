@@ -10,7 +10,7 @@ import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import Utilities from "../utilities";
 import Assets from "../assets";
 
-import { ChainsDropDown } from "./chains-dropdown/ChainsDropDown";
+import ChainsDropDown from "./chains-dropdown";
 import Actions from "../../store/actions";
 import useKeypress from "../../hooks/useKeyPress";
 import { toUsd } from "../../utils";
@@ -207,7 +207,7 @@ const Home = () => {
                 alt={chain.name}
                 height={25}
               />
-              {chain.name}
+              {chain.name.charAt(0).toUpperCase() + chain.name.slice(1)}
               <div className="home__header__second__filter__button__arrow">
                 <ChevronDown color="white" size={15} />
               </div>
