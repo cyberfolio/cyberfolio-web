@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./index.scss";
 
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import Metamask from "../../assets/metamask.png";
 import { truncateEthAddress } from "../../utils";
 import { useMetamaskLogin } from "../../hooks/useMetamaskLogin";
 import InfoService from "../../services/info";
+import ACTIONS from "../../store/actions";
 
 const Index = () => {
   return (
@@ -22,25 +23,32 @@ const Index = () => {
 
 const ConnectWallet = () => {
   const evmAddress = useSelector((state) => state.evmAddress);
-  const [ensName, setEnsName] = useState("");
+  const ensName = useSelector((state) => state.ensName);
+  const dispatch = useDispatch();
 
   const { isConnecting, signAndVerifyMessage, disconnectMetamask } =
     useMetamaskLogin();
 
   const resolveEnsName = async () => {
-    try {
-      const name = await InfoService.getEnsName();
-      setEnsName(name);
-    } catch (e) {
-      console.log(e.message);
+    if (evmAddress && !ensName) {
+      try {
+        const name = await InfoService.getEnsName();
+        dispatch({
+          type: ACTIONS.SET_ENS_NAME,
+          payload: {
+            data: name,
+          },
+        });
+      } catch (e) {
+        console.log(e.message);
+      }
     }
   };
 
   useEffect(() => {
-    if (evmAddress) {
-      resolveEnsName();
-    }
-  }, [evmAddress]);
+    resolveEnsName();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [evmAddress, ensName]);
 
   const renderTooltip = (props) => {
     if (evmAddress)

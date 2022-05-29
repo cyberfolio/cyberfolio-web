@@ -7,6 +7,7 @@ const actions = {
   SET_CEX_ASSETS: "SET_CEX_ASSETS",
   SET_DEX_ASSETS: "SET_DEX_ASSETS",
   SET_NET_WORTH: "SET_NET_WORTH",
+  SET_ENS_NAME: "SET_ENS_NAME",
 };
 
 export default actions;

@@ -4,6 +4,7 @@ import AllNetworks from "../assets/blockchain.svg";
 const initialState = {
   loading: false,
   evmAddress: "",
+  ensName: "",
   chain: {
     name: "All Networks",
     image: AllNetworks,
@@ -34,6 +35,13 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         evmAddress: action.payload.data,
+      };
+    }
+
+    case Actions.SET_ENS_NAME: {
+      return {
+        ...state,
+        ensName: action.payload.data,
       };
     }
 
