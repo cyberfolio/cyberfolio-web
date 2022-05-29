@@ -7,7 +7,7 @@ class InfoService {
       const res = await mainInstance.get("info/networth", {
         withCredentials: true,
       });
-      return res?.data?.netWorth;
+      return res.data?.netWorth;
     } catch (e) {
       throw {
         status: e?.response?.status,
@@ -21,7 +21,21 @@ class InfoService {
       const res = await mainInstance.get("info/available-accounts", {
         withCredentials: true,
       });
-      return res?.data?.availableAccounts;
+      return res.data?.availableAccounts;
+    } catch (e) {
+      throw {
+        status: e?.response?.status,
+        message: e?.response?.data,
+      };
+    }
+  }
+
+  static async getEnsName() {
+    try {
+      const res = await mainInstance.get("info/ens-name", {
+        withCredentials: true,
+      });
+      return res.data?.ensName;
     } catch (e) {
       throw {
         status: e?.response?.status,

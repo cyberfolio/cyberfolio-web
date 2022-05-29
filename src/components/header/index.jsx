@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./index.scss";
 
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import Metamask from "../../assets/metamask.png";
 import { truncateEthAddress } from "../../utils";
 import { useMetamaskLogin } from "../../hooks/useMetamaskLogin";
+import InfoService from "../../services/info";
 
 const Index = () => {
   return (
@@ -21,12 +22,25 @@ const Index = () => {
 
 const ConnectWallet = () => {
   const evmAddress = useSelector((state) => state.evmAddress);
-  const {
-    isConnecting,
-    signAndVerifyMessage,
-    disconnectMetamask,
-  } = useMetamaskLogin();
+  const [ensName, setEnsName] = useState("");
 
+  const { isConnecting, signAndVerifyMessage, disconnectMetamask } =
+    useMetamaskLogin();
+
+  const resolveEnsName = async () => {
+    try {
+      const name = await InfoService.getEnsName();
+      setEnsName(name);
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+
+  useEffect(() => {
+    if (evmAddress) {
+      resolveEnsName();
+    }
+  }, [evmAddress]);
 
   const renderTooltip = (props) => {
     if (evmAddress)
@@ -57,8 +71,9 @@ const ConnectWallet = () => {
           {evmAddress ? <span className="connectedDot"></span> : <></>}
           <div className="metamask-button-text">
             {!evmAddress && !isConnecting && "Connect Metamask"}
-            {evmAddress && `Connected to ${truncateEthAddress(evmAddress)}`}
             {!evmAddress && isConnecting && "Connecting..."}
+            {evmAddress && !ensName && `${truncateEthAddress(evmAddress)}`}
+            {evmAddress && ensName && `${ensName}`}
           </div>
         </div>
       </OverlayTrigger>
@@ -66,4 +81,4 @@ const ConnectWallet = () => {
   );
 };
 
-export default Index
+export default Index;
