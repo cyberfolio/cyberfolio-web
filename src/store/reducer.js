@@ -82,14 +82,14 @@ const reducer = (state = initialState, action) => {
     case Actions.SET_CEX_ASSETS: {
       return {
         ...state,
-        cexAssets: [...state.cexAssets, ...action.payload.data],
+        cexAssets: action.payload.data,
       };
     }
 
     case Actions.SET_DEX_ASSETS: {
       return {
         ...state,
-        dexAssets: [...state.dexAssets, ...action.payload.data],
+        dexAssets: action.payload.data,
       };
     }
 
