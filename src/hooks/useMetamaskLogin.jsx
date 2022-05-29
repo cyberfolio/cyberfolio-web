@@ -5,8 +5,9 @@ import { ethers } from "ethers";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 
-import { ACTIONS } from "../store/actions";
+import Actions from "../store/actions";
 import { getNonce, logout, validateSignature } from "../services/auth";
+import { setAppLoading } from "../utils";
 
 export const useMetamaskLogin = () => {
   const dispatch = useDispatch();
@@ -39,12 +40,7 @@ export const useMetamaskLogin = () => {
       const signer = provider.getSigner();
       const nonce = await getNonce({ evmAddress: evmWalletAddresses[0] });
       const signature = await signer.signMessage(nonce);
-      dispatch({
-        type: ACTIONS.SET_LOADING,
-        payload: {
-          data: true,
-        },
-      });
+      setAppLoading(true)
       const evmAddress = await signer.getAddress();
 
       // Verify  Message
@@ -60,7 +56,7 @@ export const useMetamaskLogin = () => {
       });
       setIsConnecting(false);
       dispatch({
-        type: ACTIONS.SET_EVM_ADDRESS,
+        type: Actions.SET_EVM_ADDRESS,
         payload: {
           data: signerAddress,
         },
@@ -71,19 +67,14 @@ export const useMetamaskLogin = () => {
       }
       setIsConnecting(false);
     } finally {
-      dispatch({
-        type: ACTIONS.SET_LOADING,
-        payload: {
-          data: false,
-        },
-      });
+      setAppLoading(false)
     }
   };
 
   const disconnectMetamask = () => {
     logout();
     dispatch({
-      type: ACTIONS.SET_EVM_ADDRESS,
+      type: Actions.SET_EVM_ADDRESS,
       payload: {
         data: "",
       },

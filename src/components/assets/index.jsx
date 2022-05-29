@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import CexService from "../../services/cex";
 import DexService from "../../services/dex";
 import InfoService from "../../services/info";
-import { ACTIONS } from "../../store/actions";
+import Actions from "../../store/actions";
 
 import AssetTable from "../asset-table";
 
@@ -70,7 +70,7 @@ const Assets = () => {
       try {
         const netWorth = await InfoService.getNetWorth();
         dispatch({
-          type: ACTIONS.SET_NET_WORTH,
+          type: Actions.SET_NET_WORTH,
           payload: {
             data: netWorth
           },

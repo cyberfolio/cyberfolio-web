@@ -1,7 +1,7 @@
 import React from "react";
 import "./ChainsDropDown.scss";
 
-import { ACTIONS } from "../../../store/actions";
+import Actions from "../../../store/actions";
 import { useDispatch } from "react-redux";
 
 import { chainsInfo } from '../../../utils'
@@ -12,7 +12,7 @@ export const ChainsDropDown = () => {
 
   const setChain = (chain, image) => {
     dispatch({
-      type: ACTIONS.FILTER_ASSETS_BY_CHAIN,
+      type: Actions.FILTER_ASSETS_BY_CHAIN,
       payload: {
         data: {
           name: chain,

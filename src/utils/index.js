@@ -16,6 +16,9 @@ import Kucoin from "../assets/kucoin.png";
 import Gateio from "../assets/gateio.svg";
 import FTX from "../assets/ftx.svg";
 
+import store from "../store";
+import Actions from "../store/actions";
+
 const truncateRegex = /^(0x[a-zA-Z0-9]{4})[a-zA-Z0-9]+([a-zA-Z0-9]{4})$/;
 
 export const logos = {
@@ -147,5 +150,14 @@ export const toUsd = (value) => {
   return value.toLocaleString("en-US", {
     style: "currency",
     currency: "USD",
+  });
+};
+
+export const setAppLoading = async (data) => {
+  store.dispatch({
+    type: Actions.SET_LOADING,
+    payload: {
+      data,
+    },
   });
 };

@@ -11,7 +11,7 @@ import AddWallet from "../components/add-wallet";
 import Loading from "../components/loading";
 
 import { isAuthenticated } from "../services/auth";
-import { ACTIONS } from "../store/actions";
+import Actions from "../store/actions";
 
 const Index = () => {
   const dispatch = useDispatch();
@@ -21,14 +21,14 @@ const Index = () => {
       const keyIdentifier = await isAuthenticated();
       if (keyIdentifier) {
         dispatch({
-          type: ACTIONS.SET_EVM_ADDRESS,
+          type: Actions.SET_EVM_ADDRESS,
           payload: {
             data: keyIdentifier,
           },
         });
       } else {
         dispatch({
-          type: ACTIONS.SET_EVM_ADDRESS,
+          type: Actions.SET_EVM_ADDRESS,
           payload: {
             data: "",
           },
@@ -36,7 +36,7 @@ const Index = () => {
       }
     } catch (e) {
       dispatch({
-        type: ACTIONS.SET_EVM_ADDRESS,
+        type: Actions.SET_EVM_ADDRESS,
         payload: {
           data: "",
         },

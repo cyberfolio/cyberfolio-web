@@ -6,7 +6,7 @@ import classnames from "classnames";
 import toast from "react-hot-toast";
 
 import CexService from "../../services/cex";
-import { ACTIONS } from "../../state/actions";
+import Actions from "../../state/actions";
 import useKeypress from "../../hooks/useKeyPress";
 
 const Index = () => {
@@ -21,7 +21,7 @@ const Index = () => {
   const add = async () => {
     setLoading(true);
     dispatch({
-      type: ACTIONS.SET_LOADING,
+      type: Actions.SET_LOADING,
       payload: {
         data: true,
       },
@@ -30,7 +30,7 @@ const Index = () => {
       toast.error("Please enter api key and secret.");
       setLoading(false);
       dispatch({
-        type: ACTIONS.SET_LOADING,
+        type: Actions.SET_LOADING,
         payload: {
           data: false,
         },
@@ -41,7 +41,7 @@ const Index = () => {
       toast.error("Please enter passphrase.");
       setLoading(false);
       dispatch({
-        type: ACTIONS.SET_LOADING,
+        type: Actions.SET_LOADING,
         payload: {
           data: false,
         },
@@ -57,7 +57,7 @@ const Index = () => {
         passphrase,
       });
       dispatch({
-        type: ACTIONS.SET_CEX_ASSETS,
+        type: Actions.SET_CEX_ASSETS,
         payload: {
           cexAssets,
         },
@@ -65,7 +65,7 @@ const Index = () => {
       toast.success(`${name} added`);
       setLoading(false);
       dispatch({
-        type: ACTIONS.SET_LOADING,
+        type: Actions.SET_LOADING,
         payload: {
           data: false,
         },
@@ -75,7 +75,7 @@ const Index = () => {
       toast.error(e.message);
       setLoading(false);
       dispatch({
-        type: ACTIONS.SET_LOADING,
+        type: Actions.SET_LOADING,
         payload: {
           data: false,
         },
@@ -89,7 +89,7 @@ const Index = () => {
 
   const close = () => {
     dispatch({
-      type: ACTIONS.OPEN_ADD_CEX_MODAL,
+      type: Actions.OPEN_ADD_CEX_MODAL,
       payload: {
         open: false,
         name: "",

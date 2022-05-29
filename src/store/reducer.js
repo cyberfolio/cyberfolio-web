@@ -1,4 +1,4 @@
-import { ACTIONS } from "./actions";
+import Actions from "./actions";
 import AllNetworks from "../assets/blockchain.svg";
 
 const initialState = {
@@ -16,40 +16,42 @@ const initialState = {
     open: false,
     name: "",
   },
+  dexAssets: [],
+  cexAssets: [],
   netWorth: 0,
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ACTIONS.SET_LOADING: {
+    case Actions.SET_LOADING: {
       return {
         ...state,
         loading: action.payload.data,
       };
     }
 
-    case ACTIONS.SET_EVM_ADDRESS: {
+    case Actions.SET_EVM_ADDRESS: {
       return {
         ...state,
         evmAddress: action.payload.data,
       };
     }
 
-    case ACTIONS.SET_NET_WORTH: {
+    case Actions.SET_NET_WORTH: {
       return {
         ...state,
         netWorth: action.payload.data,
       };
     }
 
-    case ACTIONS.FILTER_ASSETS_BY_CHAIN: {
+    case Actions.FILTER_ASSETS_BY_CHAIN: {
       return {
         ...state,
         chain: action.payload.data,
       };
     }
 
-    case ACTIONS.OPEN_WALLET_MODAL: {
+    case Actions.OPEN_WALLET_MODAL: {
       return {
         ...state,
         isWalletModalOpen: {
@@ -59,7 +61,7 @@ const reducer = (state = initialState, action) => {
       };
     }
 
-    case ACTIONS.OPEN_ADD_CEX_MODAL: {
+    case Actions.OPEN_ADD_CEX_MODAL: {
       return {
         ...state,
         isAddCexModalOpen: {
@@ -69,7 +71,7 @@ const reducer = (state = initialState, action) => {
       };
     }
 
-    case ACTIONS.SET_CEX_ASSETS: {
+    case Actions.SET_CEX_ASSETS: {
       return {
         ...state,
         cexAssets: [...state.cexAssets, ...action.payload.cexAssets],

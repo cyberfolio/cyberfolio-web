@@ -1,4 +1,4 @@
-export const ACTIONS = {
+const actions = {
   SET_LOADING: "SET_LOADING",
   SET_EVM_ADDRESS: "SET_EVM_ADDRESS",
   FILTER_ASSETS_BY_CHAIN: "FILTER_ASSETS_BY_CHAIN",
@@ -7,3 +7,5 @@ export const ACTIONS = {
   SET_CEX_ASSETS: "SET_CEX_ASSETS",
   SET_NET_WORTH: "SET_NET_WORTH",
 };
+
+export default actions;

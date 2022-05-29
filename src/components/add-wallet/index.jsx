@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import classnames from "classnames";
 
 import DexService from "../../services/dex";
-import { ACTIONS } from "../../store/actions";
+import Actions from "../../store/actions";
 import useKeypress from "../../hooks/useKeyPress";
 import { isValidWalletAddress } from "../../utils";
 
@@ -29,7 +29,7 @@ import { isValidWalletAddress } from "../../utils";
     try {
       setLoading(true);
       dispatch({
-        type: ACTIONS.SET_LOADING,
+        type: Actions.SET_LOADING,
         payload: {
           data: true
         },
@@ -40,7 +40,7 @@ import { isValidWalletAddress } from "../../utils";
       setAddress("");
       setLoading(false);
       dispatch({
-        type: ACTIONS.SET_LOADING,
+        type: Actions.SET_LOADING,
         payload: {
           data: false
         },
@@ -49,7 +49,7 @@ import { isValidWalletAddress } from "../../utils";
     } catch (e) {
       setLoading(false);
       dispatch({
-        type: ACTIONS.SET_LOADING,
+        type: Actions.SET_LOADING,
         payload: {
           data: false
         },
@@ -63,7 +63,7 @@ import { isValidWalletAddress } from "../../utils";
 
   const close = () => {
     dispatch({
-      type: ACTIONS.OPEN_WALLET_MODAL,
+      type: Actions.OPEN_WALLET_MODAL,
       payload: {
         open: false,
         chain: "",

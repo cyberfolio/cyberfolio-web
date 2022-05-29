@@ -70,3 +70,13 @@
   @extend .button;
   border: unset;
 }
+
+.button-transparent {
+  padding: 4px;
+  height: 32px;
+  border-radius: 50%;
+  &:hover {
+    cursor: pointer;
+    background-color: $button-hover-color;
+  }
+}

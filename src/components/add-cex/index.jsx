@@ -6,7 +6,7 @@ import classnames from "classnames";
 import toast from "react-hot-toast";
 
 import CexService from "../../services/cex";
-import { ACTIONS } from "../../store/actions";
+import Actions from "../../store/actions";
 import useKeypress from "../../hooks/useKeyPress";
 
 
@@ -22,7 +22,7 @@ import useKeypress from "../../hooks/useKeyPress";
   const add = async () => {
     setLoading(true);
     dispatch({
-      type: ACTIONS.SET_LOADING,
+      type: Actions.SET_LOADING,
       payload: {
         data: true
       },
@@ -31,7 +31,7 @@ import useKeypress from "../../hooks/useKeyPress";
       toast.error("Please enter api key and secret.");
       setLoading(false);
       dispatch({
-        type: ACTIONS.SET_LOADING,
+        type: Actions.SET_LOADING,
         payload: {
           data: false
         },
@@ -42,7 +42,7 @@ import useKeypress from "../../hooks/useKeyPress";
       toast.error("Please enter passphrase.");
       setLoading(false);
       dispatch({
-        type: ACTIONS.SET_LOADING,
+        type: Actions.SET_LOADING,
         payload: {
           data: false
         },
@@ -58,7 +58,7 @@ import useKeypress from "../../hooks/useKeyPress";
         passphrase,
       });
       dispatch({
-        type: ACTIONS.SET_CEX_ASSETS,
+        type: Actions.SET_CEX_ASSETS,
         payload: {
           cexAssets,
         },
@@ -66,7 +66,7 @@ import useKeypress from "../../hooks/useKeyPress";
       toast.success(`${name} added`);
       setLoading(false);
       dispatch({
-        type: ACTIONS.SET_LOADING,
+        type: Actions.SET_LOADING,
         payload: {
           data: false
         },
@@ -76,7 +76,7 @@ import useKeypress from "../../hooks/useKeyPress";
       toast.error(e.message);
       setLoading(false);
       dispatch({
-        type: ACTIONS.SET_LOADING,
+        type: Actions.SET_LOADING,
         payload: {
           data: false
         },
@@ -90,7 +90,7 @@ import useKeypress from "../../hooks/useKeyPress";
 
   const close = () => {
     dispatch({
-      type: ACTIONS.OPEN_ADD_CEX_MODAL,
+      type: Actions.OPEN_ADD_CEX_MODAL,
       payload: {
         open: false,
         name: "",

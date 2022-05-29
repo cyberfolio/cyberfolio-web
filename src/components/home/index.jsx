@@ -11,7 +11,7 @@ import Utilities from "../utilities";
 import Assets from "../assets";
 
 import { ChainsDropDown } from "./chains-dropdown/ChainsDropDown";
-import { ACTIONS } from "../../store/actions";
+import Actions from "../../store/actions";
 import useKeypress from "../../hooks/useKeyPress";
 import { toUsd } from "../../utils";
 import InfoService from "../../services/info";
@@ -35,7 +35,7 @@ const Home = () => {
     try {
       const netWorth = await InfoService.getNetWorth();
       dispatch({
-        type: ACTIONS.SET_NET_WORTH,
+        type: Actions.SET_NET_WORTH,
         payload: {
           data: netWorth,
         },
@@ -75,7 +75,7 @@ const Home = () => {
   const openWalletModal = (chain) => {
     if (evmAddress) {
       dispatch({
-        type: ACTIONS.OPEN_WALLET_MODAL,
+        type: Actions.OPEN_WALLET_MODAL,
         payload: {
           open: true,
           chain,
@@ -87,7 +87,7 @@ const Home = () => {
   const openAddCexModal = (name) => {
     if (evmAddress) {
       dispatch({
-        type: ACTIONS.OPEN_ADD_CEX_MODAL,
+        type: Actions.OPEN_ADD_CEX_MODAL,
         payload: {
           open: true,
           name,
