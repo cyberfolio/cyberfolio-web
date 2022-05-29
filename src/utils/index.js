@@ -58,7 +58,7 @@ export const chainsInfo = [
     image: Ethereum,
   },
   {
-    name: "Smart Chain",
+    name: "SmartChain",
     image: SmartChain,
   },
   {
