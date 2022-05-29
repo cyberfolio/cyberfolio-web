@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useEffect } from "react";
 import "./index.scss";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";

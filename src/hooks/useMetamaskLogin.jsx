@@ -85,6 +85,14 @@ export const useMetamaskLogin = () => {
           },
         });
       }
+      if (walletInfo.firstTimeLogin) {
+        toast.success(
+          "Refresh 30 seconds later to see your assets on other EVM chains",
+          {
+            duration: 5000,
+          }
+        );
+      }
     } catch (error) {
       if (error?.code !== 4001) {
         toast.error(error.message);
