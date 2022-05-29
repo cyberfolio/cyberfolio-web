@@ -8,9 +8,9 @@ import classnames from "classnames";
 import DexService from "../../services/dex";
 import Actions from "../../store/actions";
 import useKeypress from "../../hooks/useKeyPress";
-import { isValidWalletAddress } from "../../utils";
+import { isValidWalletAddress, setAppLoading } from "../../utils";
 
- const AddWallet = () => {
+const AddWallet = () => {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [loading, setLoading] = useState("");
@@ -28,33 +28,17 @@ import { isValidWalletAddress } from "../../utils";
     }
     try {
       setLoading(true);
-      dispatch({
-        type: Actions.SET_LOADING,
-        payload: {
-          data: true
-        },
-      });
+      setAppLoading(true);
       await DexService.addWallet({ name, address, chain });
+      toast.success("Wallet added.");
+    } catch (e) {
+      toast.error(e.message);
+    } finally {
       close();
       setName("");
       setAddress("");
       setLoading(false);
-      dispatch({
-        type: Actions.SET_LOADING,
-        payload: {
-          data: false
-        },
-      });
-      toast.success("Wallet added.");
-    } catch (e) {
-      setLoading(false);
-      dispatch({
-        type: Actions.SET_LOADING,
-        payload: {
-          data: false
-        },
-      });
-      toast.error(e.message);
+      setAppLoading(false);
     }
   };
   useKeypress("Escape", () => {
@@ -124,4 +108,4 @@ import { isValidWalletAddress } from "../../utils";
   );
 };
 
-export default AddWallet
+export default AddWallet;

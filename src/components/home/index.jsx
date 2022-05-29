@@ -63,10 +63,12 @@ const Home = () => {
 
   useEffect(() => {
     setBundles(["Main"]);
-    getTotal();
-    getAvailableAccounts();
+    if (evmAddress) {
+      getTotal();
+      getAvailableAccounts();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [evmAddress]);
 
   useKeypress("Escape", () => {
     setChainsDropDownOpen(false);
@@ -81,6 +83,8 @@ const Home = () => {
           chain,
         },
       });
+    } else {
+      toast.error("Wallet not connected yet");
     }
   };
 
@@ -93,6 +97,8 @@ const Home = () => {
           name,
         },
       });
+    } else {
+      toast.error("Wallet not connected yet");
     }
   };
 

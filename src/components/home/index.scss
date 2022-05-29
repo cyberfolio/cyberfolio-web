@@ -51,6 +51,7 @@
         margin-right: 15px;
         font-size: 0.7rem;
         @extend .button;
+        @extend .unselectable;
         &--active {
           border-color: $success-color;
         }

@@ -81,8 +81,8 @@ export const useMetamaskLogin = () => {
       if (error?.code !== 4001) {
         toast.error(error.message);
       }
-      setIsConnecting(false);
     } finally {
+      setIsConnecting(false);
       setAppLoading(false);
     }
   };

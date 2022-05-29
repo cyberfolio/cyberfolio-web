@@ -23,7 +23,7 @@ const Assets = () => {
 
   const chain = useSelector((state) => state.chain);
   const isAuthenticated = useSelector((state) => state.evmAddress);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const getAllAssets = async () => {
     try {
@@ -34,7 +34,6 @@ const Assets = () => {
       const dexTokensEthereum = await DexService.getDexTokens({
         chain: "Ethereum",
       });
-
       const dexTokensAvalanche = await DexService.getDexTokens({
         chain: "Avalanche",
       });
@@ -72,7 +71,7 @@ const Assets = () => {
         dispatch({
           type: Actions.SET_NET_WORTH,
           payload: {
-            data: netWorth
+            data: netWorth,
           },
         });
       } catch (e) {
@@ -80,7 +79,6 @@ const Assets = () => {
           toast.error(e.message);
         }
       }
-
       setLoading(false);
     } catch (e) {
       toast.error(e.message);

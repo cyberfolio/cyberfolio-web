@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from "react";
 import "./index.scss";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Header from "../components/header";
 import Home from "../components/home";
@@ -15,6 +15,7 @@ import Actions from "../store/actions";
 
 const Index = () => {
   const dispatch = useDispatch();
+  const evmAddress = useSelector(state => state.evmAddress);
 
   const checkIsAuthenticated = useCallback(async () => {
     try {
@@ -45,8 +46,10 @@ const Index = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    checkIsAuthenticated();
-  }, [checkIsAuthenticated]);
+    if(evmAddress) {
+      checkIsAuthenticated();
+    }
+  }, [evmAddress, checkIsAuthenticated]);
 
   return (
     <div className="app">
