@@ -12,40 +12,37 @@ import Loading from "../components/loading";
 
 import { isAuthenticated } from "../services/auth";
 import Actions from "../store/actions";
+import clearState from "../utils/clearState";
 
 const Index = () => {
   const dispatch = useDispatch();
 
   const checkIsAuthenticated = useCallback(async () => {
     try {
-      const keyIdentifier = await isAuthenticated();
-      if (keyIdentifier) {
+      const res = await isAuthenticated();
+      if (res?.keyIdentifier) {
         dispatch({
           type: Actions.SET_EVM_ADDRESS,
           payload: {
-            data: keyIdentifier,
+            data: res.keyIdentifier,
+          },
+        });
+        dispatch({
+          type: Actions.SET_ENS_NAME,
+          payload: {
+            data: res.ensName ? res.ensName : "",
           },
         });
       } else {
-        dispatch({
-          type: Actions.SET_EVM_ADDRESS,
-          payload: {
-            data: "",
-          },
-        });
+        clearState();
       }
     } catch (e) {
-      dispatch({
-        type: Actions.SET_EVM_ADDRESS,
-        payload: {
-          data: "",
-        },
-      });
+      clearState();
     }
   }, [dispatch]);
 
   useEffect(() => {
-      checkIsAuthenticated();
+    checkIsAuthenticated();
   }, [checkIsAuthenticated]);
 
   return (

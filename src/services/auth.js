@@ -5,7 +5,7 @@ export const isAuthenticated = async () => {
     const res = await mainInstance.get("/auth/is-authenticated", {
       withCredentials: true,
     });
-    return res?.data?.keyIdentifier;
+    return res?.data;
   } catch (e) {
     return false;
   }

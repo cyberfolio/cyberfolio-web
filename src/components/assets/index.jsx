@@ -13,17 +13,18 @@ import Actions from "../../store/actions";
 import AssetTable from "../asset-table";
 
 const Assets = () => {
-  const [loading, setLoading] = useState(false);
-  const [activeTab, setActiveTab] = useState("All");
-  const [dexTokens, setDexTokens] = useState([]);
-  const [filteredDexTokens, setFilteredDexTokens] = useState([]);
-  const [isFiltered, setIsFiltered] = useState(false);
-  const [cexTokens, setCexTokens] = useState([]);
-  const [assetsToShow, setAssetsToShow] = useState([]);
-
+  const dispatch = useDispatch();
   const chain = useSelector((state) => state.chain);
   const isAuthenticated = useSelector((state) => state.evmAddress);
-  const dispatch = useDispatch();
+  const cexAssets = useSelector((state) => state.cexAssets);
+  const dexAssets = useSelector((state) => state.dexAssets);
+
+  const [loading, setLoading] = useState(false);
+  const [activeTab, setActiveTab] = useState("All");
+  const [filteredDexTokens, setFilteredDexTokens] = useState([]);
+  const [isFiltered, setIsFiltered] = useState(false);
+  const [assetsToShow, setAssetsToShow] = useState([]);
+
 
   const getAllAssets = async () => {
     try {
@@ -47,7 +48,7 @@ const Assets = () => {
         chain: "SmartChain",
       });
 
-      const dexTokens = [
+      const dexAssets = [
         ...dexTokensBitcoin?.assets,
         ...dexTokensEthereum?.assets,
         ...dexTokensAvalanche?.assets,
@@ -55,16 +56,26 @@ const Assets = () => {
         ...dexTokensPolygon?.assets,
         ...dexTokensSmartChain?.assets,
       ];
-      dexTokens.sort(function (a, b) {
+      dexAssets.sort(function (a, b) {
         return b.value - a.value;
       });
-      setDexTokens(dexTokens);
+      dispatch({
+        type: Actions.SET_DEX_ASSETS,
+        payload: {
+          data: dexAssets
+        }
+      })
 
-      const cexTokens = await CexService.getCexTokens();
-      cexTokens.sort(function (a, b) {
+      const cexAssets = await CexService.getCexTokens();
+      cexAssets.sort(function (a, b) {
         return b.value - a.value;
       });
-      setCexTokens(cexTokens);
+      dispatch({
+        type: Actions.SET_CEX_ASSETS,
+        payload: {
+          data: cexAssets
+        }
+      })
 
       try {
         const netWorth = await InfoService.getNetWorth();
@@ -88,19 +99,19 @@ const Assets = () => {
 
   useEffect(() => {
     if (activeTab === "All" && filteredDexTokens.length > 0 && isFiltered) {
-      setAssetsToShow([...filteredDexTokens, ...cexTokens]);
+      setAssetsToShow([...filteredDexTokens, ...cexAssets]);
     }
     if (activeTab === "All" && filteredDexTokens.length === 0 && !isFiltered) {
-      setAssetsToShow([...dexTokens, ...cexTokens]);
+      setAssetsToShow([...dexAssets, ...cexAssets]);
     }
     if (activeTab === "All" && filteredDexTokens.length === 0 && isFiltered) {
       setAssetsToShow([]);
     }
     if (activeTab === "CEX") {
-      setAssetsToShow(cexTokens);
+      setAssetsToShow(cexAssets);
     }
     if (activeTab === "DEX" && filteredDexTokens.length === 0 && !isFiltered) {
-      setAssetsToShow(dexTokens);
+      setAssetsToShow(dexAssets);
     }
     if (activeTab === "DEX" && filteredDexTokens.length === 0 && isFiltered) {
       setAssetsToShow([]);
@@ -108,7 +119,7 @@ const Assets = () => {
     if (activeTab === "DEX" && filteredDexTokens.length > 0) {
       setAssetsToShow(filteredDexTokens);
     }
-  }, [activeTab, dexTokens, filteredDexTokens, cexTokens, isFiltered]);
+  }, [activeTab, dexAssets, filteredDexTokens, cexAssets, isFiltered]);
 
   const onTabClick = (tabName) => {
     setActiveTab(tabName);
@@ -123,10 +134,10 @@ const Assets = () => {
 
   useEffect(() => {
     if (chain.name !== "All Networks") {
-      const filteredDex = dexTokens.filter(
+      const filteredDex = dexAssets.filter(
         (dexToken) => dexToken.chain === chain.name
       );
-      const filteredCex = cexTokens.filter(
+      const filteredCex = cexAssets.filter(
         (ceToken) => ceToken.cexName === chain.name
       );
       setIsFiltered(true);
@@ -136,7 +147,7 @@ const Assets = () => {
       setIsFiltered(false);
       setFilteredDexTokens([]);
     }
-  }, [chain, dexTokens, cexTokens]);
+  }, [chain, dexAssets, cexAssets]);
 
   return (
     <div className="assets">
