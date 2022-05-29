@@ -17,7 +17,7 @@ import clearState from "../utils/clearState";
 const Index = () => {
   const dispatch = useDispatch();
 
-  const checkIsAuthenticated = useCallback(async () => {
+  const checkIsAuthenticated = async () => {
     try {
       const res = await isAuthenticated();
       if (res?.keyIdentifier) {
@@ -39,11 +39,12 @@ const Index = () => {
     } catch (e) {
       clearState();
     }
-  }, [dispatch]);
+  };
 
   useEffect(() => {
     checkIsAuthenticated();
-  }, [checkIsAuthenticated]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="app">
