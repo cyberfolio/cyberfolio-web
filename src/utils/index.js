@@ -104,9 +104,6 @@ export const chainsInfo = [
 ];
 
 const validateBtcAddress = (address) => {
-  if (address.length < 26 || address.length > 35) {
-    return false;
-  }
   let re = /^[A-Z0-9]+$/i;
   if (!re.test(address)) {
     return false;
