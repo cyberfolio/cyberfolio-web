@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import detectEthereumProvider from "@metamask/detect-provider";
 import { ethers } from "ethers";
@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import Actions from "../store/actions";
 import { getNonce, logout, validateSignature } from "../services/auth";
 import { setAppLoading } from "../utils";
+import clearState from "../utils/clearState";
 
 export const useMetamaskLogin = () => {
   const dispatch = useDispatch();
@@ -27,6 +28,21 @@ export const useMetamaskLogin = () => {
     }
   };
 
+  useEffect(() => {
+    if (window.ethereum) {
+      window.ethereum.on("accountsChanged", async (accounts) => {
+        if (accounts?.length === 0) {
+          try {
+            await logout();
+            clearState();
+          } catch (e) {
+            toast.error(e.message);
+          }
+        }
+      });
+    }
+  }, []);
+
   const signAndVerifyMessage = async () => {
     try {
       await checkIfMetamaskPresent();
@@ -40,7 +56,7 @@ export const useMetamaskLogin = () => {
       const signer = provider.getSigner();
       const nonce = await getNonce({ evmAddress: evmWalletAddresses[0] });
       const signature = await signer.signMessage(nonce);
-      setAppLoading(true)
+      setAppLoading(true);
       const evmAddress = await signer.getAddress();
 
       // Verify  Message
@@ -67,18 +83,17 @@ export const useMetamaskLogin = () => {
       }
       setIsConnecting(false);
     } finally {
-      setAppLoading(false)
+      setAppLoading(false);
     }
   };
 
-  const disconnectMetamask = () => {
-    logout();
-    dispatch({
-      type: Actions.SET_EVM_ADDRESS,
-      payload: {
-        data: "",
-      },
-    });
+  const disconnectMetamask = async () => {
+    try {
+      await logout();
+      clearState();
+    } catch (e) {
+      toast.error(e.message);
+    }
   };
 
   return {
