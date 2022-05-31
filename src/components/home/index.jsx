@@ -187,34 +187,41 @@ const Home = () => {
             );
           })}
         </div>
+
         <div className="home__header__second">
-          <div className="home__header__second__total-balance">
-            <div className="home__header__second__total-balance__label">
-              Net Worth
-            </div>
-            <div className="home__header__second__total-balance__value">
-              {toUsd(netWorth)}
-            </div>
-          </div>
-          <div className="home__header__second__filter">
-            <div
-              className="home__header__second__filter__button"
-              onClick={() => setChainsDropDownOpen(!chainsDropDownOpen)}
-            >
-              <img
-                className="home__header__second__filter__button__icon"
-                src={chain.image}
-                alt={chain.name}
-                height={25}
-              />
-              {chain.name.charAt(0).toUpperCase() + chain.name.slice(1)}
-              <div className="home__header__second__filter__button__arrow">
-                <ChevronDown color="white" size={15} />
+          {evmAddress && (
+            <>
+              <div className="home__header__second__total-balance">
+                <div className="home__header__second__total-balance__label">
+                  Net Worth
+                </div>
+                <div className="home__header__second__total-balance__value">
+                  {toUsd(netWorth)}
+                </div>
               </div>
-            </div>
-            {chainsDropDownOpen && <ChainsDropDown />}
-          </div>
+
+              <div className="home__header__second__filter">
+                <div
+                  className="home__header__second__filter__button"
+                  onClick={() => setChainsDropDownOpen(!chainsDropDownOpen)}
+                >
+                  <img
+                    className="home__header__second__filter__button__icon"
+                    src={chain.image}
+                    alt={chain.name}
+                    height={25}
+                  />
+                  {chain.name.charAt(0).toUpperCase() + chain.name.slice(1)}
+                  <div className="home__header__second__filter__button__arrow">
+                    <ChevronDown color="white" size={15} />
+                  </div>
+                </div>
+                {chainsDropDownOpen && <ChainsDropDown />}
+              </div>
+            </>
+          )}
         </div>
+
         <div className="home__assets">
           <Assets />
         </div>
