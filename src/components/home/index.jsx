@@ -16,7 +16,7 @@ import useKeypress from "../../hooks/useKeyPress";
 import { toUsd } from "../../utils";
 import InfoService from "../../services/info";
 
-const availableChains = ["Bitcoin", "EVM", "Solana", "Polkadot"];
+const availableChains = ["Bitcoin", "EVM", "Solana"];
 const availableCexes = ["Binance", "FTX", "Kucoin", "Gateio"];
 
 const activeBundle = "Main";

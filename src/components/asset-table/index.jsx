@@ -2,9 +2,20 @@ import React from "react";
 import "./index.scss";
 
 import classnames from "classnames";
-import { arrangeCexName, capitalizeFirstLetter, toUsd, logos } from "../../utils";
+import {
+  arrangeCexName,
+  capitalizeFirstLetter,
+  toUsd,
+  logos,
+  isValidHttpUrl,
+} from "../../utils";
 
 export const Index = ({ assets, loading }) => {
+  const openAssetAtScan = (scanUrl) => {
+    if (scanUrl && isValidHttpUrl(scanUrl)) {
+      window.open(scanUrl, "_blank");
+    }
+  };
 
   return (
     <div className="asset-table">
@@ -42,6 +53,7 @@ export const Index = ({ assets, loading }) => {
                 logo,
                 walletName,
                 cexName,
+                scan,
               },
               index
             ) => {
@@ -56,6 +68,7 @@ export const Index = ({ assets, loading }) => {
                     index === 0 && "asset-table__assets__asset--first",
                     assets.length - 1 && "asset-table__assets__asset--last"
                   )}
+                  onClick={() => openAssetAtScan(scan)}
                 >
                   <div
                     className="asset-table__assets__asset__item 
@@ -111,4 +124,4 @@ export const Index = ({ assets, loading }) => {
   );
 };
 
-export default Index
+export default Index;

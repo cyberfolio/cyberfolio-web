@@ -66,6 +66,7 @@
         border-bottom: unset !important;
       }
       &:hover {
+        cursor: pointer;
         border-bottom: 1px solid transparent !important;
         border-radius: 8px;
         background-color: $button-hover-color;
