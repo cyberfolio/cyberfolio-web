@@ -133,7 +133,7 @@ const Assets = () => {
   }, [isAuthenticated]);
 
   useEffect(() => {
-    if (chain.name !== "All Networks") {
+    if (chain.name.toLowerCase() !== "all networks") {
       const filteredDex = dexAssets.filter(
         (dexToken) => dexToken.chain === chain.name
       );
@@ -143,7 +143,7 @@ const Assets = () => {
       setIsFiltered(true);
       setFilteredDexTokens([...filteredDex, ...filteredCex]);
     }
-    if (chain.name === "All Networks") {
+    if (chain.name.toLowerCase() === "all networks") {
       setIsFiltered(false);
       setFilteredDexTokens([]);
     }
