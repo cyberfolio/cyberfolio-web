@@ -5,7 +5,7 @@ const initialState = {
   loading: false,
   evmAddress: "",
   ensName: "",
-  chain: {
+  platform: {
     name: "All Networks",
     image: AllNetworks,
   },
@@ -52,10 +52,10 @@ const reducer = (state = initialState, action) => {
       };
     }
 
-    case Actions.FILTER_ASSETS_BY_CHAIN: {
+    case Actions.FILTER_ASSETS_BY_PLATFORM: {
       return {
         ...state,
-        chain: action.payload.data,
+        platform: action.payload.data,
       };
     }
 

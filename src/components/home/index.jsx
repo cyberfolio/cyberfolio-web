@@ -22,7 +22,7 @@ const availableCexes = ["Binance", "FTX", "Kucoin", "Gateio"];
 const activeBundle = "Main";
 
 const Home = () => {
-  const chain = useSelector((state) => state.chain);
+  const platform = useSelector((state) => state.platform);
   const netWorth = useSelector((state) => state.netWorth);
   const evmAddress = useSelector((state) => state.evmAddress);
 
@@ -59,7 +59,7 @@ const Home = () => {
 
   useEffect(() => {
     setChainsDropDownOpen(false);
-  }, [chain]);
+  }, [platform]);
 
   useEffect(() => {
     setBundles(["Main"]);
@@ -207,11 +207,11 @@ const Home = () => {
                 >
                   <img
                     className="home__header__second__filter__button__icon"
-                    src={chain.image}
-                    alt={chain.name}
+                    src={platform.image}
+                    alt={platform.name}
                     height={25}
                   />
-                  {chain.name.charAt(0).toUpperCase() + chain.name.slice(1)}
+                  {platform.name.charAt(0).toUpperCase() + platform.name.slice(1)}
                   <div className="home__header__second__filter__button__arrow">
                     <ChevronDown color="white" size={15} />
                   </div>

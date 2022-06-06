@@ -9,12 +9,12 @@ import { chainsInfo } from "../../../utils";
 const ChainsDropDown = () => {
   const dispatch = useDispatch();
 
-  const setChain = (chain, image) => {
+  const setChain = (platform, image) => {
     dispatch({
-      type: Actions.FILTER_ASSETS_BY_CHAIN,
+      type: Actions.FILTER_ASSETS_BY_PLATFORM,
       payload: {
         data: {
-          name: chain.toLowerCase(),
+          name: platform.toLowerCase(),
           image,
         },
       },

@@ -14,7 +14,7 @@ import AssetTable from "../asset-table";
 
 const Assets = () => {
   const dispatch = useDispatch();
-  const chain = useSelector((state) => state.chain);
+  const platform = useSelector((state) => state.platform);
   const isAuthenticated = useSelector((state) => state.evmAddress);
   const cexAssets = useSelector((state) => state.cexAssets);
   const dexAssets = useSelector((state) => state.dexAssets);
@@ -133,21 +133,21 @@ const Assets = () => {
   }, [isAuthenticated]);
 
   useEffect(() => {
-    if (chain.name.toLowerCase() !== "all networks") {
+    if (platform.name.toLowerCase() !== "all networks") {
       const filteredDex = dexAssets.filter(
-        (dexToken) => dexToken.chain === chain.name
+        (dexToken) => dexToken.platform === platform.name
       );
       const filteredCex = cexAssets.filter(
-        (ceToken) => ceToken.cexName === chain.name
+        (ceToken) => ceToken.cexName === platform.name
       );
       setIsFiltered(true);
       setFilteredDexTokens([...filteredDex, ...filteredCex]);
     }
-    if (chain.name.toLowerCase() === "all networks") {
+    if (platform.name.toLowerCase() === "all networks") {
       setIsFiltered(false);
       setFilteredDexTokens([]);
     }
-  }, [chain, dexAssets, cexAssets]);
+  }, [platform, dexAssets, cexAssets]);
 
   return (
     <div className="assets">
