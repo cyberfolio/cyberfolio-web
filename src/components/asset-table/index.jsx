@@ -49,7 +49,7 @@ export const Index = ({ assets, loading }) => {
                 price,
                 balance,
                 value,
-                chain,
+                platform,
                 logo,
                 walletName,
                 cexName,
@@ -94,12 +94,12 @@ export const Index = ({ assets, loading }) => {
                       </div>
                       <div className="asset-table__assets__asset__item__chain__area">
                         <img
-                          src={`${logos[cexName || chain]}`}
-                          alt={cexName || chain}
+                          src={`${logos[cexName || platform]}`}
+                          alt={cexName || platform}
                           className="asset-table__assets__asset__item__chain__logo"
                         />
                         {arrangeCexName(cexName)}
-                        {capitalizeFirstLetter(chain)}
+                        {capitalizeFirstLetter(platform)}
                       </div>
                     </div>
                   </div>
