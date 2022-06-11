@@ -22,7 +22,7 @@ export const logout = async () => {
   }
 };
 
-export const getNonce = async ({ evmAddress }) => {
+export const getNonce = async ({ evmAddress }: { evmAddress: string }) => {
   try {
     const res = await mainInstance.post("/auth/login/metamask", { evmAddress });
     if (res?.data?.nonce) {
@@ -35,7 +35,15 @@ export const getNonce = async ({ evmAddress }) => {
   }
 };
 
-export const validateSignature = async ({ evmAddress, nonce, signature }) => {
+export const validateSignature = async ({
+  evmAddress,
+  nonce,
+  signature,
+}: {
+  evmAddress: string;
+  nonce: string;
+  signature: string;
+}) => {
   try {
     const res = await mainInstance.post(
       "/auth/login/validate-signature",

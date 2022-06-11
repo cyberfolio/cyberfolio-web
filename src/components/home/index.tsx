@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./index.scss";
 
-import { useSelector, useDispatch } from "react-redux";
 import { Plus, ChevronDown } from "react-bootstrap-icons";
 import classNames from "classnames";
 import toast from "react-hot-toast";
@@ -11,10 +10,10 @@ import Utilities from "../utilities";
 import Assets from "../assets";
 
 import ChainsDropDown from "./chains-dropdown";
-import Actions from "../../store/actions";
 import useKeypress from "../../hooks/useKeyPress";
 import { toUsd } from "../../utils";
 import InfoService from "../../services/info";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 
 const availableChains = ["Bitcoin", "EVM", "Solana"];
 const availableCexes = ["Binance", "FTX", "Kucoin", "Gateio"];
@@ -22,20 +21,20 @@ const availableCexes = ["Binance", "FTX", "Kucoin", "Gateio"];
 const activeBundle = "Main";
 
 const Home = () => {
-  const platform = useSelector((state) => state.platform);
-  const netWorth = useSelector((state) => state.netWorth);
-  const evmAddress = useSelector((state) => state.evmAddress);
+  const platform = useAppSelector((state) => state.platform);
+  const netWorth = useAppSelector((state) => state.netWorth);
+  const evmAddress = useAppSelector((state) => state.evmAddress);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [chainsDropDownOpen, setChainsDropDownOpen] = useState(false);
-  const [bundles, setBundles] = useState([]);
-  const [availableAccounts, setAvailableAccounts] = useState([]);
+  const [bundles, setBundles] = useState(['']);
+  const [availableAccounts, setAvailableAccounts] = useState(['']);
 
   const getTotal = async () => {
     try {
       const netWorth = await InfoService.getNetWorth();
       dispatch({
-        type: Actions.SET_NET_WORTH,
+        type: "SET_NET_WORTH",
         payload: {
           data: netWorth,
         },
@@ -74,10 +73,10 @@ const Home = () => {
     setChainsDropDownOpen(false);
   });
 
-  const openWalletModal = (chain) => {
+  const openWalletModal = (chain: string) => {
     if (evmAddress) {
       dispatch({
-        type: Actions.OPEN_WALLET_MODAL,
+        type: "OPEN_WALLET_MODAL",
         payload: {
           open: true,
           chain,
@@ -88,10 +87,10 @@ const Home = () => {
     }
   };
 
-  const openAddCexModal = (name) => {
+  const openAddCexModal = (name: string) => {
     if (evmAddress) {
       dispatch({
-        type: Actions.OPEN_ADD_CEX_MODAL,
+        type: "OPEN_ADD_CEX_MODAL",
         payload: {
           open: true,
           name,
@@ -102,9 +101,9 @@ const Home = () => {
     }
   };
 
-  const renderTooltip = (props) => {
+  const renderTooltip = (props: string) => {
     return (
-      <Tooltip id="button-tooltip" {...props}>
+      <Tooltip id="button-tooltip" {...props as any}>
         Coming soon
       </Tooltip>
     );
@@ -131,6 +130,7 @@ const Home = () => {
           <OverlayTrigger
             placement="bottom"
             delay={{ show: 50, hide: 100 }}
+            // @ts-ignore
             overlay={renderTooltip}
           >
             <div className="home__header__add-wallets__button">

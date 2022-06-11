@@ -1,29 +1,28 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./index.scss";
 
 import classnames from "classnames";
 import toast from "react-hot-toast";
-import { useDispatch, useSelector } from "react-redux";
 
 import CexService from "../../services/cex";
 import DexService from "../../services/dex";
 import InfoService from "../../services/info";
-import Actions from "../../store/actions";
 
 import AssetTable from "../asset-table";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 
 const Assets = () => {
-  const dispatch = useDispatch();
-  const platform = useSelector((state) => state.platform);
-  const isAuthenticated = useSelector((state) => state.evmAddress);
-  const cexAssets = useSelector((state) => state.cexAssets);
-  const dexAssets = useSelector((state) => state.dexAssets);
+  const dispatch = useAppDispatch();
+  const platform = useAppSelector((state) => state.platform);
+  const isAuthenticated = useAppSelector((state) => state.evmAddress);
+  const cexAssets = useAppSelector((state) => state.cexAssets);
+  const dexAssets = useAppSelector((state) => state.dexAssets);
 
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("All");
-  const [filteredDexTokens, setFilteredDexTokens] = useState([]);
+  const [filteredDexTokens, setFilteredDexTokens] = useState([] as any);
   const [isFiltered, setIsFiltered] = useState(false);
-  const [assetsToShow, setAssetsToShow] = useState([]);
+  const [assetsToShow, setAssetsToShow] = useState([] as any);
 
 
   const getAllAssets = async () => {
@@ -60,18 +59,18 @@ const Assets = () => {
         return b.value - a.value;
       });
       dispatch({
-        type: Actions.SET_DEX_ASSETS,
+        type: "SET_DEX_ASSETS",
         payload: {
           data: dexAssets
         }
       })
 
       const cexAssets = await CexService.getCexTokens();
-      cexAssets.sort(function (a, b) {
+      cexAssets.sort(function (a: any, b: any) {
         return b.value - a.value;
       });
       dispatch({
-        type: Actions.SET_CEX_ASSETS,
+        type: "SET_CEX_ASSETS",
         payload: {
           data: cexAssets
         }
@@ -80,7 +79,7 @@ const Assets = () => {
       try {
         const netWorth = await InfoService.getNetWorth();
         dispatch({
-          type: Actions.SET_NET_WORTH,
+          type: "SET_NET_WORTH",
           payload: {
             data: netWorth,
           },
@@ -121,7 +120,7 @@ const Assets = () => {
     }
   }, [activeTab, dexAssets, filteredDexTokens, cexAssets, isFiltered]);
 
-  const onTabClick = (tabName) => {
+  const onTabClick = (tabName: string) => {
     setActiveTab(tabName);
   };
 

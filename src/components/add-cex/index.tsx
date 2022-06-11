@@ -1,28 +1,27 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import "./index.scss";
 
-import { useSelector, useDispatch } from "react-redux";
 import classnames from "classnames";
 import toast from "react-hot-toast";
 
 import CexService from "../../services/cex";
-import Actions from "../../store/actions";
 import useKeypress from "../../hooks/useKeyPress";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 
 
  const AddCex = () => {
   const [apiKey, setApiKey] = useState("");
   const [apiSecret, setApiSecret] = useState("");
   const [passphrase, setPassphrase] = useState("");
-  const [loading, setLoading] = useState("");
-  const { name, open } = useSelector((state) => state.isAddCexModalOpen);
-  const dispatch = useDispatch();
-  const modalRef = useRef();
+  const [loading, setLoading] = useState(false);
+  const { name, open } = useAppSelector((state) => state.isAddCexModalOpen);
+  const dispatch = useAppDispatch();
+  const modalRef = useRef(null);
 
   const add = async () => {
     setLoading(true);
     dispatch({
-      type: Actions.SET_LOADING,
+      type: "SET_LOADING",
       payload: {
         data: true
       },
@@ -31,18 +30,18 @@ import useKeypress from "../../hooks/useKeyPress";
       toast.error("Please enter api key and secret.");
       setLoading(false);
       dispatch({
-        type: Actions.SET_LOADING,
+        type: "SET_LOADING",
         payload: {
           data: false
         },
       });
       return;
     }
-    if (name.split(" ").shift().toLowerCase() === "kucoin" && !passphrase) {
+    if (name?.split(" ")?.shift()?.toLowerCase() === "kucoin" && !passphrase) {
       toast.error("Please enter passphrase.");
       setLoading(false);
       dispatch({
-        type: Actions.SET_LOADING,
+        type: "SET_LOADING",
         payload: {
           data: false
         },
@@ -51,22 +50,24 @@ import useKeypress from "../../hooks/useKeyPress";
     }
     try {
       const cexName = name.split(" ").shift();
-      const cexAssets = await CexService.addCex({
-        apiKey,
-        apiSecret,
-        cexName,
-        passphrase,
-      });
-      dispatch({
-        type: Actions.SET_CEX_ASSETS,
-        payload: {
-          cexAssets,
-        },
-      });
-      toast.success(`${name} added`);
+      if(cexName) {
+        const cexAssets = await CexService.addCex({
+          apiKey,
+          apiSecret,
+          cexName,
+          passphrase,
+        });
+        dispatch({
+          type: "SET_CEX_ASSETS",
+          payload: {
+            cexAssets,
+          },
+        });
+        toast.success(`${name} added`);
+      }
       setLoading(false);
       dispatch({
-        type: Actions.SET_LOADING,
+        type: "SET_LOADING",
         payload: {
           data: false
         },
@@ -76,7 +77,7 @@ import useKeypress from "../../hooks/useKeyPress";
       toast.error(e.message);
       setLoading(false);
       dispatch({
-        type: Actions.SET_LOADING,
+        type: "SET_LOADING",
         payload: {
           data: false
         },
@@ -90,7 +91,7 @@ import useKeypress from "../../hooks/useKeyPress";
 
   const close = () => {
     dispatch({
-      type: Actions.OPEN_ADD_CEX_MODAL,
+      type: "OPEN_ADD_CEX_MODAL",
       payload: {
         open: false,
         name: "",
@@ -125,7 +126,7 @@ import useKeypress from "../../hooks/useKeyPress";
             onChange={(e) => setApiSecret(e.target.value)}
             placeholder="Enter Api Secret"
           />
-          {name.split(" ").shift().toLowerCase() === "kucoin" && (
+          {name?.split(" ")?.shift()?.toLowerCase() === "kucoin" && (
             <input
               className="add-cex-modal__content__body__input"
               value={passphrase}

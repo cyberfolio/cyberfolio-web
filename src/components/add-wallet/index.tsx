@@ -1,24 +1,23 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import "./index.scss";
 
-import { useSelector, useDispatch } from "react-redux";
 import toast from "react-hot-toast";
 import classnames from "classnames";
 
 import DexService from "../../services/dex";
-import Actions from "../../store/actions";
 import useKeypress from "../../hooks/useKeyPress";
 import { isValidWalletAddress, setAppLoading } from "../../utils";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 
 const AddWallet = () => {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
-  const [loading, setLoading] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const { chain, open } = useSelector((state) => state.isWalletModalOpen);
+  const { chain, open } = useAppSelector((state) => state.isWalletModalOpen);
 
-  const dispatch = useDispatch();
-  const modalRef = useRef();
+  const dispatch = useAppDispatch();
+  const modalRef = useRef(null);
 
   const add = async () => {
     const isValid = await isValidWalletAddress({ address, chain });
@@ -47,7 +46,7 @@ const AddWallet = () => {
 
   const close = () => {
     dispatch({
-      type: Actions.OPEN_WALLET_MODAL,
+      type: "OPEN_WALLET_MODAL",
       payload: {
         open: false,
         chain: "",
@@ -81,14 +80,14 @@ const AddWallet = () => {
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             placeholder="Enter Wallet Address"
-            maxLength="42"
+            maxLength={42}
           />
           <input
             className="add-wallet-modal__content__body__input"
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Enter Wallet Name"
-            maxLength="20"
+            maxLength={20}
           />
           <button
             className="add-wallet-modal__content__body__button"

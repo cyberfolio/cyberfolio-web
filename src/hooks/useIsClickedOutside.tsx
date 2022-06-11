@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
-export default function useIsClickedOutside(ref, action) {
-  const handleClick = (e) => {
+export default function useIsClickedOutside(ref: any, action: any) {
+  const handleClick = (e: any) => {
     if (ref?.current?.contains(e.target)) {
       // inside click
       return;

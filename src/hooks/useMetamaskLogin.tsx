@@ -3,15 +3,14 @@ import { useEffect, useState } from "react";
 import detectEthereumProvider from "@metamask/detect-provider";
 import { ethers } from "ethers";
 import toast from "react-hot-toast";
-import { useDispatch } from "react-redux";
 
-import Actions from "../store/actions";
 import { getNonce, logout, validateSignature } from "../services/auth";
 import { setAppLoading } from "../utils";
 import clearState from "../utils/clearState";
+import { useAppDispatch } from ".";
 
 export const useMetamaskLogin = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [isConnecting, setIsConnecting] = useState(false);
 
   const checkIfMetamaskPresent = async () => {
@@ -21,7 +20,7 @@ export const useMetamaskLogin = () => {
     } else {
       throw new Error("Please install MetaMask!");
     }
-    function startApp(provider) {
+    function startApp(provider: any) {
       if (provider !== window.ethereum) {
         throw new Error("Do you have multiple wallets installed?");
       }
@@ -30,7 +29,7 @@ export const useMetamaskLogin = () => {
 
   useEffect(() => {
     if (window.ethereum) {
-      window.ethereum.on("accountsChanged", async (accounts) => {
+      window.ethereum.on("accountsChanged", async (accounts: any) => {
         if (accounts?.length === 0) {
           try {
             await logout();
@@ -49,7 +48,7 @@ export const useMetamaskLogin = () => {
       setIsConnecting(true);
 
       // Connect Metamask
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const provider = new ethers.providers.Web3Provider(window.ethereum as any);
       const evmWalletAddresses = await provider.send("eth_requestAccounts", []);
 
       // Sign Message
@@ -72,14 +71,14 @@ export const useMetamaskLogin = () => {
       });
       setIsConnecting(false);
       dispatch({
-        type: Actions.SET_EVM_ADDRESS,
+        type: "SET_EVM_ADDRESS",
         payload: {
           data: walletInfo.keyIdentifier,
         },
       });
       if (walletInfo.ensName) {
         dispatch({
-          type: Actions.SET_ENS_NAME,
+          type: "SET_ENS_NAME",
           payload: {
             data: walletInfo.ensName,
           },

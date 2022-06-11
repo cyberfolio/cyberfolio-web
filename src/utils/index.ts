@@ -17,7 +17,6 @@ import Gateio from "../assets/gateio.svg";
 import FTX from "../assets/ftx.svg";
 
 import store from "../store";
-import Actions from "../store/actions";
 
 const truncateRegex = /^(0x[a-zA-Z0-9]{4})[a-zA-Z0-9]+([a-zA-Z0-9]{4})$/;
 
@@ -38,7 +37,7 @@ export const logos = {
   ftx: FTX,
 };
 
-export const truncateEthAddress = (address) => {
+export const truncateEthAddress = (address: string) => {
   const match = String(address).match(truncateRegex);
   if (!match) return address;
   return `${match[1]}…${match[2]}`;
@@ -103,7 +102,7 @@ export const chainsInfo = [
   },
 ];
 
-const validateBtcAddress = (address) => {
+const validateBtcAddress = (address: string) => {
   let re = /^[A-Z0-9]+$/i;
   if (!re.test(address)) {
     return false;
@@ -111,7 +110,13 @@ const validateBtcAddress = (address) => {
   return true;
 };
 
-export const isValidWalletAddress = async ({ address, chain }) => {
+export const isValidWalletAddress = async ({
+  address,
+  chain,
+}: {
+  address: string;
+  chain: string;
+}) => {
   let isValid = false;
   if (chain) {
     if (chain === "Bitcoin") {
@@ -127,14 +132,14 @@ export const isValidWalletAddress = async ({ address, chain }) => {
   return isValid;
 };
 
-export const capitalizeFirstLetter = (string) => {
+export const capitalizeFirstLetter = (string: string) => {
   if (string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
   return "";
 };
 
-export const arrangeCexName = (string) => {
+export const arrangeCexName = (string: string) => {
   if (string && string === "ftx") {
     return "FTX";
   } else if (string) {
@@ -143,23 +148,23 @@ export const arrangeCexName = (string) => {
   return "";
 };
 
-export const toUsd = (value) => {
+export const toUsd = (value: number) => {
   return value.toLocaleString("en-US", {
     style: "currency",
     currency: "USD",
   });
 };
 
-export const setAppLoading = async (data) => {
+export const setAppLoading = async (data: boolean) => {
   store.dispatch({
-    type: Actions.SET_LOADING,
+    type: "SET_LOADING",
     payload: {
       data,
     },
   });
 };
 
-export const isValidHttpUrl = (url) => {
+export const isValidHttpUrl = (url: string) => {
   try {
     new URL(url);
   } catch (e) {

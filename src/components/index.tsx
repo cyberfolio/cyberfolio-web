@@ -1,34 +1,33 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import "./index.scss";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
-import Header from "../components/header";
-import Home from "../components/home";
-import AddCex from "../components/add-cex";
-import AddWallet from "../components/add-wallet";
-import Loading from "../components/loading";
+import Header from "./header";
+import Home from "./home";
+import AddCex from "./add-cex";
+import AddWallet from "./add-wallet";
+import Loading from "./loading";
 
 import { isAuthenticated } from "../services/auth";
-import Actions from "../store/actions";
 import clearState from "../utils/clearState";
+import { useAppDispatch } from "../hooks";
 
 const Index = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const checkIsAuthenticated = async () => {
     try {
       const res = await isAuthenticated();
       if (res?.keyIdentifier) {
         dispatch({
-          type: Actions.SET_EVM_ADDRESS,
+          type: 'SET_EVM_ADDRESSs',
           payload: {
             data: res.keyIdentifier,
           },
         });
         dispatch({
-          type: Actions.SET_ENS_NAME,
+          type: 'SET_ENS_NAME',
           payload: {
             data: res.ensName ? res.ensName : "",
           },
