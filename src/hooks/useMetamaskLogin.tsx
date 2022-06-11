@@ -48,7 +48,9 @@ export const useMetamaskLogin = () => {
       setIsConnecting(true);
 
       // Connect Metamask
-      const provider = new ethers.providers.Web3Provider(window.ethereum as any);
+      const provider = new ethers.providers.Web3Provider(
+        window.ethereum as any
+      );
       const evmWalletAddresses = await provider.send("eth_requestAccounts", []);
 
       // Sign Message

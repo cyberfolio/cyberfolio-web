@@ -49,7 +49,7 @@ const Index = () => {
     }
     try {
       const cexName = name.split(" ").shift();
-      if(cexName) {
+      if (cexName) {
         const cexAssets = await CexService.addCex({
           apiKey,
           apiSecret,

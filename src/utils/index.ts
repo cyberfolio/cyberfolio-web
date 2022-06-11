@@ -103,7 +103,7 @@ export const chainsInfo = [
 ];
 
 const validateBtcAddress = (address: string) => {
-  let re = /^[A-Z0-9]+$/i;
+  const re = /^[A-Z0-9]+$/i;
   if (!re.test(address)) {
     return false;
   }

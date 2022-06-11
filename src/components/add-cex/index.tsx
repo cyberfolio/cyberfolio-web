@@ -8,8 +8,7 @@ import CexService from "../../services/cex";
 import useKeypress from "../../hooks/useKeyPress";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 
-
- const AddCex = () => {
+const AddCex = () => {
   const [apiKey, setApiKey] = useState("");
   const [apiSecret, setApiSecret] = useState("");
   const [passphrase, setPassphrase] = useState("");
@@ -23,7 +22,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks";
     dispatch({
       type: "SET_LOADING",
       payload: {
-        data: true
+        data: true,
       },
     });
     if (!apiKey || !apiSecret) {
@@ -32,7 +31,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks";
       dispatch({
         type: "SET_LOADING",
         payload: {
-          data: false
+          data: false,
         },
       });
       return;
@@ -43,14 +42,14 @@ import { useAppDispatch, useAppSelector } from "../../hooks";
       dispatch({
         type: "SET_LOADING",
         payload: {
-          data: false
+          data: false,
         },
       });
       return;
     }
     try {
       const cexName = name.split(" ").shift();
-      if(cexName) {
+      if (cexName) {
         const cexAssets = await CexService.addCex({
           apiKey,
           apiSecret,
@@ -69,7 +68,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks";
       dispatch({
         type: "SET_LOADING",
         payload: {
-          data: false
+          data: false,
         },
       });
       close();
@@ -79,7 +78,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks";
       dispatch({
         type: "SET_LOADING",
         payload: {
-          data: false
+          data: false,
         },
       });
     }
@@ -159,4 +158,4 @@ import { useAppDispatch, useAppSelector } from "../../hooks";
   );
 };
 
-export default AddCex
+export default AddCex;

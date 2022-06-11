@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 /**
  * useKeyPress
  * @param {string} key - the name of the key to respond to, compared against event.key
@@ -7,10 +7,9 @@ import { useEffect } from 'react';
 export default function useKeypress(key: any, action: any) {
   useEffect(() => {
     function onKeyup(e: any) {
-      if (e.key === key) action()
+      if (e.key === key) action();
     }
-    window.addEventListener('keyup', onKeyup);
-    return () => window.removeEventListener('keyup', onKeyup);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    window.addEventListener("keyup", onKeyup);
+    return () => window.removeEventListener("keyup", onKeyup);
+  }, [action, key]);
 }

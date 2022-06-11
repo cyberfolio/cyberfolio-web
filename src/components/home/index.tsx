@@ -27,8 +27,8 @@ const Home = () => {
 
   const dispatch = useAppDispatch();
   const [chainsDropDownOpen, setChainsDropDownOpen] = useState(false);
-  const [bundles, setBundles] = useState(['']);
-  const [availableAccounts, setAvailableAccounts] = useState(['']);
+  const [bundles, setBundles] = useState([""]);
+  const [availableAccounts, setAvailableAccounts] = useState([""]);
 
   const getTotal = async () => {
     try {
@@ -103,7 +103,7 @@ const Home = () => {
 
   const renderTooltip = (props: string) => {
     return (
-      <Tooltip id="button-tooltip" {...props as any}>
+      <Tooltip id="button-tooltip" {...(props as any)}>
         Coming soon
       </Tooltip>
     );
@@ -211,7 +211,8 @@ const Home = () => {
                     alt={platform.name}
                     height={25}
                   />
-                  {platform.name.charAt(0).toUpperCase() + platform.name.slice(1)}
+                  {platform.name.charAt(0).toUpperCase() +
+                    platform.name.slice(1)}
                   <div className="home__header__second__filter__button__arrow">
                     <ChevronDown color="white" size={15} />
                   </div>

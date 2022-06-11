@@ -21,13 +21,13 @@ const Index = () => {
       const res = await isAuthenticated();
       if (res?.keyIdentifier) {
         dispatch({
-          type: 'SET_EVM_ADDRESSs',
+          type: "SET_EVM_ADDRESSs",
           payload: {
             data: res.keyIdentifier,
           },
         });
         dispatch({
-          type: 'SET_ENS_NAME',
+          type: "SET_ENS_NAME",
           payload: {
             data: res.ensName ? res.ensName : "",
           },
@@ -42,7 +42,7 @@ const Index = () => {
 
   useEffect(() => {
     checkIsAuthenticated();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

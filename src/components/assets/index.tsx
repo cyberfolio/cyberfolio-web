@@ -24,7 +24,6 @@ const Assets = () => {
   const [isFiltered, setIsFiltered] = useState(false);
   const [assetsToShow, setAssetsToShow] = useState([] as any);
 
-
   const getAllAssets = async () => {
     try {
       setLoading(true);
@@ -61,9 +60,9 @@ const Assets = () => {
       dispatch({
         type: "SET_DEX_ASSETS",
         payload: {
-          data: dexAssets
-        }
-      })
+          data: dexAssets,
+        },
+      });
 
       const cexAssets = await CexService.getCexTokens();
       cexAssets.sort(function (a: any, b: any) {
@@ -72,9 +71,9 @@ const Assets = () => {
       dispatch({
         type: "SET_CEX_ASSETS",
         payload: {
-          data: cexAssets
-        }
-      })
+          data: cexAssets,
+        },
+      });
 
       try {
         const netWorth = await InfoService.getNetWorth();

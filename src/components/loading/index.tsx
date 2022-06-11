@@ -2,7 +2,6 @@ import React from "react";
 import { useAppSelector } from "../../hooks";
 import "./index.scss";
 
-
 const Index = () => {
   const loading = useAppSelector((state) => state.loading);
 
