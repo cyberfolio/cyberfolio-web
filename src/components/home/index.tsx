@@ -101,14 +101,6 @@ const Home = () => {
     }
   };
 
-  const renderTooltip = (props: string) => {
-    return (
-      <Tooltip id="button-tooltip" {...(props as any)}>
-        Coming soon
-      </Tooltip>
-    );
-  };
-
   return (
     <div className="home">
       <div className="home__header">
@@ -130,8 +122,7 @@ const Home = () => {
           <OverlayTrigger
             placement="bottom"
             delay={{ show: 50, hide: 100 }}
-            // @ts-ignore
-            overlay={renderTooltip}
+            overlay={<Tooltip id="button-tooltip">Coming soon</Tooltip>}
           >
             <div className="home__header__add-wallets__button">
               New Bundle

@@ -1,4 +1,3 @@
-import React from "react";
 import "./index.scss";
 
 import classnames from "classnames";
@@ -10,8 +9,14 @@ import {
   isValidHttpUrl,
 } from "../../utils";
 
-export const Index = ({ assets, loading }) => {
-  const openAssetAtScan = (scanUrl) => {
+export const Index = ({
+  assets,
+  loading,
+}: {
+  assets: any;
+  loading: boolean;
+}) => {
+  const openAssetAtScan = (scanUrl: string) => {
     if (scanUrl && isValidHttpUrl(scanUrl)) {
       window.open(scanUrl, "_blank");
     }
@@ -54,8 +59,19 @@ export const Index = ({ assets, loading }) => {
                 walletName,
                 cexName,
                 scan,
+              }: {
+                name: any;
+                symbol: any;
+                price: any;
+                balance: any;
+                value: any;
+                platform: any;
+                logo: any;
+                walletName: any;
+                cexName: any;
+                scan: any;
               },
-              index
+              index: number
             ) => {
               if (!symbol) {
                 return <div key={name + index}></div>;
@@ -94,6 +110,8 @@ export const Index = ({ assets, loading }) => {
                       </div>
                       <div className="asset-table__assets__asset__item__chain__area">
                         <img
+                          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                          // @ts-ignore
                           src={`${logos[cexName || platform]}`}
                           alt={cexName || platform}
                           className="asset-table__assets__asset__item__chain__logo"
