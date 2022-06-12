@@ -1,5 +1,5 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.scss";
 
@@ -9,13 +9,14 @@ import { Toaster } from "react-hot-toast";
 import Components from "./components";
 import store from "./store";
 
-ReactDOM.render(
+const rootElement = document.getElementById("root");
+const root = createRoot(rootElement as Element);
+
+root.render(
   <Provider store={store}>
-    <React.StrictMode>
+    <StrictMode>
       <Toaster position="top-center" reverseOrder={false} />
       <Components />
-    </React.StrictMode>
-  </Provider>,
-
-  document.getElementById("root")
+    </StrictMode>
+  </Provider>
 );

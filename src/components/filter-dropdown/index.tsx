@@ -1,29 +1,24 @@
-import React from "react";
 import "./index.scss";
 
-import Actions from "../../../store/actions";
-import { useDispatch } from "react-redux";
-
-import { chainsInfo } from "../../../utils";
+import { platformInfo } from "../../utils";
+import { useAppDispatch } from "../../store";
 
 const ChainsDropDown = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const setChain = (platform, image) => {
+  const setChain = (platform: string, image: string) => {
     dispatch({
-      type: Actions.FILTER_ASSETS_BY_PLATFORM,
+      type: "FILTER_ASSETS_BY_PLATFORM",
       payload: {
-        data: {
-          name: platform.toLowerCase(),
-          image,
-        },
+        name: platform.toLowerCase(),
+        image,
       },
     });
   };
 
   return (
     <div className="chains-dropdown">
-      {chainsInfo.map(({ name, image }) => {
+      {platformInfo.map(({ name, image }) => {
         return (
           <div
             key={name}

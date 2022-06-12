@@ -1,7 +1,17 @@
 import { mainInstance } from "../config/axios";
 
 class CexService {
-  static async addCex({ apiKey, apiSecret, cexName, passphrase }) {
+  static async addCex({
+    apiKey,
+    apiSecret,
+    cexName,
+    passphrase,
+  }: {
+    apiKey: string;
+    apiSecret: string;
+    cexName: string;
+    passphrase: string;
+  }) {
     try {
       const res = await mainInstance.post(
         "/cex/add",

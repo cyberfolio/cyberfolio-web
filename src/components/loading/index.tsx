@@ -1,10 +1,8 @@
-import React from "react";
+import { useAppSelector } from "../../store";
 import "./index.scss";
 
-import { useSelector } from "react-redux";
-
 const Index = () => {
-  const loading = useSelector((state) => state.loading);
+  const loading = useAppSelector((state) => state.loading);
 
   if (loading) {
     return (

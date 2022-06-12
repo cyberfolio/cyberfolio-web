@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./index.scss";
 
-import { useSelector, useDispatch } from "react-redux";
 import { Plus, ChevronDown } from "react-bootstrap-icons";
 import classNames from "classnames";
 import toast from "react-hot-toast";
@@ -10,11 +9,11 @@ import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import Utilities from "../utilities";
 import Assets from "../assets";
 
-import ChainsDropDown from "./chains-dropdown";
-import Actions from "../../store/actions";
+import FilterDropdown from "../filter-dropdown";
 import useKeypress from "../../hooks/useKeyPress";
 import { toUsd } from "../../utils";
 import InfoService from "../../services/info";
+import { useAppDispatch, useAppSelector } from "../../store";
 
 const availableChains = ["Bitcoin", "EVM", "Solana"];
 const availableCexes = ["Binance", "FTX", "Kucoin", "Gateio"];
@@ -22,20 +21,20 @@ const availableCexes = ["Binance", "FTX", "Kucoin", "Gateio"];
 const activeBundle = "Main";
 
 const Home = () => {
-  const platform = useSelector((state) => state.platform);
-  const netWorth = useSelector((state) => state.netWorth);
-  const evmAddress = useSelector((state) => state.evmAddress);
+  const platform = useAppSelector((state) => state.platform);
+  const netWorth = useAppSelector((state) => state.netWorth);
+  const evmAddress = useAppSelector((state) => state.evmAddress);
 
-  const dispatch = useDispatch();
-  const [chainsDropDownOpen, setChainsDropDownOpen] = useState(false);
-  const [bundles, setBundles] = useState([]);
-  const [availableAccounts, setAvailableAccounts] = useState([]);
+  const dispatch = useAppDispatch();
+  const [filterDropdownOpen, setFilterDropdownOpen] = useState(false);
+  const [bundles, setBundles] = useState([""]);
+  const [availableAccounts, setAvailableAccounts] = useState([""]);
 
   const getTotal = async () => {
     try {
       const netWorth = await InfoService.getNetWorth();
       dispatch({
-        type: Actions.SET_NET_WORTH,
+        type: "SET_NET_WORTH",
         payload: {
           data: netWorth,
         },
@@ -58,7 +57,7 @@ const Home = () => {
   };
 
   useEffect(() => {
-    setChainsDropDownOpen(false);
+    setFilterDropdownOpen(false);
   }, [platform]);
 
   useEffect(() => {
@@ -71,13 +70,13 @@ const Home = () => {
   }, [evmAddress]);
 
   useKeypress("Escape", () => {
-    setChainsDropDownOpen(false);
+    setFilterDropdownOpen(false);
   });
 
-  const openWalletModal = (chain) => {
+  const openWalletModal = (chain: string) => {
     if (evmAddress) {
       dispatch({
-        type: Actions.OPEN_WALLET_MODAL,
+        type: "OPEN_WALLET_MODAL",
         payload: {
           open: true,
           chain,
@@ -88,10 +87,10 @@ const Home = () => {
     }
   };
 
-  const openAddCexModal = (name) => {
+  const openAddCexModal = (name: string) => {
     if (evmAddress) {
       dispatch({
-        type: Actions.OPEN_ADD_CEX_MODAL,
+        type: "OPEN_ADD_CEX_MODAL",
         payload: {
           open: true,
           name,
@@ -100,14 +99,6 @@ const Home = () => {
     } else {
       toast.error("Wallet not connected yet");
     }
-  };
-
-  const renderTooltip = (props) => {
-    return (
-      <Tooltip id="button-tooltip" {...props}>
-        Coming soon
-      </Tooltip>
-    );
   };
 
   return (
@@ -131,7 +122,7 @@ const Home = () => {
           <OverlayTrigger
             placement="bottom"
             delay={{ show: 50, hide: 100 }}
-            overlay={renderTooltip}
+            overlay={<Tooltip id="button-tooltip">Coming soon</Tooltip>}
           >
             <div className="home__header__add-wallets__button">
               New Bundle
@@ -203,7 +194,7 @@ const Home = () => {
               <div className="home__header__second__filter">
                 <div
                   className="home__header__second__filter__button"
-                  onClick={() => setChainsDropDownOpen(!chainsDropDownOpen)}
+                  onClick={() => setFilterDropdownOpen(!filterDropdownOpen)}
                 >
                   <img
                     className="home__header__second__filter__button__icon"
@@ -211,12 +202,13 @@ const Home = () => {
                     alt={platform.name}
                     height={25}
                   />
-                  {platform.name.charAt(0).toUpperCase() + platform.name.slice(1)}
+                  {platform.name.charAt(0).toUpperCase() +
+                    platform.name.slice(1)}
                   <div className="home__header__second__filter__button__arrow">
                     <ChevronDown color="white" size={15} />
                   </div>
                 </div>
-                {chainsDropDownOpen && <ChainsDropDown />}
+                {filterDropdownOpen && <FilterDropdown />}
               </div>
             </>
           )}

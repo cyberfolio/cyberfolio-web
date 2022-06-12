@@ -1,14 +1,13 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import "./index.scss";
 
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
-import { useSelector, useDispatch } from "react-redux";
 
 import Metamask from "../../assets/metamask.png";
 import { truncateEthAddress } from "../../utils";
 import { useMetamaskLogin } from "../../hooks/useMetamaskLogin";
 import InfoService from "../../services/info";
-import ACTIONS from "../../store/actions";
+import { useAppDispatch, useAppSelector } from "../../store";
 
 const Index = () => {
   return (
@@ -22,9 +21,9 @@ const Index = () => {
 };
 
 const ConnectWallet = () => {
-  const evmAddress = useSelector((state) => state.evmAddress);
-  const ensName = useSelector((state) => state.ensName);
-  const dispatch = useDispatch();
+  const evmAddress = useAppSelector((state) => state.evmAddress);
+  const ensName = useAppSelector((state) => state.ensName);
+  const dispatch = useAppDispatch();
 
   const { isConnecting, signAndVerifyMessage, disconnectMetamask } =
     useMetamaskLogin();
@@ -34,7 +33,7 @@ const ConnectWallet = () => {
       try {
         const name = await InfoService.getEnsName();
         dispatch({
-          type: ACTIONS.SET_ENS_NAME,
+          type: "SET_ENS_NAME",
           payload: {
             data: name,
           },
@@ -50,15 +49,15 @@ const ConnectWallet = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [evmAddress, ensName]);
 
-  const renderTooltip = (props) => {
+  const renderTooltip = () => {
     if (evmAddress)
       return (
-        <Tooltip id="button-tooltip" {...props}>
+        <Tooltip id="button-tooltip">
           <div className="metamask-tooltip">Click to disconnect</div>
         </Tooltip>
       );
     return (
-      <Tooltip id="button-tooltip" {...props}>
+      <Tooltip id="button-tooltip">
         The account you choose will be your key identifier
       </Tooltip>
     );

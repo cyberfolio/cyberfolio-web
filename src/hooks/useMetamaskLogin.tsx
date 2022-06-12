@@ -3,34 +3,30 @@ import { useEffect, useState } from "react";
 import detectEthereumProvider from "@metamask/detect-provider";
 import { ethers } from "ethers";
 import toast from "react-hot-toast";
-import { useDispatch } from "react-redux";
 
-import Actions from "../store/actions";
 import { getNonce, logout, validateSignature } from "../services/auth";
 import { setAppLoading } from "../utils";
 import clearState from "../utils/clearState";
+import { useAppDispatch } from "../store";
 
 export const useMetamaskLogin = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [isConnecting, setIsConnecting] = useState(false);
 
   const checkIfMetamaskPresent = async () => {
     const provider = await detectEthereumProvider();
     if (provider) {
-      startApp(provider);
-    } else {
-      throw new Error("Please install MetaMask!");
-    }
-    function startApp(provider) {
       if (provider !== window.ethereum) {
         throw new Error("Do you have multiple wallets installed?");
       }
+    } else {
+      throw new Error("Please install MetaMask!");
     }
   };
 
   useEffect(() => {
     if (window.ethereum) {
-      window.ethereum.on("accountsChanged", async (accounts) => {
+      window.ethereum.on("accountsChanged", async (accounts: string[]) => {
         if (accounts?.length === 0) {
           try {
             await logout();
@@ -72,14 +68,14 @@ export const useMetamaskLogin = () => {
       });
       setIsConnecting(false);
       dispatch({
-        type: Actions.SET_EVM_ADDRESS,
+        type: "SET_EVM_ADDRESS",
         payload: {
           data: walletInfo.keyIdentifier,
         },
       });
       if (walletInfo.ensName) {
         dispatch({
-          type: Actions.SET_ENS_NAME,
+          type: "SET_ENS_NAME",
           payload: {
             data: walletInfo.ensName,
           },
