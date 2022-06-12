@@ -25,8 +25,6 @@ const Home = () => {
   const netWorth = useAppSelector((state) => state.netWorth);
   const evmAddress = useAppSelector((state) => state.evmAddress);
 
-  console.log(platform);
-
   const dispatch = useAppDispatch();
   const [filterDropdownOpen, setFilterDropdownOpen] = useState(false);
   const [bundles, setBundles] = useState([""]);

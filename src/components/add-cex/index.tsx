@@ -59,7 +59,7 @@ const AddCex = () => {
         dispatch({
           type: "SET_CEX_ASSETS",
           payload: {
-            cexAssets,
+            data: cexAssets,
           },
         });
         toast.success(`${name} added`);
