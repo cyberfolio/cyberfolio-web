@@ -1,7 +1,7 @@
 import "./index.scss";
 
-import { chainsInfo } from "../../../utils";
-import { useAppDispatch } from "../../../hooks";
+import { platformInfo } from "../../utils";
+import { useAppDispatch } from "../../hooks";
 
 const ChainsDropDown = () => {
   const dispatch = useAppDispatch();
@@ -10,17 +10,15 @@ const ChainsDropDown = () => {
     dispatch({
       type: "FILTER_ASSETS_BY_PLATFORM",
       payload: {
-        data: {
-          name: platform.toLowerCase(),
-          image,
-        },
+        name: platform.toLowerCase(),
+        image,
       },
     });
   };
 
   return (
     <div className="chains-dropdown">
-      {chainsInfo.map(({ name, image }) => {
+      {platformInfo.map(({ name, image }) => {
         return (
           <div
             key={name}

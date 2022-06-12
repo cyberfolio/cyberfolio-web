@@ -16,20 +16,17 @@ export const useMetamaskLogin = () => {
   const checkIfMetamaskPresent = async () => {
     const provider = await detectEthereumProvider();
     if (provider) {
-      startApp(provider);
-    } else {
-      throw new Error("Please install MetaMask!");
-    }
-    function startApp(provider: any) {
       if (provider !== window.ethereum) {
         throw new Error("Do you have multiple wallets installed?");
       }
+    } else {
+      throw new Error("Please install MetaMask!");
     }
   };
 
   useEffect(() => {
     if (window.ethereum) {
-      window.ethereum.on("accountsChanged", async (accounts: any) => {
+      window.ethereum.on("accountsChanged", async (accounts: string[]) => {
         if (accounts?.length === 0) {
           try {
             await logout();
@@ -48,9 +45,7 @@ export const useMetamaskLogin = () => {
       setIsConnecting(true);
 
       // Connect Metamask
-      const provider = new ethers.providers.Web3Provider(
-        window.ethereum as any
-      );
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
       const evmWalletAddresses = await provider.send("eth_requestAccounts", []);
 
       // Sign Message

@@ -43,7 +43,7 @@ export const truncateEthAddress = (address: string) => {
   return `${match[1]}…${match[2]}`;
 };
 
-export const chainsInfo = [
+export const platformInfo = [
   {
     name: "All Networks",
     image: AllNetworks,

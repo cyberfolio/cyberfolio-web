@@ -9,7 +9,7 @@ import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import Utilities from "../utilities";
 import Assets from "../assets";
 
-import ChainsDropDown from "./chains-dropdown";
+import FilterDropdown from "../filter-dropdown";
 import useKeypress from "../../hooks/useKeyPress";
 import { toUsd } from "../../utils";
 import InfoService from "../../services/info";
@@ -25,8 +25,10 @@ const Home = () => {
   const netWorth = useAppSelector((state) => state.netWorth);
   const evmAddress = useAppSelector((state) => state.evmAddress);
 
+  console.log(platform);
+
   const dispatch = useAppDispatch();
-  const [chainsDropDownOpen, setChainsDropDownOpen] = useState(false);
+  const [filterDropdownOpen, setFilterDropdownOpen] = useState(false);
   const [bundles, setBundles] = useState([""]);
   const [availableAccounts, setAvailableAccounts] = useState([""]);
 
@@ -57,7 +59,7 @@ const Home = () => {
   };
 
   useEffect(() => {
-    setChainsDropDownOpen(false);
+    setFilterDropdownOpen(false);
   }, [platform]);
 
   useEffect(() => {
@@ -70,7 +72,7 @@ const Home = () => {
   }, [evmAddress]);
 
   useKeypress("Escape", () => {
-    setChainsDropDownOpen(false);
+    setFilterDropdownOpen(false);
   });
 
   const openWalletModal = (chain: string) => {
@@ -194,7 +196,7 @@ const Home = () => {
               <div className="home__header__second__filter">
                 <div
                   className="home__header__second__filter__button"
-                  onClick={() => setChainsDropDownOpen(!chainsDropDownOpen)}
+                  onClick={() => setFilterDropdownOpen(!filterDropdownOpen)}
                 >
                   <img
                     className="home__header__second__filter__button__icon"
@@ -208,7 +210,7 @@ const Home = () => {
                     <ChevronDown color="white" size={15} />
                   </div>
                 </div>
-                {chainsDropDownOpen && <ChainsDropDown />}
+                {filterDropdownOpen && <FilterDropdown />}
               </div>
             </>
           )}
