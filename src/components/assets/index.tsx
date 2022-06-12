@@ -9,7 +9,7 @@ import DexService from "../../services/dex";
 import InfoService from "../../services/info";
 
 import AssetTable from "../asset-table";
-import { useAppDispatch, useAppSelector } from "../../hooks";
+import { useAppDispatch, useAppSelector } from "../../store";
 
 const Assets = () => {
   const dispatch = useAppDispatch();

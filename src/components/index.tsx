@@ -11,7 +11,7 @@ import Loading from "./loading";
 
 import { isAuthenticated } from "../services/auth";
 import clearState from "../utils/clearState";
-import { useAppDispatch } from "../hooks";
+import { useAppDispatch } from "../store";
 
 const Index = () => {
   const dispatch = useAppDispatch();
@@ -21,7 +21,7 @@ const Index = () => {
       const res = await isAuthenticated();
       if (res?.keyIdentifier) {
         dispatch({
-          type: "SET_EVM_ADDRESSs",
+          type: "SET_EVM_ADDRESS",
           payload: {
             data: res.keyIdentifier,
           },

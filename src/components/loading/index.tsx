@@ -1,5 +1,4 @@
-import React from "react";
-import { useAppSelector } from "../../hooks";
+import { useAppSelector } from "../../store";
 import "./index.scss";
 
 const Index = () => {

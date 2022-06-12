@@ -13,7 +13,7 @@ import FilterDropdown from "../filter-dropdown";
 import useKeypress from "../../hooks/useKeyPress";
 import { toUsd } from "../../utils";
 import InfoService from "../../services/info";
-import { useAppDispatch, useAppSelector } from "../../hooks";
+import { useAppDispatch, useAppSelector } from "../../store";
 
 const availableChains = ["Bitcoin", "EVM", "Solana"];
 const availableCexes = ["Binance", "FTX", "Kucoin", "Gateio"];

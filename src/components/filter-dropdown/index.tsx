@@ -1,7 +1,7 @@
 import "./index.scss";
 
 import { platformInfo } from "../../utils";
-import { useAppDispatch } from "../../hooks";
+import { useAppDispatch } from "../../store";
 
 const ChainsDropDown = () => {
   const dispatch = useAppDispatch();

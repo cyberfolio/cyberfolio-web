@@ -7,7 +7,7 @@ import Metamask from "../../assets/metamask.png";
 import { truncateEthAddress } from "../../utils";
 import { useMetamaskLogin } from "../../hooks/useMetamaskLogin";
 import InfoService from "../../services/info";
-import { useAppDispatch, useAppSelector } from "../../hooks";
+import { useAppDispatch, useAppSelector } from "../../store";
 
 const Index = () => {
   return (
@@ -49,15 +49,15 @@ const ConnectWallet = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [evmAddress, ensName]);
 
-  const renderTooltip = (props: any) => {
+  const renderTooltip = () => {
     if (evmAddress)
       return (
-        <Tooltip id="button-tooltip" {...props}>
+        <Tooltip id="button-tooltip">
           <div className="metamask-tooltip">Click to disconnect</div>
         </Tooltip>
       );
     return (
-      <Tooltip id="button-tooltip" {...props}>
+      <Tooltip id="button-tooltip">
         The account you choose will be your key identifier
       </Tooltip>
     );
