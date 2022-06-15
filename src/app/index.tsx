@@ -1,22 +1,22 @@
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import "./index.scss";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Header from "./header";
-import Home from "./home";
-import AddCex from "./add-cex";
-import AddWallet from "./add-wallet";
-import Loading from "./loading";
+import Header from "@components/header";
+import Home from "../pages/home";
+import AddCex from "@components/add-cex";
+import AddWallet from "@components/add-wallet";
+import Loading from "@components/loading";
 
-import { isAuthenticated } from "../services/auth";
-import clearState from "../utils/clearState";
-import { useAppDispatch } from "../store";
+import { isAuthenticated } from "@services/auth";
+import clearState from "@utils/clearState";
+import { useAppDispatch } from "@store/functions";
 
 const Index = () => {
   const dispatch = useAppDispatch();
 
-  const checkIsAuthenticated = async () => {
+  const checkIsAuthenticated = useCallback(async () => {
     try {
       const res = await isAuthenticated();
       if (res?.keyIdentifier) {
@@ -38,12 +38,11 @@ const Index = () => {
     } catch (e) {
       clearState();
     }
-  };
+  }, [dispatch]);
 
   useEffect(() => {
     checkIsAuthenticated();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [checkIsAuthenticated]);
 
   return (
     <div className="app">

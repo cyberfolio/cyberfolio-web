@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import "./index.scss";
 
-import useKeypress from "../../hooks/useKeyPress";
-import { useAppDispatch } from "../../store";
+import useKeypress from "../hooks/useKeyPress";
+import { useAppDispatch } from "@store/functions";
 
 const Index = () => {
   const dispatch = useAppDispatch();

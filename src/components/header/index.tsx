@@ -3,11 +3,11 @@ import "./index.scss";
 
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
-import Metamask from "../../assets/metamask.png";
-import { truncateEthAddress } from "../../utils";
-import { useMetamaskLogin } from "../../hooks/useMetamaskLogin";
-import InfoService from "../../services/info";
-import { useAppDispatch, useAppSelector } from "../../store";
+import Metamask from "@assets/metamask.png";
+import { truncateEthAddress } from "@utils/index";
+import { useMetamaskLogin } from "../hooks/useMetamaskLogin";
+import InfoService from "@services/info";
+import { useAppDispatch, useAppSelector } from "@store/functions";
 
 const Index = () => {
   return (

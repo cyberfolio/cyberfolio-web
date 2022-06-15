@@ -4,12 +4,12 @@ import "./index.scss";
 import classnames from "classnames";
 import toast from "react-hot-toast";
 
-import CexService from "../../services/cex";
-import DexService from "../../services/dex";
-import InfoService from "../../services/info";
+import CexService from "@services/cex";
+import DexService from "@services/dex";
+import InfoService from "@services/info";
 
-import AssetTable from "../asset-table";
-import { useAppDispatch, useAppSelector } from "../../store";
+import AssetTable from "@components/asset-table";
+import { useAppDispatch, useAppSelector } from "@store/functions";
 
 const Assets = () => {
   const dispatch = useAppDispatch();
