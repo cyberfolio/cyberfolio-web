@@ -17,6 +17,7 @@ import Gateio from "@assets/gateio.svg";
 import FTX from "@assets/ftx.svg";
 
 import store from "@store/index";
+import { Platform } from "@customTypes/index";
 
 const truncateRegex = /^(0x[a-zA-Z0-9]{4})[a-zA-Z0-9]+([a-zA-Z0-9]{4})$/;
 
@@ -45,59 +46,59 @@ export const truncateEthAddress = (address: string) => {
 
 export const platformInfo = [
   {
-    name: "All Networks",
+    name: Platform.ALLNETWORKS,
     image: AllNetworks,
   },
   {
-    name: "Bitcoin",
+    name: Platform.BITCOIN,
     image: Bitcoin,
   },
   {
-    name: "Ethereum",
+    name: Platform.ETHEREUM,
     image: Ethereum,
   },
   {
-    name: "SmartChain",
+    name: Platform.BSC,
     image: SmartChain,
   },
   {
-    name: "Avalanche",
+    name: Platform.AVALANCHE,
     image: Avalanche,
   },
   {
-    name: "Solana",
+    name: Platform.SOLANA,
     image: Solana,
   },
   {
-    name: "Polkadot",
+    name: Platform.POLKADOT,
     image: Polkadot,
   },
   {
-    name: "Polygon",
+    name: Platform.POLYGON,
     image: Polygon,
   },
   {
-    name: "Arbitrum",
+    name: Platform.ARBITRUM,
     image: Arbitrum,
   },
   {
-    name: "Optimism",
+    name: Platform.OPTIMISM,
     image: Optimism,
   },
   {
-    name: "Binance",
+    name: Platform.BINANCE,
     image: Binance,
   },
   {
-    name: "Kucoin",
+    name: Platform.KUCOIN,
     image: Kucoin,
   },
   {
-    name: "Gateio",
+    name: Platform.GATEIO,
     image: Gateio,
   },
   {
-    name: "FTX",
+    name: Platform.FTX,
     image: FTX,
   },
 ];

@@ -1,12 +1,13 @@
 import Actions from "./actions";
 import AllNetworks from "@assets/blockchain.svg";
+import { Platform } from "@customTypes/index";
 
 const initialState = {
   loading: false,
   evmAddress: "",
   ensName: "",
   platform: {
-    name: "All Networks",
+    name: Platform.ALLNETWORKS,
     image: AllNetworks,
   },
   isWalletModalOpen: {
@@ -56,7 +57,7 @@ const reducer = (state = initialState, action: Actions) => {
     return {
       ...state,
       platform: {
-        name: action.payload.name,
+        name: action.payload.platform,
         image: action.payload.image,
       },
     };

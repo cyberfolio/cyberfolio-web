@@ -10,7 +10,8 @@
       "@store/*": ["./src/store/*"],
       "@utils/*": ["./src/utils/*"],
       "@assets/*": ["./src/assets/*"],
-      "@config/*": ["./src/config/*"]
+      "@config/*": ["./src/config/*"],
+      "@customTypes/*": ["./src/custom-types/*"]
     },
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": false,

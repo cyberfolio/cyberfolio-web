@@ -2,15 +2,16 @@ import "./index.scss";
 
 import { platformInfo } from "@utils/index";
 import { useAppDispatch } from "@store/functions";
+import { Platform } from "@customTypes/index";
 
 const ChainsDropDown = () => {
   const dispatch = useAppDispatch();
 
-  const setChain = (platform: string, image: string) => {
+  const setChain = (platform: Platform, image: string) => {
     dispatch({
       type: "FILTER_ASSETS_BY_PLATFORM",
       payload: {
-        name: platform.toLowerCase(),
+        platform,
         image,
       },
     });
