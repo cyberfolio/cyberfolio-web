@@ -7,6 +7,7 @@ import {
   toUsd,
   logos,
   isValidHttpUrl,
+  platformInfo,
 } from "@utils/index";
 
 export const Index = ({
@@ -60,7 +61,7 @@ export const Index = ({
                 cexName,
                 scan,
               }: {
-                name: any;
+                name: string;
                 symbol: any;
                 price: any;
                 balance: any;
@@ -73,9 +74,20 @@ export const Index = ({
               },
               index: number
             ) => {
+              let platformImage = platformInfo.filter(
+                (info) => info.name === (cexName || platform)
+              ) as any;
+              if (platformImage.length === 1) {
+                platformImage = platformInfo.filter(
+                  (info) => info.name === (cexName || platform)
+                )[0].image;
+              } else {
+                platformImage = undefined;
+              }
               if (!symbol) {
                 return <div key={name + index}></div>;
               }
+
               return (
                 <div
                   key={name + index}
@@ -110,9 +122,7 @@ export const Index = ({
                       </div>
                       <div className="asset-table__assets__asset__item__chain__area">
                         <img
-                          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                          // @ts-ignore
-                          src={`${logos[cexName || platform]}`}
+                          src={platformImage}
                           alt={cexName || platform}
                           className="asset-table__assets__asset__item__chain__logo"
                         />

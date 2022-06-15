@@ -1,10 +1,12 @@
+import { Platform } from "@customTypes/index";
+
 type Actions =
   | { type: "SET_LOADING"; payload: { data: boolean } }
   | { type: "SET_EVM_ADDRESS"; payload: { data: string } }
   | {
       type: "FILTER_ASSETS_BY_PLATFORM";
       payload: {
-        name: string;
+        platform: Platform;
         image: string;
       };
     }

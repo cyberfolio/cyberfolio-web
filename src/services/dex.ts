@@ -1,4 +1,5 @@
 import { mainInstance } from "@config/axios";
+import { Chains } from "@customTypes/index";
 
 class DexService {
   static async addWallet({
@@ -23,7 +24,7 @@ class DexService {
     }
   }
 
-  static async getDexTokens({ chain }: { chain: string }) {
+  static async getDexTokens({ chain }: { chain: Chains }) {
     try {
       const res = await mainInstance.get(
         `dex/assets/${chain}`,

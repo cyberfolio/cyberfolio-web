@@ -10,6 +10,7 @@ import InfoService from "@services/info";
 
 import AssetTable from "@components/asset-table";
 import { useAppDispatch, useAppSelector } from "@store/functions";
+import { Chains, Platform } from "@customTypes/index";
 
 const Assets = () => {
   const dispatch = useAppDispatch();
@@ -28,22 +29,25 @@ const Assets = () => {
     try {
       setLoading(true);
       const dexTokensBitcoin = await DexService.getDexTokens({
-        chain: "Bitcoin",
+        chain: Chains.BITCOIN,
       });
       const dexTokensEthereum = await DexService.getDexTokens({
-        chain: "Ethereum",
+        chain: Chains.ETHEREUM,
       });
       const dexTokensAvalanche = await DexService.getDexTokens({
-        chain: "Avalanche",
+        chain: Chains.AVALANCHE,
       });
       const dexTokensArbitrum = await DexService.getDexTokens({
-        chain: "Arbitrum",
+        chain: Chains.ARBITRUM,
       });
       const dexTokensPolygon = await DexService.getDexTokens({
-        chain: "Polygon",
+        chain: Chains.POLYGON,
       });
       const dexTokensSmartChain = await DexService.getDexTokens({
-        chain: "SmartChain",
+        chain: Chains.BSC,
+      });
+      const dexTokenOptimism = await DexService.getDexTokens({
+        chain: Chains.OPTIMISM,
       });
 
       const dexAssets = [
@@ -53,6 +57,7 @@ const Assets = () => {
         ...dexTokensArbitrum?.assets,
         ...dexTokensPolygon?.assets,
         ...dexTokensSmartChain?.assets,
+        ...dexTokenOptimism?.assets,
       ];
       dexAssets.sort(function (a, b) {
         return b.value - a.value;
@@ -131,7 +136,7 @@ const Assets = () => {
   }, [isAuthenticated]);
 
   useEffect(() => {
-    if (platform.name.toLowerCase() !== "all networks") {
+    if (platform.name !== Platform.ALLNETWORKS) {
       const filteredDex = dexAssets.filter(
         (dexToken) => dexToken.platform === platform.name
       );
@@ -141,7 +146,7 @@ const Assets = () => {
       setIsFiltered(true);
       setFilteredDexTokens([...filteredDex, ...filteredCex]);
     }
-    if (platform.name.toLowerCase() === "all networks") {
+    if (platform.name === Platform.ALLNETWORKS) {
       setIsFiltered(false);
       setFilteredDexTokens([]);
     }
