@@ -7,7 +7,7 @@ import {
   toUsd,
   logos,
   isValidHttpUrl,
-} from "../../utils";
+} from "@utils/index";
 
 export const Index = ({
   assets,

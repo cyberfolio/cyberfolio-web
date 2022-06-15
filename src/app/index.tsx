@@ -10,7 +10,7 @@ import AddWallet from "@components/add-wallet";
 import Loading from "@components/loading";
 
 import { isAuthenticated } from "@services/auth";
-import clearState from "../utils/clearState";
+import clearState from "@utils/clearState";
 import { useAppDispatch } from "@store/functions";
 
 const Index = () => {
