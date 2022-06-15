@@ -4,7 +4,8 @@
   "exclude": ["node_modules"],
   "compilerOptions": {
     "paths": {
-      "@components/*": ["./src/components/*"]
+      "@components/*": ["./src/components/*"],
+      "@services/*": ["./src/services/*"]
     },
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": false,

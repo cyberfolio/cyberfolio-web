@@ -4,7 +4,7 @@ import "./index.scss";
 import toast from "react-hot-toast";
 import classnames from "classnames";
 
-import DexService from "../../services/dex";
+import DexService from "@services/dex";
 import useKeypress from "../hooks/useKeyPress";
 import { isValidWalletAddress, setAppLoading } from "../../utils";
 import { useAppDispatch, useAppSelector } from "../../store";

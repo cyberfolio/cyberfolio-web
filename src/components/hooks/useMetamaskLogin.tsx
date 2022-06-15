@@ -4,7 +4,7 @@ import detectEthereumProvider from "@metamask/detect-provider";
 import { ethers } from "ethers";
 import toast from "react-hot-toast";
 
-import { getNonce, logout, validateSignature } from "../../services/auth";
+import { getNonce, logout, validateSignature } from "@services/auth";
 import { setAppLoading } from "../../utils";
 import clearState from "../../utils/clearState";
 import { useAppDispatch } from "../../store";

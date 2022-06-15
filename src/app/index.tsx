@@ -9,7 +9,7 @@ import AddCex from "@components/add-cex";
 import AddWallet from "@components/add-wallet";
 import Loading from "@components/loading";
 
-import { isAuthenticated } from "../services/auth";
+import { isAuthenticated } from "@services/auth";
 import clearState from "../utils/clearState";
 import { useAppDispatch } from "../store";
 

@@ -12,7 +12,7 @@ import Assets from "@components//assets";
 import FilterDropdown from "@components//filter-dropdown";
 import useKeypress from "@components/hooks/useKeyPress";
 import { toUsd } from "../../utils";
-import InfoService from "../../services/info";
+import InfoService from "@services/info";
 import { useAppDispatch, useAppSelector } from "../../store";
 
 const availableChains = ["Bitcoin", "EVM", "Solana"];
