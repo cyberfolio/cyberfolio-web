@@ -5,7 +5,8 @@
   "compilerOptions": {
     "paths": {
       "@components/*": ["./src/components/*"],
-      "@services/*": ["./src/services/*"]
+      "@services/*": ["./src/services/*"],
+      "@store/*": ["./src/store/*"]
     },
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": false,

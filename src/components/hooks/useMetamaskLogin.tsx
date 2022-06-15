@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import { getNonce, logout, validateSignature } from "@services/auth";
 import { setAppLoading } from "../../utils";
 import clearState from "../../utils/clearState";
-import { useAppDispatch } from "../../store";
+import { useAppDispatch } from "@store/functions";
 
 export const useMetamaskLogin = () => {
   const dispatch = useAppDispatch();

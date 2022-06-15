@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 
 import CexService from "@services/cex";
 import useKeypress from "../hooks/useKeyPress";
-import { useAppDispatch, useAppSelector } from "../../store";
+import { useAppDispatch, useAppSelector } from "@store/functions";
 
 const AddCex = () => {
   const [apiKey, setApiKey] = useState("");

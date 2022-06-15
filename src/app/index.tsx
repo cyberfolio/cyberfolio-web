@@ -11,7 +11,7 @@ import Loading from "@components/loading";
 
 import { isAuthenticated } from "@services/auth";
 import clearState from "../utils/clearState";
-import { useAppDispatch } from "../store";
+import { useAppDispatch } from "@store/functions";
 
 const Index = () => {
   const dispatch = useAppDispatch();

@@ -7,7 +7,7 @@ import classnames from "classnames";
 import DexService from "@services/dex";
 import useKeypress from "../hooks/useKeyPress";
 import { isValidWalletAddress, setAppLoading } from "../../utils";
-import { useAppDispatch, useAppSelector } from "../../store";
+import { useAppDispatch, useAppSelector } from "@store/functions";
 
 const AddWallet = () => {
   const [name, setName] = useState("");
