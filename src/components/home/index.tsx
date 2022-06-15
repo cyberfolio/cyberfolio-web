@@ -10,7 +10,7 @@ import Utilities from "../utilities";
 import Assets from "../assets";
 
 import FilterDropdown from "../filter-dropdown";
-import useKeypress from "../../hooks/useKeyPress";
+import useKeypress from "@components/hooks/useKeyPress";
 import { toUsd } from "../../utils";
 import InfoService from "../../services/info";
 import { useAppDispatch, useAppSelector } from "../../store";

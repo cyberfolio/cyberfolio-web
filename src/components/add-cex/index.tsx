@@ -5,7 +5,7 @@ import classnames from "classnames";
 import toast from "react-hot-toast";
 
 import CexService from "../../services/cex";
-import useKeypress from "../../hooks/useKeyPress";
+import useKeypress from "../hooks/useKeyPress";
 import { useAppDispatch, useAppSelector } from "../../store";
 
 const AddCex = () => {

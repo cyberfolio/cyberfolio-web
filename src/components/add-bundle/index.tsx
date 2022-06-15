@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import "./index.scss";
 
-import useKeypress from "../../hooks/useKeyPress";
+import useKeypress from "../hooks/useKeyPress";
 import { useAppDispatch } from "../../store";
 
 const Index = () => {
