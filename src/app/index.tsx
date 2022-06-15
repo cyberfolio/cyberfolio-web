@@ -3,11 +3,11 @@ import "./index.scss";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Header from "./header";
-import Home from "./home";
-import AddCex from "./add-cex";
-import AddWallet from "./add-wallet";
-import Loading from "./loading";
+import Header from "@components/header";
+import Home from "../pages/home";
+import AddCex from "@components/add-cex";
+import AddWallet from "@components/add-wallet";
+import Loading from "@components/loading";
 
 import { isAuthenticated } from "../services/auth";
 import clearState from "../utils/clearState";
@@ -45,7 +45,7 @@ const Index = () => {
   }, [checkIsAuthenticated]);
 
   return (
-    <div className="components">
+    <div className="app">
       <Loading />
       <Header />
       <AddWallet />
