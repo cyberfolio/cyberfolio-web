@@ -1,4 +1,4 @@
-import { mainInstance } from "../config/axios";
+import { mainInstance } from "@config/axios";
 
 export const isAuthenticated = async () => {
   try {

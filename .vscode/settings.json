@@ -1,8 +1,10 @@
 {
   "liveServer.settings.port": 5501,
   "eslint.options": {
-    "parserOptions": {
-      "createDefaultProgram": true
+    "overrideConfig": {
+      "parserOptions": {
+        "createDefaultProgram": true
+      }
     }
   }
 }

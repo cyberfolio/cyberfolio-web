@@ -1,4 +1,4 @@
-import { mainInstance } from "../config/axios";
+import { mainInstance } from "@config/axios";
 
 class CexService {
   static async addCex({

@@ -4,11 +4,13 @@
   "exclude": ["node_modules"],
   "compilerOptions": {
     "paths": {
+      "@pages/*": ["./src/pages/*"],
       "@components/*": ["./src/components/*"],
       "@services/*": ["./src/services/*"],
       "@store/*": ["./src/store/*"],
       "@utils/*": ["./src/utils/*"],
-      "@assets/*": ["./src/assets/*"]
+      "@assets/*": ["./src/assets/*"],
+      "@config/*": ["./src/config/*"]
     },
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": false,
