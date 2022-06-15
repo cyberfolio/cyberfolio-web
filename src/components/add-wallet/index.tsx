@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import "./index.scss";
 
-import toast from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import classnames from "classnames";
 
 import DexService from "@services/dex";
