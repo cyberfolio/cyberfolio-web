@@ -1,5 +1,5 @@
 import Actions from "./actions";
-import AllNetworks from "../assets/blockchain.svg";
+import AllNetworks from "@assets/blockchain.svg";
 
 const initialState = {
   loading: false,

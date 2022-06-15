@@ -3,7 +3,7 @@ import "./index.scss";
 
 import { Plus, ChevronDown } from "react-bootstrap-icons";
 import classNames from "classnames";
-import toast from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 import Utilities from "@components/utilities";

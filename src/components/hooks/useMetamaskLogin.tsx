@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import detectEthereumProvider from "@metamask/detect-provider";
 import { ethers } from "ethers";
-import toast from "react-hot-toast";
+import { toast } from "react-hot-toast";
 
 import { getNonce, logout, validateSignature } from "@services/auth";
 import { setAppLoading } from "@utils/index";

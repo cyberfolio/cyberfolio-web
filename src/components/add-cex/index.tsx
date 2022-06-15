@@ -2,10 +2,10 @@ import { useRef, useState } from "react";
 import "./index.scss";
 
 import classnames from "classnames";
-import toast from "react-hot-toast";
+import { toast } from "react-hot-toast";
 
 import CexService from "@services/cex";
-import useKeypress from "../hooks/useKeyPress";
+import useKeypress from "@components/hooks/useKeyPress";
 import { useAppDispatch, useAppSelector } from "@store/functions";
 
 const AddCex = () => {

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "./index.scss";
 
 import classnames from "classnames";
-import toast from "react-hot-toast";
+import { toast } from "react-hot-toast";
 
 import CexService from "@services/cex";
 import DexService from "@services/dex";
