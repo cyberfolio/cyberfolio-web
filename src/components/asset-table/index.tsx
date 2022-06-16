@@ -5,7 +5,6 @@ import {
   arrangeCexName,
   capitalizeFirstLetter,
   toUsd,
-  logos,
   isValidHttpUrl,
   platformInfo,
 } from "@utils/index";
@@ -121,11 +120,19 @@ export const Index = ({
                         {symbol.toUpperCase()}
                       </div>
                       <div className="asset-table__assets__asset__item__chain__area">
-                        <img
-                          src={platformImage}
-                          alt={cexName || platform}
-                          className="asset-table__assets__asset__item__chain__logo"
-                        />
+                        {!platformImage && (
+                          <div className="asset-table__assets__asset__item__noimage">
+                            {symbol.toUpperCase().slice(0, 3)}
+                          </div>
+                        )}
+                        {platformImage && (
+                          <img
+                            src={platformImage}
+                            alt={cexName || platform}
+                            className="asset-table__assets__asset__item__chain__logo"
+                          />
+                        )}
+
                         {arrangeCexName(cexName)}
                         {capitalizeFirstLetter(platform)}
                       </div>
