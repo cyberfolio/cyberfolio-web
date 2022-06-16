@@ -25,8 +25,7 @@ const ConnectWallet = () => {
   const ensName = useAppSelector((state) => state.ensName);
   const dispatch = useAppDispatch();
 
-  const { isConnecting, signAndVerifyMessage, disconnectMetamask } =
-    useMetamaskLogin();
+  const { isConnecting, signAndVerifyMessage, disconnectMetamask } = useMetamaskLogin();
 
   const resolveEnsName = async () => {
     if (evmAddress && !ensName) {
@@ -56,20 +55,12 @@ const ConnectWallet = () => {
           <div className="metamask-tooltip">Click to disconnect</div>
         </Tooltip>
       );
-    return (
-      <Tooltip id="button-tooltip">
-        The account you choose will be your key identifier
-      </Tooltip>
-    );
+    return <Tooltip id="button-tooltip">The account you choose will be your key identifier</Tooltip>;
   };
 
   return (
     <div className="metamask">
-      <OverlayTrigger
-        placement="bottom"
-        delay={{ show: 50, hide: 100 }}
-        overlay={renderTooltip}
-      >
+      <OverlayTrigger placement="bottom" delay={{ show: 50, hide: 100 }} overlay={renderTooltip}>
         <div
           className={`metamask-button ${isConnecting ? "disabledbutton" : ""}`}
           onClick={!evmAddress ? signAndVerifyMessage : disconnectMetamask}

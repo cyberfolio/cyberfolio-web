@@ -55,22 +55,12 @@ const AddWallet = () => {
   };
 
   return (
-    <div
-      className={classnames(
-        "add-wallet-modal",
-        open && "add-wallet-modal--active"
-      )}
-    >
+    <div className={classnames("add-wallet-modal", open && "add-wallet-modal--active")}>
       <div className="add-wallet-modal__content" ref={modalRef}>
         <div className="add-wallet-modal__content__header">
           <div />
-          <div className="add-wallet-modal__content__header__title">
-            Add {chain} Wallet
-          </div>
-          <div
-            className="add-wallet-modal__content__header__exit"
-            onClick={close}
-          >
+          <div className="add-wallet-modal__content__header__title">Add {chain} Wallet</div>
+          <div className="add-wallet-modal__content__header__exit" onClick={close}>
             X
           </div>
         </div>
@@ -89,11 +79,7 @@ const AddWallet = () => {
             placeholder="Enter Wallet Name"
             maxLength={20}
           />
-          <button
-            className="add-wallet-modal__content__body__button"
-            onClick={add}
-            disabled={loading}
-          >
+          <button className="add-wallet-modal__content__body__button" onClick={add} disabled={loading}>
             {loading && (
               <div className="fa-1x" style={{ marginRight: 5 }}>
                 <i className="fas fa-sync fa-spin"></i>

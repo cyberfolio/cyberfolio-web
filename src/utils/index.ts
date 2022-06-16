@@ -111,13 +111,7 @@ const validateBtcAddress = (address: string) => {
   return true;
 };
 
-export const isValidWalletAddress = async ({
-  address,
-  chain,
-}: {
-  address: string;
-  chain: string;
-}) => {
+export const isValidWalletAddress = async ({ address, chain }: { address: string; chain: string }) => {
   let isValid = false;
   if (chain) {
     if (chain === "Bitcoin") {

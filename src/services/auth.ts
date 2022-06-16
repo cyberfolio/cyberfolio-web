@@ -52,7 +52,7 @@ export const validateSignature = async ({
         nonce,
         signature,
       },
-      { withCredentials: true }
+      { withCredentials: true },
     );
     if (res?.data) {
       return res?.data;
