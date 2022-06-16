@@ -3,6 +3,7 @@ import "./index.scss";
 import classnames from "classnames";
 import { arrangeCexName, capitalizeFirstLetter, toUsd, isValidHttpUrl, platformInfo } from "@utils/index";
 
+
 export const Index = ({ assets, loading }: { assets: any; loading: boolean }) => {
   const openAssetAtScan = (scanUrl: string) => {
     if (scanUrl && isValidHttpUrl(scanUrl)) {
@@ -102,7 +103,6 @@ export const Index = ({ assets, loading }: { assets: any; loading: boolean }) =>
                             className="asset-table__assets__asset__item__chain__logo"
                           />
                         )}
-
                         {arrangeCexName(cexName)}
                         {capitalizeFirstLetter(platform)}
                       </div>
