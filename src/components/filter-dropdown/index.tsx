@@ -21,17 +21,8 @@ const ChainsDropDown = () => {
     <div className="chains-dropdown">
       {platformInfo.map(({ name, image }) => {
         return (
-          <div
-            key={name}
-            className="chains-dropdown__item"
-            onClick={() => setChain(name, image)}
-          >
-            <img
-              className="chains-dropdown__item__image"
-              src={image}
-              alt={name}
-              height={25}
-            />
+          <div key={name} className="chains-dropdown__item" onClick={() => setChain(name, image)}>
+            <img className="chains-dropdown__item__image" src={image} alt={name} height={25} />
             <div className="chains-dropdown__item__name"> {name} </div>
           </div>
         );

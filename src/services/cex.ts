@@ -21,7 +21,7 @@ class CexService {
           cexName,
           passphrase,
         },
-        { withCredentials: true }
+        { withCredentials: true },
       );
       if (res?.data?.assets) {
         return res?.data?.assets;
@@ -38,7 +38,7 @@ class CexService {
       const res = await mainInstance.get(
         `/cex/assets`,
 
-        { withCredentials: true }
+        { withCredentials: true },
       );
       if (res?.data?.assets) {
         return res.data?.assets;

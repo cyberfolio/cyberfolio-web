@@ -34,6 +34,9 @@ const Assets = () => {
       const dexTokensEthereum = await DexService.getDexTokens({
         chain: Chains.ETHEREUM,
       });
+      const dexTokensSmartChain = await DexService.getDexTokens({
+        chain: Chains.BSC,
+      });
       const dexTokensAvalanche = await DexService.getDexTokens({
         chain: Chains.AVALANCHE,
       });
@@ -43,22 +46,32 @@ const Assets = () => {
       const dexTokensPolygon = await DexService.getDexTokens({
         chain: Chains.POLYGON,
       });
-      const dexTokensSmartChain = await DexService.getDexTokens({
-        chain: Chains.BSC,
-      });
       const dexTokenOptimism = await DexService.getDexTokens({
         chain: Chains.OPTIMISM,
       });
+      const dexAssets = [];
 
-      const dexAssets = [
-        ...dexTokensBitcoin?.assets,
-        ...dexTokensEthereum?.assets,
-        ...dexTokensAvalanche?.assets,
-        ...dexTokensArbitrum?.assets,
-        ...dexTokensPolygon?.assets,
-        ...dexTokensSmartChain?.assets,
-        ...dexTokenOptimism?.assets,
-      ];
+      if (dexTokensBitcoin?.assets) {
+        dexAssets.push(...dexTokensBitcoin.assets);
+      }
+      if (dexTokensEthereum?.assets) {
+        dexAssets.push(...dexTokensEthereum.assets);
+      }
+      if (dexTokensSmartChain?.assets) {
+        dexAssets.push(...dexTokensSmartChain.assets);
+      }
+      if (dexTokensAvalanche?.assets) {
+        dexAssets.push(...dexTokensAvalanche.assets);
+      }
+      if (dexTokensArbitrum?.assets) {
+        dexAssets.push(...dexTokensArbitrum.assets);
+      }
+      if (dexTokensPolygon?.assets) {
+        dexAssets.push(...dexTokensPolygon.assets);
+      }
+      if (dexTokenOptimism?.assets) {
+        dexAssets.push(...dexTokenOptimism.assets);
+      }
       dexAssets.sort(function (a, b) {
         return b.value - a.value;
       });
@@ -137,12 +150,8 @@ const Assets = () => {
 
   useEffect(() => {
     if (platform.name !== Platform.ALLNETWORKS) {
-      const filteredDex = dexAssets.filter(
-        (dexToken) => dexToken.platform === platform.name
-      );
-      const filteredCex = cexAssets.filter(
-        (ceToken) => ceToken.cexName === platform.name
-      );
+      const filteredDex = dexAssets.filter((dexToken) => dexToken.platform === platform.name);
+      const filteredCex = cexAssets.filter((ceToken) => ceToken.cexName === platform.name);
       setIsFiltered(true);
       setFilteredDexTokens([...filteredDex, ...filteredCex]);
     }
@@ -156,28 +165,19 @@ const Assets = () => {
     <div className="assets">
       <div className="assets__links">
         <div
-          className={classnames(
-            "assets__links__link",
-            activeTab === "All" && "assets__links__link--active"
-          )}
+          className={classnames("assets__links__link", activeTab === "All" && "assets__links__link--active")}
           onClick={() => onTabClick("All")}
         >
           All
         </div>
         <div
-          className={classnames(
-            "assets__links__link",
-            activeTab === "CEX" && "assets__links__link--active"
-          )}
+          className={classnames("assets__links__link", activeTab === "CEX" && "assets__links__link--active")}
           onClick={() => onTabClick("CEX")}
         >
           CEX
         </div>
         <div
-          className={classnames(
-            "assets__links__link",
-            activeTab === "DEX" && "assets__links__link--active"
-          )}
+          className={classnames("assets__links__link", activeTab === "DEX" && "assets__links__link--active")}
           onClick={() => onTabClick("DEX")}
         >
           DEX

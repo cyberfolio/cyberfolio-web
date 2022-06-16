@@ -110,8 +110,7 @@ const Home = () => {
               <div
                 className={classNames(
                   "home__header__bundle__available",
-                  bundle === activeBundle &&
-                    "home__header__bundle__available--active"
+                  bundle === activeBundle && "home__header__bundle__available--active",
                 )}
                 key={bundle}
               >
@@ -136,16 +135,12 @@ const Home = () => {
               <div
                 className={classNames(
                   "home__header__add-wallets__button ",
-                  availableAccounts.includes(chain.toLowerCase()) &&
-                    "home__header__add-wallets__button--active"
+                  availableAccounts.includes(chain.toLowerCase()) && "home__header__add-wallets__button--active",
                 )}
                 key={chain}
                 onClick={() => openWalletModal(chain)}
               >
-                {chain}{" "}
-                {availableAccounts.includes(chain.toLowerCase())
-                  ? "Connected"
-                  : "Wallet"}
+                {chain} {availableAccounts.includes(chain.toLowerCase()) ? "Connected" : "Wallet"}
                 {availableAccounts.includes(chain.toLowerCase()) ? (
                   <span className="connectedDotButton"></span>
                 ) : (
@@ -159,16 +154,12 @@ const Home = () => {
               <div
                 className={classNames(
                   "home__header__add-wallets__button ",
-                  availableAccounts.includes(cex.toLowerCase()) &&
-                    "home__header__add-wallets__button--active"
+                  availableAccounts.includes(cex.toLowerCase()) && "home__header__add-wallets__button--active",
                 )}
                 key={cex}
                 onClick={() => openAddCexModal(cex)}
               >
-                {cex}{" "}
-                {availableAccounts.includes(cex.toLowerCase())
-                  ? "Connected"
-                  : "Account"}
+                {cex} {availableAccounts.includes(cex.toLowerCase()) ? "Connected" : "Account"}
                 {availableAccounts.includes(cex.toLowerCase()) ? (
                   <span className="connectedDotButton"></span>
                 ) : (
@@ -183,12 +174,8 @@ const Home = () => {
           {evmAddress && (
             <>
               <div className="home__header__second__total-balance">
-                <div className="home__header__second__total-balance__label">
-                  Net Worth
-                </div>
-                <div className="home__header__second__total-balance__value">
-                  {toUsd(netWorth)}
-                </div>
+                <div className="home__header__second__total-balance__label">Net Worth</div>
+                <div className="home__header__second__total-balance__value">{toUsd(netWorth)}</div>
               </div>
 
               <div className="home__header__second__filter">
@@ -202,8 +189,7 @@ const Home = () => {
                     alt={platform.name}
                     height={25}
                   />
-                  {platform.name.charAt(0).toUpperCase() +
-                    platform.name.slice(1)}
+                  {platform.name.charAt(0).toUpperCase() + platform.name.slice(1)}
                   <div className="home__header__second__filter__button__arrow">
                     <ChevronDown color="white" size={15} />
                   </div>

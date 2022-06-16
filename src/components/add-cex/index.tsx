@@ -99,15 +99,11 @@ const AddCex = () => {
   };
 
   return (
-    <div
-      className={classnames("add-cex-modal", open && "add-cex-modal--active")}
-    >
+    <div className={classnames("add-cex-modal", open && "add-cex-modal--active")}>
       <div className="add-cex-modal__content" ref={modalRef}>
         <div className="add-cex-modal__content__header">
           <div />
-          <div className="add-cex-modal__content__header__title">
-            Add {name}
-          </div>
+          <div className="add-cex-modal__content__header__title">Add {name}</div>
           <div className="add-cex-modal__content__header__exit" onClick={close}>
             X
           </div>
@@ -133,14 +129,8 @@ const AddCex = () => {
               placeholder="Enter Passphrase"
             />
           )}
-          <div
-            className="add-cex-modal__content__body__button__wrapper"
-            onClick={add}
-          >
-            <button
-              className="add-cex-modal__content__body__button__wrapper__button"
-              disabled={loading}
-            >
+          <div className="add-cex-modal__content__body__button__wrapper" onClick={add}>
+            <button className="add-cex-modal__content__body__button__wrapper__button" disabled={loading}>
               {loading && (
                 <div
                   className="fa-1x add-cex-modal__content__body__button__wrapper__button__loading"

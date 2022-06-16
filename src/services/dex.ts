@@ -2,22 +2,14 @@ import { mainInstance } from "@config/axios";
 import { Chains } from "@customTypes/index";
 
 class DexService {
-  static async addWallet({
-    address,
-    name,
-    chain,
-  }: {
-    address: string;
-    name: string;
-    chain: string;
-  }) {
+  static async addWallet({ address, name, chain }: { address: string; name: string; chain: string }) {
     try {
       await mainInstance.post(
         "dex/add",
         {
           wallets: [{ name, address, chain }],
         },
-        { withCredentials: true }
+        { withCredentials: true },
       );
     } catch (e) {
       throw new Error(e?.response?.data);
@@ -29,7 +21,7 @@ class DexService {
       const res = await mainInstance.get(
         `dex/assets/${chain}`,
 
-        { withCredentials: true }
+        { withCredentials: true },
       );
       if (res?.data) {
         return res.data;

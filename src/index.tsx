@@ -18,5 +18,5 @@ root.render(
       <Toaster position="top-center" reverseOrder={false} />
       <App />
     </StrictMode>
-  </Provider>
+  </Provider>,
 );
