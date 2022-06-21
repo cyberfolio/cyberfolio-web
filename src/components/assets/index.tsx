@@ -10,7 +10,7 @@ import InfoService from "@services/info";
 
 import AssetTable from "@components/asset-table";
 import { useAppDispatch, useAppSelector } from "@store/functions";
-import { Chains, Platform } from "@customTypes/index";
+import { CexAsset, Chain, DexAsset, Platform } from "@customTypes/index";
 
 const Assets = () => {
   const dispatch = useAppDispatch();
@@ -21,33 +21,33 @@ const Assets = () => {
 
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("All");
-  const [filteredDexTokens, setFilteredDexTokens] = useState([] as any);
+  const [filteredDexTokens, setFilteredDexTokens] = useState<DexAsset[]>([]);
   const [isFiltered, setIsFiltered] = useState(false);
-  const [assetsToShow, setAssetsToShow] = useState([] as any);
+  const [assetsToShow, setAssetsToShow] = useState<(DexAsset | CexAsset)[]>([]);
 
   const getAllAssets = async () => {
     try {
       setLoading(true);
       const dexTokensBitcoin = await DexService.getDexTokens({
-        chain: Chains.BITCOIN,
+        chain: Chain.BITCOIN,
       });
       const dexTokensEthereum = await DexService.getDexTokens({
-        chain: Chains.ETHEREUM,
+        chain: Chain.ETHEREUM,
       });
       const dexTokensSmartChain = await DexService.getDexTokens({
-        chain: Chains.BSC,
+        chain: Chain.BSC,
       });
       const dexTokensAvalanche = await DexService.getDexTokens({
-        chain: Chains.AVALANCHE,
+        chain: Chain.AVALANCHE,
       });
       const dexTokensArbitrum = await DexService.getDexTokens({
-        chain: Chains.ARBITRUM,
+        chain: Chain.ARBITRUM,
       });
       const dexTokensPolygon = await DexService.getDexTokens({
-        chain: Chains.POLYGON,
+        chain: Chain.POLYGON,
       });
       const dexTokenOptimism = await DexService.getDexTokens({
-        chain: Chains.OPTIMISM,
+        chain: Chain.OPTIMISM,
       });
       const dexAssets = [];
 
@@ -75,6 +75,7 @@ const Assets = () => {
       dexAssets.sort(function (a, b) {
         return b.value - a.value;
       });
+
       dispatch({
         type: "SET_DEX_ASSETS",
         payload: {
@@ -83,7 +84,7 @@ const Assets = () => {
       });
 
       const cexAssets = await CexService.getCexTokens();
-      cexAssets.sort(function (a: any, b: any) {
+      cexAssets.sort(function (a, b) {
         return b.value - a.value;
       });
       dispatch({
@@ -151,9 +152,9 @@ const Assets = () => {
   useEffect(() => {
     if (platform.name !== Platform.ALLNETWORKS) {
       const filteredDex = dexAssets.filter((dexToken) => dexToken.platform === platform.name);
-      const filteredCex = cexAssets.filter((ceToken) => ceToken.cexName === platform.name);
+      const filteredCex = cexAssets.filter((cexToken) => cexToken.cexName === platform.name);
       setIsFiltered(true);
-      setFilteredDexTokens([...filteredDex, ...filteredCex]);
+      setAssetsToShow([...filteredDex, ...filteredCex]);
     }
     if (platform.name === Platform.ALLNETWORKS) {
       setIsFiltered(false);

@@ -3,7 +3,6 @@ import "./index.scss";
 import classnames from "classnames";
 import { arrangeCexName, capitalizeFirstLetter, toUsd, isValidHttpUrl, platformInfo } from "@utils/index";
 
-
 export const Index = ({ assets, loading }: { assets: any; loading: boolean }) => {
   const openAssetAtScan = (scanUrl: string) => {
     if (scanUrl && isValidHttpUrl(scanUrl)) {

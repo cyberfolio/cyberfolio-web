@@ -1,6 +1,10 @@
 import { mainInstance } from "@config/axios";
-import { Chains } from "@customTypes/index";
+import { Chain, DexAsset } from "@customTypes/index";
 
+interface DexTokens {
+  assets: DexAsset[];
+  totalTokenValue: number;
+}
 class DexService {
   static async addWallet({ address, name, chain }: { address: string; name: string; chain: string }) {
     try {
@@ -16,7 +20,7 @@ class DexService {
     }
   }
 
-  static async getDexTokens({ chain }: { chain: Chains }) {
+  static async getDexTokens({ chain }: { chain: Chain }) {
     try {
       const res = await mainInstance.get(
         `dex/assets/${chain}`,
@@ -24,7 +28,7 @@ class DexService {
         { withCredentials: true },
       );
       if (res?.data) {
-        return res.data;
+        return res.data as DexTokens;
       } else {
         throw new Error("Something went wrong");
       }

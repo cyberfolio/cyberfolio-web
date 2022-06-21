@@ -1,6 +1,6 @@
 import Actions from "./actions";
 import AllNetworks from "@assets/blockchain.svg";
-import { Platform } from "@customTypes/index";
+import { CexAsset, DexAsset, Platform } from "@customTypes/index";
 
 const initialState = {
   loading: false,
@@ -18,17 +18,8 @@ const initialState = {
     open: false,
     name: "",
   },
-  dexAssets: [
-    {
-      name: "",
-      platform: "",
-    },
-  ],
-  cexAssets: [
-    {
-      cexName: "",
-    },
-  ],
+  dexAssets: [] as DexAsset[],
+  cexAssets: [] as CexAsset[],
   netWorth: 0,
 };
 

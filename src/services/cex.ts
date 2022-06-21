@@ -1,4 +1,5 @@
 import { mainInstance } from "@config/axios";
+import { CexAsset } from "@customTypes/index";
 
 class CexService {
   static async addCex({
@@ -24,7 +25,7 @@ class CexService {
         { withCredentials: true },
       );
       if (res?.data?.assets) {
-        return res?.data?.assets;
+        return res?.data?.assets as CexAsset[];
       } else {
         throw new Error("Something went wrong");
       }
@@ -41,7 +42,7 @@ class CexService {
         { withCredentials: true },
       );
       if (res?.data?.assets) {
-        return res.data?.assets;
+        return res.data?.assets as CexAsset[];
       } else {
         throw new Error("Something went wrong");
       }

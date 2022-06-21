@@ -15,7 +15,7 @@ export enum Platform {
   KUCOIN = "Kucoin",
 }
 
-export enum Chains {
+export enum Chain {
   BITCOIN = "Bitcoin",
   ETHEREUM = "Ethereum",
   BSC = "SmartChain",
@@ -25,4 +25,29 @@ export enum Chains {
   POLYGON = "Polygon",
   ARBITRUM = "Arbitrum",
   OPTIMISM = "Optimism",
+}
+export interface DexAsset {
+  keyIdentifier: string;
+  platform: Platform;
+  name: string;
+  symbol: string;
+  logo: string;
+  balance: number;
+  price: number;
+  value: number;
+  walletName: string;
+  contractAddress?: string;
+  walletAddress: string;
+  scan: string;
+}
+
+export interface CexAsset {
+  keyIdentifier: string;
+  cexName: Platform;
+  name: string;
+  symbol: string;
+  logo: string;
+  balance: number;
+  price: number;
+  value: number;
 }
