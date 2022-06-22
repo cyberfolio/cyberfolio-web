@@ -4,9 +4,9 @@ import { useEffect } from "react";
  * @param {string} key - the name of the key to respond to, compared against event.key
  * @param {function} action - the action to perform on key press
  */
-export default function useKeypress(key: any, action: any) {
+export default function useKeypress(key: string, action: () => void) {
   useEffect(() => {
-    function onKeyup(e: any) {
+    function onKeyup(e: KeyboardEvent) {
       if (e.key === key) action();
     }
     window.addEventListener("keyup", onKeyup);
