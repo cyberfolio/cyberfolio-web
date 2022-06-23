@@ -4,7 +4,6 @@ import "./index.scss";
 import { Plus, ChevronDown } from "react-bootstrap-icons";
 import classNames from "classnames";
 import { toast } from "react-hot-toast";
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 import Utilities from "@components/utilities";
 import Assets from "@components//assets";
@@ -118,16 +117,10 @@ const Home = () => {
               </div>
             );
           })}
-          <OverlayTrigger
-            placement="bottom"
-            delay={{ show: 50, hide: 100 }}
-            overlay={<Tooltip id="button-tooltip">Coming soon</Tooltip>}
-          >
-            <div className="home__header__add-wallets__button">
-              New Bundle
-              <Plus color="white" size={20} />
-            </div>
-          </OverlayTrigger>
+          <div className="home__header__add-wallets__button">
+            New Bundle
+            <Plus color="white" size={20} />
+          </div>
         </div>
         <div className="home__header__add-wallets">
           {availableChains.map((chain) => {

@@ -1,8 +1,6 @@
 import { useEffect } from "react";
 import "./index.scss";
 
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
-
 import Metamask from "@assets/metamask.png";
 import { truncateEthAddress } from "@utils/index";
 import { useMetamaskLogin } from "@components/hooks/useMetamaskLogin";
@@ -48,33 +46,21 @@ const ConnectWallet = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [evmAddress, ensName]);
 
-  const renderTooltip = () => {
-    if (evmAddress)
-      return (
-        <Tooltip id="button-tooltip">
-          <div className="metamask-tooltip">Click to disconnect</div>
-        </Tooltip>
-      );
-    return <Tooltip id="button-tooltip">The account you choose will be your key identifier</Tooltip>;
-  };
-
   return (
     <div className="metamask">
-      <OverlayTrigger placement="bottom" delay={{ show: 50, hide: 100 }} overlay={renderTooltip}>
-        <div
-          className={`metamask-button ${isConnecting ? "disabledbutton" : ""}`}
-          onClick={!evmAddress ? signAndVerifyMessage : disconnectMetamask}
-        >
-          <img className="metamask-button-img" src={Metamask} alt="metamask" />
-          {evmAddress ? <span className="connectedDot"></span> : <></>}
-          <div className="metamask-button-text">
-            {!evmAddress && !isConnecting && "Connect Metamask"}
-            {!evmAddress && isConnecting && "Connecting..."}
-            {evmAddress && !ensName && `${truncateEthAddress(evmAddress)}`}
-            {evmAddress && ensName && `${ensName}`}
-          </div>
+      <div
+        className={`metamask-button ${isConnecting ? "disabledbutton" : ""}`}
+        onClick={!evmAddress ? signAndVerifyMessage : disconnectMetamask}
+      >
+        <img className="metamask-button-img" src={Metamask} alt="metamask" />
+        {evmAddress ? <span className="connectedDot"></span> : <></>}
+        <div className="metamask-button-text">
+          {!evmAddress && !isConnecting && "Connect Metamask"}
+          {!evmAddress && isConnecting && "Connecting..."}
+          {evmAddress && !ensName && `${truncateEthAddress(evmAddress)}`}
+          {evmAddress && ensName && `${ensName}`}
         </div>
-      </OverlayTrigger>
+      </div>
     </div>
   );
 };
