@@ -3,7 +3,10 @@ import AllNetworks from "@assets/blockchain.svg";
 import { CexAsset, DexAsset, Platform } from "@customTypes/index";
 
 const initialState = {
-  loading: false,
+  loading: {
+    state: false,
+    message: "",
+  },
   evmAddress: "",
   ensName: "",
   platform: {
@@ -27,7 +30,10 @@ const reducer = (state = initialState, action: Actions) => {
   if (action.type === "SET_LOADING") {
     return {
       ...state,
-      loading: action.payload.data,
+      loading: {
+        state: action.payload.state,
+        message: action.payload.message,
+      },
     };
   } else if (action.type === "SET_EVM_ADDRESS") {
     return {

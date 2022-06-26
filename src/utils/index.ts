@@ -150,11 +150,12 @@ export const toUsd = (value: number) => {
   });
 };
 
-export const setAppLoading = async (data: boolean) => {
+export const setAppLoading = async (state: boolean, message?: string) => {
   store.dispatch({
     type: "SET_LOADING",
     payload: {
-      data,
+      state,
+      message: message ? message : "",
     },
   });
 };

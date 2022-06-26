@@ -7,6 +7,7 @@ import { toast } from "react-hot-toast";
 import CexService from "@services/cex";
 import useKeypress from "@components/hooks/useKeyPress";
 import { useAppDispatch, useAppSelector } from "@store/functions";
+import { setAppLoading } from "@utils/index";
 
 const AddCex = () => {
   const [apiKey, setApiKey] = useState("");
@@ -19,32 +20,17 @@ const AddCex = () => {
 
   const add = async () => {
     setLoading(true);
-    dispatch({
-      type: "SET_LOADING",
-      payload: {
-        data: true,
-      },
-    });
+    setAppLoading(true);
     if (!apiKey || !apiSecret) {
       toast.error("Please enter api key and secret.");
       setLoading(false);
-      dispatch({
-        type: "SET_LOADING",
-        payload: {
-          data: false,
-        },
-      });
+      setAppLoading(false);
       return;
     }
     if (name?.split(" ")?.shift()?.toLowerCase() === "kucoin" && !passphrase) {
       toast.error("Please enter passphrase.");
       setLoading(false);
-      dispatch({
-        type: "SET_LOADING",
-        payload: {
-          data: false,
-        },
-      });
+      setAppLoading(false);
       return;
     }
     try {
@@ -65,22 +51,12 @@ const AddCex = () => {
         toast.success(`${name} added`);
       }
       setLoading(false);
-      dispatch({
-        type: "SET_LOADING",
-        payload: {
-          data: false,
-        },
-      });
+      setAppLoading(false);
       close();
     } catch (e) {
       toast.error(e.message);
       setLoading(false);
-      dispatch({
-        type: "SET_LOADING",
-        payload: {
-          data: false,
-        },
-      });
+      setAppLoading(false);
     }
   };
 

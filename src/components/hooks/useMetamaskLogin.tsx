@@ -52,7 +52,7 @@ export const useMetamaskLogin = () => {
       const signer = provider.getSigner();
       const nonce = await getNonce({ evmAddress: evmWalletAddresses[0] });
       const signature = await signer.signMessage(nonce);
-      setAppLoading(true);
+      setAppLoading(true, "Assets are loading");
       const evmAddress = await signer.getAddress();
 
       // Verify  Message
