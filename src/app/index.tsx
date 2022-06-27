@@ -8,11 +8,11 @@ import Home from "@pages/home";
 import AddCex from "@components/add-cex";
 import AddWallet from "@components/add-wallet";
 import Loading from "@components/loading";
+import Footer from "@components/footer";
 
 import { isAuthenticated } from "@services/auth";
 import clearState from "@utils/clearState";
 import { useAppDispatch } from "@store/functions";
-
 const Index = () => {
   const dispatch = useAppDispatch();
 
@@ -64,6 +64,7 @@ const Index = () => {
           <Route path="/" element={<Home />} />
         </Routes>
       </Router>
+      <Footer />
     </div>
   );
 };

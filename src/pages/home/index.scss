@@ -8,6 +8,8 @@
   max-width: 1480px;
   margin: 0 auto;
   border-left: 1px solid $border;
+  border-bottom: 1px solid #2d2d32;
+  border-radius: 8px;
 
   &__header {
     padding-top: 10px;
