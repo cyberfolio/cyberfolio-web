@@ -6,7 +6,7 @@ import classnames from "classnames";
 
 import DexService from "@services/dex";
 import useKeypress from "@components/hooks/useKeyPress";
-import { isValidWalletAddress, setAppLoading } from "@utils/index";
+import utils from "@utils/index";
 import { useAppDispatch, useAppSelector } from "@store/functions";
 
 const AddWallet = () => {
@@ -20,14 +20,14 @@ const AddWallet = () => {
   const modalRef = useRef(null);
 
   const add = async () => {
-    const isValid = await isValidWalletAddress({ address, chain });
+    const isValid = await utils.isValidWalletAddress({ address, chain });
     if (!isValid) {
       toast.error(`${chain} address is not valid`);
       return;
     }
     try {
       setLoading(true);
-      setAppLoading(true);
+      utils.setAppLoading(true);
       await DexService.addWallet({ name, address, chain });
       toast.success("Wallet added.");
     } catch (e) {
@@ -37,7 +37,7 @@ const AddWallet = () => {
       setName("");
       setAddress("");
       setLoading(false);
-      setAppLoading(false);
+      utils.setAppLoading(false);
     }
   };
   useKeypress("Escape", () => {

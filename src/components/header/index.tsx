@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import "./index.scss";
 
 import Metamask from "@assets/metamask.png";
-import { truncateEthAddress } from "@utils/index";
+import utils from "@utils/index";
 import { useMetamaskLogin } from "@components/hooks/useMetamaskLogin";
 import InfoService from "@services/info";
 import { useAppDispatch, useAppSelector } from "@store/functions";
@@ -57,7 +57,7 @@ const ConnectWallet = () => {
         <div className="metamask-button-text">
           {!evmAddress && !isConnecting && "Connect Metamask"}
           {!evmAddress && isConnecting && "Connecting..."}
-          {evmAddress && !ensName && `${truncateEthAddress(evmAddress)}`}
+          {evmAddress && !ensName && `${utils.truncateEthAddress(evmAddress)}`}
           {evmAddress && ensName && `${ensName}`}
         </div>
       </div>

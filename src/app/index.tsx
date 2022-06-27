@@ -26,12 +26,21 @@ const Index = () => {
             data: res.keyIdentifier,
           },
         });
-        dispatch({
-          type: "SET_ENS_NAME",
-          payload: {
-            data: res.ensName ? res.ensName : "",
-          },
-        });
+        if (res.ensName) {
+          dispatch({
+            type: "SET_ENS_NAME",
+            payload: {
+              data: res.ensName,
+            },
+          });
+        }
+        if (res.lastAssetUpdate)
+          dispatch({
+            type: "SET_LAST_ASSET_UPDATE",
+            payload: {
+              data: res.lastAssetUpdate,
+            },
+          });
       } else {
         clearState();
       }

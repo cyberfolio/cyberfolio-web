@@ -21,7 +21,7 @@ import { Platform } from "@customTypes/index";
 
 const truncateRegex = /^(0x[a-zA-Z0-9]{4})[a-zA-Z0-9]+([a-zA-Z0-9]{4})$/;
 
-export const logos = {
+const logos = {
   allnetworks: AllNetworks,
   bitcoin: Bitcoin,
   ethereum: Ethereum,
@@ -38,13 +38,13 @@ export const logos = {
   ftx: FTX,
 };
 
-export const truncateEthAddress = (address: string) => {
+const truncateEthAddress = (address: string) => {
   const match = String(address).match(truncateRegex);
   if (!match) return address;
   return `${match[1]}…${match[2]}`;
 };
 
-export const platformInfo = [
+const platformInfo = [
   {
     name: Platform.ALLNETWORKS,
     image: AllNetworks,
@@ -111,7 +111,7 @@ const validateBtcAddress = (address: string) => {
   return true;
 };
 
-export const isValidWalletAddress = async ({ address, chain }: { address: string; chain: string }) => {
+const isValidWalletAddress = async ({ address, chain }: { address: string; chain: string }) => {
   let isValid = false;
   if (chain) {
     if (chain === "Bitcoin") {
@@ -127,14 +127,14 @@ export const isValidWalletAddress = async ({ address, chain }: { address: string
   return isValid;
 };
 
-export const capitalizeFirstLetter = (string: string) => {
+const capitalizeFirstLetter = (string: string) => {
   if (string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
   return "";
 };
 
-export const arrangeCexName = (string: string) => {
+const arrangeCexName = (string: string) => {
   if (string && string === "ftx") {
     return "FTX";
   } else if (string) {
@@ -143,14 +143,14 @@ export const arrangeCexName = (string: string) => {
   return "";
 };
 
-export const toUsd = (value: number) => {
+const toUsd = (value: number) => {
   return value.toLocaleString("en-US", {
     style: "currency",
     currency: "USD",
   });
 };
 
-export const setAppLoading = async (state: boolean, message?: string) => {
+const setAppLoading = async (state: boolean, message?: string) => {
   store.dispatch({
     type: "SET_LOADING",
     payload: {
@@ -160,11 +160,51 @@ export const setAppLoading = async (state: boolean, message?: string) => {
   });
 };
 
-export const isValidHttpUrl = (url: string) => {
+const isValidHttpUrl = (url: string) => {
   try {
     new URL(url);
   } catch (e) {
     return false;
   }
   return true;
+};
+
+const toReadableDateDifference = (date1: Date, date2: Date) => {
+  const seconds = Math.floor((Number(date2) - Number(date1)) / 1000);
+
+  let interval = Math.floor(seconds / 31536000);
+
+  if (interval > 1) {
+    return interval + " years";
+  }
+  interval = Math.floor(seconds / 2592000);
+  if (interval > 1) {
+    return interval + " months";
+  }
+  interval = Math.floor(seconds / 86400);
+  if (interval > 1) {
+    return interval + " days";
+  }
+  interval = Math.floor(seconds / 3600);
+  if (interval > 1) {
+    return interval + " hours";
+  }
+  interval = Math.floor(seconds / 60);
+  if (interval > 1) {
+    return interval + " minutes";
+  }
+  return Math.floor(seconds) + " seconds";
+};
+
+export default {
+  toReadableDateDifference,
+  isValidHttpUrl,
+  setAppLoading,
+  toUsd,
+  arrangeCexName,
+  capitalizeFirstLetter,
+  isValidWalletAddress,
+  platformInfo,
+  truncateEthAddress,
+  logos,
 };

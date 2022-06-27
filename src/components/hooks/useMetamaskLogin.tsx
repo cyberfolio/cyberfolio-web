@@ -5,7 +5,7 @@ import { ethers } from "ethers";
 import { toast } from "react-hot-toast";
 
 import { getNonce, logout, validateSignature } from "@services/auth";
-import { setAppLoading } from "@utils/index";
+import utils from "@utils/index";
 import clearState from "@utils/clearState";
 import { useAppDispatch } from "@store/functions";
 
@@ -52,7 +52,7 @@ export const useMetamaskLogin = () => {
       const signer = provider.getSigner();
       const nonce = await getNonce({ evmAddress: evmWalletAddresses[0] });
       const signature = await signer.signMessage(nonce);
-      setAppLoading(true, "Assets are loading");
+      utils.setAppLoading(true, "Assets are loading");
       const evmAddress = await signer.getAddress();
 
       // Verify  Message
@@ -87,7 +87,7 @@ export const useMetamaskLogin = () => {
       }
     } finally {
       setIsConnecting(false);
-      setAppLoading(false);
+      utils.setAppLoading(false);
     }
   };
 

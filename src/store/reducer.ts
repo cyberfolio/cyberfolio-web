@@ -9,6 +9,8 @@ const initialState = {
   },
   evmAddress: "",
   ensName: "",
+  lastAssetUpdate: "",
+  netWorth: 0,
   platform: {
     name: Platform.ALLNETWORKS,
     image: AllNetworks,
@@ -23,7 +25,6 @@ const initialState = {
   },
   dexAssets: [] as DexAsset[],
   cexAssets: [] as CexAsset[],
-  netWorth: 0,
 };
 
 const reducer = (state = initialState, action: Actions) => {
@@ -44,6 +45,11 @@ const reducer = (state = initialState, action: Actions) => {
     return {
       ...state,
       ensName: action.payload.data,
+    };
+  } else if (action.type === "SET_LAST_ASSET_UPDATE") {
+    return {
+      ...state,
+      lastAssetUpdate: action.payload.data,
     };
   } else if (action.type === "SET_NET_WORTH") {
     return {

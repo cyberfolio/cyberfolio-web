@@ -1,6 +1,6 @@
 import "./index.scss";
 
-import { platformInfo } from "@utils/index";
+import utils from "@utils/index";
 import { useAppDispatch } from "@store/functions";
 import { Platform } from "@customTypes/index";
 
@@ -19,7 +19,7 @@ const ChainsDropDown = () => {
 
   return (
     <div className="chains-dropdown">
-      {platformInfo.map(({ name, image }) => {
+      {utils.platformInfo.map(({ name, image }) => {
         return (
           <div key={name} className="chains-dropdown__item" onClick={() => setChain(name, image)}>
             <img className="chains-dropdown__item__image" src={image} alt={name} height={25} />

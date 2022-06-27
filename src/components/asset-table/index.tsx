@@ -1,12 +1,12 @@
 import "./index.scss";
 
 import classnames from "classnames";
-import { arrangeCexName, capitalizeFirstLetter, toUsd, isValidHttpUrl, platformInfo } from "@utils/index";
+import utils from "@utils/index";
 import { CexAsset, DexAsset } from "@customTypes/index";
 
 export const Index = ({ assets, loading }: { assets: (DexAsset | CexAsset)[]; loading: boolean }) => {
   const openAssetAtScan = (scanUrl: string) => {
-    if (scanUrl && isValidHttpUrl(scanUrl)) {
+    if (scanUrl && utils.isValidHttpUrl(scanUrl)) {
       window.open(scanUrl, "_blank");
     }
   };
@@ -41,7 +41,7 @@ export const Index = ({ assets, loading }: { assets: (DexAsset | CexAsset)[]; lo
             let price = 0;
             let value = 0;
             if ("platform" in asset) {
-              platformImage = platformInfo.filter((info) => info.name === asset.platform)[0]?.image;
+              platformImage = utils.platformInfo.filter((info) => info.name === asset.platform)[0]?.image;
               symbol = asset.symbol;
               scan = asset.scan;
               logo = asset.logo;
@@ -52,7 +52,7 @@ export const Index = ({ assets, loading }: { assets: (DexAsset | CexAsset)[]; lo
               value = asset.value;
             }
             if ("cexName" in asset) {
-              platformImage = platformInfo.filter((info) => info.name === asset.cexName)[0]?.image;
+              platformImage = utils.platformInfo.filter((info) => info.name === asset.cexName)[0]?.image;
               symbol = asset.symbol;
               logo = asset.logo;
               price = asset.price;
@@ -97,18 +97,18 @@ export const Index = ({ assets, loading }: { assets: (DexAsset | CexAsset)[]; lo
                           className="asset-table__assets__asset__item__chain__logo"
                         />
                       )}
-                      {arrangeCexName(cexName)}
-                      {capitalizeFirstLetter(platform)}
+                      {utils.arrangeCexName(cexName)}
+                      {utils.capitalizeFirstLetter(platform)}
                     </div>
                   </div>
                 </div>
-                <div className="asset-table__assets__asset__item ">{toUsd(price)}</div>
+                <div className="asset-table__assets__asset__item ">{utils.toUsd(price)}</div>
                 <div className="asset-table__assets__asset__item">{balance}</div>
                 <div className="asset-table__assets__asset__item asset-table__assets__asset__item--center">
                   {walletName}
                 </div>
                 <div className="asset-table__assets__asset__item asset-table__assets__asset__item--last">
-                  {toUsd(value)}
+                  {utils.toUsd(value)}
                 </div>
               </div>
             );

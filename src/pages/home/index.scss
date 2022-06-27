@@ -68,19 +68,38 @@
       margin-top: 30px;
       padding-bottom: 20px;
       min-height: 80px;
-      &__total-balance {
-        display: flex;
-        flex-direction: column;
-        &__label {
-          padding-left: 2px;
-          color: darken($text-color-dark, 40%);
+      &__first {
+        &__total-balance {
+          display: flex;
+          flex-direction: column;
+          &__label {
+            padding-left: 2px;
+            color: darken($text-color-dark, 40%);
+          }
+          &__value {
+            font-size: 30px;
+            font-weight: 600;
+            color: $text-color-dark;
+          }
         }
-        &__value {
-          font-size: 30px;
-          font-weight: 600;
-          color: $text-color-dark;
+        &__last-update {
+          padding-top: 30px;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          font-size: 14px;
+          &__label {
+            padding-left: 2px;
+            padding-right: 5px;
+            color: darken($text-color-dark, 40%);
+            &--value {
+              font-weight: 600;
+              color: $text-color-dark;
+            }
+          }
         }
       }
+     
       &__filter {
         display: flex;
         flex-direction: column;

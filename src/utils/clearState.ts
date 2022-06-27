@@ -14,6 +14,12 @@ const clearState = async () => {
     },
   });
   store.dispatch({
+    type: "SET_LAST_ASSET_UPDATE",
+    payload: {
+      data: "",
+    },
+  });
+  store.dispatch({
     type: "SET_CEX_ASSETS",
     payload: {
       data: [],

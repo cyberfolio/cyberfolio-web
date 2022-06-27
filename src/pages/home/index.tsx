@@ -10,7 +10,7 @@ import Assets from "@components//assets";
 
 import FilterDropdown from "@components//filter-dropdown";
 import useKeypress from "@components/hooks/useKeyPress";
-import { toUsd } from "@utils/index";
+import utils from "@utils/index";
 import InfoService from "@services/info";
 import { useAppDispatch, useAppSelector } from "@store/functions";
 
@@ -22,6 +22,7 @@ const activeBundle = "Main";
 const Home = () => {
   const platform = useAppSelector((state) => state.platform);
   const netWorth = useAppSelector((state) => state.netWorth);
+  const lastAssetUpdate = useAppSelector((state) => state.lastAssetUpdate);
   const evmAddress = useAppSelector((state) => state.evmAddress);
 
   const dispatch = useAppDispatch();
@@ -166,9 +167,23 @@ const Home = () => {
         <div className="home__header__second">
           {evmAddress && (
             <>
-              <div className="home__header__second__total-balance">
-                <div className="home__header__second__total-balance__label">Net Worth</div>
-                <div className="home__header__second__total-balance__value">{toUsd(netWorth)}</div>
+              <div className="home__header__second__first">
+                <div className="home__header__second__first__total-balance">
+                  <div className="home__header__second__first__total-balance__label">Net Worth</div>
+                  <div className="home__header__second__first__total-balance__value">{utils.toUsd(netWorth)}</div>
+                </div>
+
+                <div className="home__header__second__first__last-update">
+                  {lastAssetUpdate && (
+                    <div className="home__header__second__first__last-update__label">
+                      Data updated{" "}
+                      <span className="home__header__second__first__last-update__label--value">
+                        {utils.toReadableDateDifference(new Date(lastAssetUpdate), new Date())}
+                      </span>{" "}
+                      ago
+                    </div>
+                  )}
+                </div>
               </div>
 
               <div className="home__header__second__filter">
