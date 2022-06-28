@@ -3,14 +3,15 @@
 .footer {
   height: $header_footer_height + px;
   width: 100%;
+  background-color: $background;
   &__area {
-    background-color: $background;
     max-width: 1480px;
     padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 0 auto;
+    background-color: $background;
     &__logo {
       width: 50%;
       display: flex;
