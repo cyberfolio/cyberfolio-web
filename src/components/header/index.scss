@@ -10,21 +10,29 @@
   position: sticky;
   top: 0;
   z-index: $header_index;
-}
-.header-content {
-  max-width: 1480px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  height: 100%;
-  padding: 0 20px;
-}
-.header-brand {
-  font-size: 22px;
-  font-weight: 600;
-  @extend .unselectable;
+  &__content {
+    max-width: 1480px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 100%;
+    padding: 0 20px;
+    &__brand {
+      display: flex;
+      align-items: center;
+      &__image {
+        width: 30px;
+        padding-right: 5px;
+      }
+      &__label {
+        font-size: 22px;
+        font-weight: 600;
+        @extend .unselectable;
+      }
+    }
+  }
 }
 
 .metamask-button {

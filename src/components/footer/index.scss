@@ -4,13 +4,14 @@
   height: 70px;
   width: 100%;
   &__area {
-    padding: 10px 20px 0 20px;
+    max-width: 1480px;
+    padding:  20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 800px;
     margin: 0 auto;
     &__logo {
+      width:50%;
       display: flex;
       align-items: center;
       &__image {
@@ -18,16 +19,21 @@
         padding-right: 5px;
       }
       &__label {
-        font-size: 16px;
         color: $text-color-dark;
       }
     }
     &__links {
+      width:50%;
       display: flex;
       align-items: center;
-      &__twitter {
-        width: 30px;
-        padding-right: 5px;
+      justify-content: space-evenly;
+      &__label {
+        color: white;
+        font-size: 16px;
+      }
+      &__link{
+        color: white;
+        font-size: 24px;
       }
     }
   }

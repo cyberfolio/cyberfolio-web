@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import "./index.scss";
 
 import Metamask from "@assets/metamask.png";
+import Logo from "@assets/logo.png";
 import utils from "@utils/index";
 import { useMetamaskLogin } from "@components/hooks/useMetamaskLogin";
 import InfoService from "@services/info";
@@ -10,8 +11,11 @@ import { useAppDispatch, useAppSelector } from "@store/functions";
 const Index = () => {
   return (
     <div className="header">
-      <div className="header-content">
-        <div className="header-brand">Cyberfolio</div>
+      <div className="header__content">
+        <div className="header__content__brand">
+          <img src={Logo} className="header__content__brand__image" />
+          <div className="header__content__brand__label">Cyberfolio</div>
+        </div>
         <ConnectWallet />
       </div>
     </div>
