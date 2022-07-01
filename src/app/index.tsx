@@ -10,15 +10,16 @@ import AddWallet from "@components/add-wallet";
 import Loading from "@components/loading";
 import Footer from "@components/footer";
 
-import { isAuthenticated } from "@services/auth";
+import AuthService from "@services/auth";
 import clearState from "@utils/clearState";
 import { useAppDispatch } from "@store/functions";
+
 const Index = () => {
   const dispatch = useAppDispatch();
 
   const checkIsAuthenticated = useCallback(async () => {
     try {
-      const res = await isAuthenticated();
+      const res = await AuthService.getUserInfo();
       if (res?.keyIdentifier) {
         dispatch({
           type: "SET_EVM_ADDRESS",

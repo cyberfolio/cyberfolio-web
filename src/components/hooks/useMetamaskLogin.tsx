@@ -4,7 +4,7 @@ import detectEthereumProvider from "@metamask/detect-provider";
 import { ethers } from "ethers";
 import { toast } from "react-hot-toast";
 
-import { getNonce, logout, validateSignature } from "@services/auth";
+import AuthService from "@services/auth";
 import utils from "@utils/index";
 import clearState from "@utils/clearState";
 import { useAppDispatch } from "@store/functions";
@@ -29,7 +29,7 @@ export const useMetamaskLogin = () => {
       window.ethereum.on("accountsChanged", async (accounts: string[]) => {
         if (accounts?.length === 0) {
           try {
-            await logout();
+            await AuthService.logout();
             clearState();
           } catch (e) {
             toast.error(e.message);
@@ -50,7 +50,7 @@ export const useMetamaskLogin = () => {
 
       // Sign Message
       const signer = provider.getSigner();
-      const nonce = await getNonce({ evmAddress: evmWalletAddresses[0] });
+      const nonce = await AuthService.getNonce({ evmAddress: evmWalletAddresses[0] });
       const signature = await signer.signMessage(nonce);
       utils.setAppLoading(true, "Assets are loading");
       const evmAddress = await signer.getAddress();
@@ -61,7 +61,7 @@ export const useMetamaskLogin = () => {
         setIsConnecting(false);
         throw new Error("Your message could not be verified!");
       }
-      const walletInfo = await validateSignature({
+      const walletInfo = await AuthService.validateSignature({
         evmAddress,
         nonce,
         signature,
@@ -93,7 +93,7 @@ export const useMetamaskLogin = () => {
 
   const disconnectMetamask = async () => {
     try {
-      await logout();
+      await AuthService.logout();
       clearState();
     } catch (e) {
       toast.error(e.message);
