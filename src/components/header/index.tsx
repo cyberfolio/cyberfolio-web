@@ -2,13 +2,17 @@ import { useEffect } from "react";
 import "./index.scss";
 
 import Metamask from "@assets/metamask.png";
+import BuyMeACoffee from "@assets/bmc-logo.png";
 import Logo from "@assets/logo.png";
 import utils from "@utils/index";
 import { useMetamaskLogin } from "@components/hooks/useMetamaskLogin";
 import InfoService from "@services/info";
 import { useAppDispatch, useAppSelector } from "@store/functions";
+import links from "@config/links";
 
 const Index = () => {
+  const isAuthenticated = useAppSelector((state) => state.evmAddress);
+
   return (
     <div className="header">
       <div className="header__content">
@@ -16,7 +20,15 @@ const Index = () => {
           <img src={Logo} className="header__content__brand__image" />
           <div className="header__content__brand__label">Cyberfolio</div>
         </div>
-        <ConnectWallet />
+        <div className="header__content__brand">
+          {isAuthenticated && (
+            <a href={links.buyMeACoffee} target="_blank" rel="noreferrer" className="header__content__brand__bmc">
+              <img src={BuyMeACoffee} className="header__content__brand__bmc__logo" />
+              <div className="header__content__brand__bmc__text">Buy me a coffee</div>
+            </a>
+          )}
+          <ConnectWallet />
+        </div>
       </div>
     </div>
   );

@@ -22,6 +22,25 @@
     &__brand {
       display: flex;
       align-items: center;
+      &__bmc {
+        margin-right: 20px;
+        background-color: lighten($background-dark, 20);
+        text-decoration: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 10px;
+        border-radius: 8px;
+        &__logo {
+          width: 30px;
+          padding-right: 7px;
+        }
+        &__text{
+          color: $text-color-dark;
+          text-decoration: none;
+          font-size: 12px;
+        }
+      }
       &__image {
         width: 30px;
         padding-right: 5px;
