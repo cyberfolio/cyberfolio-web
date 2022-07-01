@@ -6,7 +6,7 @@ export default class AuthService {
       const res = await mainInstance.get("/auth/get-user-info", {
         withCredentials: true,
       });
-      return res?.data;
+      return res.data;
     } catch (e) {
       return false;
     }
@@ -26,11 +26,7 @@ export default class AuthService {
   static async getNonce({ evmAddress }: { evmAddress: string }) {
     try {
       const res = await mainInstance.post("/auth/login/metamask", { evmAddress });
-      if (res?.data?.nonce) {
-        return res?.data?.nonce;
-      } else {
-        throw new Error("Something went wrong");
-      }
+      return res.data;
     } catch (e) {
       throw new Error(e.message);
     }
@@ -55,11 +51,7 @@ export default class AuthService {
         },
         { withCredentials: true },
       );
-      if (res?.data) {
-        return res?.data;
-      } else {
-        throw new Error("aaa went wrong");
-      }
+      return res.data;
     } catch (e) {
       throw new Error(e.message);
     }

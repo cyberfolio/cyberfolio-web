@@ -6,7 +6,6 @@ import { toast } from "react-hot-toast";
 
 import CexService from "@services/cex";
 import DexService from "@services/dex";
-import InfoService from "@services/info";
 
 import AssetTable from "@components/asset-table";
 import { useAppDispatch, useAppSelector } from "@store/functions";
@@ -93,20 +92,6 @@ const Assets = () => {
           data: cexAssets,
         },
       });
-
-      try {
-        const netWorth = await InfoService.getNetWorth();
-        dispatch({
-          type: "SET_NET_WORTH",
-          payload: {
-            data: netWorth,
-          },
-        });
-      } catch (e) {
-        if (e.status !== 401) {
-          toast.error(e.message);
-        }
-      }
       setLoading(false);
     } catch (e) {
       toast.error(e.message);

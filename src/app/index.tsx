@@ -20,31 +20,29 @@ const Index = () => {
   const checkIsAuthenticated = useCallback(async () => {
     try {
       const res = await AuthService.getUserInfo();
-      if (res?.keyIdentifier) {
+      if (res.keyIdentifier) {
         dispatch({
           type: "SET_EVM_ADDRESS",
           payload: {
             data: res.keyIdentifier,
           },
         });
-        if (res.ensName) {
-          dispatch({
-            type: "SET_ENS_NAME",
-            payload: {
-              data: res.ensName,
-            },
-          });
-        }
-        if (res.lastAssetUpdate)
-          dispatch({
-            type: "SET_LAST_ASSET_UPDATE",
-            payload: {
-              data: res.lastAssetUpdate,
-            },
-          });
-      } else {
-        clearState();
       }
+      if (res.ensName) {
+        dispatch({
+          type: "SET_ENS_NAME",
+          payload: {
+            data: res.ensName,
+          },
+        });
+      }
+      if (res.lastAssetUpdate)
+        dispatch({
+          type: "SET_LAST_ASSET_UPDATE",
+          payload: {
+            data: res.lastAssetUpdate,
+          },
+        });
     } catch (e) {
       clearState();
     }

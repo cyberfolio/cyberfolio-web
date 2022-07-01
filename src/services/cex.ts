@@ -1,7 +1,7 @@
 import { mainInstance } from "@config/axios";
 import { CexAsset } from "@customTypes/index";
 
-class CexService {
+export default class CexService {
   static async addCex({
     apiKey,
     apiSecret,
@@ -51,5 +51,3 @@ class CexService {
     }
   }
 }
-
-export default CexService;

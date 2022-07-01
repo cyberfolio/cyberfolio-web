@@ -5,7 +5,7 @@ interface DexTokens {
   assets: DexAsset[];
   totalTokenValue: number;
 }
-class DexService {
+export default class DexService {
   static async addWallet({ address, name, chain }: { address: string; name: string; chain: string }) {
     try {
       await mainInstance.post(
@@ -16,26 +16,20 @@ class DexService {
         { withCredentials: true },
       );
     } catch (e) {
-      throw new Error(e?.response?.data);
+      throw new Error(e.response.data);
     }
   }
 
   static async getDexTokens({ chain }: { chain: Chain }) {
     try {
-      const res = await mainInstance.get(
+      const res = await mainInstance.get<DexTokens>(
         `dex/assets/${chain}`,
 
         { withCredentials: true },
       );
-      if (res?.data) {
-        return res.data as DexTokens;
-      } else {
-        throw new Error("Something went wrong");
-      }
+      return res.data;
     } catch (e) {
-      throw new Error(e?.response?.data);
+      throw new Error(e.response.data);
     }
   }
 }
-
-export default DexService;
