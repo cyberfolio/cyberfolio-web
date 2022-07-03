@@ -1,4 +1,4 @@
-import { Platform } from "@customTypes/index";
+import { Cex, CexAsset, AllNetworks, Chain, DexAsset } from "@customTypes/index";
 
 type Actions =
   | { type: "SET_LOADING"; payload: { state: boolean; message: string } }
@@ -9,13 +9,13 @@ type Actions =
   | {
       type: "FILTER_ASSETS_BY_PLATFORM";
       payload: {
-        platform: Platform;
+        platform: Chain | Cex | AllNetworks;
         image: string;
       };
     }
-  | { type: "OPEN_WALLET_MODAL"; payload: { open: boolean; chain: string } }
-  | { type: "OPEN_ADD_CEX_MODAL"; payload: { open: boolean; name: string } }
-  | { type: "SET_CEX_ASSETS"; payload: { data: any } }
-  | { type: "SET_DEX_ASSETS"; payload: { data: any } };
+  | { type: "OPEN_WALLET_MODAL"; payload: { open: boolean; chain: Chain } }
+  | { type: "OPEN_ADD_CEX_MODAL"; payload: { open: boolean; name: Cex } }
+  | { type: "SET_CEX_ASSETS"; payload: { data: CexAsset[] } }
+  | { type: "SET_DEX_ASSETS"; payload: { data: DexAsset[] } };
 
 export default Actions;

@@ -1,5 +1,11 @@
 /* eslint-disable no-throw-literal */
 import { mainInstance } from "@config/axios";
+import { Chain, Cex } from "@customTypes/index";
+
+interface AvailableAccountsRes {
+  availableCexes: Cex[];
+  availableChains: Chain[];
+}
 
 class InfoService {
   static async getNetWorth() {
@@ -18,7 +24,7 @@ class InfoService {
 
   static async getAvailableAccounts() {
     try {
-      const res = await mainInstance.get("info/available-accounts", {
+      const res = await mainInstance.get<AvailableAccountsRes>("info/available-accounts", {
         withCredentials: true,
       });
       return res.data;

@@ -8,14 +8,15 @@ import { toast } from "react-hot-toast";
 import Utilities from "@components/utilities";
 import Assets from "@components//assets";
 
-import FilterDropdown from "@components//filter-dropdown";
+import FilterDropdown from "@components/platform-dropdown";
 import useKeypress from "@components/hooks/useKeyPress";
 import utils from "@utils/index";
 import InfoService from "@services/info";
 import { useAppDispatch, useAppSelector } from "@store/functions";
+import { Cex, Chain } from "@customTypes/index";
 
-const availableChains = ["Bitcoin", "EVM", "Solana"];
-const availableCexes = ["Binance", "FTX", "Kucoin", "Gateio"];
+const availableChains = [Chain.BITCOIN, Chain.ETHEREUM, Chain.SOLANA];
+const availableCexes = [Cex.BINANCE, Cex.FTX, Cex.KUCOIN, Cex.GATEIO];
 
 const activeBundle = "Main";
 
@@ -28,7 +29,8 @@ const Home = () => {
   const dispatch = useAppDispatch();
   const [filterDropdownOpen, setFilterDropdownOpen] = useState(false);
   const [bundles, setBundles] = useState([""]);
-  const [availableAccounts, setAvailableAccounts] = useState([""]);
+  const [connectedChains, setConnectedChains] = useState<Chain[]>([]);
+  const [connectedCexes, setConnectedCexes] = useState<Cex[]>([]);
   const [currentTime, setCurrentTime] = useState<Date>(new Date());
 
   const getTotal = async () => {
@@ -49,7 +51,8 @@ const Home = () => {
   const getAvailableAccounts = async () => {
     try {
       const availableAccounts = await InfoService.getAvailableAccounts();
-      setAvailableAccounts(availableAccounts);
+      setConnectedCexes(availableAccounts.availableCexes);
+      setConnectedChains(availableAccounts.availableChains);
     } catch (e) {
       if (e.status !== 401) {
         toast.error(e.message);
@@ -85,7 +88,7 @@ const Home = () => {
     setFilterDropdownOpen(false);
   });
 
-  const openWalletModal = (chain: string) => {
+  const openWalletModal = (chain: Chain) => {
     if (evmAddress) {
       dispatch({
         type: "OPEN_WALLET_MODAL",
@@ -99,7 +102,7 @@ const Home = () => {
     }
   };
 
-  const openAddCexModal = (name: string) => {
+  const openAddCexModal = (name: Cex) => {
     if (evmAddress) {
       dispatch({
         type: "OPEN_ADD_CEX_MODAL",
@@ -141,13 +144,13 @@ const Home = () => {
               <div
                 className={classNames(
                   "home__header__add-wallets__button ",
-                  availableAccounts.includes(chain.toLowerCase()) && "home__header__add-wallets__button--active",
+                  connectedChains.includes(chain) && "home__header__add-wallets__button--active",
                 )}
                 key={chain}
                 onClick={() => openWalletModal(chain)}
               >
-                {chain} {availableAccounts.includes(chain.toLowerCase()) ? "Connected" : "Wallet"}
-                {availableAccounts.includes(chain.toLowerCase()) ? (
+                {chain} {connectedChains.includes(chain) ? "Connected" : "Wallet"}
+                {connectedChains.includes(chain) ? (
                   <span className="connectedDotButton"></span>
                 ) : (
                   <Plus color="white" size={20} />
@@ -160,13 +163,13 @@ const Home = () => {
               <div
                 className={classNames(
                   "home__header__add-wallets__button ",
-                  availableAccounts.includes(cex.toLowerCase()) && "home__header__add-wallets__button--active",
+                  connectedCexes.includes(cex) && "home__header__add-wallets__button--active",
                 )}
                 key={cex}
                 onClick={() => openAddCexModal(cex)}
               >
-                {cex} {availableAccounts.includes(cex.toLowerCase()) ? "Connected" : "Account"}
-                {availableAccounts.includes(cex.toLowerCase()) ? (
+                {cex} {connectedCexes.includes(cex) ? "Connected" : "Account"}
+                {connectedCexes.includes(cex) ? (
                   <span className="connectedDotButton"></span>
                 ) : (
                   <Plus color="white" size={20} />

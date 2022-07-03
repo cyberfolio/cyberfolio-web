@@ -2,7 +2,7 @@ import "./index.scss";
 
 import classnames from "classnames";
 import utils from "@utils/index";
-import { CexAsset, DexAsset } from "@customTypes/index";
+import { Cex, CexAsset, Chain, DexAsset } from "@customTypes/index";
 
 export const Index = ({ assets, loading }: { assets: (DexAsset | CexAsset)[]; loading: boolean }) => {
   const openAssetAtScan = (scanUrl: string) => {
@@ -34,25 +34,26 @@ export const Index = ({ assets, loading }: { assets: (DexAsset | CexAsset)[]; lo
             let symbol = "";
             let scan = "";
             let logo = "";
-            const cexName = "";
-            let platform = "";
+            let cexName = Cex.NO;
+            let chain = Chain.NO;
             let balance = 0;
             let walletName = "";
             let price = 0;
             let value = 0;
-            if ("platform" in asset) {
-              platformImage = utils.platformInfo.filter((info) => info.name === asset.platform)[0]?.image;
+            if ("chain" in asset) {
+              platformImage = utils.chainInfo.filter((info) => info.name === asset.chain)[0]?.image;
+              chain = asset.chain;
               symbol = asset.symbol;
               scan = asset.scan;
               logo = asset.logo;
-              platform = asset.platform;
               price = asset.price;
               balance = asset.balance;
               walletName = asset.walletName;
               value = asset.value;
             }
             if ("cexName" in asset) {
-              platformImage = utils.platformInfo.filter((info) => info.name === asset.cexName)[0]?.image;
+              cexName = asset.cexName;
+              platformImage = utils.cexInfo.filter((info) => info.name === asset.cexName)[0]?.image;
               symbol = asset.symbol;
               logo = asset.logo;
               price = asset.price;
@@ -93,12 +94,12 @@ export const Index = ({ assets, loading }: { assets: (DexAsset | CexAsset)[]; lo
                       {platformImage && (
                         <img
                           src={platformImage}
-                          alt={cexName || platform}
+                          alt={cexName || chain}
                           className="asset-table__assets__asset__item__chain__logo"
                         />
                       )}
                       {utils.arrangeCexName(cexName)}
-                      {utils.capitalizeFirstLetter(platform)}
+                      {utils.capitalizeFirstLetter(chain)}
                     </div>
                   </div>
                 </div>

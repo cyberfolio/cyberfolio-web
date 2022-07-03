@@ -18,8 +18,9 @@
     display: flex;
   }
   &__content {
+    transition: all .5s ease-in-out;
     box-shadow: 0 4px 18px rgb(7 7 22 / 20%);
-    max-width: 650px;
+    max-width: 550px;
     max-height: 100%;
     background-color: $background;
     border-radius: 12px;
@@ -35,22 +36,32 @@
       font-weight: bold;
       padding-bottom: 20px;
       &__exit {
-        @extend .button-borderless;
+        @extend .button-borderless-oval;
         font-size: 20px;
       }
     }
     &__body {
       @extend .flexCenter;
-      flex-direction: row;
+      flex-direction: column;
+      justify-content: flex-end;
       width: 100%;
       padding-bottom: 20px;
       &__input {
         @extend .textInput;
-        margin-right: 10px;
+        margin-top: 10px;
+        width: 70%;
       }
       &__button {
-        @extend .button;
-        margin-left: 10px;
+        margin-top: 10px;
+        width: 70%;
+        display: flex;
+        justify-content: flex-end;
+        &__content {
+          @extend .button;
+          &--loading {
+           opacity: 0.8;
+          }
+        }
       }
     }
   }
