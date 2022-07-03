@@ -103,7 +103,7 @@ export const Index = ({ assets, loading }: { assets: (DexAsset | CexAsset)[]; lo
                   </div>
                 </div>
                 <div className="asset-table__assets__asset__item ">{utils.toUsd(price)}</div>
-                <div className="asset-table__assets__asset__item">{balance}</div>
+                <div className="asset-table__assets__asset__item">{Intl.NumberFormat("en-US").format(balance)}</div>
                 <div className="asset-table__assets__asset__item asset-table__assets__asset__item--center">
                   {walletName}
                 </div>
