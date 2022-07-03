@@ -61,7 +61,7 @@ export const useMetamaskLogin = () => {
         setIsConnecting(false);
         throw new Error("Your message could not be verified!");
       }
-      const walletInfo = await AuthService.validateSignature({
+      const user = await AuthService.validateSignature({
         evmAddress,
         nonce,
         signature,
@@ -70,14 +70,22 @@ export const useMetamaskLogin = () => {
       dispatch({
         type: "SET_EVM_ADDRESS",
         payload: {
-          data: walletInfo.keyIdentifier,
+          data: user.keyIdentifier,
         },
       });
-      if (walletInfo.ensName) {
+      if (user.ensName) {
         dispatch({
           type: "SET_ENS_NAME",
           payload: {
-            data: walletInfo.ensName,
+            data: user.ensName,
+          },
+        });
+      }
+      if (user.lastAssetUpdate) {
+        dispatch({
+          type: "SET_LAST_ASSET_UPDATE",
+          payload: {
+            data: user.lastAssetUpdate,
           },
         });
       }
