@@ -29,6 +29,7 @@ const Home = () => {
   const [filterDropdownOpen, setFilterDropdownOpen] = useState(false);
   const [bundles, setBundles] = useState([""]);
   const [availableAccounts, setAvailableAccounts] = useState([""]);
+  const [currentTime, setCurrentTime] = useState<Date>(new Date());
 
   const getTotal = async () => {
     try {
@@ -55,6 +56,17 @@ const Home = () => {
       }
     }
   };
+
+  const onFocus = () => {
+    setCurrentTime(new Date());
+  };
+
+  useEffect(() => {
+    window.addEventListener("focus", onFocus);
+    return () => {
+      window.removeEventListener("focus", onFocus);
+    };
+  }, []);
 
   useEffect(() => {
     setFilterDropdownOpen(false);
@@ -178,7 +190,7 @@ const Home = () => {
                     <div className="home__header__second__first__last-update__label">
                       Data updated{" "}
                       <span className="home__header__second__first__last-update__label--value">
-                        {utils.toReadableDateDifference(new Date(lastAssetUpdate), new Date())}
+                        {utils.toReadableDateDifference(new Date(lastAssetUpdate), currentTime)}
                       </span>{" "}
                       ago
                     </div>
