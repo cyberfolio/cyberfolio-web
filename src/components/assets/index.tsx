@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import "./index.scss";
 
 import classnames from "classnames";
@@ -9,7 +9,7 @@ import DexService from "@services/dex";
 
 import AssetTable from "@components/asset-table";
 import { useAppDispatch, useAppSelector } from "@store/functions";
-import { CexAsset, Chain, DexAsset, AllNetworks } from "@customTypes/index";
+import { Chain, AllNetworks } from "@customTypes/index";
 
 const Assets = () => {
   const dispatch = useAppDispatch();
@@ -20,9 +20,6 @@ const Assets = () => {
 
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("All");
-  const [filteredDexTokens, setFilteredDexTokens] = useState<DexAsset[]>([]);
-  const [isFiltered, setIsFiltered] = useState(false);
-  const [assetsToShow, setAssetsToShow] = useState<(DexAsset | CexAsset)[]>([]);
 
   const getAllAssets = async () => {
     try {
@@ -99,29 +96,29 @@ const Assets = () => {
     }
   };
 
-  useEffect(() => {
-    if (activeTab === "All" && filteredDexTokens.length > 0 && isFiltered) {
-      setAssetsToShow([...filteredDexTokens, ...cexAssets]);
+  const assetsToShow = useMemo(() => {
+    if (String(platform.name) !== String(AllNetworks.ALLNETWORKS)) {
+      const filteredDex = dexAssets.filter((dexAsset) => String(dexAsset.chain) === String(platform.name));
+      const filteredCex = cexAssets.filter((cexToken) => String(cexToken.cexName) === String(platform.name));
+      if (activeTab === "All") {
+        return [...filteredCex, ...filteredDex];
+      } else if (activeTab === "CEX") {
+        return filteredCex;
+      } else if (activeTab === "DEX") {
+        return filteredDex;
+      } else {
+        return [...filteredCex, ...filteredDex];
+      }
+    } else if (activeTab === "All") {
+      return [...cexAssets, ...dexAssets];
+    } else if (activeTab === "CEX") {
+      return cexAssets;
+    } else if (activeTab === "DEX") {
+      return dexAssets;
+    } else {
+      return [];
     }
-    if (activeTab === "All" && filteredDexTokens.length === 0 && !isFiltered) {
-      setAssetsToShow([...dexAssets, ...cexAssets]);
-    }
-    if (activeTab === "All" && filteredDexTokens.length === 0 && isFiltered) {
-      setAssetsToShow([]);
-    }
-    if (activeTab === "CEX") {
-      setAssetsToShow(cexAssets);
-    }
-    if (activeTab === "DEX" && filteredDexTokens.length === 0 && !isFiltered) {
-      setAssetsToShow(dexAssets);
-    }
-    if (activeTab === "DEX" && filteredDexTokens.length === 0 && isFiltered) {
-      setAssetsToShow([]);
-    }
-    if (activeTab === "DEX" && filteredDexTokens.length > 0) {
-      setAssetsToShow(filteredDexTokens);
-    }
-  }, [activeTab, dexAssets, filteredDexTokens, cexAssets, isFiltered]);
+  }, [cexAssets, dexAssets, activeTab, platform]);
 
   const onTabClick = (tabName: string) => {
     setActiveTab(tabName);
@@ -133,19 +130,6 @@ const Assets = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated]);
-
-  useEffect(() => {
-    if (String(platform.name) !== String(AllNetworks.ALLNETWORKS)) {
-      const filteredDex = dexAssets.filter((dexToken) => String(dexToken.chain) === String(platform.name));
-      const filteredCex = cexAssets.filter((cexToken) => String(cexToken.cexName) === String(platform.name));
-      setIsFiltered(true);
-      setAssetsToShow([...filteredDex, ...filteredCex]);
-    }
-    if (String(platform.name) === String(AllNetworks.ALLNETWORKS)) {
-      setIsFiltered(false);
-      setFilteredDexTokens([]);
-    }
-  }, [platform, dexAssets, cexAssets]);
 
   return (
     <div className="assets">
