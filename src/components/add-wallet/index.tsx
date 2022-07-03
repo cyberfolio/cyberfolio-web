@@ -8,6 +8,7 @@ import DexService from "@services/dex";
 import useKeypress from "@components/hooks/useKeyPress";
 import utils from "@utils/index";
 import { useAppDispatch, useAppSelector } from "@store/functions";
+import { Chain } from "@customTypes/index";
 
 const AddWallet = () => {
   const [name, setName] = useState("");
@@ -49,7 +50,7 @@ const AddWallet = () => {
       type: "OPEN_WALLET_MODAL",
       payload: {
         open: false,
-        chain: "",
+        chain: Chain.BITCOIN,
       },
     });
   };
@@ -79,14 +80,23 @@ const AddWallet = () => {
             placeholder="Enter Wallet Name"
             maxLength={20}
           />
-          <button className="add-wallet-modal__content__body__button" onClick={add} disabled={loading}>
-            {loading && (
-              <div className="fa-1x" style={{ marginRight: 5 }}>
-                <i className="fas fa-sync fa-spin"></i>
-              </div>
-            )}
-            Add
-          </button>
+          <div className="add-wallet-modal__content__body__button">
+            <button
+              className={classnames(
+                "add-wallet-modal__content__body__button__content",
+                open && "add-wallet-modal__content__body__button__content--loading",
+              )}
+              onClick={add}
+              disabled={loading}
+            >
+              {loading && (
+                <div className="fa-1x" style={{ marginRight: 8 }}>
+                  <i className="fas fa-sync fa-spin"></i>
+                </div>
+              )}
+              Add
+            </button>
+          </div>
         </div>
       </div>
     </div>

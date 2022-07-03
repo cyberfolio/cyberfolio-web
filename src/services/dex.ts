@@ -6,7 +6,7 @@ interface DexTokens {
   totalTokenValue: number;
 }
 export default class DexService {
-  static async addWallet({ address, name, chain }: { address: string; name: string; chain: string }) {
+  static async addWallet({ address, name, chain }: { address: string; name: string; chain: Chain }) {
     try {
       await mainInstance.post(
         "dex/add",

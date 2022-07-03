@@ -17,7 +17,7 @@ import Gateio from "@assets/gateio.svg";
 import FTX from "@assets/ftx.svg";
 
 import store from "@store/index";
-import { Platform } from "@customTypes/index";
+import { Cex, Chain } from "@customTypes/index";
 
 const truncateRegex = /^(0x[a-zA-Z0-9]{4})[a-zA-Z0-9]+([a-zA-Z0-9]{4})$/;
 
@@ -44,61 +44,60 @@ const truncateEthAddress = (address: string) => {
   return `${match[1]}…${match[2]}`;
 };
 
-const platformInfo = [
+const chainInfo = [
   {
-    name: Platform.ALLNETWORKS,
-    image: AllNetworks,
-  },
-  {
-    name: Platform.BITCOIN,
+    name: Chain.BITCOIN,
     image: Bitcoin,
   },
   {
-    name: Platform.ETHEREUM,
+    name: Chain.ETHEREUM,
     image: Ethereum,
   },
   {
-    name: Platform.BSC,
+    name: Chain.BSC,
     image: SmartChain,
   },
   {
-    name: Platform.AVALANCHE,
+    name: Chain.AVALANCHE,
     image: Avalanche,
   },
   {
-    name: Platform.SOLANA,
+    name: Chain.SOLANA,
     image: Solana,
   },
   {
-    name: Platform.POLKADOT,
+    name: Chain.POLKADOT,
     image: Polkadot,
   },
   {
-    name: Platform.POLYGON,
+    name: Chain.POLYGON,
     image: Polygon,
   },
   {
-    name: Platform.ARBITRUM,
+    name: Chain.ARBITRUM,
     image: Arbitrum,
   },
   {
-    name: Platform.OPTIMISM,
+    name: Chain.OPTIMISM,
     image: Optimism,
   },
+];
+
+const cexInfo = [
   {
-    name: Platform.BINANCE,
+    name: Cex.BINANCE,
     image: Binance,
   },
   {
-    name: Platform.KUCOIN,
+    name: Cex.KUCOIN,
     image: Kucoin,
   },
   {
-    name: Platform.GATEIO,
+    name: Cex.GATEIO,
     image: Gateio,
   },
   {
-    name: Platform.FTX,
+    name: Cex.FTX,
     image: FTX,
   },
 ];
@@ -111,20 +110,17 @@ const validateBtcAddress = (address: string) => {
   return true;
 };
 
-const isValidWalletAddress = async ({ address, chain }: { address: string; chain: string }) => {
-  let isValid = false;
-  if (chain) {
-    if (chain === "Bitcoin") {
-      isValid = validateBtcAddress(address);
-    }
-    if (chain === "Evm") {
-      isValid = ethers.utils.isAddress(address);
-    } else if (chain === "Solana") {
-      const publicKey = new solanaWeb3.PublicKey(address);
-      isValid = await solanaWeb3.PublicKey.isOnCurve(publicKey);
-    }
+const isValidWalletAddress = async ({ address, chain }: { address: string; chain: Chain }) => {
+  switch (chain) {
+    case Chain.BITCOIN:
+      return validateBtcAddress(address);
+    case Chain.ETHEREUM:
+      return ethers.utils.isAddress(address);
+    case Chain.SOLANA:
+      return solanaWeb3.PublicKey.isOnCurve(address);
+    default:
+      return false;
   }
-  return isValid;
 };
 
 const capitalizeFirstLetter = (string: string) => {
@@ -134,13 +130,15 @@ const capitalizeFirstLetter = (string: string) => {
   return "";
 };
 
-const arrangeCexName = (string: string) => {
-  if (string && string === "ftx") {
-    return "FTX";
-  } else if (string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+const arrangeCexName = (cex: Cex) => {
+  switch (cex) {
+    case Cex.NO:
+      return "";
+    case Cex.FTX:
+      return "FTX";
+    default:
+      return cex.charAt(0).toUpperCase() + cex.slice(1);
   }
-  return "";
 };
 
 const toUsd = (value: number) => {
@@ -204,7 +202,8 @@ export default {
   arrangeCexName,
   capitalizeFirstLetter,
   isValidWalletAddress,
-  platformInfo,
+  cexInfo,
+  chainInfo,
   truncateEthAddress,
   logos,
 };

@@ -35,7 +35,7 @@
       font-weight: bold;
       padding-bottom: 20px;
       &__exit {
-        @extend .button-borderless;
+        @extend .button-borderless-oval;
         font-size: 20px;
       }
     }

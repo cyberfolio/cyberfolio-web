@@ -1,14 +1,5 @@
-export enum Platform {
-  ALLNETWORKS = "All Networks",
-  BITCOIN = "Bitcoin",
-  ETHEREUM = "Ethereum",
-  BSC = "SmartChain",
-  AVALANCHE = "Avalanche",
-  SOLANA = "Solana",
-  POLKADOT = "Polkadot",
-  POLYGON = "Polygon",
-  ARBITRUM = "Arbitrum",
-  OPTIMISM = "Optimism",
+export enum Cex {
+  NO = "No",
   BINANCE = "Binance",
   FTX = "FTX",
   GATEIO = "Gateio",
@@ -16,6 +7,7 @@ export enum Platform {
 }
 
 export enum Chain {
+  NO = "No",
   BITCOIN = "Bitcoin",
   ETHEREUM = "Ethereum",
   BSC = "SmartChain",
@@ -26,9 +18,14 @@ export enum Chain {
   ARBITRUM = "Arbitrum",
   OPTIMISM = "Optimism",
 }
+
+export enum AllNetworks {
+  ALLNETWORKS = "All Networks",
+}
+
 export interface DexAsset {
   keyIdentifier: string;
-  platform: Platform;
+  chain: Chain;
   name: string;
   symbol: string;
   logo: string;
@@ -43,7 +40,7 @@ export interface DexAsset {
 
 export interface CexAsset {
   keyIdentifier: string;
-  cexName: Platform;
+  cexName: Cex;
   name: string;
   symbol: string;
   logo: string;

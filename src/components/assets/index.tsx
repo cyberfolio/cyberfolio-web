@@ -9,7 +9,7 @@ import DexService from "@services/dex";
 
 import AssetTable from "@components/asset-table";
 import { useAppDispatch, useAppSelector } from "@store/functions";
-import { CexAsset, Chain, DexAsset, Platform } from "@customTypes/index";
+import { CexAsset, Chain, DexAsset, AllNetworks } from "@customTypes/index";
 
 const Assets = () => {
   const dispatch = useAppDispatch();
@@ -135,13 +135,13 @@ const Assets = () => {
   }, [isAuthenticated]);
 
   useEffect(() => {
-    if (platform.name !== Platform.ALLNETWORKS) {
-      const filteredDex = dexAssets.filter((dexToken) => dexToken.platform === platform.name);
-      const filteredCex = cexAssets.filter((cexToken) => cexToken.cexName === platform.name);
+    if (String(platform.name) !== String(AllNetworks.ALLNETWORKS)) {
+      const filteredDex = dexAssets.filter((dexToken) => String(dexToken.chain) === String(platform.name));
+      const filteredCex = cexAssets.filter((cexToken) => String(cexToken.cexName) === String(platform.name));
       setIsFiltered(true);
       setAssetsToShow([...filteredDex, ...filteredCex]);
     }
-    if (platform.name === Platform.ALLNETWORKS) {
+    if (String(platform.name) === String(AllNetworks.ALLNETWORKS)) {
       setIsFiltered(false);
       setFilteredDexTokens([]);
     }

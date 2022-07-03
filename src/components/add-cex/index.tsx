@@ -8,6 +8,7 @@ import CexService from "@services/cex";
 import useKeypress from "@components/hooks/useKeyPress";
 import { useAppDispatch, useAppSelector } from "@store/functions";
 import utils from "@utils/index";
+import { Cex } from "@customTypes/index";
 
 const AddCex = () => {
   const [apiKey, setApiKey] = useState("");
@@ -69,7 +70,7 @@ const AddCex = () => {
       type: "OPEN_ADD_CEX_MODAL",
       payload: {
         open: false,
-        name: "",
+        name: Cex.NO,
       },
     });
   };

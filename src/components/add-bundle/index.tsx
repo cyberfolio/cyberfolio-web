@@ -3,6 +3,7 @@ import "./index.scss";
 
 import useKeypress from "@components/hooks/useKeyPress";
 import { useAppDispatch } from "@store/functions";
+import { Cex } from "@customTypes/index";
 
 const Index = () => {
   const dispatch = useAppDispatch();
@@ -17,7 +18,7 @@ const Index = () => {
       type: "OPEN_ADD_CEX_MODAL",
       payload: {
         open: false,
-        name: "",
+        name: Cex.NO,
       },
     });
   };

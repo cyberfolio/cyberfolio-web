@@ -1,6 +1,6 @@
 import Actions from "./actions";
-import AllNetworks from "@assets/blockchain.svg";
-import { CexAsset, DexAsset, Platform } from "@customTypes/index";
+import ALLNetworks from "@assets/blockchain.svg";
+import { Cex, AllNetworks, CexAsset, Chain, DexAsset } from "@customTypes/index";
 
 const initialState = {
   loading: {
@@ -12,16 +12,16 @@ const initialState = {
   lastAssetUpdate: "",
   netWorth: 0,
   platform: {
-    name: Platform.ALLNETWORKS,
-    image: AllNetworks,
+    name: AllNetworks.ALLNETWORKS as Cex | Chain | AllNetworks,
+    image: ALLNetworks,
   },
   isWalletModalOpen: {
     open: false,
-    chain: "",
+    chain: Chain.NO,
   },
   isAddCexModalOpen: {
     open: false,
-    name: "",
+    name: Cex.NO,
   },
   dexAssets: [] as DexAsset[],
   cexAssets: [] as CexAsset[],

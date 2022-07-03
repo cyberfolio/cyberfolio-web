@@ -52,7 +52,7 @@
         margin-top: 15px;
         margin-right: 15px;
         font-size: 0.7rem;
-        @extend .button;
+        @extend .button-borderless;
         @extend .unselectable;
         &--active {
           border-color: $success-color;
@@ -109,7 +109,7 @@
         @extend .unselectable;
         &__button {
           font-size: 0.8rem;
-          @extend .button;
+          @extend .button-borderless;
           padding: 18px;
           &__icon {
             width: 1.5rem;

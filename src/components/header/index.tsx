@@ -52,7 +52,12 @@ const ConnectWallet = () => {
           },
         });
       } catch (e) {
-        console.log(e.message);
+        dispatch({
+          type: "SET_ENS_NAME",
+          payload: {
+            data: "",
+          },
+        });
       }
     }
   };
