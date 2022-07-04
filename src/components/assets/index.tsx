@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import "./index.scss";
 
 import classnames from "classnames";
@@ -21,7 +21,7 @@ const Assets = () => {
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("All");
 
-  const getAllAssets = async () => {
+  const getAllAssets = useCallback(async () => {
     try {
       setLoading(true);
       const dexTokensBitcoin = await DexService.getDexTokens({
@@ -94,7 +94,7 @@ const Assets = () => {
       toast.error(e.message);
       setLoading(false);
     }
-  };
+  }, [dispatch]);
 
   const assetsToShow = useMemo(() => {
     if (String(platform.name) !== String(AllNetworks.ALLNETWORKS)) {
@@ -128,8 +128,7 @@ const Assets = () => {
     if (isAuthenticated) {
       getAllAssets();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isAuthenticated]);
+  }, [isAuthenticated, getAllAssets]);
 
   return (
     <div className="assets">
@@ -152,26 +151,6 @@ const Assets = () => {
         >
           DEX
         </div>
-        {/*
-        <div
-          className={classnames(
-            "assets__links__link",
-            activeTab === "Pools" && "assets__links__link--active"
-          )}
-          onClick={() => onTabClick("Pools")}
-        >
-          Pools
-        </div>
-        <div
-          className={classnames(
-            "assets__links__link",
-            activeTab === "Connected Accounts" && "assets__links__link--active"
-          )}
-          onClick={() => onTabClick("Connected Accounts")}
-        >
-          Connected Accounts
-        </div>
-      */}
       </div>
       <div className="assets__table">
         <AssetTable assets={assetsToShow} loading={loading} />
