@@ -22,11 +22,16 @@ export default class DexService {
 
   static async getDexTokens({ chain }: { chain: Chain }) {
     try {
-      const res = await mainInstance.get<DexTokens>(
-        `dex/assets/${chain}`,
+      const res = await mainInstance.get<DexTokens>(`dex/assets/${chain}`, { withCredentials: true });
+      return res.data;
+    } catch (e) {
+      throw new Error(e.response.data);
+    }
+  }
 
-        { withCredentials: true },
-      );
+  static async getAllDexTokens() {
+    try {
+      const res = await mainInstance.get<DexTokens>(`dex/assets`, { withCredentials: true });
       return res.data;
     } catch (e) {
       throw new Error(e.response.data);

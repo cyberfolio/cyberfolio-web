@@ -9,7 +9,7 @@ import DexService from "@services/dex";
 
 import AssetTable from "@components/asset-table";
 import { useAppDispatch, useAppSelector } from "@store/functions";
-import { Chain, AllNetworks } from "@customTypes/index";
+import { AllNetworks } from "@customTypes/index";
 
 const Assets = () => {
   const dispatch = useAppDispatch();
@@ -24,58 +24,14 @@ const Assets = () => {
   const getAllAssets = useCallback(async () => {
     try {
       setLoading(true);
-      const dexTokensBitcoin = await DexService.getDexTokens({
-        chain: Chain.BITCOIN,
-      });
-      const dexTokensEthereum = await DexService.getDexTokens({
-        chain: Chain.ETHEREUM,
-      });
-      const dexTokensSmartChain = await DexService.getDexTokens({
-        chain: Chain.BSC,
-      });
-      const dexTokensAvalanche = await DexService.getDexTokens({
-        chain: Chain.AVALANCHE,
-      });
-      const dexTokensArbitrum = await DexService.getDexTokens({
-        chain: Chain.ARBITRUM,
-      });
-      const dexTokensPolygon = await DexService.getDexTokens({
-        chain: Chain.POLYGON,
-      });
-      const dexTokenOptimism = await DexService.getDexTokens({
-        chain: Chain.OPTIMISM,
-      });
-      const dexAssets = [];
-
-      if (dexTokensBitcoin?.assets) {
-        dexAssets.push(...dexTokensBitcoin.assets);
-      }
-      if (dexTokensEthereum?.assets) {
-        dexAssets.push(...dexTokensEthereum.assets);
-      }
-      if (dexTokensSmartChain?.assets) {
-        dexAssets.push(...dexTokensSmartChain.assets);
-      }
-      if (dexTokensAvalanche?.assets) {
-        dexAssets.push(...dexTokensAvalanche.assets);
-      }
-      if (dexTokensArbitrum?.assets) {
-        dexAssets.push(...dexTokensArbitrum.assets);
-      }
-      if (dexTokensPolygon?.assets) {
-        dexAssets.push(...dexTokensPolygon.assets);
-      }
-      if (dexTokenOptimism?.assets) {
-        dexAssets.push(...dexTokenOptimism.assets);
-      }
-      dexAssets.sort(function (a, b) {
+      const dexAssets = await DexService.getAllDexTokens();
+      dexAssets.assets.sort(function (a, b) {
         return b.value - a.value;
       });
-
       dispatch({
         type: "SET_DEX_ASSETS",
         payload: {
-          data: dexAssets,
+          data: dexAssets.assets,
         },
       });
 
