@@ -1,5 +1,5 @@
 import { mainInstance } from "@config/axios";
-import { CexAsset } from "@customTypes/index";
+import { CexAsset, Cex } from "@customTypes/index";
 
 export default class CexService {
   static async addCex({
@@ -10,11 +10,11 @@ export default class CexService {
   }: {
     apiKey: string;
     apiSecret: string;
-    cexName: string;
+    cexName: Cex;
     passphrase: string;
   }) {
     try {
-      const res = await mainInstance.post(
+      await mainInstance.post(
         "/cex/add",
         {
           apiKey,
@@ -24,13 +24,8 @@ export default class CexService {
         },
         { withCredentials: true },
       );
-      if (res?.data?.assets) {
-        return res?.data?.assets as CexAsset[];
-      } else {
-        throw new Error("Something went wrong");
-      }
     } catch (e) {
-      throw new Error(e?.response?.data);
+      throw new Error(e.response?.data);
     }
   }
 
@@ -47,7 +42,7 @@ export default class CexService {
         throw new Error("Something went wrong");
       }
     } catch (e) {
-      throw new Error(e?.response?.data);
+      throw new Error(e.response?.data);
     }
   }
 }

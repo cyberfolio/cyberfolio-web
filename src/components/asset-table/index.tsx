@@ -98,8 +98,8 @@ export const Index = ({ assets, loading }: { assets: (DexAsset | CexAsset)[]; lo
                           className="asset-table__assets__asset__item__chain__logo"
                         />
                       )}
-                      {utils.arrangeCexName(cexName)}
-                      {utils.capitalizeFirstLetter(chain)}
+                      {cexName !== Cex.NO && utils.arrangeCexName(cexName)}
+                      {chain !== Chain.NO && utils.capitalizeFirstLetter(chain)}
                     </div>
                   </div>
                 </div>

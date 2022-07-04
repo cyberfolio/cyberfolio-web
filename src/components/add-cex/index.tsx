@@ -9,6 +9,7 @@ import useKeypress from "@components/hooks/useKeyPress";
 import { useAppDispatch, useAppSelector } from "@store/functions";
 import utils from "@utils/index";
 import { Cex } from "@customTypes/index";
+import InfoService from "@services/info";
 
 const AddCex = () => {
   const [apiKey, setApiKey] = useState("");
@@ -28,36 +29,42 @@ const AddCex = () => {
       utils.setAppLoading(false);
       return;
     }
-    if (name?.split(" ")?.shift()?.toLowerCase() === "kucoin" && !passphrase) {
+    if (name === Cex.KUCOIN && !passphrase) {
       toast.error("Please enter passphrase.");
       setLoading(false);
       utils.setAppLoading(false);
       return;
     }
     try {
-      const cexName = name.split(" ").shift();
-      if (cexName) {
-        const cexAssets = await CexService.addCex({
+      if (name) {
+        await CexService.addCex({
           apiKey,
           apiSecret,
-          cexName,
+          cexName: name,
           passphrase,
         });
+        const cexAssets = await CexService.getCexTokens();
+        const netWorth = await InfoService.getNetWorth();
         dispatch({
           type: "SET_CEX_ASSETS",
           payload: {
             data: cexAssets,
           },
         });
+        dispatch({
+          type: "SET_NET_WORTH",
+          payload: {
+            data: netWorth,
+          },
+        });
         toast.success(`${name} added`);
       }
-      setLoading(false);
-      utils.setAppLoading(false);
       close();
     } catch (e) {
       toast.error(e.message);
-      setLoading(false);
+    } finally {
       utils.setAppLoading(false);
+      setLoading(false);
     }
   };
 

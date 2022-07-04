@@ -30,6 +30,13 @@ const AddWallet = () => {
       setLoading(true);
       utils.setAppLoading(true);
       await DexService.addWallet({ name, address, chain });
+      const allDexTokens = await DexService.getAllDexTokens();
+      dispatch({
+        type: "SET_DEX_ASSETS",
+        payload: {
+          data: allDexTokens.assets,
+        },
+      });
       toast.success("Wallet added.");
     } catch (e) {
       toast.error(e.message);
