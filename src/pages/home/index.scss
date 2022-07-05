@@ -55,7 +55,8 @@
         @extend .button-borderless;
         @extend .unselectable;
         &--active {
-          border-color: $success-color;
+          border: 1px solid $success-color;
+          cursor: unset !important;
         }
       }
     }

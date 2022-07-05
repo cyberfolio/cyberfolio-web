@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import "./index.scss";
 
 import { Plus, ChevronDown } from "react-bootstrap-icons";
@@ -33,7 +33,7 @@ const Home = () => {
   const [bundles, setBundles] = useState([""]);
   const [currentTime, setCurrentTime] = useState<Date>(new Date());
 
-  const getTotal = async () => {
+  const getTotal = useCallback(async () => {
     try {
       const netWorth = await InfoService.getNetWorth();
       dispatch({
@@ -47,8 +47,8 @@ const Home = () => {
         toast.error(e.message);
       }
     }
-  };
-  const getAvailableAccounts = async () => {
+  }, [dispatch]);
+  const getAvailableAccounts = useCallback(async () => {
     try {
       const availableAccounts = await InfoService.getAvailableAccounts();
       dispatch({
@@ -68,7 +68,7 @@ const Home = () => {
         toast.error(e.message);
       }
     }
-  };
+  }, [dispatch]);
 
   const onFocus = () => {
     setCurrentTime(new Date());
@@ -91,8 +91,7 @@ const Home = () => {
       getTotal();
       getAvailableAccounts();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [evmAddress]);
+  }, [evmAddress, getTotal, getAvailableAccounts]);
 
   useKeypress("Escape", () => {
     setFilterDropdownOpen(false);
@@ -113,6 +112,7 @@ const Home = () => {
   };
 
   const openAddCexModal = (name: Cex) => {
+    if (connectedCexes.includes(name)) return;
     if (evmAddress) {
       dispatch({
         type: "OPEN_ADD_CEX_MODAL",

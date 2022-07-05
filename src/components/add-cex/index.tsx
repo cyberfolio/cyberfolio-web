@@ -45,6 +45,13 @@ const AddCex = () => {
         });
         const cexAssets = await CexService.getCexTokens();
         const netWorth = await InfoService.getNetWorth();
+        const availableAccounts = await InfoService.getAvailableAccounts();
+        dispatch({
+          type: "SET_CONNECTED_CEXES",
+          payload: {
+            data: availableAccounts.availableCexes,
+          },
+        });
         dispatch({
           type: "SET_CEX_ASSETS",
           payload: {
