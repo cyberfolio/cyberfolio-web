@@ -25,12 +25,12 @@ const Home = () => {
   const netWorth = useAppSelector((state) => state.netWorth);
   const lastAssetUpdate = useAppSelector((state) => state.lastAssetUpdate);
   const evmAddress = useAppSelector((state) => state.evmAddress);
+  const connectedCexes = useAppSelector((state) => state.connectedCexes);
+  const connectedChains = useAppSelector((state) => state.connectedChains);
 
   const dispatch = useAppDispatch();
   const [filterDropdownOpen, setFilterDropdownOpen] = useState(false);
   const [bundles, setBundles] = useState([""]);
-  const [connectedChains, setConnectedChains] = useState<Chain[]>([]);
-  const [connectedCexes, setConnectedCexes] = useState<Cex[]>([]);
   const [currentTime, setCurrentTime] = useState<Date>(new Date());
 
   const getTotal = async () => {
@@ -51,8 +51,18 @@ const Home = () => {
   const getAvailableAccounts = async () => {
     try {
       const availableAccounts = await InfoService.getAvailableAccounts();
-      setConnectedCexes(availableAccounts.availableCexes);
-      setConnectedChains(availableAccounts.availableChains);
+      dispatch({
+        type: "SET_CONNECTED_CEXES",
+        payload: {
+          data: availableAccounts.availableCexes,
+        },
+      });
+      dispatch({
+        type: "SET_CONNECTED_CHAINS",
+        payload: {
+          data: availableAccounts.availableChains,
+        },
+      });
     } catch (e) {
       if (e.status !== 401) {
         toast.error(e.message);

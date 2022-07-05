@@ -17,7 +17,7 @@ export const Index = ({ assets, loading }: { assets: (DexAsset | CexAsset)[]; lo
         <div className="asset-table__header__item asset-table__header__item--first">ASSET</div>
         <div className="asset-table__header__item ">PRICE</div>
         <div className="asset-table__header__item">BALANCE</div>
-        <div className="asset-table__header__item asset-table__header__item--center">WALLET NAME</div>
+        <div className="asset-table__header__item asset-table__header__item--center">WALLET/ACCOUNT</div>
         <div className="asset-table__header__item asset-table__header__item--last">VALUE</div>
       </div>
       <div className="asset-table__assets">
@@ -38,6 +38,7 @@ export const Index = ({ assets, loading }: { assets: (DexAsset | CexAsset)[]; lo
             let chain = Chain.NO;
             let balance = 0;
             let walletName = "";
+            let accountName = "";
             let price = 0;
             let value = 0;
             if ("chain" in asset) {
@@ -58,6 +59,7 @@ export const Index = ({ assets, loading }: { assets: (DexAsset | CexAsset)[]; lo
               logo = asset.logo;
               price = asset.price;
               balance = asset.balance;
+              accountName = asset.accountName;
               value = asset.value;
             }
             if (!symbol) {
@@ -106,7 +108,7 @@ export const Index = ({ assets, loading }: { assets: (DexAsset | CexAsset)[]; lo
                 <div className="asset-table__assets__asset__item ">{utils.toUsd(price)}</div>
                 <div className="asset-table__assets__asset__item">{Intl.NumberFormat("en-US").format(balance)}</div>
                 <div className="asset-table__assets__asset__item asset-table__assets__asset__item--center">
-                  {walletName}
+                  {walletName} {accountName}
                 </div>
                 <div className="asset-table__assets__asset__item asset-table__assets__asset__item--last">
                   {utils.toUsd(value)}

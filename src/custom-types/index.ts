@@ -47,4 +47,5 @@ export interface CexAsset {
   balance: number;
   price: number;
   value: number;
+  accountName: string;
 }

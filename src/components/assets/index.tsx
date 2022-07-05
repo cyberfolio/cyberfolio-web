@@ -54,23 +54,28 @@ const Assets = () => {
 
   const assetsToShow = useMemo(() => {
     if (String(platform.name) !== String(AllNetworks.ALLNETWORKS)) {
-      const filteredDex = dexAssets.filter((dexAsset) => String(dexAsset.chain) === String(platform.name));
-      const filteredCex = cexAssets.filter((cexToken) => String(cexToken.cexName) === String(platform.name));
+      const filteredDex = dexAssets
+        .filter((dexAsset) => String(dexAsset.chain) === String(platform.name))
+        .sort((a, b) => b.value - a.value);
+      const filteredCex = cexAssets
+        .filter((cexToken) => String(cexToken.cexName) === String(platform.name))
+        .sort((a, b) => b.value - a.value);
+      const all = [...filteredCex, ...filteredDex].sort((a, b) => b.value - a.value);
       if (activeTab === "All") {
-        return [...filteredCex, ...filteredDex];
+        return all;
       } else if (activeTab === "CEX") {
         return filteredCex;
       } else if (activeTab === "DEX") {
         return filteredDex;
       } else {
-        return [...filteredCex, ...filteredDex];
+        return all;
       }
     } else if (activeTab === "All") {
-      return [...cexAssets, ...dexAssets];
+      return [...cexAssets, ...dexAssets].sort((a, b) => b.value - a.value);
     } else if (activeTab === "CEX") {
-      return cexAssets;
+      return cexAssets.sort((a, b) => b.value - a.value);
     } else if (activeTab === "DEX") {
-      return dexAssets;
+      return dexAssets.sort((a, b) => b.value - a.value);
     } else {
       return [];
     }

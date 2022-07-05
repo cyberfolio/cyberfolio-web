@@ -25,6 +25,8 @@ const initialState = {
   },
   dexAssets: [] as DexAsset[],
   cexAssets: [] as CexAsset[],
+  connectedCexes: [] as Cex[],
+  connectedChains: [] as Chain[],
 };
 
 const reducer = (state = initialState, action: Actions) => {
@@ -35,6 +37,16 @@ const reducer = (state = initialState, action: Actions) => {
         state: action.payload.state,
         message: action.payload.message,
       },
+    };
+  } else if (action.type === "SET_CONNECTED_CEXES") {
+    return {
+      ...state,
+      connectedCexes: action.payload.data,
+    };
+  } else if (action.type === "SET_CONNECTED_CHAINS") {
+    return {
+      ...state,
+      connectedChains: action.payload.data,
     };
   } else if (action.type === "SET_EVM_ADDRESS") {
     return {
