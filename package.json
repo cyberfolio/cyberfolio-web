@@ -9,7 +9,8 @@
     "test": "craco test",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint:fix": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",
-    "u": "yarn yarn-upgrade-all"
+    "u": "yarn yarn-upgrade-all",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@craco/craco": "^6.4.3",
@@ -52,8 +53,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "husky": "4",
-    "lint-staged": "^13.0.1",
+    "husky": "^8.0.1",
     "prettier": "^2.7.1",
     "typescript": "^4.7.3"
   },
@@ -68,14 +68,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": "yarn run lint"
   },
   "engines": {
     "node": "16.15.0",
