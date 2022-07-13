@@ -117,7 +117,7 @@ const isValidWalletAddress = async ({ address, chain }: { address: string; chain
     case Chain.ETHEREUM:
       return ethers.utils.isAddress(address);
     case Chain.SOLANA:
-      return solanaWeb3.PublicKey.isOnCurve(address);
+      return isValidSolanaAddress(address);
     default:
       return false;
   }

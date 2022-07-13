@@ -9,6 +9,7 @@ import useKeypress from "@components/hooks/useKeyPress";
 import utils from "@utils/index";
 import { useAppDispatch, useAppSelector } from "@store/functions";
 import { Chain } from "@customTypes/index";
+import InfoService from "@services/info";
 
 const AddWallet = () => {
   const [name, setName] = useState("");
@@ -21,11 +22,20 @@ const AddWallet = () => {
   const modalRef = useRef(null);
 
   const add = async () => {
-    const isValid = await utils.isValidWalletAddress({ address, chain });
-    if (!isValid) {
-      toast.error(`${chain} address is not valid`);
-      return;
+    try {
+      const isValid = await utils.isValidWalletAddress({ address, chain });
+      if (!isValid) {
+        toast.error(`${chain} address is not valid`);
+        return;
+      }
+    } catch (e) {
+      if (e instanceof Error) {
+        toast.error(e.message);
+      } else {
+        toast.error("Unexpected error");
+      }
     }
+
     try {
       setLoading(true);
       utils.setAppLoading(true);
@@ -37,13 +47,20 @@ const AddWallet = () => {
           data: allDexTokens.assets,
         },
       });
+      const availableAccounts = await InfoService.getAvailableAccounts();
       toast.success("Wallet added.");
+      dispatch({
+        type: "SET_CONNECTED_CHAINS",
+        payload: {
+          data: availableAccounts.availableChains,
+        },
+      });
+      setName("");
+      setAddress("");
+      close();
     } catch (e) {
       toast.error(e.message);
     } finally {
-      close();
-      setName("");
-      setAddress("");
       setLoading(false);
       utils.setAppLoading(false);
     }
@@ -78,7 +95,7 @@ const AddWallet = () => {
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             placeholder="Enter Wallet Address"
-            maxLength={42}
+            maxLength={100}
           />
           <input
             className="add-wallet-modal__content__body__input"
