@@ -123,6 +123,14 @@ const isValidWalletAddress = async ({ address, chain }: { address: string; chain
   }
 };
 
+const isValidSolanaAddress = (address: string) => {
+  try {
+    return solanaWeb3.PublicKey.isOnCurve(address);
+  } catch (e) {
+    return false;
+  }
+};
+
 const capitalizeFirstLetter = (string: string) => {
   if (string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
