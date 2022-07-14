@@ -35,7 +35,6 @@ const AddWallet = () => {
         toast.error("Unexpected error");
       }
     }
-
     try {
       setLoading(true);
       utils.setAppLoading(true);
@@ -55,6 +54,13 @@ const AddWallet = () => {
           data: availableAccounts.availableChains,
         },
       });
+      const netWorth = await InfoService.getNetWorth();
+      dispatch({
+        type: "SET_NET_WORTH",
+        payload: {
+          data: netWorth,
+        },
+      });
       setName("");
       setAddress("");
       close();
@@ -67,6 +73,8 @@ const AddWallet = () => {
   };
   useKeypress("Escape", () => {
     close();
+    setName("");
+    setAddress("");
   });
 
   const close = () => {

@@ -77,6 +77,9 @@ const AddCex = () => {
 
   useKeypress("Escape", () => {
     close();
+    setApiKey("");
+    setApiSecret("");
+    setPassphrase("");
   });
 
   const close = () => {
