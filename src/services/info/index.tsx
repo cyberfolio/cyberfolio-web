@@ -1,17 +1,6 @@
 /* eslint-disable no-throw-literal */
 import { mainInstance } from "@config/axios";
-import { Chain, Cex } from "@customTypes/index";
-
-interface ConnectedWallets {
-  chain: Chain;
-  walletName: string;
-  walletAddress: string;
-}
-
-export interface ConnectedAccountsResponse {
-  cexes: Cex[];
-  wallets: ConnectedWallets[];
-}
+import { ConnectedAccountsResponse } from "./types";
 
 class InfoService {
   static async getNetWorth() {

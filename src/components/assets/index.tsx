@@ -10,6 +10,14 @@ import DexService from "@services/dex";
 import AssetTable from "@components/asset-table";
 import { useAppDispatch, useAppSelector } from "@store/functions";
 import { AllNetworks } from "@customTypes/index";
+import Accounts from "@components/accounts";
+
+enum Tab {
+  All = "All",
+  DEX = "DEX",
+  CEX = "CEX",
+  Accounts = "Accounts",
+}
 
 const Assets = () => {
   const dispatch = useAppDispatch();
@@ -19,7 +27,7 @@ const Assets = () => {
   const dexAssets = useAppSelector((state) => state.dexAssets);
 
   const [loading, setLoading] = useState(false);
-  const [activeTab, setActiveTab] = useState("All");
+  const [activeTab, setActiveTab] = useState<Tab>(Tab.All);
 
   const getAllAssets = useCallback(async () => {
     try {
@@ -81,7 +89,7 @@ const Assets = () => {
     }
   }, [cexAssets, dexAssets, activeTab, platform]);
 
-  const onTabClick = (tabName: string) => {
+  const onTabClick = (tabName: Tab) => {
     setActiveTab(tabName);
   };
 
@@ -95,26 +103,33 @@ const Assets = () => {
     <div className="assets">
       <div className="assets__links">
         <div
-          className={classnames("assets__links__link", activeTab === "All" && "assets__links__link--active")}
-          onClick={() => onTabClick("All")}
+          className={classnames("assets__links__link", activeTab === Tab.All && "assets__links__link--active")}
+          onClick={() => onTabClick(Tab.All)}
         >
           All
         </div>
         <div
-          className={classnames("assets__links__link", activeTab === "CEX" && "assets__links__link--active")}
-          onClick={() => onTabClick("CEX")}
+          className={classnames("assets__links__link", activeTab === Tab.CEX && "assets__links__link--active")}
+          onClick={() => onTabClick(Tab.CEX)}
         >
           CEX
         </div>
         <div
-          className={classnames("assets__links__link", activeTab === "DEX" && "assets__links__link--active")}
-          onClick={() => onTabClick("DEX")}
+          className={classnames("assets__links__link", activeTab === Tab.DEX && "assets__links__link--active")}
+          onClick={() => onTabClick(Tab.DEX)}
         >
           DEX
         </div>
+        <div
+          className={classnames("assets__links__link", activeTab === Tab.Accounts && "assets__links__link--active")}
+          onClick={() => onTabClick(Tab.Accounts)}
+        >
+          Accounts
+        </div>
       </div>
       <div className="assets__table">
-        <AssetTable assets={assetsToShow} loading={loading} />
+        {activeTab !== Tab.Accounts && <AssetTable assets={assetsToShow} loading={loading} />}
+        {activeTab === Tab.Accounts && <Accounts />}
       </div>
     </div>
   );

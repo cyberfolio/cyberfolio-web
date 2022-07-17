@@ -3,8 +3,9 @@ import "./index.scss";
 import classnames from "classnames";
 import utils from "@utils/index";
 import { Cex, CexAsset, Chain, DexAsset } from "@customTypes/index";
+import { memo } from "react";
 
-export const Index = ({ assets, loading }: { assets: (DexAsset | CexAsset)[]; loading: boolean }) => {
+const Index = ({ assets, loading }: { assets: (DexAsset | CexAsset)[]; loading: boolean }) => {
   const openAssetAtScan = (scanUrl: string) => {
     if (scanUrl && utils.isValidHttpUrl(scanUrl)) {
       window.open(scanUrl, "_blank");
@@ -121,4 +122,4 @@ export const Index = ({ assets, loading }: { assets: (DexAsset | CexAsset)[]; lo
   );
 };
 
-export default Index;
+export default memo(Index);

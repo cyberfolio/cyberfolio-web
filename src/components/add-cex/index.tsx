@@ -45,11 +45,11 @@ const AddCex = () => {
         });
         const cexAssets = await CexService.getCexTokens();
         const netWorth = await InfoService.getNetWorth();
-        const availableAccounts = await InfoService.getAvailableAccounts();
+        const availableAccounts = await InfoService.getConnectedAccounts();
         dispatch({
           type: "SET_CONNECTED_CEXES",
           payload: {
-            data: availableAccounts.availableCexes,
+            data: availableAccounts.cexes,
           },
         });
         dispatch({
@@ -115,7 +115,7 @@ const AddCex = () => {
             onChange={(e) => setApiSecret(e.target.value)}
             placeholder="Enter Api Secret"
           />
-          {name?.split(" ")?.shift()?.toLowerCase() === "kucoin" && (
+          {name === Cex.KUCOIN && (
             <input
               className="add-cex-modal__content__body__input"
               value={passphrase}

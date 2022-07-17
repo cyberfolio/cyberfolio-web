@@ -37,6 +37,7 @@
   },
   "rules": {
     "prettier/prettier": ["error", { "singleQuote": false, "semi": true }],
+    "no-console": "error",
     "linebreak-style": "off",
     "import/no-relative-parent-imports": "error",
     "import/no-unresolved": "off",

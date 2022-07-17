@@ -1,6 +1,16 @@
 const path = require('path')
+const sassResourcesLoader = require("craco-sass-resources-loader");
+
 
 module.exports = {
+  plugins: [
+    {
+      plugin: sassResourcesLoader,
+      options: {
+        resources: "./src/styles/global.scss",
+      },
+    },
+  ],
   webpack: {
     alias: {
       '@pages': path.resolve(__dirname, 'src/pages'),

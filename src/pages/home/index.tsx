@@ -18,19 +18,16 @@ import { Cex, Chain } from "@customTypes/index";
 const availableChains = [Chain.BITCOIN, Chain.ETHEREUM, Chain.SOLANA];
 const availableCexes = [Cex.BINANCE, Cex.FTX, Cex.KUCOIN, Cex.GATEIO];
 
-const activeBundle = "Main";
-
 const Home = () => {
   const platform = useAppSelector((state) => state.platform);
   const netWorth = useAppSelector((state) => state.netWorth);
   const lastAssetUpdate = useAppSelector((state) => state.lastAssetUpdate);
   const evmAddress = useAppSelector((state) => state.evmAddress);
   const connectedCexes = useAppSelector((state) => state.connectedCexes);
-  const connectedChains = useAppSelector((state) => state.connectedChains);
+  const connectedWallets = useAppSelector((state) => state.connectedWallets);
 
   const dispatch = useAppDispatch();
   const [filterDropdownOpen, setFilterDropdownOpen] = useState(false);
-  const [bundles, setBundles] = useState([""]);
   const [currentTime, setCurrentTime] = useState<Date>(new Date());
 
   const getTotal = useCallback(async () => {
@@ -50,17 +47,17 @@ const Home = () => {
   }, [dispatch]);
   const getAvailableAccounts = useCallback(async () => {
     try {
-      const availableAccounts = await InfoService.getAvailableAccounts();
+      const availableAccounts = await InfoService.getConnectedAccounts();
       dispatch({
         type: "SET_CONNECTED_CEXES",
         payload: {
-          data: availableAccounts.availableCexes,
+          data: availableAccounts.cexes,
         },
       });
       dispatch({
-        type: "SET_CONNECTED_CHAINS",
+        type: "SET_CONNECTED_WALLETS",
         payload: {
-          data: availableAccounts.availableChains,
+          data: availableAccounts.wallets,
         },
       });
     } catch (e) {
@@ -86,7 +83,6 @@ const Home = () => {
   }, [platform]);
 
   useEffect(() => {
-    setBundles(["Main"]);
     if (evmAddress) {
       getTotal();
       getAvailableAccounts();
@@ -129,38 +125,20 @@ const Home = () => {
   return (
     <div className="home">
       <div className="home__header">
-        <div className="home__header__bundle">
-          {bundles.map((bundle) => {
-            return (
-              <div
-                className={classNames(
-                  "home__header__bundle__available",
-                  bundle === activeBundle && "home__header__bundle__available--active",
-                )}
-                key={bundle}
-              >
-                {bundle} Bundle
-              </div>
-            );
-          })}
-          <div className="home__header__add-wallets__button">
-            New Bundle
-            <Plus color="white" size={20} />
-          </div>
-        </div>
         <div className="home__header__add-wallets">
           {availableChains.map((chain) => {
             return (
               <div
                 className={classNames(
                   "home__header__add-wallets__button ",
-                  connectedChains.includes(chain) && "home__header__add-wallets__button--active",
+                  connectedWallets.some((wallet) => wallet.chain === chain) &&
+                    "home__header__add-wallets__button--active",
                 )}
                 key={chain}
                 onClick={() => openWalletModal(chain)}
               >
-                {chain} {connectedChains.includes(chain) ? "Connected" : "Wallet"}
-                {connectedChains.includes(chain) ? (
+                {chain} {connectedWallets.some((wallet) => wallet.chain === chain) ? "Connected" : "Wallet"}
+                {connectedWallets.some((wallet) => wallet.chain === chain) ? (
                   <span className="connectedDotButton"></span>
                 ) : (
                   <Plus color="white" size={20} />
