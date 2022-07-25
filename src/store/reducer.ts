@@ -1,7 +1,7 @@
 import Actions from "./actions";
 import ALLNetworks from "@assets/blockchain.svg";
 import { Cex, AllNetworks, CexAsset, Chain, DexAsset } from "@customTypes/index";
-import { ConnectedWallets } from "@services/info/types";
+import { ConnectedCexPayload, ConnectedWalletPayload } from "./types";
 
 const initialState = {
   loading: {
@@ -26,8 +26,8 @@ const initialState = {
   },
   dexAssets: [] as DexAsset[],
   cexAssets: [] as CexAsset[],
-  connectedCexes: [] as Cex[],
-  connectedWallets: [] as ConnectedWallets[],
+  connectedCexes: [] as ConnectedCexPayload[],
+  connectedWallets: [] as ConnectedWalletPayload[],
 };
 
 const reducer = (state = initialState, action: Actions) => {

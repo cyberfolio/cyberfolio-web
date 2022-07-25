@@ -1,5 +1,5 @@
 import { Cex, CexAsset, AllNetworks, Chain, DexAsset } from "@customTypes/index";
-import { ConnectedWallets } from "@services/info/types";
+import { ConnectedCexPayload, ConnectedWalletPayload } from "./types";
 
 type Actions =
   | { type: "SET_LOADING"; payload: { state: boolean; message: string } }
@@ -7,8 +7,8 @@ type Actions =
   | { type: "SET_LAST_ASSET_UPDATE"; payload: { data: string } }
   | { type: "SET_NET_WORTH"; payload: { data: number } }
   | { type: "SET_ENS_NAME"; payload: { data: string } }
-  | { type: "SET_CONNECTED_CEXES"; payload: { data: Cex[] } }
-  | { type: "SET_CONNECTED_WALLETS"; payload: { data: ConnectedWallets[] } }
+  | { type: "SET_CONNECTED_CEXES"; payload: { data: ConnectedCexPayload[] } }
+  | { type: "SET_CONNECTED_WALLETS"; payload: { data: ConnectedWalletPayload[] } }
   | {
       type: "FILTER_ASSETS_BY_PLATFORM";
       payload: {

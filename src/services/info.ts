@@ -3,13 +3,20 @@ import { mainInstance } from "@config/axios";
 import { Chain, Cex } from "@customTypes/index";
 
 interface ConnectedWallets {
+  name: string;
   chain: Chain;
-  walletName: string;
-  walletAddress: string;
+  address: string;
+  scan: string;
+  netWorth: number;
+}
+
+interface ConnectedCexes {
+  name: Cex;
+  netWorth: number;
 }
 
 export interface ConnectedAccountsResponse {
-  cexes: Cex[];
+  cexes: ConnectedCexes[];
   wallets: ConnectedWallets[];
 }
 

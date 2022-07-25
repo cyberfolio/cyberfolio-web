@@ -108,7 +108,7 @@ const Home = () => {
   };
 
   const openAddCexModal = (name: Cex) => {
-    if (connectedCexes.includes(name)) return;
+    if (connectedCexes.some((connectedCex) => connectedCex.name === name)) return;
     if (evmAddress) {
       dispatch({
         type: "OPEN_ADD_CEX_MODAL",
@@ -151,13 +151,14 @@ const Home = () => {
               <div
                 className={classNames(
                   "home__header__add-wallets__button ",
-                  connectedCexes.includes(cex) && "home__header__add-wallets__button--active",
+                  connectedCexes.some((connectedCex) => connectedCex.name === cex) &&
+                    "home__header__add-wallets__button--active",
                 )}
                 key={cex}
                 onClick={() => openAddCexModal(cex)}
               >
-                {cex} {connectedCexes.includes(cex) ? "Connected" : "Account"}
-                {connectedCexes.includes(cex) ? (
+                {cex} {connectedCexes.some((connectedCex) => connectedCex.name === cex) ? "Connected" : "Account"}
+                {connectedCexes.some((connectedCex) => connectedCex.name === cex) ? (
                   <span className="connectedDotButton"></span>
                 ) : (
                   <Plus color="white" size={20} />

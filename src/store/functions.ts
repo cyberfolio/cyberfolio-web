@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-restricted-imports
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import store from ".";
 export type RootState = ReturnType<typeof store.getState>;
