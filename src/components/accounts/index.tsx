@@ -12,8 +12,10 @@ const Accounts = () => {
         return (
           <div key={connectedCex.name} className="accounts__account">
             <div className="accounts__account__info">
-              <div className="accounts__account__info__title">{connectedCex.name}</div>
-              <div className="accounts__account__info__address">Net Worth: {utils.toUsd(connectedCex.netWorth)}</div>
+              <div className="accounts__account__info__title">{connectedCex.name} Account</div>
+              <div className="accounts__account__info__item">
+                Net Worth: <strong>{utils.toUsd(connectedCex.netWorth)}</strong>
+              </div>
             </div>
             <div className="accounts__account__buttons">
               <button className="accounts__account__buttons__button">Delete</button>
@@ -25,20 +27,16 @@ const Accounts = () => {
         return (
           <div key={connectedWallet.address} className="accounts__account">
             <div className="accounts__account__info">
-              <div className="accounts__account__info__title">{connectedWallet.chain}</div>
-              <div className="accounts__account__info__address">Name: {connectedWallet.name}</div>
-              <div className="accounts__account__info__address">
-                Address:{" "}
-                <a
-                  href={connectedWallet.scan}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="accounts__account__info__address"
-                >
-                  {connectedWallet.address}
-                </a>
+              <div className="accounts__account__info__title">{connectedWallet.chain} Wallet</div>
+              <div className="accounts__account__info__item">
+                Name: <strong>{connectedWallet.name}</strong>
               </div>
-              <div className="accounts__account__info__address">Net Worth: {utils.toUsd(connectedWallet.netWorth)}</div>
+              <div className="accounts__account__info__item">
+                Address: <strong>{connectedWallet.address}</strong>
+              </div>
+              <div className="accounts__account__info__item">
+                Net Worth: <strong>{utils.toUsd(connectedWallet.netWorth)}</strong>
+              </div>
             </div>
 
             <div className="accounts__account__buttons">
