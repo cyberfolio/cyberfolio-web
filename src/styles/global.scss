@@ -1,0 +1,23 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+input,
+select,
+textarea,
+button {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace !important;
+}
+
+body {
+  overscroll-behavior-y: none;
+}
+
+@import "./variables.scss";
+@import "./shared.scss";

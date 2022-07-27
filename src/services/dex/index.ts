@@ -37,4 +37,19 @@ export default class DexService {
       throw new Error(e.response.data);
     }
   }
+
+  static async deleteWallet({ chain, address }: { chain: Chain; address: string }) {
+    try {
+      await mainInstance.post(
+        `dex/delete`,
+        {
+          address,
+          chain,
+        },
+        { withCredentials: true },
+      );
+    } catch (e) {
+      throw new Error(e.response.data);
+    }
+  }
 }

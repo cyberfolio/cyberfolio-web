@@ -7,12 +7,9 @@
       }
     }
   },
-  "eslint.validate": [
-    "typescript",
-    "typescriptreact"
-  ],
+  "eslint.validate": ["typescript", "typescriptreact"],
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true,
+    "source.fixAll.eslint": true
   },
-  "explorer.compactFolders": true,
+  "explorer.compactFolders": false
 }

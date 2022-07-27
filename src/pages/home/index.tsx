@@ -13,12 +13,10 @@ import useKeypress from "@components/hooks/useKeyPress";
 import utils from "@utils/index";
 import InfoService from "@services/info";
 import { useAppDispatch, useAppSelector } from "@store/functions";
-import { Cex, Chain } from "@customTypes/index";
+import { Cex, Chain, Keys } from "@customTypes/index";
 
 const availableChains = [Chain.BITCOIN, Chain.ETHEREUM, Chain.SOLANA];
 const availableCexes = [Cex.BINANCE, Cex.FTX, Cex.KUCOIN, Cex.GATEIO];
-
-const activeBundle = "Main";
 
 const Home = () => {
   const platform = useAppSelector((state) => state.platform);
@@ -26,11 +24,10 @@ const Home = () => {
   const lastAssetUpdate = useAppSelector((state) => state.lastAssetUpdate);
   const evmAddress = useAppSelector((state) => state.evmAddress);
   const connectedCexes = useAppSelector((state) => state.connectedCexes);
-  const connectedChains = useAppSelector((state) => state.connectedChains);
+  const connectedWallets = useAppSelector((state) => state.connectedWallets);
 
   const dispatch = useAppDispatch();
   const [filterDropdownOpen, setFilterDropdownOpen] = useState(false);
-  const [bundles, setBundles] = useState([""]);
   const [currentTime, setCurrentTime] = useState<Date>(new Date());
 
   const getTotal = useCallback(async () => {
@@ -50,17 +47,17 @@ const Home = () => {
   }, [dispatch]);
   const getAvailableAccounts = useCallback(async () => {
     try {
-      const availableAccounts = await InfoService.getAvailableAccounts();
+      const availableAccounts = await InfoService.getConnectedAccounts();
       dispatch({
         type: "SET_CONNECTED_CEXES",
         payload: {
-          data: availableAccounts.availableCexes,
+          data: availableAccounts.cexes,
         },
       });
       dispatch({
-        type: "SET_CONNECTED_CHAINS",
+        type: "SET_CONNECTED_WALLETS",
         payload: {
-          data: availableAccounts.availableChains,
+          data: availableAccounts.wallets,
         },
       });
     } catch (e) {
@@ -86,14 +83,13 @@ const Home = () => {
   }, [platform]);
 
   useEffect(() => {
-    setBundles(["Main"]);
     if (evmAddress) {
       getTotal();
       getAvailableAccounts();
     }
   }, [evmAddress, getTotal, getAvailableAccounts]);
 
-  useKeypress("Escape", () => {
+  useKeypress(Keys.Escape, () => {
     setFilterDropdownOpen(false);
   });
 
@@ -112,7 +108,7 @@ const Home = () => {
   };
 
   const openAddCexModal = (name: Cex) => {
-    if (connectedCexes.includes(name)) return;
+    if (connectedCexes.some((connectedCex) => connectedCex.name === name)) return;
     if (evmAddress) {
       dispatch({
         type: "OPEN_ADD_CEX_MODAL",
@@ -129,38 +125,20 @@ const Home = () => {
   return (
     <div className="home">
       <div className="home__header">
-        <div className="home__header__bundle">
-          {bundles.map((bundle) => {
-            return (
-              <div
-                className={classNames(
-                  "home__header__bundle__available",
-                  bundle === activeBundle && "home__header__bundle__available--active",
-                )}
-                key={bundle}
-              >
-                {bundle} Bundle
-              </div>
-            );
-          })}
-          <div className="home__header__add-wallets__button">
-            New Bundle
-            <Plus color="white" size={20} />
-          </div>
-        </div>
         <div className="home__header__add-wallets">
           {availableChains.map((chain) => {
             return (
               <div
                 className={classNames(
                   "home__header__add-wallets__button ",
-                  connectedChains.includes(chain) && "home__header__add-wallets__button--active",
+                  connectedWallets.some((wallet) => wallet.chain === chain) &&
+                    "home__header__add-wallets__button--active",
                 )}
                 key={chain}
                 onClick={() => openWalletModal(chain)}
               >
-                {chain} {connectedChains.includes(chain) ? "Connected" : "Wallet"}
-                {connectedChains.includes(chain) ? (
+                {chain} {connectedWallets.some((wallet) => wallet.chain === chain) ? "Connected" : "Wallet"}
+                {connectedWallets.some((wallet) => wallet.chain === chain) ? (
                   <span className="connectedDotButton"></span>
                 ) : (
                   <Plus color="white" size={20} />
@@ -173,13 +151,14 @@ const Home = () => {
               <div
                 className={classNames(
                   "home__header__add-wallets__button ",
-                  connectedCexes.includes(cex) && "home__header__add-wallets__button--active",
+                  connectedCexes.some((connectedCex) => connectedCex.name === cex) &&
+                    "home__header__add-wallets__button--active",
                 )}
                 key={cex}
                 onClick={() => openAddCexModal(cex)}
               >
-                {cex} {connectedCexes.includes(cex) ? "Connected" : "Account"}
-                {connectedCexes.includes(cex) ? (
+                {cex} {connectedCexes.some((connectedCex) => connectedCex.name === cex) ? "Connected" : "Account"}
+                {connectedCexes.some((connectedCex) => connectedCex.name === cex) ? (
                   <span className="connectedDotButton"></span>
                 ) : (
                   <Plus color="white" size={20} />

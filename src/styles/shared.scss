@@ -14,7 +14,6 @@
 .connectedDotButton {
   @extend .connectedDot;
   margin: 0 3px 0 7px;
-
 }
 
 .unselectable {
@@ -67,11 +66,24 @@
   }
 }
 
+.danger-button {
+  @extend .button;
+  background-color: $danger-color;
+  border: unset !important;
+  color: $text-color-dark;
+  &:hover {
+    cursor: pointer;
+    background-color: $danger-color;
+  }
+}
+
 .button-borderless-oval {
   @extend .button;
   border: unset;
   background-color: transparent;
-  border-radius: 50%
+  border-radius: 50%;
+  font-size: 12px;
+  width: 35px;
 }
 
 .button-borderless {

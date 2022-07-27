@@ -8,7 +8,7 @@ import DexService from "@services/dex";
 import useKeypress from "@components/hooks/useKeyPress";
 import utils from "@utils/index";
 import { useAppDispatch, useAppSelector } from "@store/functions";
-import { Chain } from "@customTypes/index";
+import { Chain, Keys } from "@customTypes/index";
 import InfoService from "@services/info";
 
 const AddWallet = () => {
@@ -46,12 +46,12 @@ const AddWallet = () => {
           data: allDexTokens.assets,
         },
       });
-      const availableAccounts = await InfoService.getAvailableAccounts();
+      const availableAccounts = await InfoService.getConnectedAccounts();
       toast.success("Wallet added.");
       dispatch({
-        type: "SET_CONNECTED_CHAINS",
+        type: "SET_CONNECTED_WALLETS",
         payload: {
-          data: availableAccounts.availableChains,
+          data: availableAccounts.wallets,
         },
       });
       const netWorth = await InfoService.getNetWorth();
@@ -71,7 +71,7 @@ const AddWallet = () => {
       utils.setAppLoading(false);
     }
   };
-  useKeypress("Escape", () => {
+  useKeypress(Keys.Escape, () => {
     close();
     setName("");
     setAddress("");

@@ -3,13 +3,13 @@ import "./index.scss";
 
 import useKeypress from "@components/hooks/useKeyPress";
 import { useAppDispatch } from "@store/functions";
-import { Cex } from "@customTypes/index";
+import { Cex, Keys } from "@customTypes/index";
 
 const Index = () => {
   const dispatch = useAppDispatch();
   const modalRef = useRef(null);
 
-  useKeypress("Escape", () => {
+  useKeypress(Keys.Escape, () => {
     close();
   });
 
