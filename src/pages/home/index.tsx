@@ -13,7 +13,7 @@ import useKeypress from "@components/hooks/useKeyPress";
 import utils from "@utils/index";
 import InfoService from "@services/info";
 import { useAppDispatch, useAppSelector } from "@store/functions";
-import { Cex, Chain } from "@customTypes/index";
+import { Cex, Chain, Keys } from "@customTypes/index";
 
 const availableChains = [Chain.BITCOIN, Chain.ETHEREUM, Chain.SOLANA];
 const availableCexes = [Cex.BINANCE, Cex.FTX, Cex.KUCOIN, Cex.GATEIO];
@@ -89,7 +89,7 @@ const Home = () => {
     }
   }, [evmAddress, getTotal, getAvailableAccounts]);
 
-  useKeypress("Escape", () => {
+  useKeypress(Keys.Escape, () => {
     setFilterDropdownOpen(false);
   });
 

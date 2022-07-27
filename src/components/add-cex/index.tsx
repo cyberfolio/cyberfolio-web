@@ -8,7 +8,7 @@ import CexService from "@services/cex";
 import useKeypress from "@components/hooks/useKeyPress";
 import { useAppDispatch, useAppSelector } from "@store/functions";
 import utils from "@utils/index";
-import { Cex } from "@customTypes/index";
+import { Cex, Keys } from "@customTypes/index";
 import InfoService from "@services/info";
 
 const AddCex = () => {
@@ -75,7 +75,7 @@ const AddCex = () => {
     }
   };
 
-  useKeypress("Escape", () => {
+  useKeypress(Keys.Escape, () => {
     close();
     setApiKey("");
     setApiSecret("");

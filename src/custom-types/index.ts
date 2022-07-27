@@ -49,3 +49,7 @@ export interface CexAsset {
   value: number;
   accountName: string;
 }
+
+export enum Keys {
+  Escape = "Escape",
+}

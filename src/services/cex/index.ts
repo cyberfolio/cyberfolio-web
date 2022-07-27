@@ -45,4 +45,18 @@ export default class CexService {
       throw new Error(e.response?.data);
     }
   }
+
+  static async deleteCex({ cexName }: { cexName: Cex }) {
+    try {
+      await mainInstance.post(
+        `/cex/delete`,
+        {
+          cexName,
+        },
+        { withCredentials: true },
+      );
+    } catch (e) {
+      throw new Error(e.response?.data);
+    }
+  }
 }
