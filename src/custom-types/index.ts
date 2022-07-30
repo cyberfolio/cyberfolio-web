@@ -1,6 +1,7 @@
 export enum Cex {
   NO = "No",
   BINANCE = "Binance",
+  BINANCETR = "BinanceTR",
   FTX = "FTX",
   GATEIO = "Gateio",
   KUCOIN = "Kucoin",
