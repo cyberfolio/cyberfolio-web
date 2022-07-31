@@ -42,24 +42,18 @@ const AddWallet = () => {
       const allDexTokens = await DexService.getAllDexTokens();
       dispatch({
         type: "SET_DEX_ASSETS",
-        payload: {
-          data: allDexTokens.assets,
-        },
+        payload: allDexTokens.assets,
       });
       const availableAccounts = await InfoService.getConnectedAccounts();
       toast.success("Wallet added.");
       dispatch({
         type: "SET_CONNECTED_WALLETS",
-        payload: {
-          data: availableAccounts.wallets,
-        },
+        payload: availableAccounts.wallets,
       });
       const netWorth = await InfoService.getNetWorth();
       dispatch({
         type: "SET_NET_WORTH",
-        payload: {
-          data: netWorth,
-        },
+        payload: netWorth,
       });
       setName("");
       setAddress("");

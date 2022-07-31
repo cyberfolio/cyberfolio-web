@@ -27,33 +27,23 @@ const Accounts = () => {
     const netWorth = await InfoService.getNetWorth();
     dispatch({
       type: "SET_CONNECTED_CEXES",
-      payload: {
-        data: availableAccounts.cexes,
-      },
+      payload: availableAccounts.cexes,
     });
     dispatch({
       type: "SET_CONNECTED_WALLETS",
-      payload: {
-        data: availableAccounts.wallets,
-      },
+      payload: availableAccounts.wallets,
     });
     dispatch({
       type: "SET_CEX_ASSETS",
-      payload: {
-        data: cexAssets,
-      },
+      payload: cexAssets,
     });
     dispatch({
       type: "SET_DEX_ASSETS",
-      payload: {
-        data: dexAssets.assets,
-      },
+      payload: dexAssets.assets,
     });
     dispatch({
       type: "SET_NET_WORTH",
-      payload: {
-        data: netWorth,
-      },
+      payload: netWorth,
     });
   };
 

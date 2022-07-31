@@ -19,6 +19,7 @@ const availableChains = [Chain.BITCOIN, Chain.ETHEREUM, Chain.SOLANA];
 const availableCexes = [Cex.BINANCE, Cex.FTX, Cex.KUCOIN, Cex.GATEIO];
 
 const Home = () => {
+  const dispatch = useAppDispatch();
   const platform = useAppSelector((state) => state.platform);
   const netWorth = useAppSelector((state) => state.netWorth);
   const lastAssetUpdate = useAppSelector((state) => state.lastAssetUpdate);
@@ -26,18 +27,17 @@ const Home = () => {
   const connectedCexes = useAppSelector((state) => state.connectedCexes);
   const connectedWallets = useAppSelector((state) => state.connectedWallets);
 
-  const dispatch = useAppDispatch();
   const [filterDropdownOpen, setFilterDropdownOpen] = useState(false);
   const [currentTime, setCurrentTime] = useState<Date>(new Date());
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [hoveredWallet, setHoveredWallet] = useState<Chain | undefined>();
 
   const getTotal = useCallback(async () => {
     try {
       const netWorth = await InfoService.getNetWorth();
       dispatch({
         type: "SET_NET_WORTH",
-        payload: {
-          data: netWorth,
-        },
+        payload: netWorth,
       });
     } catch (e) {
       if (e.status !== 401) {
@@ -47,18 +47,14 @@ const Home = () => {
   }, [dispatch]);
   const getAvailableAccounts = useCallback(async () => {
     try {
-      const availableAccounts = await InfoService.getConnectedAccounts();
+      const { cexes, wallets } = await InfoService.getConnectedAccounts();
       dispatch({
         type: "SET_CONNECTED_CEXES",
-        payload: {
-          data: availableAccounts.cexes,
-        },
+        payload: cexes,
       });
       dispatch({
         type: "SET_CONNECTED_WALLETS",
-        payload: {
-          data: availableAccounts.wallets,
-        },
+        payload: wallets,
       });
     } catch (e) {
       if (e.status !== 401) {
@@ -122,27 +118,35 @@ const Home = () => {
     }
   };
 
+  const addMore = (chain: Chain) => {
+    if (connectedWallets.some((wallet) => wallet.chain === chain)) {
+      setHoveredWallet(chain);
+    }
+  };
+
   return (
     <div className="home">
       <div className="home__header">
-        <div className="home__header__add-wallets">
+        <div className="home__header__add">
           {availableChains.map((chain) => {
             return (
               <div
                 className={classNames(
-                  "home__header__add-wallets__button ",
-                  connectedWallets.some((wallet) => wallet.chain === chain) &&
-                    "home__header__add-wallets__button--active",
+                  "home__header__add__wallet",
+                  connectedWallets.some((wallet) => wallet.chain === chain) && "home__header__add__wallet--active",
                 )}
                 key={chain}
                 onClick={() => openWalletModal(chain)}
+                onMouseEnter={() => addMore(chain)}
+                onMouseLeave={() => setHoveredWallet(undefined)}
               >
                 {chain} {connectedWallets.some((wallet) => wallet.chain === chain) ? "Connected" : "Wallet"}
                 {connectedWallets.some((wallet) => wallet.chain === chain) ? (
                   <span className="connectedDotButton"></span>
                 ) : (
                   <Plus color="white" size={20} />
-                )}{" "}
+                )}
+                <span className="home__header__add__wallet--active__tooltip">Add another {chain} wallet</span>
               </div>
             );
           })}
@@ -150,9 +154,8 @@ const Home = () => {
             return (
               <div
                 className={classNames(
-                  "home__header__add-wallets__button ",
-                  connectedCexes.some((connectedCex) => connectedCex.name === cex) &&
-                    "home__header__add-wallets__button--active",
+                  "home__header__add__cex",
+                  connectedCexes.some((connectedCex) => connectedCex.name === cex) && "home__header__add__cex--active",
                 )}
                 key={cex}
                 onClick={() => openAddCexModal(cex)}

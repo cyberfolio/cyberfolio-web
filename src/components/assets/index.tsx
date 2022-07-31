@@ -38,9 +38,7 @@ const Assets = () => {
       });
       dispatch({
         type: "SET_DEX_ASSETS",
-        payload: {
-          data: dexAssets.assets,
-        },
+        payload: dexAssets.assets,
       });
 
       const cexAssets = await CexService.getCexTokens();
@@ -49,9 +47,7 @@ const Assets = () => {
       });
       dispatch({
         type: "SET_CEX_ASSETS",
-        payload: {
-          data: cexAssets,
-        },
+        payload: cexAssets,
       });
       setLoading(false);
     } catch (e) {
