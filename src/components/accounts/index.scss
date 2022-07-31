@@ -1,20 +1,19 @@
 .accounts {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   flex-wrap: wrap;
   width: 100%;
   height: 100%;
   &__account {
     color: $text-color-dark;
     padding: 15px;
-    margin: 10px;
     border: 1px solid $border;
     border-radius: 8px;
-    width: 400px;
-    height: 200px;
+    width: 32%;
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
+    margin-bottom: 15px;
     &__info {
       &__title {
         font-weight: bold;
@@ -24,6 +23,7 @@
       &__item {
         font-size: 13px;
         margin-bottom: 10px;
+        word-wrap: break-word;
       }
     }
     &__buttons {
