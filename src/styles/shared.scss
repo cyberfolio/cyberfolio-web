@@ -102,3 +102,29 @@
     background-color: $button-hover-color;
   }
 }
+
+.tooltip-bottom {
+  visibility: hidden;
+  width: 130px;
+  background-color: $tooltip-dark-color;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  top: 115%;
+  left: 50%;
+  margin-left: -65px; /* Use half of the width (130/2 = 65), to center the tooltip */
+}
+/* To make top arrow */
+.tooltip-bottom::after {
+  content: " ";
+  position: absolute;
+  bottom: 100%; /* At the top of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent $tooltip-dark-color transparent;
+}

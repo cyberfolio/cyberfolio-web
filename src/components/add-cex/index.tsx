@@ -48,21 +48,15 @@ const AddCex = () => {
         const availableAccounts = await InfoService.getConnectedAccounts();
         dispatch({
           type: "SET_CONNECTED_CEXES",
-          payload: {
-            data: availableAccounts.cexes,
-          },
+          payload: availableAccounts.cexes,
         });
         dispatch({
           type: "SET_CEX_ASSETS",
-          payload: {
-            data: cexAssets,
-          },
+          payload: cexAssets,
         });
         dispatch({
           type: "SET_NET_WORTH",
-          payload: {
-            data: netWorth,
-          },
+          payload: netWorth,
         });
         toast.success(`${name} added`);
       }

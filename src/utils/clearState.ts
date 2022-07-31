@@ -3,33 +3,23 @@ import store from "@store/index";
 const clearState = async () => {
   store.dispatch({
     type: "SET_EVM_ADDRESS",
-    payload: {
-      data: "",
-    },
+    payload: "",
   });
   store.dispatch({
     type: "SET_NET_WORTH",
-    payload: {
-      data: 0,
-    },
+    payload: 0,
   });
   store.dispatch({
     type: "SET_LAST_ASSET_UPDATE",
-    payload: {
-      data: "",
-    },
+    payload: "",
   });
   store.dispatch({
     type: "SET_CEX_ASSETS",
-    payload: {
-      data: [],
-    },
+    payload: [],
   });
   store.dispatch({
     type: "SET_DEX_ASSETS",
-    payload: {
-      data: [],
-    },
+    payload: [],
   });
 };
 
