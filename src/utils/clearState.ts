@@ -21,6 +21,14 @@ const clearState = async () => {
     type: "SET_DEX_ASSETS",
     payload: [],
   });
+  store.dispatch({
+    type: "SET_CONNECTED_CEXES",
+    payload: [],
+  });
+  store.dispatch({
+    type: "SET_CONNECTED_WALLETS",
+    payload: [],
+  });
 };
 
 export default clearState;
