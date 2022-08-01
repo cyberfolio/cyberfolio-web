@@ -148,6 +148,8 @@ const Accounts = () => {
           </div>
         );
       })}
+      {connectedCexes.length + connectedWallets.length > 1 &&
+        (connectedCexes.length + connectedWallets.length) % 2 !== 0 && <div style={{ width: "33%" }} />}
     </div>
   );
 };
