@@ -24,25 +24,19 @@ const Index = () => {
       if (res.keyIdentifier) {
         dispatch({
           type: "SET_EVM_ADDRESS",
-          payload: {
-            data: res.keyIdentifier,
-          },
+          payload: res.keyIdentifier,
         });
       }
       if (res.ensName) {
         dispatch({
           type: "SET_ENS_NAME",
-          payload: {
-            data: res.ensName,
-          },
+          payload: res.ensName,
         });
       }
       if (res.lastAssetUpdate)
         dispatch({
           type: "SET_LAST_ASSET_UPDATE",
-          payload: {
-            data: res.lastAssetUpdate,
-          },
+          payload: res.lastAssetUpdate,
         });
     } catch (e) {
       clearState();

@@ -42,32 +42,32 @@ const reducer = (state = initialState, action: Actions) => {
   } else if (action.type === "SET_CONNECTED_CEXES") {
     return {
       ...state,
-      connectedCexes: action.payload.data,
+      connectedCexes: action.payload,
     };
   } else if (action.type === "SET_CONNECTED_WALLETS") {
     return {
       ...state,
-      connectedWallets: action.payload.data,
+      connectedWallets: action.payload,
     };
   } else if (action.type === "SET_EVM_ADDRESS") {
     return {
       ...state,
-      evmAddress: action.payload.data,
+      evmAddress: action.payload,
     };
   } else if (action.type === "SET_ENS_NAME") {
     return {
       ...state,
-      ensName: action.payload.data,
+      ensName: action.payload,
     };
   } else if (action.type === "SET_LAST_ASSET_UPDATE") {
     return {
       ...state,
-      lastAssetUpdate: action.payload.data,
+      lastAssetUpdate: action.payload,
     };
   } else if (action.type === "SET_NET_WORTH") {
     return {
       ...state,
-      netWorth: action.payload.data,
+      netWorth: action.payload,
     };
   } else if (action.type === "FILTER_ASSETS_BY_PLATFORM") {
     return {
@@ -96,12 +96,12 @@ const reducer = (state = initialState, action: Actions) => {
   } else if (action.type === "SET_CEX_ASSETS") {
     return {
       ...state,
-      cexAssets: action.payload.data,
+      cexAssets: action.payload,
     };
   } else if (action.type === "SET_DEX_ASSETS") {
     return {
       ...state,
-      dexAssets: action.payload.data,
+      dexAssets: action.payload,
     };
   } else {
     return {

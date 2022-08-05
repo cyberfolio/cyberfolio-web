@@ -47,16 +47,12 @@ const ConnectWallet = () => {
         const name = await InfoService.getEnsName();
         dispatch({
           type: "SET_ENS_NAME",
-          payload: {
-            data: name,
-          },
+          payload: name,
         });
       } catch (e) {
         dispatch({
           type: "SET_ENS_NAME",
-          payload: {
-            data: "",
-          },
+          payload: "",
         });
       }
     }

@@ -69,24 +69,18 @@ export const useMetamaskLogin = () => {
       setIsConnecting(false);
       dispatch({
         type: "SET_EVM_ADDRESS",
-        payload: {
-          data: user.keyIdentifier,
-        },
+        payload: user.keyIdentifier,
       });
       if (user.ensName) {
         dispatch({
           type: "SET_ENS_NAME",
-          payload: {
-            data: user.ensName,
-          },
+          payload: user.ensName,
         });
       }
       if (user.lastAssetUpdate) {
         dispatch({
           type: "SET_LAST_ASSET_UPDATE",
-          payload: {
-            data: user.lastAssetUpdate,
-          },
+          payload: user.lastAssetUpdate,
         });
       }
     } catch (error) {
