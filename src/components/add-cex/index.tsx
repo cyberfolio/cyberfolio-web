@@ -96,6 +96,12 @@ const AddCex = () => {
             X
           </div>
         </div>
+        <a className="add-cex-modal__content__link" href={utils.cexAPIKeyURL[name]} target="_blank" rel="noreferrer">
+          Click here to navigate API Creation Link
+        </a>
+        <div className="add-cex-modal__content__info">
+          Please only enable <b>READING ONLY</b> option!
+        </div>
         <div className="add-cex-modal__content__body">
           <input
             className="add-cex-modal__content__body__input"
