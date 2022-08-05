@@ -1,7 +1,6 @@
 import { ethers } from "ethers";
 import * as solanaWeb3 from "@solana/web3.js";
 
-import AllNetworks from "@assets/blockchain.svg";
 import Bitcoin from "@assets/bitcoin.svg";
 import Ethereum from "@assets/ethereum.svg";
 import SmartChain from "@assets/smartchain.svg";
@@ -20,23 +19,6 @@ import store from "@store/index";
 import { Cex, Chain } from "@customTypes/index";
 
 const truncateRegex = /^(0x[a-zA-Z0-9]{4})[a-zA-Z0-9]+([a-zA-Z0-9]{4})$/;
-
-const logos = {
-  allnetworks: AllNetworks,
-  bitcoin: Bitcoin,
-  ethereum: Ethereum,
-  smartchain: SmartChain,
-  avalanche: Avalanche,
-  solana: Solana,
-  polkadot: Polkadot,
-  polygon: Polygon,
-  arbitrum: Arbitrum,
-  optimism: Optimism,
-  binance: Binance,
-  kucoin: Kucoin,
-  gateio: Gateio,
-  ftx: FTX,
-};
 
 const truncateEthAddress = (address: string) => {
   const match = String(address).match(truncateRegex);
@@ -86,6 +68,10 @@ const chainInfo = [
 const cexInfo = [
   {
     name: Cex.BINANCE,
+    image: Binance,
+  },
+  {
+    name: Cex.BINANCETR,
     image: Binance,
   },
   {
@@ -213,5 +199,4 @@ export default {
   cexInfo,
   chainInfo,
   truncateEthAddress,
-  logos,
 };
