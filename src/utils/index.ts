@@ -33,6 +33,7 @@ const logos = {
   arbitrum: Arbitrum,
   optimism: Optimism,
   binance: Binance,
+  binancetr: Binance,
   kucoin: Kucoin,
   gateio: Gateio,
   ftx: FTX,
@@ -86,6 +87,10 @@ const chainInfo = [
 const cexInfo = [
   {
     name: Cex.BINANCE,
+    image: Binance,
+  },
+  {
+    name: Cex.BINANCETR,
     image: Binance,
   },
   {
