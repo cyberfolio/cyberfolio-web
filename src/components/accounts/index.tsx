@@ -20,22 +20,30 @@ const Accounts = () => {
 
   const dispatch = useAppDispatch();
 
-  const resetAccounts = async () => {
+  const resetCexBalance = async () => {
     const availableAccounts = await InfoService.getConnectedAccounts();
     const cexAssets = await CexService.getCexTokens();
-    const dexAssets = await DexService.getAllDexTokens();
     const netWorth = await InfoService.getNetWorth();
     dispatch({
       type: "SET_CONNECTED_CEXES",
       payload: availableAccounts.cexes,
     });
     dispatch({
-      type: "SET_CONNECTED_WALLETS",
-      payload: availableAccounts.wallets,
-    });
-    dispatch({
       type: "SET_CEX_ASSETS",
       payload: cexAssets,
+    });
+    dispatch({
+      type: "SET_NET_WORTH",
+      payload: netWorth,
+    });
+  };
+  const resetDexBalance = async () => {
+    const availableAccounts = await InfoService.getConnectedAccounts();
+    const dexAssets = await DexService.getAllDexTokens();
+    const netWorth = await InfoService.getNetWorth();
+    dispatch({
+      type: "SET_CONNECTED_WALLETS",
+      payload: availableAccounts.wallets,
     });
     dispatch({
       type: "SET_DEX_ASSETS",
@@ -54,7 +62,7 @@ const Accounts = () => {
       await CexService.deleteCex({ cexName: cexToDelete });
       toast.success(`${cexToDelete} Account deleted`);
       closeDeleteModal();
-      await resetAccounts();
+      await resetCexBalance();
     } catch (e) {
       toast.error(e.message);
     } finally {
@@ -69,7 +77,7 @@ const Accounts = () => {
       await DexService.deleteWallet({ chain: walletToDelete, address: walletAddressToDelete });
       toast.success(`${walletToDelete} Wallet deleted`);
       closeDeleteModal();
-      await resetAccounts();
+      await resetDexBalance();
     } catch (e) {
       toast.error(e.message);
     } finally {
