@@ -188,6 +188,15 @@ const toReadableDateDifference = (date1: Date, date2: Date) => {
   return Math.floor(seconds) + " seconds";
 };
 
+const cexAPIKeyURL = {
+  [Cex.BINANCE]: "https://www.binance.com/en/my/settings/api-management",
+  [Cex.BINANCETR]: "https://www.trbinance.com/usercenter/settings/api-management",
+  [Cex.FTX]: "https://ftx.com/settings/api",
+  [Cex.GATEIO]: "https://www.gate.io/myaccount/apikeys",
+  [Cex.KUCOIN]: "https://www.kucoin.com/account/api?spm=kcWeb.B1assets.person.8",
+  [Cex.NO]: "",
+};
+
 export default {
   toReadableDateDifference,
   isValidHttpUrl,
@@ -199,4 +208,5 @@ export default {
   cexInfo,
   chainInfo,
   truncateEthAddress,
+  cexAPIKeyURL,
 };
