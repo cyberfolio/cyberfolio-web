@@ -6,6 +6,10 @@ const clearState = async () => {
     payload: "",
   });
   store.dispatch({
+    type: "SET_ENS_NAME",
+    payload: "",
+  });
+  store.dispatch({
     type: "SET_NET_WORTH",
     payload: 0,
   });
