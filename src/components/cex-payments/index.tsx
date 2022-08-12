@@ -12,12 +12,17 @@ type Props = {
 const CexPayments: FC<Props> = ({ show }) => {
   const [history, setHistory] = useState<PaymentHistoryResponse[]>([]);
   const [loading, setLoading] = useState(false);
+  const [infoMessage, setInfoMessage] = useState("");
 
   const init = async () => {
     try {
-      setLoading(true);
+      setLoading(false);
       const paymentHistory = await CexService.getPaymentHistory();
-      setHistory(paymentHistory);
+      if (paymentHistory.length === 0) {
+        setInfoMessage("Only Binance payment history is supported");
+      } else {
+        setHistory(paymentHistory);
+      }
     } catch (e) {
       toast.error(e.message);
     } finally {
@@ -45,6 +50,11 @@ const CexPayments: FC<Props> = ({ show }) => {
             <div className="fa-3x">
               <i className="fas fa-sync fa-spin cex-payments__assets__loading--white"></i>
             </div>
+          </div>
+        )}
+        {infoMessage && (
+          <div className="cex-payments__assets__loading ">
+            <div className="cex-payments__assets__loading--white">{infoMessage}</div>
           </div>
         )}
         {history &&
