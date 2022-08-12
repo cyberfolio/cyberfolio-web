@@ -1,5 +1,6 @@
 import { mainInstance } from "@config/axios";
 import { CexAsset, Cex } from "@customTypes/index";
+import { PaymentHistoryResponse } from "./types";
 
 export default class CexService {
   static async addCex({
@@ -55,6 +56,15 @@ export default class CexService {
         },
         { withCredentials: true },
       );
+    } catch (e) {
+      throw new Error(e.response?.data);
+    }
+  }
+
+  static async getPaymentHistory() {
+    try {
+      const res = await mainInstance.get<PaymentHistoryResponse[]>(`/cex/payment-history`, { withCredentials: true });
+      return res.data;
     } catch (e) {
       throw new Error(e.response?.data);
     }
