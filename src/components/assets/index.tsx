@@ -8,15 +8,18 @@ import CexService from "@services/cex";
 import DexService from "@services/dex";
 
 import AssetTable from "@components/asset-table";
+import Accounts from "@components/accounts";
+import PaymentHistory from "@components/payments-history";
+
 import { useAppDispatch, useAppSelector } from "@store/functions";
 import { AllNetworks } from "@customTypes/index";
-import Accounts from "@components/accounts";
 
 enum Tab {
   All = "All",
   DEX = "DEX",
   CEX = "CEX",
   Accounts = "Accounts",
+  PaymentHistory = "PaymentHistory",
 }
 
 const Assets = () => {
@@ -122,10 +125,23 @@ const Assets = () => {
         >
           Accounts
         </div>
+
+        <div
+          className={classnames(
+            "assets__links__link",
+            activeTab === Tab.PaymentHistory && "assets__links__link--active",
+          )}
+          onClick={() => onTabClick(Tab.PaymentHistory)}
+        >
+          Payment History
+        </div>
       </div>
       <div className="assets__table">
-        {activeTab !== Tab.Accounts && <AssetTable assets={assetsToShow} loading={loading} />}
+        {activeTab !== Tab.Accounts && activeTab !== Tab.PaymentHistory && (
+          <AssetTable assets={assetsToShow} loading={loading} />
+        )}
         {activeTab === Tab.Accounts && <Accounts />}
+        {activeTab === Tab.PaymentHistory && <PaymentHistory />}
       </div>
     </div>
   );

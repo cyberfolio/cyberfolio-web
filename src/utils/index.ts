@@ -188,6 +188,22 @@ const toReadableDateDifference = (date1: Date, date2: Date) => {
   return Math.floor(seconds) + " seconds";
 };
 
+const timestampToReadableDate = (timestamp: number) => {
+  const date = new Date(timestamp);
+  return (
+    date.getDate() +
+    "/" +
+    (date.getMonth() + 1) +
+    "/" +
+    date.getFullYear() +
+    " " +
+    date.getHours() +
+    ":" +
+    date.getMinutes() +
+    ":" +
+    date.getSeconds()
+  );
+};
 const cexAPIKeyURL = {
   [Cex.BINANCE]: "https://www.binance.com/en/my/settings/api-management",
   [Cex.BINANCETR]: "https://www.trbinance.com/usercenter/settings/api-management",
@@ -199,6 +215,7 @@ const cexAPIKeyURL = {
 
 export default {
   toReadableDateDifference,
+  timestampToReadableDate,
   isValidHttpUrl,
   setAppLoading,
   toUsd,
