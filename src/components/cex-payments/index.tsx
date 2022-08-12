@@ -16,7 +16,7 @@ const CexPayments: FC<Props> = ({ show }) => {
 
   const init = async () => {
     try {
-      setLoading(false);
+      setLoading(true);
       const paymentHistory = await CexService.getPaymentHistory();
       if (paymentHistory.length === 0) {
         setInfoMessage("Only Binance payment history is supported");
