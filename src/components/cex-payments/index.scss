@@ -1,8 +1,13 @@
-.payments-history {
+.cex-payments {
   border: 1px solid $border;
   border-radius: 8px;
   padding: 0 20px;
   margin-bottom: 50px;
+  display: none;
+
+  &--show {
+    display: block;
+  }
 
   &__header {
     display: flex;
