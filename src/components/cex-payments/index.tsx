@@ -1,38 +1,48 @@
+import { FC, useEffect, useState } from "react";
 import CexService from "@services/cex";
 import { PaymentHistoryResponse } from "@services/cex/types";
 import utils from "@utils/index";
 import classNames from "classnames";
-import { FC, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import "./index.scss";
+import { useAppSelector } from "@store/functions";
 
 type Props = {
   show: boolean;
 };
 const CexPayments: FC<Props> = ({ show }) => {
+  const evmAddress = useAppSelector((state) => state.evmAddress);
   const [history, setHistory] = useState<PaymentHistoryResponse[]>([]);
   const [loading, setLoading] = useState(false);
   const [infoMessage, setInfoMessage] = useState("");
 
-  const init = async () => {
-    try {
-      setLoading(true);
-      const paymentHistory = await CexService.getPaymentHistory();
-      if (paymentHistory.length === 0) {
-        setInfoMessage("Only Binance payment history is supported");
-      } else {
-        setHistory(paymentHistory);
+  const init = async (evmAddress: string) => {
+    if (evmAddress) {
+      try {
+        setLoading(true);
+        const paymentHistory = await CexService.getPaymentHistory();
+        if (paymentHistory.length === 0) {
+          setInfoMessage("Only Binance payment history is supported");
+        } else {
+          setHistory(paymentHistory);
+        }
+      } catch (e) {
+        toast.error(e.message);
+      } finally {
+        setLoading(false);
       }
-    } catch (e) {
-      toast.error(e.message);
-    } finally {
-      setLoading(false);
     }
   };
 
   useEffect(() => {
-    init();
-  }, []);
+    init(evmAddress);
+  }, [evmAddress]);
+
+  useEffect(() => {
+    if (!evmAddress) {
+      setHistory([]);
+    }
+  }, [evmAddress]);
 
   return (
     <div className={classNames("cex-payments", show && "cex-payments--show")}>
