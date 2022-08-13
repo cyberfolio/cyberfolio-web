@@ -69,7 +69,7 @@ const CexPayments: FC<Props> = ({ show }) => {
         )}
         {history &&
           history.map((item, index: number) => {
-            const cexLogo = utils.cexInfo.filter((info) => info.name === item.cex)[0]?.image;
+            const cexLogo = utils.cexInfo.filter((info) => info.name === item.cexName)[0]?.image;
             return (
               <div
                 key={item.orderNo + index}
@@ -85,8 +85,8 @@ const CexPayments: FC<Props> = ({ show }) => {
                                 cex-payments__assets__asset__item--first"
                 >
                   <div className="cex-payments__assets__asset__item__chain">
-                    <div className="cex-payments__assets__asset__item__chain__name">{item.cex}</div>
-                    <img src={cexLogo} alt={item.cex} className="cex-payments__assets__asset__item__chain__logo" />
+                    <div className="cex-payments__assets__asset__item__chain__name">{item.cexName}</div>
+                    <img src={cexLogo} alt={item.cexName} className="cex-payments__assets__asset__item__chain__logo" />
                   </div>
                 </div>
                 <div className="cex-payments__assets__asset__item cex-payments__assets__asset__item--left">

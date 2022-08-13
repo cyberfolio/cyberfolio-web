@@ -1,7 +1,7 @@
 import { Cex } from "@customTypes/index";
 
 export interface PaymentHistoryResponse {
-  cex: Cex;
+  cexName: Cex;
   orderNo: number;
   type: string;
   fee: string;
