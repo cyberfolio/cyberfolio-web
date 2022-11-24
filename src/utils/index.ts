@@ -13,7 +13,6 @@ import Optimism from "@assets/optimism.svg";
 import Binance from "@assets/binance.svg";
 import Kucoin from "@assets/kucoin.png";
 import Gateio from "@assets/gateio.svg";
-import FTX from "@assets/ftx.svg";
 
 import store from "@store/index";
 import { Cex, Chain } from "@customTypes/index";
@@ -82,10 +81,6 @@ const cexInfo = [
     name: Cex.GATEIO,
     image: Gateio,
   },
-  {
-    name: Cex.FTX,
-    image: FTX,
-  },
 ];
 
 const validateBtcAddress = (address: string) => {
@@ -128,8 +123,6 @@ const arrangeCexName = (cex: Cex) => {
   switch (cex) {
     case Cex.NO:
       return "";
-    case Cex.FTX:
-      return "FTX";
     default:
       return cex.charAt(0).toUpperCase() + cex.slice(1);
   }
@@ -207,7 +200,6 @@ const timestampToReadableDate = (timestamp: number) => {
 const cexAPIKeyURL = {
   [Cex.BINANCE]: "https://www.binance.com/en/my/settings/api-management",
   [Cex.BINANCETR]: "https://www.trbinance.com/usercenter/settings/api-management",
-  [Cex.FTX]: "https://ftx.com/settings/api",
   [Cex.GATEIO]: "https://www.gate.io/myaccount/apikeys",
   [Cex.KUCOIN]: "https://www.kucoin.com/account/api?spm=kcWeb.B1assets.person.8",
   [Cex.NO]: "",

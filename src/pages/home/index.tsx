@@ -16,7 +16,7 @@ import { useAppDispatch, useAppSelector } from "@store/functions";
 import { Cex, Chain, Keys } from "@customTypes/index";
 
 const availableChains = [Chain.BITCOIN, Chain.ETHEREUM, Chain.SOLANA];
-const availableCexes = [Cex.BINANCE, Cex.BINANCETR, Cex.FTX, Cex.KUCOIN, Cex.GATEIO];
+const availableCexes = [Cex.BINANCE, Cex.BINANCETR, Cex.KUCOIN, Cex.GATEIO];
 
 const Home = () => {
   const dispatch = useAppDispatch();
