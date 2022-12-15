@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 import classnames from "classnames";
 
 import DexService from "@services/dex";
-import useKeypress from "@components/hooks/useKeyPress";
+import useKeypress from "@hooks/useKeyPress";
 import utils from "@utils/index";
 import { useAppDispatch, useAppSelector } from "@store/functions";
 import { Chain, Keys } from "@customTypes/index";
@@ -92,34 +92,42 @@ const AddWallet = () => {
           </div>
         </div>
         <div className="add-wallet-modal__content__body">
-          <input
-            className="add-wallet-modal__content__body__input"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            placeholder="Enter Wallet Address"
-            maxLength={100}
-          />
-          <input
-            className="add-wallet-modal__content__body__input"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Enter Wallet Name"
-            maxLength={20}
-          />
+          <div className="add-wallet-modal__content__body__container">
+            <label className="add-wallet-modal__content__body__container__label">Address</label>
+            <input
+              className="add-wallet-modal__content__body__container__input"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              placeholder="Enter Wallet Address"
+              maxLength={100}
+            />
+          </div>
+
+          <div className="add-wallet-modal__content__body__container">
+            <label className="add-wallet-modal__content__body__container__label">Name</label>
+            <input
+              className="add-wallet-modal__content__body__container__input"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Enter Wallet Name"
+              maxLength={20}
+            />
+          </div>
           <div className="add-wallet-modal__content__body__button">
             <button
-              className={classnames(
-                "add-wallet-modal__content__body__button__content",
-                open && "add-wallet-modal__content__body__button__content--loading",
-              )}
+              className={classnames("add-wallet-modal__content__body__button__content")}
               onClick={add}
-              disabled={loading}
+              disabled={loading || !name || !address}
             >
-              {loading && (
-                <div className="fa-1x" style={{ marginRight: 8 }}>
-                  <i className="fas fa-sync fa-spin"></i>
-                </div>
-              )}
+              <i
+                className={classnames(
+                  "fa-1x fas fa-sync fa-spin",
+                  loading
+                    ? "add-wallet-modal__content__body__button__content--loading"
+                    : "add-wallet-modal__content__body__button__content--not-loading",
+                )}
+                style={{ marginRight: 5 }}
+              ></i>
               Add
             </button>
           </div>

@@ -11,7 +11,8 @@
       "@utils/*": ["./src/utils/*"],
       "@assets/*": ["./src/assets/*"],
       "@config/*": ["./src/config/*"],
-      "@customTypes/*": ["./src/custom-types/*"]
+      "@customTypes/*": ["./src/custom-types/*"],
+      "@hooks/*": ["./src/hooks/*"]
     },
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": false,

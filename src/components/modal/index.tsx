@@ -1,4 +1,4 @@
-import useKeypress from "@components/hooks/useKeyPress";
+import useKeypress from "@hooks/useKeyPress";
 import { Keys } from "@customTypes/index";
 import "./index.scss";
 

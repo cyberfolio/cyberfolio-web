@@ -5,7 +5,7 @@ import Metamask from "@assets/metamask.png";
 import BuyMeACoffee from "@assets/bmc-logo.png";
 import Logo from "@assets/logo.png";
 import utils from "@utils/index";
-import { useMetamaskLogin } from "@components/hooks/useMetamaskLogin";
+import { useMetamaskLogin } from "@hooks/useMetamaskLogin";
 import InfoService from "@services/info";
 import { useAppDispatch, useAppSelector } from "@store/functions";
 import links from "@config/links";

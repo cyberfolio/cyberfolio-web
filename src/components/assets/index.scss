@@ -9,18 +9,18 @@
       padding: 20px 30px;
       margin-right: 20px;
       color: $text-color-dark;
+      transition: background-color 0.25s ease;
       border-bottom: 1px solid transparent;
+      border-radius: 8px 8px 0 0;
       @extend .unselectable;
       @extend .flexCenter;
       &:hover {
         background-color: lighten($background-dark, 20%);
-        border-radius: 8px 8px 0 0;
         cursor: pointer;
       }
       &--active {
         background-color: unset !important;
         border-bottom: 1px solid red;
-        border-radius: unset !important;
         cursor: unset !important;
       }
     }

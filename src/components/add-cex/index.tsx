@@ -5,7 +5,7 @@ import classnames from "classnames";
 import { toast } from "react-hot-toast";
 
 import CexService from "@services/cex";
-import useKeypress from "@components/hooks/useKeyPress";
+import useKeypress from "@hooks/useKeyPress";
 import { useAppDispatch, useAppSelector } from "@store/functions";
 import utils from "@utils/index";
 import { Cex, Keys } from "@customTypes/index";
@@ -21,6 +21,7 @@ const AddCex = () => {
   const modalRef = useRef(null);
 
   const add = async () => {
+    if (loading) return;
     setLoading(true);
     utils.setAppLoading(true);
     if (!apiKey || !apiSecret) {
@@ -124,15 +125,20 @@ const AddCex = () => {
             />
           )}
           <div className="add-cex-modal__content__body__button__wrapper" onClick={add}>
-            <button className="add-cex-modal__content__body__button__wrapper__button" disabled={loading}>
-              {loading && (
-                <div
-                  className="fa-1x add-cex-modal__content__body__button__wrapper__button__loading"
-                  style={{ marginRight: 5 }}
-                >
-                  <i className="fas fa-sync fa-spin"></i>
-                </div>
-              )}
+            <button
+              className="add-cex-modal__content__body__button__wrapper__button"
+              onClick={add}
+              disabled={!apiKey || !apiSecret}
+            >
+              <i
+                className={classnames(
+                  "fas fa-sync fa-spin",
+                  loading
+                    ? "add-cex-modal__content__body__button__wrapper__button--loading"
+                    : "add-cex-modal__content__body__button__wrapper__button--not-loading",
+                )}
+                style={{ marginRight: 5 }}
+              ></i>
               Add
             </button>
           </div>

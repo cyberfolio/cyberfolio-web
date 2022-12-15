@@ -13,7 +13,15 @@ const root = createRoot(rootElement as Element);
 root.render(
   <Provider store={store}>
     <StrictMode>
-      <Toaster position="top-center" reverseOrder={false} />
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+        toastOptions={{
+          style: {
+            fontSize: 14,
+          },
+        }}
+      />
       <App />
     </StrictMode>
   </Provider>,

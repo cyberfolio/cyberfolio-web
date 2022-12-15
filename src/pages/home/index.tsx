@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import "./index.scss";
 
 import { Plus, ChevronDown } from "react-bootstrap-icons";
@@ -8,12 +8,13 @@ import { toast } from "react-hot-toast";
 import Utilities from "@components/utilities";
 import Assets from "@components//assets";
 
-import FilterDropdown from "@components/platform-dropdown";
-import useKeypress from "@components/hooks/useKeyPress";
+import PlatformDropdown from "@components/platform-dropdown";
+import useKeypress from "@hooks/useKeyPress";
 import utils from "@utils/index";
 import InfoService from "@services/info";
 import { useAppDispatch, useAppSelector } from "@store/functions";
 import { Cex, Chain, Keys } from "@customTypes/index";
+import useOnClickOutside from "@hooks/useClickOutside";
 
 const availableChains = [Chain.BITCOIN, Chain.ETHEREUM, Chain.SOLANA];
 const availableCexes = [Cex.BINANCE, Cex.BINANCETR, Cex.KUCOIN, Cex.GATEIO];
@@ -27,10 +28,11 @@ const Home = () => {
   const connectedCexes = useAppSelector((state) => state.connectedCexes);
   const connectedWallets = useAppSelector((state) => state.connectedWallets);
 
-  const [filterDropdownOpen, setFilterDropdownOpen] = useState(false);
-  const [currentTime, setCurrentTime] = useState<Date>(new Date());
+  const [platformDropdownOpen, setPlatformDropdownOpen] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [hoveredWallet, setHoveredWallet] = useState<Chain | undefined>();
+  const [lastUpdate, setLastUpdate] = useState<string>();
+  const platfromDropdownRef = useRef<HTMLDivElement>(null);
 
   const getTotal = useCallback(async () => {
     try {
@@ -63,19 +65,8 @@ const Home = () => {
     }
   }, [dispatch]);
 
-  const onFocus = () => {
-    setCurrentTime(new Date());
-  };
-
   useEffect(() => {
-    window.addEventListener("focus", onFocus);
-    return () => {
-      window.removeEventListener("focus", onFocus);
-    };
-  }, []);
-
-  useEffect(() => {
-    setFilterDropdownOpen(false);
+    setPlatformDropdownOpen(false);
   }, [platform]);
 
   useEffect(() => {
@@ -85,8 +76,25 @@ const Home = () => {
     }
   }, [evmAddress, getTotal, getAvailableAccounts]);
 
+  useEffect(() => {
+    const updateLastUpdateTime = () => {
+      const lastUpdateRes = utils.toReadableDateDifference(new Date(lastAssetUpdate), new Date());
+      setLastUpdate(lastUpdateRes);
+    };
+    updateLastUpdateTime();
+    const interval = setInterval(() => {
+      updateLastUpdateTime();
+    }, 58000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [lastAssetUpdate]);
+
   useKeypress(Keys.Escape, () => {
-    setFilterDropdownOpen(false);
+    setPlatformDropdownOpen(false);
+  });
+  useOnClickOutside(platfromDropdownRef, () => {
+    setPlatformDropdownOpen(false);
   });
 
   const openWalletModal = (chain: Chain) => {
@@ -125,7 +133,7 @@ const Home = () => {
   };
 
   return (
-    <div className="home">
+    <div className={classNames("home", !evmAddress && "home--not-connected")}>
       <div className="home__header">
         <div className="home__header__add">
           {availableChains.map((chain) => {
@@ -181,13 +189,10 @@ const Home = () => {
                 </div>
 
                 <div className="home__header__second__first__last-update">
-                  {lastAssetUpdate && (
+                  {lastUpdate && (
                     <div className="home__header__second__first__last-update__label">
                       Data updated{" "}
-                      <span className="home__header__second__first__last-update__label--value">
-                        {utils.toReadableDateDifference(new Date(lastAssetUpdate), currentTime)}
-                      </span>{" "}
-                      ago
+                      <span className="home__header__second__first__last-update__label--value">{lastUpdate}</span> ago
                     </div>
                   )}
                 </div>
@@ -196,7 +201,8 @@ const Home = () => {
               <div className="home__header__second__filter">
                 <div
                   className="home__header__second__filter__button"
-                  onClick={() => setFilterDropdownOpen(!filterDropdownOpen)}
+                  onClick={() => setPlatformDropdownOpen(!platformDropdownOpen)}
+                  ref={platfromDropdownRef}
                 >
                   <img
                     className="home__header__second__filter__button__icon"
@@ -209,7 +215,7 @@ const Home = () => {
                     <ChevronDown color="white" size={15} />
                   </div>
                 </div>
-                {filterDropdownOpen && <FilterDropdown />}
+                <PlatformDropdown open={platformDropdownOpen} />
               </div>
             </>
           )}

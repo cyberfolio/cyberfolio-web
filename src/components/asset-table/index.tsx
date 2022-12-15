@@ -6,11 +6,11 @@ import { Cex, CexAsset, Chain, DexAsset } from "@customTypes/index";
 import { memo } from "react";
 
 const Index = ({ assets, loading }: { assets: (DexAsset | CexAsset)[]; loading: boolean }) => {
-  const openAssetAtScan = (scanUrl: string) => {
-    if (scanUrl && utils.isValidHttpUrl(scanUrl)) {
-      window.open(scanUrl, "_blank");
-    }
-  };
+  // const openAssetAtScan = (scanUrl: string) => {
+  //   if (scanUrl && utils.isValidHttpUrl(scanUrl)) {
+  //     window.open(scanUrl, "_blank");
+  //   }
+  // };
 
   return (
     <div className="asset-table">
@@ -67,14 +67,16 @@ const Index = ({ assets, loading }: { assets: (DexAsset | CexAsset)[]; loading: 
               return <div key={symbol + index}></div>;
             }
             return (
-              <div
+              <a
                 key={symbol + index}
                 className={classnames(
                   "asset-table__assets__asset",
                   index === 0 && "asset-table__assets__asset--first",
                   assets.length - 1 && "asset-table__assets__asset--last",
                 )}
-                onClick={() => openAssetAtScan(scan)}
+                href={scan}
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <div
                   className="asset-table__assets__asset__item 
@@ -114,7 +116,7 @@ const Index = ({ assets, loading }: { assets: (DexAsset | CexAsset)[]; loading: 
                 <div className="asset-table__assets__asset__item asset-table__assets__asset__item--last">
                   {utils.toUsd(value)}
                 </div>
-              </div>
+              </a>
             );
           })}
       </div>

@@ -40,8 +40,7 @@
   background-color: $button-hover-color;
   color: $text-color-dark;
   outline: none;
-  padding-left: 24px;
-  padding-right: 24px;
+  padding: 0 10px;
   font-family: Graphik;
   font-size: 14px;
   line-height: 20px;
@@ -56,13 +55,40 @@
   min-height: 40px;
   border: 1px solid $border;
   border-radius: 8px;
-  background-color: $background;
+  background-color: $border;
   color: $text-color-dark;
   font-weight: 500;
   font-size: 16px;
+  transition: background-color 0.25s ease;
   &:hover {
     cursor: pointer;
     background-color: $button-hover-color;
+  }
+  &:disabled {
+    cursor: default;
+    background-color: $border;
+  }
+}
+
+.submit-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  min-height: 40px;
+  border-radius: 8px;
+  border: 1px solid $cyberpunk-color;
+  background-color: $cyberpunk-color;
+  color: $text-color-dark;
+  font-weight: 500;
+  font-size: 16px;
+  transition: background-color 0.25s ease;
+  &:hover:enabled {
+    cursor: pointer;
+  }
+  &:disabled {
+    border: 1px solid $border;
+    background-color: $border;
   }
 }
 

@@ -1,5 +1,28 @@
+@import "./variables.scss";
+@import "./shared.scss";
+
 * {
   box-sizing: border-box;
+}
+*::-webkit-scrollbar {
+  width: 6px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 5px;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: #676a6d;
+  border-radius: 14px;
+  border: 1px solid #676a6d;
+}
+::-webkit-scrollbar:horizontal {
+  height: 5px;
+  background-color: transparent;
+}
+::-webkit-scrollbar-thumb:horizontal {
+  background: #676a6d;
+  border-radius: 14px;
 }
 
 body {
@@ -7,6 +30,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+  background-color: $background;
+  overflow-y: scroll;
 }
 input,
 select,
@@ -14,10 +39,3 @@ textarea,
 button {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace !important;
 }
-
-body {
-  overscroll-behavior-y: none;
-}
-
-@import "./variables.scss";
-@import "./shared.scss";
