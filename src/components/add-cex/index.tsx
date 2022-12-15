@@ -71,10 +71,10 @@ const AddCex = () => {
   };
 
   useKeypress(Keys.Escape, () => {
-    close();
     setApiKey("");
     setApiSecret("");
     setPassphrase("");
+    close();
   });
 
   const close = () => {
