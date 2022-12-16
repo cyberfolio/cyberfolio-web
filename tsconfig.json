@@ -11,10 +11,12 @@
       "@utils/*": ["./src/utils/*"],
       "@assets/*": ["./src/assets/*"],
       "@config/*": ["./src/config/*"],
-      "@customTypes/*": ["./src/custom-types/*"],
+      "@app-types/*": ["./src/app-types/*"],
       "@hooks/*": ["./src/hooks/*"]
     },
+    "target": "ESNext",
     "lib": ["dom", "dom.iterable", "esnext"],
+    "types": ["vite/client", "vite-plugin-svgr/client"],
     "allowJs": false,
     "skipLibCheck": false,
     "esModuleInterop": true,

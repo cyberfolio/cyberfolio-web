@@ -1,5 +1,5 @@
 import { mainInstance } from "@config/axios";
-import { CexAsset, Cex } from "@customTypes/index";
+import { CexAsset, Cex } from "@app-types/index";
 import { PaymentHistoryResponse } from "./types";
 
 export default class CexService {

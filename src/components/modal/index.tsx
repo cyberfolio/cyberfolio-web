@@ -1,5 +1,5 @@
 import useKeypress from "@hooks/useKeyPress";
-import { Keys } from "@customTypes/index";
+import { Keys } from "@app-types/index";
 import "./index.scss";
 
 type Props = {

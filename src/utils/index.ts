@@ -15,7 +15,7 @@ import Kucoin from "@assets/kucoin.png";
 import Gateio from "@assets/gateio.svg";
 
 import store from "@store/index";
-import { Cex, Chain } from "@customTypes/index";
+import { Cex, Chain } from "@app-types/index";
 
 const truncateRegex = /^(0x[a-zA-Z0-9]{4})[a-zA-Z0-9]+([a-zA-Z0-9]{4})$/;
 

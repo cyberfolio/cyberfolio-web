@@ -8,7 +8,7 @@ import CexService from "@services/cex";
 import useKeypress from "@hooks/useKeyPress";
 import { useAppDispatch, useAppSelector } from "@store/functions";
 import utils from "@utils/index";
-import { Cex, Keys } from "@customTypes/index";
+import { Cex, Keys } from "@app-types/index";
 import InfoService from "@services/info";
 
 const AddCex = () => {

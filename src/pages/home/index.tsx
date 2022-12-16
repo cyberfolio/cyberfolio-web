@@ -13,7 +13,7 @@ import useKeypress from "@hooks/useKeyPress";
 import utils from "@utils/index";
 import InfoService from "@services/info";
 import { useAppDispatch, useAppSelector } from "@store/functions";
-import { Cex, Chain, Keys } from "@customTypes/index";
+import { Cex, Chain, Keys } from "@app-types/index";
 import useOnClickOutside from "@hooks/useClickOutside";
 
 const availableChains = [Chain.BITCOIN, Chain.ETHEREUM, Chain.SOLANA];
@@ -107,7 +107,7 @@ const Home = () => {
         },
       });
     } else {
-      toast.error("Wallet not connected yet");
+      toast.error("Connect your metamask wallet");
     }
   };
 
@@ -122,7 +122,7 @@ const Home = () => {
         },
       });
     } else {
-      toast.error("Wallet not connected yet");
+      toast.error("Connect your metamask wallet");
     }
   };
 

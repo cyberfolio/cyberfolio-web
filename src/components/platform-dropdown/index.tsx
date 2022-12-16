@@ -3,7 +3,7 @@ import "./index.scss";
 
 import utils from "@utils/index";
 import { useAppDispatch } from "@store/functions";
-import { AllNetworks, Cex, Chain } from "@customTypes/index";
+import { AllNetworks, Cex, Chain } from "@app-types/index";
 import ALLNetworks from "@assets/blockchain.svg";
 import classNames from "classnames";
 

@@ -8,7 +8,7 @@ import DexService from "@services/dex";
 import useKeypress from "@hooks/useKeyPress";
 import utils from "@utils/index";
 import { useAppDispatch, useAppSelector } from "@store/functions";
-import { Chain, Keys } from "@customTypes/index";
+import { Chain, Keys } from "@app-types/index";
 import InfoService from "@services/info";
 
 const AddWallet = () => {

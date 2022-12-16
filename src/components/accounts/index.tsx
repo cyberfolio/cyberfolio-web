@@ -1,5 +1,5 @@
 import Modal from "@components/modal";
-import { Chain, Cex } from "@customTypes/index";
+import { Chain, Cex } from "@app-types/index";
 import CexService from "@services/cex";
 import DexService from "@services/dex";
 import InfoService from "@services/info";

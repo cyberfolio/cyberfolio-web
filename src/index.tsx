@@ -6,6 +6,7 @@ import { Toaster } from "react-hot-toast";
 
 import App from "./app";
 import store from "./store";
+import "./styles/global.scss";
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement as Element);

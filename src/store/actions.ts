@@ -1,4 +1,4 @@
-import { Cex, CexAsset, AllNetworks, Chain, DexAsset } from "@customTypes/index";
+import { Cex, CexAsset, AllNetworks, Chain, DexAsset } from "@app-types/index";
 import { ConnectedCexPayload, ConnectedWalletPayload } from "./types";
 
 type Actions =

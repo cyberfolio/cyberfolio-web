@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = process.env.REACT_APP_BACKEND_URL;
+const baseURL = import.meta.env.VITE_BACKEND_URL;
 
 export const mainInstance = axios.create({
   baseURL,

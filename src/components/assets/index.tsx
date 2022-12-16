@@ -12,7 +12,7 @@ import Accounts from "@components/accounts";
 import CexPayments from "@components/cex-payments";
 
 import { useAppDispatch, useAppSelector } from "@store/functions";
-import { AllNetworks } from "@customTypes/index";
+import { AllNetworks } from "@app-types/index";
 
 enum Tab {
   All = "All",

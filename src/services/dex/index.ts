@@ -1,5 +1,5 @@
 import { mainInstance } from "@config/axios";
-import { Chain, DexAsset } from "@customTypes/index";
+import { Chain, DexAsset } from "@app-types/index";
 
 interface DexTokens {
   assets: DexAsset[];

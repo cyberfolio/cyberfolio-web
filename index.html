@@ -1,11 +1,11 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link id="favicon" rel="icon" href="%PUBLIC_URL%/favicon-light.ico" />
+    <link id="favicon" rel="icon" href="./favicon-light.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta name="description" content="CyberFolio" />
-    <link id="manifest" rel="manifest" href="%PUBLIC_URL%/manifest-light.json" />
+    <link id="manifest" rel="manifest" href="./manifest-light.json" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,27 +14,27 @@
       rel="stylesheet"
     />
     <script src="https://kit.fontawesome.com/127e0e6f06.js" crossorigin="anonymous"></script>
-
     <script>
-      const usesDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches || false;
-      const favicon = document.getElementById('favicon');
-      const manifest = document.getElementById('manifest');
-      function switchIcon (usesDarkMode) {
-        if (usesDarkMode) { 
-          favicon.href = '%PUBLIC_URL%/favicon-light.ico';
-          manifest.href='%PUBLIC_URL%/manifest-light.json' 
+      const usesDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches || false;
+      const favicon = document.getElementById("favicon");
+      const manifest = document.getElementById("manifest");
+      function switchIcon(usesDarkMode) {
+        if (usesDarkMode) {
+          favicon.href = "./favicon-light.ico";
+          manifest.href = "./manifest-light.json";
         } else {
-          favicon.href = '%PUBLIC_URL%/favicon-dark.ico';
-          manifest.href='%PUBLIC_URL%/manifest-dark.json' 
+          favicon.href = "./favicon-dark.ico";
+          manifest.href = "./manifest-dark.json";
         }
       }
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener( "change", (e) => switchIcon(e.matches));
+      window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => switchIcon(e.matches));
       switchIcon(usesDarkMode);
     </script>
-    <title>Cyberfolio</title>
+    <title><%= title %></title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <script type="module" src="/src/index.tsx"></script>
   </body>
 </html>

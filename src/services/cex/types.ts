@@ -1,4 +1,4 @@
-import { Cex } from "@customTypes/index";
+import { Cex } from "@app-types/index";
 
 export interface PaymentHistoryResponse {
   cexName: Cex;

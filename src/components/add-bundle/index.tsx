@@ -3,7 +3,7 @@ import "./index.scss";
 
 import useKeypress from "@hooks/useKeyPress";
 import { useAppDispatch } from "@store/functions";
-import { Cex, Keys } from "@customTypes/index";
+import { Cex, Keys } from "@app-types/index";
 
 const Index = () => {
   const dispatch = useAppDispatch();

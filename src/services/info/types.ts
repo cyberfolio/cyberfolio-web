@@ -1,4 +1,4 @@
-import { Cex, Chain } from "@customTypes/index";
+import { Cex, Chain } from "@app-types/index";
 
 export interface ConnectedWallets {
   chain: Chain;
