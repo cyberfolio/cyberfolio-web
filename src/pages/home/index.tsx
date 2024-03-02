@@ -1,136 +1,37 @@
-import { useEffect, useState, useCallback, useRef } from "react";
 import "./index.scss";
 
 import { Plus, ChevronDown } from "react-bootstrap-icons";
 import classNames from "classnames";
-import { toast } from "react-hot-toast";
 
-import Utilities from "@components/utilities";
-import Assets from "@components//assets";
+import Utilities from "./utilities";
+import Assets from "./assets";
 
 import PlatformDropdown from "@components/platform-dropdown";
-import useKeypress from "@hooks/useKeyPress";
 import utils from "@utils/index";
-import InfoService from "@services/info";
-import { useAppDispatch, useAppSelector } from "@store/functions";
-import { Cex, Chain, Keys } from "@app-types/index";
-import useOnClickOutside from "@hooks/useClickOutside";
+import { Cex, Chain } from "@app-types/index";
+import useHome from "./useIndex";
 
 const availableChains = [Chain.BITCOIN, Chain.ETHEREUM, Chain.SOLANA];
 const availableCexes = [Cex.BINANCE, Cex.BINANCETR, Cex.KUCOIN, Cex.GATEIO];
 
 const Home = () => {
-  const dispatch = useAppDispatch();
-  const platform = useAppSelector((state) => state.platform);
-  const netWorth = useAppSelector((state) => state.netWorth);
-  const lastAssetUpdate = useAppSelector((state) => state.lastAssetUpdate);
-  const evmAddress = useAppSelector((state) => state.evmAddress);
-  const connectedCexes = useAppSelector((state) => state.connectedCexes);
-  const connectedWallets = useAppSelector((state) => state.connectedWallets);
-
-  const [platformDropdownOpen, setPlatformDropdownOpen] = useState(false);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [hoveredWallet, setHoveredWallet] = useState<Chain | undefined>();
-  const [lastUpdate, setLastUpdate] = useState<string>();
-  const platfromDropdownRef = useRef<HTMLDivElement>(null);
-
-  const getTotal = useCallback(async () => {
-    try {
-      const netWorth = await InfoService.getNetWorth();
-      dispatch({
-        type: "SET_NET_WORTH",
-        payload: netWorth,
-      });
-    } catch (e) {
-      if (e.status !== 401) {
-        toast.error(e.message);
-      }
-    }
-  }, [dispatch]);
-  const getAvailableAccounts = useCallback(async () => {
-    try {
-      const { cexes, wallets } = await InfoService.getConnectedAccounts();
-      dispatch({
-        type: "SET_CONNECTED_CEXES",
-        payload: cexes,
-      });
-      dispatch({
-        type: "SET_CONNECTED_WALLETS",
-        payload: wallets,
-      });
-    } catch (e) {
-      if (e.status !== 401) {
-        toast.error(e.message);
-      }
-    }
-  }, [dispatch]);
-
-  useEffect(() => {
-    setPlatformDropdownOpen(false);
-  }, [platform]);
-
-  useEffect(() => {
-    if (evmAddress) {
-      getTotal();
-      getAvailableAccounts();
-    }
-  }, [evmAddress, getTotal, getAvailableAccounts]);
-
-  useEffect(() => {
-    const updateLastUpdateTime = () => {
-      const lastUpdateRes = utils.toReadableDateDifference(new Date(lastAssetUpdate), new Date());
-      setLastUpdate(lastUpdateRes);
-    };
-    updateLastUpdateTime();
-    const interval = setInterval(() => {
-      updateLastUpdateTime();
-    }, 58000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, [lastAssetUpdate]);
-
-  useKeypress(Keys.Escape, () => {
-    setPlatformDropdownOpen(false);
-  });
-  useOnClickOutside(platfromDropdownRef, () => {
-    setPlatformDropdownOpen(false);
-  });
-
-  const openWalletModal = (chain: Chain) => {
-    if (evmAddress) {
-      dispatch({
-        type: "OPEN_WALLET_MODAL",
-        payload: {
-          open: true,
-          chain,
-        },
-      });
-    } else {
-      toast.error("Connect your metamask wallet");
-    }
-  };
-
-  const openAddCexModal = (name: Cex) => {
-    if (connectedCexes.some((connectedCex) => connectedCex.name === name)) return;
-    if (evmAddress) {
-      dispatch({
-        type: "OPEN_ADD_CEX_MODAL",
-        payload: {
-          open: true,
-          name,
-        },
-      });
-    } else {
-      toast.error("Connect your metamask wallet");
-    }
-  };
-
-  const addMore = (chain: Chain) => {
-    if (connectedWallets.some((wallet) => wallet.chain === chain)) {
-      setHoveredWallet(chain);
-    }
-  };
+  const {
+    evmAddress,
+    connectedCexes,
+    connectedWallets,
+    netWorth,
+    platform,
+    platformDropdownOpen,
+    hoveredWallet,
+    setHoveredWallet,
+    lastUpdate,
+    platfromDropdownRef,
+    openWalletModal,
+    openAddCexModal,
+    addMore,
+    setPlatformDropdownOpen,
+    onAddStockClick,
+  } = useHome();
 
   return (
     <div className={classNames("home", !evmAddress && "home--not-connected")}>
@@ -177,6 +78,9 @@ const Home = () => {
               </div>
             );
           })}
+          <div className={classNames("home__header__add__wallet")} onClick={() => onAddStockClick()}>
+            Add a Stock <Plus color="white" size={20} />
+          </div>
         </div>
 
         <div className="home__header__second">

@@ -18,6 +18,7 @@ enum Tab {
   All = "All",
   DEX = "DEX",
   CEX = "CEX",
+  Stocks = "Stocks",
   Accounts = "Accounts",
   CexPaymets = "CexPaymets",
 }
@@ -118,6 +119,12 @@ const Assets = () => {
           onClick={() => onTabClick(Tab.DEX)}
         >
           DEX
+        </div>
+        <div
+          className={classnames("assets__links__link", activeTab === Tab.Stocks && "assets__links__link--active")}
+          onClick={() => onTabClick(Tab.Stocks)}
+        >
+          Stocks
         </div>
         <div
           className={classnames("assets__links__link", activeTab === Tab.Accounts && "assets__links__link--active")}
