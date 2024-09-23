@@ -1,4 +1,4 @@
-import { Cex, Chain } from "@app-types/index";
+import { Cex, Chain } from "structures/index";
 
 export type ConnectedCexPayload = {
   name: Cex;

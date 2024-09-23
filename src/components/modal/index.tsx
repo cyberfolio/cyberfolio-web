@@ -1,5 +1,5 @@
-import useKeypress from "@hooks/useKeyPress";
-import { Keys } from "@app-types/index";
+import AppHooks from "hooks/index";
+import { Keys } from "structures/index";
 import "./index.scss";
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
   loading: boolean;
 };
 const Modal: React.FC<Props> = ({ title, open, action, close, loading }) => {
-  useKeypress(Keys.Escape, close);
+  AppHooks.useKeypress(Keys.Escape, close);
 
   if (!open) return <></>;
 

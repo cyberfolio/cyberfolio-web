@@ -1,6 +1,6 @@
 import Actions from "./actions";
-import ALLNetworks from "@assets/blockchain.svg";
-import { Cex, AllNetworks, CexAsset, Chain, DexAsset } from "@app-types/index";
+import ALLNetworks from "assets/blockchain.svg";
+import { Cex, AllNetworks, CexAsset, Chain, DexAsset } from "structures/index";
 import { ConnectedCexPayload, ConnectedWalletPayload } from "./types";
 
 const initialState = {

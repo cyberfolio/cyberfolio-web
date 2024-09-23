@@ -1,42 +1,48 @@
-import { loadEnv } from "vite";
+import svgr from "@svgr/rollup";
 import react from "@vitejs/plugin-react";
+import { defineConfig, loadEnv } from "vite";
 import viteTsconfigPaths from "vite-tsconfig-paths";
-import svgrPlugin from "vite-plugin-svgr";
-import { createHtmlPlugin } from "vite-plugin-html";
-import path from "path";
 
-// https://vitejs.dev/config/
-export default ({ mode }) => {
-  const env = loadEnv(mode, process.cwd());
+export default defineConfig(({ mode }) => {
+  process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
   return {
-    plugins: [
-      react(),
-      viteTsconfigPaths(),
-      svgrPlugin(),
-      createHtmlPlugin({
-        minify: true,
-        inject: {
-          data: {
-            title: env.VITE_APP_TITLE,
-          },
-        },
-      }),
-    ],
-    server: {
-      port: 4000,
-    },
-    resolve: {
-      alias: {
-        "@pages": path.resolve(__dirname, "src/pages"),
-        "@components": path.resolve(__dirname, "src/components"),
-        "@services": path.resolve(__dirname, "src/services"),
-        "@store": path.resolve(__dirname, "src/store"),
-        "@utils": path.resolve(__dirname, "src/utils"),
-        "@assets": path.resolve(__dirname, "src/assets"),
-        "@config": path.resolve(__dirname, "src/config"),
-        "@app-types": path.resolve(__dirname, "src/app-types"),
-        "@hooks": path.resolve(__dirname, "src/hooks"),
+    build: {
+      commonjsOptions: {
+        transformMixedEsModules: true,
       },
     },
+    plugins: [
+      react({
+        babel: {
+          plugins: [
+            [
+              "babel-plugin-styled-components",
+              {
+                displayName: true,
+                fileName: true,
+                meaninglessFileNames: ["index", "styles"],
+                minify: true,
+                transpileTemplateLiterals: false,
+                pure: true,
+                preprocess: false,
+              },
+            ],
+          ],
+        },
+      }),
+      viteTsconfigPaths({}),
+      svgr({ dimensions: false }),
+    ],
+    server: {
+      host: "127.0.0.1",
+      port: 4000,
+      watch: {
+        ignored: ["**/.env/**"],
+      },
+    },
+    preview: {
+      host: true,
+      port: 5000,
+    },
   };
-};
+});

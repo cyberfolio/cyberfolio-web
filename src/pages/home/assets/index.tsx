@@ -4,15 +4,15 @@ import "./index.scss";
 import classnames from "classnames";
 import { toast } from "react-hot-toast";
 
-import CexService from "@services/cex";
-import DexService from "@services/dex";
+import CexService from "services/cex";
+import DexService from "services/dex";
 
-import AssetTable from "@components/asset-table";
-import Accounts from "@components/accounts";
-import CexPayments from "@components/cex-payments";
+import AssetTable from "components/asset-table";
+import Accounts from "components/accounts";
+import CexPayments from "components/cex-payments";
 
-import { useAppDispatch, useAppSelector } from "@store/functions";
-import { AllNetworks } from "@app-types/index";
+import { useAppDispatch, useAppSelector } from "store/functions";
+import { AllNetworks } from "structures/index";
 
 enum Tab {
   All = "All",

@@ -1,6 +1,6 @@
 import "./index.scss";
 
-import links from "@config/links";
+import AppConstants from "constants/index";
 
 const Footer = () => {
   return (
@@ -9,13 +9,13 @@ const Footer = () => {
         <div className="footer__area__logo" />
         <div className="footer__area__links">
           <div className="footer__area__links__label">Find Me On</div>
-          <a href={links.github} target="_blank" rel="noreferrer">
+          <a href={AppConstants.GitHub} target="_blank" rel="noreferrer">
             <i className="fa-brands fa-github footer__area__links__link"></i>
           </a>
-          <a href={links.twitter} target="_blank" rel="noreferrer">
+          <a href={AppConstants.Twitter} target="_blank" rel="noreferrer">
             <i className="fa-brands fa-twitter footer__area__links__link"></i>
           </a>
-          <a href={links.linkedin} target="_blank" rel="noreferrer">
+          <a href={AppConstants.LinkedIn} target="_blank" rel="noreferrer">
             <i className="fa-brands fa-linkedin footer__area__links__link"></i>
           </a>
         </div>

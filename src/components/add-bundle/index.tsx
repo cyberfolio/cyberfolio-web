@@ -1,15 +1,15 @@
 import { useRef } from "react";
 import "./index.scss";
 
-import useKeypress from "@hooks/useKeyPress";
-import { useAppDispatch } from "@store/functions";
-import { Cex, Keys } from "@app-types/index";
+import AppHooks from "hooks/index";
+import { useAppDispatch } from "store/functions";
+import { Cex, Keys } from "structures/index";
 
 const Index = () => {
   const dispatch = useAppDispatch();
   const modalRef = useRef(null);
 
-  useKeypress(Keys.Escape, () => {
+  AppHooks.useKeypress(Keys.Escape, () => {
     close();
   });
 

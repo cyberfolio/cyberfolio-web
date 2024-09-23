@@ -1,5 +1,5 @@
 /* eslint-disable no-throw-literal */
-import { mainInstance } from "@config/axios";
+import { mainInstance } from "config/axios";
 
 class StockService {
   static async getInteractiveBrokers() {

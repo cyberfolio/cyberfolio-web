@@ -3,12 +3,11 @@ import "./index.scss";
 
 import { toast } from "react-hot-toast";
 
-import useKeypress from "@hooks/useKeyPress";
-import utils from "@utils/index";
-import InfoService from "@services/info";
-import { useAppDispatch, useAppSelector } from "@store/functions";
-import { Cex, Chain, Keys } from "@app-types/index";
-import useOnClickOutside from "@hooks/useClickOutside";
+import AppHooks from "hooks/index";
+import utils from "utils/index";
+import InfoService from "services/info";
+import { useAppDispatch, useAppSelector } from "store/functions";
+import { Cex, Chain, Keys } from "structures/index";
 
 const useHome = () => {
   const dispatch = useAppDispatch();
@@ -88,10 +87,10 @@ const useHome = () => {
     };
   }, [lastAssetUpdate]);
 
-  useKeypress(Keys.Escape, () => {
+  AppHooks.useKeypress(Keys.Escape, () => {
     setPlatformDropdownOpen(false);
   });
-  useOnClickOutside(platfromDropdownRef, () => {
+  AppHooks.useOnClickOutside(platfromDropdownRef, () => {
     setPlatformDropdownOpen(false);
   });
 

@@ -1,25 +1,11 @@
 {
-  "extends": "@tsconfig/node16/tsconfig.json",
-  "include": ["./src"],
-  "exclude": ["node_modules"],
   "compilerOptions": {
-    "paths": {
-      "@pages/*": ["./src/pages/*"],
-      "@components/*": ["./src/components/*"],
-      "@services/*": ["./src/services/*"],
-      "@store/*": ["./src/store/*"],
-      "@utils/*": ["./src/utils/*"],
-      "@assets/*": ["./src/assets/*"],
-      "@config/*": ["./src/config/*"],
-      "@app-types/*": ["./src/app-types/*"],
-      "@hooks/*": ["./src/hooks/*"]
-    },
     "target": "ESNext",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "types": ["vite/client", "vite-plugin-svgr/client"],
-    "allowJs": false,
-    "skipLibCheck": false,
+    "allowJs": true,
+    "skipLibCheck": true,
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
@@ -29,6 +15,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "useUnknownInCatchVariables": false
-  }
+    "baseUrl": "./src"
+  },
+  "include": ["src", ".eslintrc.js", "vite.config.ts"]
 }

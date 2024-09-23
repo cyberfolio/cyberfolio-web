@@ -4,10 +4,10 @@ import detectEthereumProvider from "@metamask/detect-provider";
 import { ethers } from "ethers";
 import { toast } from "react-hot-toast";
 
-import AuthService from "@services/auth";
-import utils from "@utils/index";
-import clearState from "@utils/clearState";
-import { useAppDispatch } from "@store/functions";
+import AuthService from "services/auth";
+import utils from "utils/index";
+import clearState from "utils/clearState";
+import { useAppDispatch } from "store/functions";
 
 export const useMetamaskLogin = () => {
   const dispatch = useAppDispatch();
@@ -45,18 +45,18 @@ export const useMetamaskLogin = () => {
       setIsConnecting(true);
 
       // Connect Metamask
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const provider = new ethers.BrowserProvider(window.ethereum);
       const evmWalletAddresses = await provider.send("eth_requestAccounts", []);
 
       // Sign Message
-      const signer = provider.getSigner();
+      const signer = await provider.getSigner();
       const nonce = await AuthService.getNonce({ evmAddress: evmWalletAddresses[0] });
       const signature = await signer.signMessage(nonce);
       utils.setAppLoading(true, "Assets are loading");
       const evmAddress = await signer.getAddress();
 
       // Verify  Message
-      const signerAddress = ethers.utils.verifyMessage(nonce, signature);
+      const signerAddress = ethers.verifyMessage(nonce, signature);
       if (signerAddress !== evmAddress) {
         setIsConnecting(false);
         throw new Error("Your message could not be verified!");

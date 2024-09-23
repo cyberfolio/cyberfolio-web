@@ -1,4 +1,4 @@
-import { Keys } from "@app-types/index";
+import { Keys } from "structures/index";
 import { useEffect } from "react";
 /**
  * useKeyPress

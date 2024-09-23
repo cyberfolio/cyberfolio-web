@@ -6,9 +6,9 @@ import classNames from "classnames";
 import Utilities from "./utilities";
 import Assets from "./assets";
 
-import PlatformDropdown from "@components/platform-dropdown";
-import utils from "@utils/index";
-import { Cex, Chain } from "@app-types/index";
+import PlatformDropdown from "components/platform-dropdown";
+import utils from "utils/index";
+import { Cex, Chain } from "structures/index";
 import useHome from "./useIndex";
 
 const availableChains = [Chain.BITCOIN, Chain.ETHEREUM, Chain.SOLANA];
@@ -22,7 +22,7 @@ const Home = () => {
     netWorth,
     platform,
     platformDropdownOpen,
-    hoveredWallet,
+    // hoveredWallet,
     setHoveredWallet,
     lastUpdate,
     platfromDropdownRef,

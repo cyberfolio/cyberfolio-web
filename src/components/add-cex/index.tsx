@@ -4,12 +4,12 @@ import "./index.scss";
 import classnames from "classnames";
 import { toast } from "react-hot-toast";
 
-import CexService from "@services/cex";
-import useKeypress from "@hooks/useKeyPress";
-import { useAppDispatch, useAppSelector } from "@store/functions";
-import utils from "@utils/index";
-import { Cex, Keys } from "@app-types/index";
-import InfoService from "@services/info";
+import CexService from "services/cex";
+import AppHooks from "hooks/index";
+import { useAppDispatch, useAppSelector } from "store/functions";
+import utils from "utils/index";
+import { Cex, Keys } from "structures/index";
+import InfoService from "services/info";
 
 const AddCex = () => {
   const [apiKey, setApiKey] = useState("");
@@ -70,7 +70,7 @@ const AddCex = () => {
     }
   };
 
-  useKeypress(Keys.Escape, () => {
+  AppHooks.useKeypress(Keys.Escape, () => {
     setApiKey("");
     setApiSecret("");
     setPassphrase("");

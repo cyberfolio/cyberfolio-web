@@ -1,4 +1,4 @@
-import { useAppSelector } from "@store/functions";
+import { useAppSelector } from "store/functions";
 import "./index.scss";
 
 const Index = () => {

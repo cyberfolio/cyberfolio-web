@@ -1,8 +1,8 @@
 import "./index.scss";
 
 import classnames from "classnames";
-import utils from "@utils/index";
-import { Cex, CexAsset, Chain, DexAsset } from "@app-types/index";
+import utils from "utils/index";
+import { Cex, CexAsset, Chain, DexAsset } from "structures/index";
 import { memo } from "react";
 
 const Index = ({ assets, loading }: { assets: (DexAsset | CexAsset)[]; loading: boolean }) => {

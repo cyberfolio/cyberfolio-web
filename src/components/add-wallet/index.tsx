@@ -4,12 +4,12 @@ import "./index.scss";
 import { toast } from "react-hot-toast";
 import classnames from "classnames";
 
-import DexService from "@services/dex";
-import useKeypress from "@hooks/useKeyPress";
-import utils from "@utils/index";
-import { useAppDispatch, useAppSelector } from "@store/functions";
-import { Chain, Keys } from "@app-types/index";
-import InfoService from "@services/info";
+import DexService from "services/dex";
+import AppHooks from "hooks/index";
+import utils from "utils/index";
+import { useAppDispatch, useAppSelector } from "store/functions";
+import { Chain, Keys } from "structures/index";
+import InfoService from "services/info";
 
 const AddWallet = () => {
   const [name, setName] = useState("");
@@ -65,7 +65,7 @@ const AddWallet = () => {
       utils.setAppLoading(false);
     }
   };
-  useKeypress(Keys.Escape, () => {
+  AppHooks.useKeypress(Keys.Escape, () => {
     close();
     setName("");
     setAddress("");

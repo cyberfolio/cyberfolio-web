@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 import "./index.scss";
 
-import Metamask from "@assets/metamask.png";
-import BuyMeACoffee from "@assets/bmc-logo.png";
-import Logo from "@assets/logo.png";
-import utils from "@utils/index";
-import { useMetamaskLogin } from "@hooks/useMetamaskLogin";
-import InfoService from "@services/info";
-import { useAppDispatch, useAppSelector } from "@store/functions";
-import links from "@config/links";
+import Metamask from "assets/metamask.png";
+import BuyMeACoffee from "assets/bmc-logo.png";
+import Logo from "assets/logo.png";
+import utils from "utils/index";
+import AppHooks from "hooks/index";
+import InfoService from "services/info";
+import { useAppDispatch, useAppSelector } from "store/functions";
+import AppConstants from "constants/index";
 
 const Index = () => {
   const isAuthenticated = useAppSelector((state) => state.evmAddress);
@@ -22,7 +22,12 @@ const Index = () => {
         </div>
         <div className="header__content__brand">
           {isAuthenticated && (
-            <a href={links.buyMeACoffee} target="_blank" rel="noreferrer" className="header__content__brand__bmc">
+            <a
+              href={AppConstants.BuyMeACoffee}
+              target="_blank"
+              rel="noreferrer"
+              className="header__content__brand__bmc"
+            >
               <img src={BuyMeACoffee} className="header__content__brand__bmc__logo" />
               <div className="header__content__brand__bmc__text">Buy me a coffee</div>
             </a>
@@ -39,7 +44,7 @@ const ConnectWallet = () => {
   const ensName = useAppSelector((state) => state.ensName);
   const dispatch = useAppDispatch();
 
-  const { isConnecting, signAndVerifyMessage, disconnectMetamask } = useMetamaskLogin();
+  const { isConnecting, signAndVerifyMessage, disconnectMetamask } = AppHooks.useMetamaskLogin();
 
   const resolveEnsName = async () => {
     if (evmAddress && !ensName) {

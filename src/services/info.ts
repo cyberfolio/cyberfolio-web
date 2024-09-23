@@ -1,6 +1,6 @@
 /* eslint-disable no-throw-literal */
-import { mainInstance } from "@config/axios";
-import { Chain, Cex } from "@app-types/index";
+import { mainInstance } from "config/axios";
+import { Chain, Cex } from "structures/index";
 
 interface ConnectedWallets {
   name: string;

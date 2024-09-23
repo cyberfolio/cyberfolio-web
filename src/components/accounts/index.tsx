@@ -1,10 +1,10 @@
-import Modal from "@components/modal";
-import { Chain, Cex } from "@app-types/index";
-import CexService from "@services/cex";
-import DexService from "@services/dex";
-import InfoService from "@services/info";
-import { useAppDispatch, useAppSelector } from "@store/functions";
-import utils from "@utils/index";
+import Modal from "components/modal";
+import { Chain, Cex } from "structures/index";
+import CexService from "services/cex";
+import DexService from "services/dex";
+import InfoService from "services/info";
+import { useAppDispatch, useAppSelector } from "store/functions";
+import utils from "utils/index";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import "./index.scss";

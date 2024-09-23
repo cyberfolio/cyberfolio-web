@@ -1,5 +1,5 @@
 /* eslint-disable no-throw-literal */
-import { mainInstance } from "@config/axios";
+import { mainInstance } from "config/axios";
 import { ConnectedAccountsResponse } from "./types";
 
 class InfoService {

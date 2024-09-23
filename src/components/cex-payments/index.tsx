@@ -1,11 +1,11 @@
 import { FC, useEffect, useState } from "react";
-import CexService from "@services/cex";
-import { PaymentHistoryResponse } from "@services/cex/types";
-import utils from "@utils/index";
+import CexService from "services/cex";
+import { PaymentHistoryResponse } from "services/cex/types";
+import utils from "utils/index";
 import classNames from "classnames";
 import toast from "react-hot-toast";
 import "./index.scss";
-import { useAppSelector } from "@store/functions";
+import { useAppSelector } from "store/functions";
 
 type Props = {
   show: boolean;
