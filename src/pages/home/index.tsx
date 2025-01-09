@@ -6,7 +6,7 @@ import classNames from "classnames";
 import Utilities from "./utilities";
 import Assets from "./assets";
 
-import PlatformDropdown from "components/platform-dropdown";
+import AppComponents from "components";
 import utils from "utils/index";
 import { Cex, Chain } from "structures/index";
 import useHome from "./useIndex";
@@ -119,7 +119,7 @@ const Home = () => {
                     <ChevronDown color="white" size={15} />
                   </div>
                 </div>
-                <PlatformDropdown open={platformDropdownOpen} />
+                <AppComponents.PlatformDropdown open={platformDropdownOpen} />
               </div>
             </>
           )}

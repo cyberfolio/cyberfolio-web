@@ -15,7 +15,8 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "useUnknownInCatchVariables": false // TODO: remove this one all error mesages are handled with new method
   },
   "include": ["src", ".eslintrc.js", "vite.config.ts"]
 }

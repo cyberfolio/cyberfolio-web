@@ -1,4 +1,4 @@
-import Modal from "components/modal";
+import AppComponents from "components";
 import { Chain, Cex } from "structures/index";
 import CexService from "services/cex";
 import DexService from "services/dex";
@@ -103,7 +103,7 @@ const Accounts = () => {
 
   return (
     <div className="accounts">
-      <Modal
+      <AppComponents.Modal
         open={Boolean(whatToDelete)}
         title={whatToDelete}
         action={cexToDelete ? onClickCexOkey : onClickWalletOkey}

@@ -7,9 +7,7 @@ import { toast } from "react-hot-toast";
 import CexService from "services/cex";
 import DexService from "services/dex";
 
-import AssetTable from "components/asset-table";
-import Accounts from "components/accounts";
-import CexPayments from "components/cex-payments";
+import AppComponents from "components";
 
 import { useAppDispatch, useAppSelector } from "store/functions";
 import { AllNetworks } from "structures/index";
@@ -142,10 +140,10 @@ const Assets = () => {
       </div>
       <div className="assets__table">
         {activeTab !== Tab.Accounts && activeTab !== Tab.CexPaymets && (
-          <AssetTable assets={assetsToShow} loading={loading} />
+          <AppComponents.AssetTable assets={assetsToShow} loading={loading} />
         )}
-        {activeTab === Tab.Accounts && <Accounts />}
-        <CexPayments show={activeTab === Tab.CexPaymets} />
+        {activeTab === Tab.Accounts && <AppComponents.Accounts />}
+        <AppComponents.CexPayments show={activeTab === Tab.CexPaymets} />
       </div>
     </div>
   );

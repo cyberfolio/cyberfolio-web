@@ -9,6 +9,7 @@ import AppHooks from "hooks/index";
 import InfoService from "services/info";
 import { useAppDispatch, useAppSelector } from "store/functions";
 import AppConstants from "constants/index";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 const Index = () => {
   const isAuthenticated = useAppSelector((state) => state.evmAddress);
@@ -70,7 +71,7 @@ const ConnectWallet = () => {
 
   return (
     <div className="metamask">
-      <div
+      {/* <div
         className={`metamask-button ${isConnecting ? "disabledbutton" : ""}`}
         onClick={!evmAddress ? signAndVerifyMessage : disconnectMetamask}
       >
@@ -82,7 +83,8 @@ const ConnectWallet = () => {
           {evmAddress && !ensName && `${utils.truncateEthAddress(evmAddress)}`}
           {evmAddress && ensName && `${ensName}`}
         </div>
-      </div>
+      </div> */}
+      <ConnectButton />
     </div>
   );
 };

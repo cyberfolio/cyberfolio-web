@@ -3,17 +3,12 @@ import "./index.scss";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Header from "components/header";
-import AddCex from "components/add-cex";
-import AddWallet from "components/add-wallet";
-import Loading from "components/loading";
-import Footer from "components/footer";
-
 import Home from "pages/home";
 
 import AuthService from "services/auth";
 import clearState from "utils/clearState";
 import { useAppDispatch } from "store/functions";
+import AppComponents from "components";
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -49,16 +44,16 @@ const App = () => {
 
   return (
     <div className="app">
-      <Loading />
-      <Header />
-      <AddWallet />
-      <AddCex />
+      <AppComponents.Loading />
+      <AppComponents.Header />
+      <AppComponents.AddWallet />
+      <AppComponents.AddCex />
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
         </Routes>
       </Router>
-      <Footer />
+      <AppComponents.Footer />
     </div>
   );
 };
