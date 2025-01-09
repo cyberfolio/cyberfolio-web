@@ -6,9 +6,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "pages/home";
 
 import AuthService from "services/auth";
-import clearState from "utils/clearState";
 import { useAppDispatch } from "store/functions";
 import AppComponents from "components";
+import AppUtils from "utils";
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -34,7 +34,7 @@ const App = () => {
           payload: res.lastAssetUpdate,
         });
     } catch (e) {
-      clearState();
+      AppUtils.clearState();
     }
   }, [dispatch]);
 

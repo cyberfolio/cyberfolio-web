@@ -1,5 +1,6 @@
 /* eslint-disable no-throw-literal */
-import { mainInstance } from "config/axios";
+
+import AppConfig from "config";
 import { Chain, Cex } from "structures/index";
 
 interface ConnectedWallets {
@@ -23,7 +24,7 @@ export interface ConnectedAccountsResponse {
 class InfoService {
   static async getNetWorth() {
     try {
-      const res = await mainInstance.get("info/networth", {
+      const res = await AppConfig.Axios.get("info/networth", {
         withCredentials: true,
       });
       return res.data;
@@ -37,7 +38,7 @@ class InfoService {
 
   static async getConnectedAccounts() {
     try {
-      const res = await mainInstance.get<ConnectedAccountsResponse>("info/connected-accounts", {
+      const res = await AppConfig.Axios.get<ConnectedAccountsResponse>("info/connected-accounts", {
         withCredentials: true,
       });
       return res.data;
@@ -51,7 +52,7 @@ class InfoService {
 
   static async getEnsName() {
     try {
-      const res = await mainInstance.get("info/ens-name", {
+      const res = await AppConfig.Axios.get("info/ens-name", {
         withCredentials: true,
       });
       return res.data;

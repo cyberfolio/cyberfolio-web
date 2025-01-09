@@ -1,13 +1,9 @@
-import axios from "axios";
+import RainbowKit from "./src/rainbow-kit";
+import Axios from "./src/axios";
 
-const mainBackendURL = import.meta.env.VITE_BACKEND_URL;
-
-const MainBackend = axios.create({
-  baseURL: mainBackendURL,
-});
-
-const AppConfigs = {
-  MainBackend,
+const AppConfig = {
+  Axios,
+  RainbowKit,
 };
 
-export default AppConfigs;
+export default AppConfig;

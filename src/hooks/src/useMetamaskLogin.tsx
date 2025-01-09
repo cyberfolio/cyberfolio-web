@@ -5,9 +5,10 @@ import { ethers } from "ethers";
 import { toast } from "react-hot-toast";
 
 import AuthService from "services/auth";
-import utils from "utils/index";
-import clearState from "utils/clearState";
+import AppUtils from "utils/index";
 import { useAppDispatch } from "store/functions";
+import { getAccount, signMessage } from "@wagmi/core";
+import AppConfig from "config";
 
 export const useMetamaskLogin = () => {
   const dispatch = useAppDispatch();
@@ -30,7 +31,7 @@ export const useMetamaskLogin = () => {
         if (accounts?.length === 0) {
           try {
             await AuthService.logout();
-            clearState();
+            AppUtils.clearState();
           } catch (e) {
             toast.error(e.message);
           }
@@ -45,24 +46,34 @@ export const useMetamaskLogin = () => {
       setIsConnecting(true);
 
       // Connect Metamask
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const evmWalletAddresses = await provider.send("eth_requestAccounts", []);
+      // const provider = new ethers.BrowserProvider(window.ethereum);
+      // const evmWalletAddresses = await provider.send("eth_requestAccounts", []);
+
+      const { connector, address } = getAccount(AppConfig.RainbowKit);
+
+      if (!address) {
+        throw new Error("Please connect your wallet!");
+      }
 
       // Sign Message
-      const signer = await provider.getSigner();
-      const nonce = await AuthService.getNonce({ evmAddress: evmWalletAddresses[0] });
-      const signature = await signer.signMessage(nonce);
-      utils.setAppLoading(true, "Assets are loading");
-      const evmAddress = await signer.getAddress();
+      // const signer = await provider.getSigner();
+      const nonce = await AuthService.getNonce({ evmAddress: address });
+      // const signature = await signer.signMessage(nonce);
+      const signature = await signMessage(AppConfig.RainbowKit, {
+        connector,
+        message: nonce,
+      });
+      AppUtils.setAppLoading(true, "Assets are loading");
+      // const evmAddress = await signer.getAddress();
 
       // Verify  Message
       const signerAddress = ethers.verifyMessage(nonce, signature);
-      if (signerAddress !== evmAddress) {
+      if (signerAddress !== address) {
         setIsConnecting(false);
         throw new Error("Your message could not be verified!");
       }
       const user = await AuthService.validateSignature({
-        evmAddress,
+        evmAddress: address,
         nonce,
         signature,
       });
@@ -89,14 +100,14 @@ export const useMetamaskLogin = () => {
       }
     } finally {
       setIsConnecting(false);
-      utils.setAppLoading(false);
+      AppUtils.setAppLoading(false);
     }
   };
 
   const disconnectMetamask = async () => {
     try {
       await AuthService.logout();
-      clearState();
+      AppUtils.clearState();
     } catch (e) {
       toast.error(e.message);
     }

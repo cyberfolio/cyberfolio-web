@@ -1,6 +1,6 @@
-import { mainInstance } from "config/axios";
 import { CexAsset, Cex } from "structures/index";
 import { PaymentHistoryResponse } from "./types";
+import AppConfig from "config";
 
 export default class CexService {
   static async addCex({
@@ -15,7 +15,7 @@ export default class CexService {
     passphrase: string;
   }) {
     try {
-      await mainInstance.post(
+      await AppConfig.Axios.post(
         "/cex/add",
         {
           apiKey,
@@ -32,7 +32,7 @@ export default class CexService {
 
   static async getCexTokens() {
     try {
-      const res = await mainInstance.get(
+      const res = await AppConfig.Axios.get(
         `/cex/assets`,
 
         { withCredentials: true },
@@ -49,7 +49,7 @@ export default class CexService {
 
   static async deleteCex({ cexName }: { cexName: Cex }) {
     try {
-      await mainInstance.post(
+      await AppConfig.Axios.post(
         `/cex/delete`,
         {
           cexName,
@@ -63,7 +63,9 @@ export default class CexService {
 
   static async getPaymentHistory() {
     try {
-      const res = await mainInstance.get<PaymentHistoryResponse[]>(`/cex/payment-history`, { withCredentials: true });
+      const res = await AppConfig.Axios.get<PaymentHistoryResponse[]>(`/cex/payment-history`, {
+        withCredentials: true,
+      });
       return res.data;
     } catch (e) {
       throw new Error(e.response?.data);

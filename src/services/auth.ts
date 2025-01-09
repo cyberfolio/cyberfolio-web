@@ -1,9 +1,9 @@
-import { mainInstance } from "config/axios";
+import AppConfig from "config";
 
 export default class AuthService {
   static async getUserInfo() {
     try {
-      const res = await mainInstance.get("/auth/get-user-info", {
+      const res = await AppConfig.Axios.get("/auth/get-user-info", {
         withCredentials: true,
       });
       return res.data;
@@ -14,7 +14,7 @@ export default class AuthService {
 
   static async logout() {
     try {
-      await mainInstance.get("/auth/logout", {
+      await AppConfig.Axios.get("/auth/logout", {
         withCredentials: true,
       });
       return true;
@@ -25,7 +25,7 @@ export default class AuthService {
 
   static async getNonce({ evmAddress }: { evmAddress: string }) {
     try {
-      const res = await mainInstance.post("/auth/login/metamask", { evmAddress });
+      const res = await AppConfig.Axios.post("/auth/login/metamask", { evmAddress });
       return res.data;
     } catch (e) {
       throw new Error(e.message);
@@ -42,7 +42,7 @@ export default class AuthService {
     signature: string;
   }) {
     try {
-      const res = await mainInstance.post(
+      const res = await AppConfig.Axios.post(
         "/auth/login/validate-signature",
         {
           evmAddress,

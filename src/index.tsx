@@ -7,32 +7,22 @@ import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { Toaster } from "react-hot-toast";
 
-import { getDefaultConfig, RainbowKitProvider } from "@rainbow-me/rainbowkit";
-import { WagmiProvider, http } from "wagmi";
-import { mainnet } from "wagmi/chains";
+import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { WagmiProvider } from "wagmi";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 
 import App from "./app";
 import store from "./store";
-import AppConstants from "constants/index";
+import AppConfig from "config";
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement as Element);
 
-const config = getDefaultConfig({
-  appName: AppConstants.WalletConnectProjectName,
-  projectId: AppConstants.WalletConnectProjectId,
-  chains: [mainnet],
-  transports: {
-    [mainnet.id]: http(AppConstants.ETHMainnetRPCPRoviderURL),
-    // [sepolia.id]: http(AppConstants.ETHSepholiaRPCPRoviderURL),
-  },
-});
 const queryClient = new QueryClient();
 
 root.render(
   <Provider store={store}>
-    <WagmiProvider config={config}>
+    <WagmiProvider config={AppConfig.RainbowKit}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider>
           <StrictMode>
