@@ -7,9 +7,8 @@ import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { Toaster } from "react-hot-toast";
 
-import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { WagmiProvider } from "wagmi";
-import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 
 import App from "./app";
 import store from "./store";
@@ -22,22 +21,20 @@ const queryClient = new QueryClient();
 
 root.render(
   <Provider store={store}>
-    <WagmiProvider config={AppConfig.RainbowKit}>
+    <WagmiProvider config={AppConfig.Wagmi}>
       <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider>
-          <StrictMode>
-            <Toaster
-              position="top-center"
-              reverseOrder={false}
-              toastOptions={{
-                style: {
-                  fontSize: 14,
-                },
-              }}
-            />
-            <App />
-          </StrictMode>
-        </RainbowKitProvider>
+        <StrictMode>
+          <Toaster
+            position="top-center"
+            reverseOrder={false}
+            toastOptions={{
+              style: {
+                fontSize: 14,
+              },
+            }}
+          />
+          <App />
+        </StrictMode>
       </QueryClientProvider>
     </WagmiProvider>
   </Provider>,

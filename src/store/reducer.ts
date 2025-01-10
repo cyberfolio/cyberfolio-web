@@ -1,5 +1,5 @@
 import Actions from "./actions";
-import ALLNetworks from "assets/blockchain.svg";
+import ALLNetworks from "assets/src/blockchain.svg";
 import { Cex, AllNetworks, CexAsset, Chain, DexAsset } from "structures/index";
 import { ConnectedCexPayload, ConnectedWalletPayload } from "./types";
 

@@ -1,18 +1,18 @@
 import { ethers } from "ethers";
 import * as solanaWeb3 from "@solana/web3.js";
 
-import Bitcoin from "assets/bitcoin.svg";
-import Ethereum from "assets/ethereum.svg";
-import SmartChain from "assets/smartchain.svg";
-import Avalanche from "assets/avalanche.svg";
-import Solana from "assets/solana.svg";
-import Polkadot from "assets/polkadot.svg";
-import Polygon from "assets/polygon.svg";
-import Arbitrum from "assets/arbitrum.svg";
-import Optimism from "assets/optimism.svg";
-import Binance from "assets/binance.svg";
-import Kucoin from "assets/kucoin.png";
-import Gateio from "assets/gateio.svg";
+import Bitcoin from "assets/src/bitcoin.svg";
+import Ethereum from "assets/src/ethereum.svg";
+import SmartChain from "assets/src/smartchain.svg";
+import Avalanche from "assets/src/avalanche.svg";
+import Solana from "assets/src/solana.svg";
+import Polkadot from "assets/src/polkadot.svg";
+import Polygon from "assets/src/polygon.svg";
+import Arbitrum from "assets/src/arbitrum.svg";
+import Optimism from "assets/src/optimism.svg";
+import Binance from "assets/src/binance.svg";
+import Kucoin from "assets/src/kucoin.png";
+import Gateio from "assets/src/gateio.svg";
 
 import store from "store/index";
 import { Cex, Chain } from "structures/index";
@@ -240,6 +240,8 @@ const clearState = async () => {
   });
 };
 
+const isProd = import.meta.env.ENV === "prod";
+
 const AppUtils = {
   toReadableDateDifference,
   timestampToReadableDate,
@@ -254,6 +256,7 @@ const AppUtils = {
   truncateEthAddress,
   cexAPIKeyURL,
   clearState,
+  isProd,
 };
 
 export default AppUtils;

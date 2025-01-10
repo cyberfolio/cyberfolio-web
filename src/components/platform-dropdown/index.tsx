@@ -4,7 +4,7 @@ import "./index.scss";
 import utils from "utils/index";
 import { useAppDispatch } from "store/functions";
 import { AllNetworks, Cex, Chain } from "structures/index";
-import ALLNetworks from "assets/blockchain.svg";
+import ALLNetworks from "assets/src/blockchain.svg";
 import classNames from "classnames";
 
 type Props = {

@@ -1,48 +1,20 @@
-import { useEffect, useState } from "react";
+import React from "react";
 
-import detectEthereumProvider from "@metamask/detect-provider";
 import { ethers } from "ethers";
 import { toast } from "react-hot-toast";
 
-import AuthService from "services/auth";
-import AppUtils from "utils/index";
+import AppServices from "services";
+import AppUtils from "utils";
+import AppConfig from "config";
 import { useAppDispatch } from "store/functions";
 import { getAccount, signMessage } from "@wagmi/core";
-import AppConfig from "config";
 
-export const useMetamaskLogin = () => {
+const useMetamaskLogin = () => {
   const dispatch = useAppDispatch();
-  const [isConnecting, setIsConnecting] = useState(false);
-
-  const checkIfMetamaskPresent = async () => {
-    const provider = await detectEthereumProvider();
-    if (provider) {
-      if (provider !== window.ethereum) {
-        throw new Error("Do you have multiple wallets installed?");
-      }
-    } else {
-      throw new Error("Please install MetaMask!");
-    }
-  };
-
-  useEffect(() => {
-    if (window.ethereum) {
-      window.ethereum.on("accountsChanged", async (accounts: string[]) => {
-        if (accounts?.length === 0) {
-          try {
-            await AuthService.logout();
-            AppUtils.clearState();
-          } catch (e) {
-            toast.error(e.message);
-          }
-        }
-      });
-    }
-  }, []);
+  const [isConnecting, setIsConnecting] = React.useState(false);
 
   const signAndVerifyMessage = async () => {
     try {
-      await checkIfMetamaskPresent();
       setIsConnecting(true);
 
       // Connect Metamask
@@ -57,7 +29,7 @@ export const useMetamaskLogin = () => {
 
       // Sign Message
       // const signer = await provider.getSigner();
-      const nonce = await AuthService.getNonce({ evmAddress: address });
+      const nonce = await AppServices.AUTH.getNonce({ evmAddress: address });
       // const signature = await signer.signMessage(nonce);
       const signature = await signMessage(AppConfig.RainbowKit, {
         connector,
@@ -72,7 +44,7 @@ export const useMetamaskLogin = () => {
         setIsConnecting(false);
         throw new Error("Your message could not be verified!");
       }
-      const user = await AuthService.validateSignature({
+      const user = await AppServices.AUTH.validateSignature({
         evmAddress: address,
         nonce,
         signature,
@@ -106,7 +78,7 @@ export const useMetamaskLogin = () => {
 
   const disconnectMetamask = async () => {
     try {
-      await AuthService.logout();
+      await AppServices.AUTH.logout();
       AppUtils.clearState();
     } catch (e) {
       toast.error(e.message);
@@ -119,3 +91,5 @@ export const useMetamaskLogin = () => {
     disconnectMetamask,
   };
 };
+
+export default useMetamaskLogin;

@@ -26,7 +26,7 @@ const useHome = () => {
 
   const checkIfWalletConnected = () => {
     if (!evmAddress) {
-      toast.error("Connect your metamask wallet");
+      toast.error("Connect your wallet");
       return;
     }
   };
