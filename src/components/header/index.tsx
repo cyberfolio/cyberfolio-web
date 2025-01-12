@@ -8,7 +8,6 @@ import AppHooks from "hooks/index";
 import InfoService from "services/info";
 import { useAppDispatch, useAppSelector } from "store/functions";
 import AppConstants from "constants/index";
-// import { ConnectButton } from "@rainbow-me/rainbowkit";
 import AppAssets from "assets";
 
 const Header = () => {
@@ -45,7 +44,7 @@ const ConnectWallet = () => {
   const ensName = useAppSelector((state) => state.ensName);
   const dispatch = useAppDispatch();
 
-  const { isConnecting, signAndVerifyMessage, disconnectMetamask } = AppHooks.useMetamaskLogin();
+  const { isConnecting, signAndVerifyMessageV2, disconnectMetamask } = AppHooks.useMetamaskLogin();
 
   const resolveEnsName = async () => {
     if (evmAddress && !ensName) {
@@ -73,7 +72,7 @@ const ConnectWallet = () => {
     <div className="metamask">
       <div
         className={`metamask-button ${isConnecting ? "disabledbutton" : ""}`}
-        onClick={!evmAddress ? signAndVerifyMessage : disconnectMetamask}
+        onClick={!evmAddress ? signAndVerifyMessageV2 : disconnectMetamask}
       >
         <img className="metamask-button-img" src={AppAssets.Ethereum} alt="metamask" />
         {evmAddress ? <span className="connectedDot"></span> : <></>}

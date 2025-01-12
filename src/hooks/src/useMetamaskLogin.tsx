@@ -8,48 +8,38 @@ import AppUtils from "utils";
 import AppConfig from "config";
 import { useAppDispatch } from "store/functions";
 import { getAccount, signMessage } from "@wagmi/core";
+import { useConnect } from "wagmi";
+import { injected } from "wagmi/connectors";
 
 const useMetamaskLogin = () => {
   const dispatch = useAppDispatch();
   const [isConnecting, setIsConnecting] = React.useState(false);
+  const { connectAsync } = useConnect();
 
-  const signAndVerifyMessage = async () => {
+  const signAndVerifyMessageV2 = async () => {
     try {
       setIsConnecting(true);
+      const result = await connectAsync({ connector: injected() });
+      const evmAddress = result.accounts[0];
+      const nonce = await AppServices.AUTH.getNonce({ evmAddress });
 
-      // Connect Metamask
-      // const provider = new ethers.BrowserProvider(window.ethereum);
-      // const evmWalletAddresses = await provider.send("eth_requestAccounts", []);
-
-      const { connector, address } = getAccount(AppConfig.RainbowKit);
-
-      if (!address) {
-        throw new Error("Please connect your wallet!");
-      }
-
-      // Sign Message
-      // const signer = await provider.getSigner();
-      const nonce = await AppServices.AUTH.getNonce({ evmAddress: address });
-      // const signature = await signer.signMessage(nonce);
-      const signature = await signMessage(AppConfig.RainbowKit, {
+      const { connector } = getAccount(AppConfig.Wagmi);
+      const signature = await signMessage(AppConfig.Wagmi, {
         connector,
         message: nonce,
       });
-      AppUtils.setAppLoading(true, "Assets are loading");
-      // const evmAddress = await signer.getAddress();
-
-      // Verify  Message
       const signerAddress = ethers.verifyMessage(nonce, signature);
-      if (signerAddress !== address) {
+      if (signerAddress !== evmAddress) {
         setIsConnecting(false);
         throw new Error("Your message could not be verified!");
       }
+      AppUtils.setAppLoading(true, "Assets are loading");
+
       const user = await AppServices.AUTH.validateSignature({
-        evmAddress: address,
+        evmAddress,
         nonce,
         signature,
       });
-      setIsConnecting(false);
       dispatch({
         type: "SET_EVM_ADDRESS",
         payload: user.keyIdentifier,
@@ -66,6 +56,7 @@ const useMetamaskLogin = () => {
           payload: user.lastAssetUpdate,
         });
       }
+      setIsConnecting(false);
     } catch (error) {
       if (error?.code !== 4001) {
         toast.error(error.message);
@@ -87,7 +78,7 @@ const useMetamaskLogin = () => {
 
   return {
     isConnecting,
-    signAndVerifyMessage,
+    signAndVerifyMessageV2,
     disconnectMetamask,
   };
 };

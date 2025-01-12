@@ -1,9 +1,9 @@
-import RainbowKit from "./src/rainbow-kit";
+import Wagmi from "./src/wagmi";
 import Axios from "./src/axios";
 
 const AppConfig = {
   Axios,
-  RainbowKit,
+  Wagmi,
 };
 
 export default AppConfig;
