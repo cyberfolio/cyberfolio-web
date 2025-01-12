@@ -19,16 +19,12 @@ const useHome = () => {
   const connectedWallets = useAppSelector((state) => state.connectedWallets);
 
   const [platformDropdownOpen, setPlatformDropdownOpen] = useState(false);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [hoveredWallet, setHoveredWallet] = useState<Chain | undefined>();
   const [lastUpdate, setLastUpdate] = useState<string>();
   const platfromDropdownRef = useRef<HTMLDivElement>(null);
 
-  const checkIfWalletConnected = () => {
-    if (!evmAddress) {
-      toast.error("Connect your wallet");
-      return;
-    }
+  const isWalletConnected = () => {
+    return Boolean(evmAddress) === true;
   };
 
   const getTotal = useCallback(async () => {
@@ -44,6 +40,7 @@ const useHome = () => {
       }
     }
   }, [dispatch]);
+
   const getAvailableAccounts = useCallback(async () => {
     try {
       const { cexes, wallets } = await InfoService.getConnectedAccounts();
@@ -95,7 +92,11 @@ const useHome = () => {
   });
 
   const openWalletModal = (chain: Chain) => {
-    checkIfWalletConnected();
+    const isConnected = isWalletConnected();
+    if (!isConnected) {
+      toast.error("Connect your wallet");
+      return;
+    }
 
     dispatch({
       type: "OPEN_WALLET_MODAL",
@@ -107,7 +108,12 @@ const useHome = () => {
   };
 
   const openAddCexModal = (name: Cex) => {
-    checkIfWalletConnected();
+    const isConnected = isWalletConnected();
+    if (!isConnected) {
+      toast.error("Connect your wallet");
+      return;
+    }
+
     if (connectedCexes.some((connectedCex) => connectedCex.name === name)) return;
     if (evmAddress) {
       dispatch({
@@ -127,7 +133,11 @@ const useHome = () => {
   };
 
   const onAddStockClick = () => {
-    checkIfWalletConnected();
+    const isConnected = isWalletConnected();
+    if (!isConnected) {
+      toast.error("Connect your wallet");
+      return;
+    }
   };
 
   return {
