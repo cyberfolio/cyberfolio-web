@@ -1,13 +1,9 @@
-import axios from "axios";
+import Wagmi from "./src/wagmi";
+import Axios from "./src/axios";
 
-const mainBackendURL = import.meta.env.VITE_BACKEND_URL;
-
-const MainBackend = axios.create({
-  baseURL: mainBackendURL,
-});
-
-const AppConfigs = {
-  MainBackend,
+const AppConfig = {
+  Axios,
+  Wagmi,
 };
 
-export default AppConfigs;
+export default AppConfig;

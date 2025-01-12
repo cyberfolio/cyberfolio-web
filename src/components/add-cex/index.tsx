@@ -4,12 +4,12 @@ import "./index.scss";
 import classnames from "classnames";
 import { toast } from "react-hot-toast";
 
-import CexService from "services/cex";
-import AppHooks from "hooks/index";
+import AppHooks from "hooks";
+import AppServices from "services";
+import AppUtils from "utils";
+
 import { useAppDispatch, useAppSelector } from "store/functions";
-import utils from "utils/index";
-import { Cex, Keys } from "structures/index";
-import InfoService from "services/info";
+import { Cex, Keys } from "structures";
 
 const AddCex = () => {
   const [apiKey, setApiKey] = useState("");
@@ -23,30 +23,30 @@ const AddCex = () => {
   const add = async () => {
     if (loading) return;
     setLoading(true);
-    utils.setAppLoading(true);
+    AppUtils.setAppLoading(true);
     if (!apiKey || !apiSecret) {
       toast.error("Please enter api key and secret.");
       setLoading(false);
-      utils.setAppLoading(false);
+      AppUtils.setAppLoading(false);
       return;
     }
     if (name === Cex.KUCOIN && !passphrase) {
       toast.error("Please enter passphrase.");
       setLoading(false);
-      utils.setAppLoading(false);
+      AppUtils.setAppLoading(false);
       return;
     }
     try {
       if (name) {
-        await CexService.addCex({
+        await AppServices.CEX.addCex({
           apiKey,
           apiSecret,
           cexName: name,
           passphrase,
         });
-        const cexAssets = await CexService.getCexTokens();
-        const netWorth = await InfoService.getNetWorth();
-        const availableAccounts = await InfoService.getConnectedAccounts();
+        const cexAssets = await AppServices.CEX.getCexTokens();
+        const netWorth = await AppServices.INFO.getNetWorth();
+        const availableAccounts = await AppServices.INFO.getConnectedAccounts();
         dispatch({
           type: "SET_CONNECTED_CEXES",
           payload: availableAccounts.cexes,
@@ -65,7 +65,7 @@ const AddCex = () => {
     } catch (e) {
       toast.error(e.message);
     } finally {
-      utils.setAppLoading(false);
+      AppUtils.setAppLoading(false);
       setLoading(false);
     }
   };
@@ -97,7 +97,7 @@ const AddCex = () => {
             X
           </div>
         </div>
-        <a className="add-cex-modal__content__link" href={utils.cexAPIKeyURL[name]} target="_blank" rel="noreferrer">
+        <a className="add-cex-modal__content__link" href={AppUtils.cexAPIKeyURL[name]} target="_blank" rel="noreferrer">
           Click here to navigate API Creation Link
         </a>
         <div className="add-cex-modal__content__info">

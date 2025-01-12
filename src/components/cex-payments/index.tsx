@@ -17,20 +17,20 @@ const CexPayments: FC<Props> = ({ show }) => {
   const [infoMessage, setInfoMessage] = useState("");
 
   const init = async (evmAddress: string) => {
-    if (evmAddress) {
-      try {
-        setLoading(true);
-        const paymentHistory = await CexService.getPaymentHistory();
-        if (paymentHistory.length === 0) {
-          setInfoMessage("Only Binance payment history is supported");
-        } else {
-          setHistory(paymentHistory);
-        }
-      } catch (e) {
-        toast.error(e.message);
-      } finally {
-        setLoading(false);
+    if (!evmAddress) return;
+
+    try {
+      setLoading(true);
+      const paymentHistory = await CexService.getPaymentHistory();
+      if (paymentHistory.length === 0) {
+        setInfoMessage("Only Binance payment history is supported");
+      } else {
+        setHistory(paymentHistory);
       }
+    } catch (e) {
+      toast.error(e.message);
+    } finally {
+      setLoading(false);
     }
   };
 

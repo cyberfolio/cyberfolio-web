@@ -1,16 +1,16 @@
 import { useEffect } from "react";
 import "./index.scss";
 
-import Metamask from "assets/metamask.png";
-import BuyMeACoffee from "assets/bmc-logo.png";
-import Logo from "assets/logo.png";
+import BuyMeACoffee from "assets/src/bmc-logo.png";
+import Logo from "assets/src/logo.png";
 import utils from "utils/index";
 import AppHooks from "hooks/index";
 import InfoService from "services/info";
 import { useAppDispatch, useAppSelector } from "store/functions";
 import AppConstants from "constants/index";
+import AppAssets from "assets";
 
-const Index = () => {
+const Header = () => {
   const isAuthenticated = useAppSelector((state) => state.evmAddress);
 
   return (
@@ -44,7 +44,7 @@ const ConnectWallet = () => {
   const ensName = useAppSelector((state) => state.ensName);
   const dispatch = useAppDispatch();
 
-  const { isConnecting, signAndVerifyMessage, disconnectMetamask } = AppHooks.useMetamaskLogin();
+  const { isConnecting, signAndVerifyMessageV2, disconnectMetamask } = AppHooks.useMetamaskLogin();
 
   const resolveEnsName = async () => {
     if (evmAddress && !ensName) {
@@ -72,12 +72,12 @@ const ConnectWallet = () => {
     <div className="metamask">
       <div
         className={`metamask-button ${isConnecting ? "disabledbutton" : ""}`}
-        onClick={!evmAddress ? signAndVerifyMessage : disconnectMetamask}
+        onClick={!evmAddress ? signAndVerifyMessageV2 : disconnectMetamask}
       >
-        <img className="metamask-button-img" src={Metamask} alt="metamask" />
+        <img className="metamask-button-img" src={AppAssets.Ethereum} alt="metamask" />
         {evmAddress ? <span className="connectedDot"></span> : <></>}
         <div className="metamask-button-text">
-          {!evmAddress && !isConnecting && "Connect Metamask"}
+          {!evmAddress && !isConnecting && "Connect Wallet"}
           {!evmAddress && isConnecting && "Connecting..."}
           {evmAddress && !ensName && `${utils.truncateEthAddress(evmAddress)}`}
           {evmAddress && ensName && `${ensName}`}
@@ -87,4 +87,4 @@ const ConnectWallet = () => {
   );
 };
 
-export default Index;
+export default Header;

@@ -1,72 +1,45 @@
-import { useEffect, useState } from "react";
+import React from "react";
 
-import detectEthereumProvider from "@metamask/detect-provider";
 import { ethers } from "ethers";
 import { toast } from "react-hot-toast";
 
-import AuthService from "services/auth";
-import utils from "utils/index";
-import clearState from "utils/clearState";
+import AppServices from "services";
+import AppUtils from "utils";
+import AppConfig from "config";
 import { useAppDispatch } from "store/functions";
+import { getAccount, signMessage } from "@wagmi/core";
+import { useConnect } from "wagmi";
+import { injected } from "wagmi/connectors";
 
-export const useMetamaskLogin = () => {
+const useMetamaskLogin = () => {
   const dispatch = useAppDispatch();
-  const [isConnecting, setIsConnecting] = useState(false);
+  const [isConnecting, setIsConnecting] = React.useState(false);
+  const { connectAsync } = useConnect();
 
-  const checkIfMetamaskPresent = async () => {
-    const provider = await detectEthereumProvider();
-    if (provider) {
-      if (provider !== window.ethereum) {
-        throw new Error("Do you have multiple wallets installed?");
-      }
-    } else {
-      throw new Error("Please install MetaMask!");
-    }
-  };
-
-  useEffect(() => {
-    if (window.ethereum) {
-      window.ethereum.on("accountsChanged", async (accounts: string[]) => {
-        if (accounts?.length === 0) {
-          try {
-            await AuthService.logout();
-            clearState();
-          } catch (e) {
-            toast.error(e.message);
-          }
-        }
-      });
-    }
-  }, []);
-
-  const signAndVerifyMessage = async () => {
+  const signAndVerifyMessageV2 = async () => {
     try {
-      await checkIfMetamaskPresent();
       setIsConnecting(true);
+      const result = await connectAsync({ connector: injected() });
+      const evmAddress = result.accounts[0];
+      const nonce = await AppServices.AUTH.getNonce({ evmAddress });
 
-      // Connect Metamask
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const evmWalletAddresses = await provider.send("eth_requestAccounts", []);
-
-      // Sign Message
-      const signer = await provider.getSigner();
-      const nonce = await AuthService.getNonce({ evmAddress: evmWalletAddresses[0] });
-      const signature = await signer.signMessage(nonce);
-      utils.setAppLoading(true, "Assets are loading");
-      const evmAddress = await signer.getAddress();
-
-      // Verify  Message
+      const { connector } = getAccount(AppConfig.Wagmi);
+      const signature = await signMessage(AppConfig.Wagmi, {
+        connector,
+        message: nonce,
+      });
       const signerAddress = ethers.verifyMessage(nonce, signature);
       if (signerAddress !== evmAddress) {
         setIsConnecting(false);
         throw new Error("Your message could not be verified!");
       }
-      const user = await AuthService.validateSignature({
+      AppUtils.setAppLoading(true, "Assets are loading");
+
+      const user = await AppServices.AUTH.validateSignature({
         evmAddress,
         nonce,
         signature,
       });
-      setIsConnecting(false);
       dispatch({
         type: "SET_EVM_ADDRESS",
         payload: user.keyIdentifier,
@@ -83,20 +56,21 @@ export const useMetamaskLogin = () => {
           payload: user.lastAssetUpdate,
         });
       }
+      setIsConnecting(false);
     } catch (error) {
       if (error?.code !== 4001) {
         toast.error(error.message);
       }
     } finally {
       setIsConnecting(false);
-      utils.setAppLoading(false);
+      AppUtils.setAppLoading(false);
     }
   };
 
   const disconnectMetamask = async () => {
     try {
-      await AuthService.logout();
-      clearState();
+      await AppServices.AUTH.logout();
+      AppUtils.clearState();
     } catch (e) {
       toast.error(e.message);
     }
@@ -104,7 +78,9 @@ export const useMetamaskLogin = () => {
 
   return {
     isConnecting,
-    signAndVerifyMessage,
+    signAndVerifyMessageV2,
     disconnectMetamask,
   };
 };
+
+export default useMetamaskLogin;

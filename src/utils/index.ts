@@ -1,18 +1,18 @@
 import { ethers } from "ethers";
 import * as solanaWeb3 from "@solana/web3.js";
 
-import Bitcoin from "assets/bitcoin.svg";
-import Ethereum from "assets/ethereum.svg";
-import SmartChain from "assets/smartchain.svg";
-import Avalanche from "assets/avalanche.svg";
-import Solana from "assets/solana.svg";
-import Polkadot from "assets/polkadot.svg";
-import Polygon from "assets/polygon.svg";
-import Arbitrum from "assets/arbitrum.svg";
-import Optimism from "assets/optimism.svg";
-import Binance from "assets/binance.svg";
-import Kucoin from "assets/kucoin.png";
-import Gateio from "assets/gateio.svg";
+import Bitcoin from "assets/src/bitcoin.svg";
+import Ethereum from "assets/src/ethereum.svg";
+import SmartChain from "assets/src/smartchain.svg";
+import Avalanche from "assets/src/avalanche.svg";
+import Solana from "assets/src/solana.svg";
+import Polkadot from "assets/src/polkadot.svg";
+import Polygon from "assets/src/polygon.svg";
+import Arbitrum from "assets/src/arbitrum.svg";
+import Optimism from "assets/src/optimism.svg";
+import Binance from "assets/src/binance.svg";
+import Kucoin from "assets/src/kucoin.png";
+import Gateio from "assets/src/gateio.svg";
 
 import store from "store/index";
 import { Cex, Chain } from "structures/index";
@@ -205,7 +205,44 @@ const cexAPIKeyURL = {
   [Cex.NO]: "",
 };
 
-export default {
+const clearState = async () => {
+  store.dispatch({
+    type: "SET_EVM_ADDRESS",
+    payload: "",
+  });
+  store.dispatch({
+    type: "SET_ENS_NAME",
+    payload: "",
+  });
+  store.dispatch({
+    type: "SET_NET_WORTH",
+    payload: 0,
+  });
+  store.dispatch({
+    type: "SET_LAST_ASSET_UPDATE",
+    payload: "",
+  });
+  store.dispatch({
+    type: "SET_CEX_ASSETS",
+    payload: [],
+  });
+  store.dispatch({
+    type: "SET_DEX_ASSETS",
+    payload: [],
+  });
+  store.dispatch({
+    type: "SET_CONNECTED_CEXES",
+    payload: [],
+  });
+  store.dispatch({
+    type: "SET_CONNECTED_WALLETS",
+    payload: [],
+  });
+};
+
+const isProd = import.meta.env.ENV === "prod";
+
+const AppUtils = {
   toReadableDateDifference,
   timestampToReadableDate,
   isValidHttpUrl,
@@ -218,4 +255,8 @@ export default {
   chainInfo,
   truncateEthAddress,
   cexAPIKeyURL,
+  clearState,
+  isProd,
 };
+
+export default AppUtils;
