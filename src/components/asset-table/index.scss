@@ -40,6 +40,17 @@
     min-height: 35vh;
     width: 100%;
     overflow-y: scroll;
+    &__empty {
+      @extend .flexCenter;
+      height: 35vh;
+      color: $fainted-color;
+      &__text {
+        font-size: 20px;
+        padding: 20px;
+        color: white;
+      }
+    }
+
     &__loading {
       height: 50vh;
       @extend .flexCenter;

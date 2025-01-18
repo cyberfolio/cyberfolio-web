@@ -28,12 +28,12 @@ const Assets = () => {
   const cexAssets = useAppSelector((state) => state.cexAssets);
   const dexAssets = useAppSelector((state) => state.dexAssets);
 
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [activeTab, setActiveTab] = useState<Tab>(Tab.All);
 
   const getAllAssets = useCallback(async () => {
     try {
-      setLoading(true);
+      setIsLoading(true);
       const dexAssets = await DexService.getAllDexTokens();
       dexAssets.assets.sort(function (a, b) {
         return b.value - a.value;
@@ -51,10 +51,10 @@ const Assets = () => {
         type: "SET_CEX_ASSETS",
         payload: cexAssets,
       });
-      setLoading(false);
+      setIsLoading(false);
     } catch (e) {
       toast.error(e.message);
-      setLoading(false);
+      setIsLoading(false);
     }
   }, [dispatch]);
 
@@ -140,7 +140,7 @@ const Assets = () => {
       </div>
       <div className="assets__table">
         {activeTab !== Tab.Accounts && activeTab !== Tab.CexPaymets && (
-          <AppComponents.AssetTable assets={assetsToShow} loading={loading} />
+          <AppComponents.AssetTable assets={assetsToShow} isLoading={isLoading} />
         )}
         {activeTab === Tab.Accounts && <AppComponents.Accounts />}
         <AppComponents.CexPayments show={activeTab === Tab.CexPaymets} />

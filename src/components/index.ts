@@ -8,7 +8,7 @@ import Header from "./header";
 import Footer from "./footer";
 import Loading from "./loading";
 import Modal from "./modal";
-import PlatformDropdown from "./platform-dropdown";
+import Dropdown from "./dropdown";
 
 const AppComponents = {
   Accounts,
@@ -21,7 +21,7 @@ const AppComponents = {
   Footer,
   Loading,
   Modal,
-  PlatformDropdown,
+  Dropdown,
 };
 
 export default AppComponents;

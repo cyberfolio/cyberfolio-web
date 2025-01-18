@@ -99,25 +99,6 @@
           }
         }
       }
-
-      &__filter {
-        display: flex;
-        flex-direction: column;
-        position: relative;
-        @extend .unselectable;
-        &__button {
-          font-size: 0.8rem;
-          @extend .button-borderless;
-          padding: 18px;
-          &__icon {
-            width: 1.5rem;
-            margin-right: 10px;
-          }
-          &__arrow {
-            margin-left: 5px;
-          }
-        }
-      }
     }
 
     &__assets {

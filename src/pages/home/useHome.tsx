@@ -3,25 +3,22 @@ import "./index.scss";
 
 import { toast } from "react-hot-toast";
 
-import AppHooks from "hooks/index";
 import utils from "utils/index";
 import InfoService from "services/info";
 import { useAppDispatch, useAppSelector } from "store/functions";
-import { Cex, Chain, Keys } from "structures/index";
+import { AllNetworks, Cex, Chain, Keys } from "structures/index";
 
 const useHome = () => {
   const dispatch = useAppDispatch();
-  const platform = useAppSelector((state) => state.platform);
   const netWorth = useAppSelector((state) => state.netWorth);
   const lastAssetUpdate = useAppSelector((state) => state.lastAssetUpdate);
   const evmAddress = useAppSelector((state) => state.evmAddress);
   const connectedCexes = useAppSelector((state) => state.connectedCexes);
   const connectedWallets = useAppSelector((state) => state.connectedWallets);
 
-  const [platformDropdownOpen, setPlatformDropdownOpen] = useState(false);
+  const [isPlatformDropdownOpen, setIsPlatformDropdownOpen] = useState(false);
   const [hoveredWallet, setHoveredWallet] = useState<Chain | undefined>();
   const [lastUpdate, setLastUpdate] = useState<string>();
-  const platfromDropdownRef = useRef<HTMLDivElement>(null);
 
   const isWalletConnected = () => {
     return Boolean(evmAddress) === true;
@@ -60,10 +57,6 @@ const useHome = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    setPlatformDropdownOpen(false);
-  }, [platform]);
-
-  useEffect(() => {
     if (evmAddress) {
       getTotal();
       getAvailableAccounts();
@@ -83,13 +76,6 @@ const useHome = () => {
       clearInterval(interval);
     };
   }, [lastAssetUpdate]);
-
-  AppHooks.useKeypress(Keys.Escape, () => {
-    setPlatformDropdownOpen(false);
-  });
-  AppHooks.useOnClickOutside(platfromDropdownRef, () => {
-    setPlatformDropdownOpen(false);
-  });
 
   const openWalletModal = (chain: Chain) => {
     const isConnected = isWalletConnected();
@@ -140,22 +126,31 @@ const useHome = () => {
     }
   };
 
+  const onPlatformClick = ({ name, image }: { name: string; image: string }) => {
+    dispatch({
+      type: "FILTER_ASSETS_BY_PLATFORM",
+      payload: {
+        platform: name,
+        image,
+      },
+    });
+  };
+
   return {
     evmAddress,
     connectedCexes,
     connectedWallets,
     netWorth,
-    platform,
     setHoveredWallet,
-    platformDropdownOpen,
+    isPlatformDropdownOpen,
     hoveredWallet,
     lastUpdate,
-    platfromDropdownRef,
     openWalletModal,
     openAddCexModal,
     addMore,
-    setPlatformDropdownOpen,
+    setIsPlatformDropdownOpen,
     onAddStockClick,
+    onPlatformClick,
   };
 };
 

@@ -1,16 +1,23 @@
+import React from "react";
 import "./index.scss";
 
 import classnames from "classnames";
 import utils from "utils/index";
 import { Cex, CexAsset, Chain, DexAsset } from "structures/index";
-import { memo } from "react";
+import { useAppSelector } from "store/functions";
 
-const Index = ({ assets, loading }: { assets: (DexAsset | CexAsset)[]; loading: boolean }) => {
+interface AssetTableProps {
+  assets: (DexAsset | CexAsset)[];
+  isLoading: boolean;
+}
+
+const AssetTable: React.FC<AssetTableProps> = ({ assets, isLoading }) => {
   // const openAssetAtScan = (scanUrl: string) => {
   //   if (scanUrl && utils.isValidHttpUrl(scanUrl)) {
   //     window.open(scanUrl, "_blank");
   //   }
   // };
+  const selectedPlatform = useAppSelector((state) => state.platform);
 
   return (
     <div className="asset-table">
@@ -22,7 +29,7 @@ const Index = ({ assets, loading }: { assets: (DexAsset | CexAsset)[]; loading: 
         <div className="asset-table__header__item asset-table__header__item--last">VALUE</div>
       </div>
       <div className="asset-table__assets">
-        {loading && (
+        {isLoading && (
           <div className="asset-table__assets__loading">
             <div className="fa-3x">
               <i className="fas fa-sync fa-spin asset-table__assets__loading--white"></i>
@@ -119,9 +126,14 @@ const Index = ({ assets, loading }: { assets: (DexAsset | CexAsset)[]; loading: 
               </a>
             );
           })}
+        {assets && assets.length === 0 && selectedPlatform && (
+          <div className="asset-table__assets__empty">
+            <div className="asset-table__assets__empty__text">No assets in {selectedPlatform.name}</div>
+          </div>
+        )}
       </div>
     </div>
   );
 };
 
-export default memo(Index);
+export default React.memo(AssetTable);

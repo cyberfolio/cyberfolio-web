@@ -9,7 +9,9 @@ import Assets from "./assets";
 import AppComponents from "components";
 import utils from "utils/index";
 import { Cex, Chain } from "structures/index";
-import useHome from "./useIndex";
+import useHome from "./useHome";
+import BlockchainSvg from "assets/src/blockchain.svg";
+import { useAppSelector } from "store/functions";
 
 const availableChains = [Chain.BITCOIN, Chain.ETHEREUM, Chain.SOLANA];
 const availableCexes = [Cex.BINANCE, Cex.BINANCETR, Cex.KUCOIN, Cex.GATEIO];
@@ -20,18 +22,32 @@ const Home = () => {
     connectedCexes,
     connectedWallets,
     netWorth,
-    platform,
-    platformDropdownOpen,
+    isPlatformDropdownOpen,
     // hoveredWallet,
     setHoveredWallet,
     lastUpdate,
-    platfromDropdownRef,
     openWalletModal,
     openAddCexModal,
     addMore,
-    setPlatformDropdownOpen,
+    setIsPlatformDropdownOpen,
     onAddStockClick,
+    onPlatformClick,
   } = useHome();
+
+  const platform = useAppSelector((state) => state.platform);
+  const chains = utils.chainInfo.map(({ name, image }) => {
+    return {
+      name,
+      image,
+    };
+  });
+
+  const cexes = utils.cexInfo.map(({ name, image }) => {
+    return {
+      name,
+      image,
+    };
+  });
 
   return (
     <div className={classNames("home", !evmAddress && "home--not-connected")}>
@@ -103,23 +119,13 @@ const Home = () => {
               </div>
 
               <div className="home__header__second__filter">
-                <div
-                  className="home__header__second__filter__button"
-                  onClick={() => setPlatformDropdownOpen(!platformDropdownOpen)}
-                  ref={platfromDropdownRef}
-                >
-                  <img
-                    className="home__header__second__filter__button__icon"
-                    src={platform.image}
-                    alt={platform.name}
-                    height={25}
-                  />
-                  {platform.name.charAt(0).toUpperCase() + platform.name.slice(1)}
-                  <div className="home__header__second__filter__button__arrow">
-                    <ChevronDown color="white" size={15} />
-                  </div>
-                </div>
-                <AppComponents.PlatformDropdown open={platformDropdownOpen} />
+                <AppComponents.Dropdown
+                  isOpen={isPlatformDropdownOpen}
+                  setIsOpen={setIsPlatformDropdownOpen}
+                  items={[...chains, ...cexes, { name: "All Networks", image: BlockchainSvg }]}
+                  onClick={onPlatformClick}
+                  selectedItem={platform}
+                />
               </div>
             </>
           )}

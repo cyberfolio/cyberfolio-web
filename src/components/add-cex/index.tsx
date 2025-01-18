@@ -23,7 +23,7 @@ const AddCex = () => {
   const add = async () => {
     if (loading) return;
     setLoading(true);
-    AppUtils.setAppLoading(true);
+    AppUtils.setAppLoading(true, "Patience is a virtue...");
     if (!apiKey || !apiSecret) {
       toast.error("Please enter api key and secret.");
       setLoading(false);
