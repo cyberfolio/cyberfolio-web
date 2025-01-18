@@ -9,8 +9,8 @@ import DexService from "services/dex";
 
 import AppComponents from "components";
 
-import { useAppDispatch, useAppSelector } from "store/functions";
 import { AllNetworks } from "structures/index";
+import AppHooks from "hooks";
 
 enum Tab {
   All = "All",
@@ -22,11 +22,11 @@ enum Tab {
 }
 
 const Assets = () => {
-  const dispatch = useAppDispatch();
-  const platform = useAppSelector((state) => state.platform);
-  const isAuthenticated = useAppSelector((state) => state.evmAddress);
-  const cexAssets = useAppSelector((state) => state.cexAssets);
-  const dexAssets = useAppSelector((state) => state.dexAssets);
+  const dispatch = AppHooks.useAppDispatch();
+  const platform = AppHooks.useAppSelector((state) => state.platform);
+  const isAuthenticated = AppHooks.useAppSelector((state) => state.evmAddress);
+  const cexAssets = AppHooks.useAppSelector((state) => state.cexAssets);
+  const dexAssets = AppHooks.useAppSelector((state) => state.dexAssets);
 
   const [isLoading, setIsLoading] = useState(false);
   const [activeTab, setActiveTab] = useState<Tab>(Tab.All);

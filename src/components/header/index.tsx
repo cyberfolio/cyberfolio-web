@@ -6,12 +6,11 @@ import Logo from "assets/src/logo.png";
 import utils from "utils/index";
 import AppHooks from "hooks/index";
 import InfoService from "services/info";
-import { useAppDispatch, useAppSelector } from "store/functions";
 import AppConstants from "constants/index";
 import AppAssets from "assets";
 
 const Header = () => {
-  const isAuthenticated = useAppSelector((state) => state.evmAddress);
+  const isAuthenticated = AppHooks.useAppSelector((state) => state.evmAddress);
 
   return (
     <div className="header">
@@ -40,9 +39,9 @@ const Header = () => {
 };
 
 const ConnectWallet = () => {
-  const evmAddress = useAppSelector((state) => state.evmAddress);
-  const ensName = useAppSelector((state) => state.ensName);
-  const dispatch = useAppDispatch();
+  const evmAddress = AppHooks.useAppSelector((state) => state.evmAddress);
+  const ensName = AppHooks.useAppSelector((state) => state.ensName);
+  const dispatch = AppHooks.useAppDispatch();
 
   const { isConnecting, signAndVerifyMessageV2, disconnectMetamask } = AppHooks.useMetamaskLogin();
 

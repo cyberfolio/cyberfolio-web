@@ -1,8 +1,8 @@
-import { useAppSelector } from "store/functions";
+import AppHooks from "hooks";
 import "./index.scss";
 
-const Index = () => {
-  const loading = useAppSelector((state) => state.loading);
+const Loading = () => {
+  const loading = AppHooks.useAppSelector((state) => state.loading);
 
   if (loading.state) {
     return (
@@ -15,4 +15,4 @@ const Index = () => {
   return <></>;
 };
 
-export default Index;
+export default Loading;

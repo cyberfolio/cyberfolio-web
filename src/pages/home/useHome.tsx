@@ -1,20 +1,20 @@
-import { useEffect, useState, useCallback, useRef } from "react";
+import { useEffect, useState, useCallback } from "react";
 import "./index.scss";
 
 import { toast } from "react-hot-toast";
 
 import utils from "utils/index";
 import InfoService from "services/info";
-import { useAppDispatch, useAppSelector } from "store/functions";
-import { AllNetworks, Cex, Chain, Keys } from "structures/index";
+import { Cex, Chain } from "structures/index";
+import AppHooks from "hooks";
 
 const useHome = () => {
-  const dispatch = useAppDispatch();
-  const netWorth = useAppSelector((state) => state.netWorth);
-  const lastAssetUpdate = useAppSelector((state) => state.lastAssetUpdate);
-  const evmAddress = useAppSelector((state) => state.evmAddress);
-  const connectedCexes = useAppSelector((state) => state.connectedCexes);
-  const connectedWallets = useAppSelector((state) => state.connectedWallets);
+  const dispatch = AppHooks.useAppDispatch();
+  const netWorth = AppHooks.useAppSelector((state) => state.netWorth);
+  const lastAssetUpdate = AppHooks.useAppSelector((state) => state.lastAssetUpdate);
+  const evmAddress = AppHooks.useAppSelector((state) => state.evmAddress);
+  const connectedCexes = AppHooks.useAppSelector((state) => state.connectedCexes);
+  const connectedWallets = AppHooks.useAppSelector((state) => state.connectedWallets);
 
   const [isPlatformDropdownOpen, setIsPlatformDropdownOpen] = useState(false);
   const [hoveredWallet, setHoveredWallet] = useState<Chain | undefined>();

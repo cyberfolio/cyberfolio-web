@@ -7,7 +7,6 @@ import classnames from "classnames";
 import DexService from "services/dex";
 import AppHooks from "hooks/index";
 import utils from "utils/index";
-import { useAppDispatch, useAppSelector } from "store/functions";
 import { Chain, Keys } from "structures/index";
 import InfoService from "services/info";
 
@@ -16,9 +15,9 @@ const AddWallet = () => {
   const [address, setAddress] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const { chain, open } = useAppSelector((state) => state.isWalletModalOpen);
+  const { chain, open } = AppHooks.useAppSelector((state) => state.isWalletModalOpen);
 
-  const dispatch = useAppDispatch();
+  const dispatch = AppHooks.useAppDispatch();
   const modalRef = useRef(null);
 
   const add = async () => {

@@ -1,17 +1,17 @@
 import "./index.scss";
 
-import { Plus, ChevronDown } from "react-bootstrap-icons";
+import { Plus } from "react-bootstrap-icons";
 import classNames from "classnames";
 
 import Utilities from "./utilities";
 import Assets from "./assets";
 
 import AppComponents from "components";
+import AppHooks from "hooks";
 import utils from "utils/index";
 import { Cex, Chain } from "structures/index";
 import useHome from "./useHome";
 import BlockchainSvg from "assets/src/blockchain.svg";
-import { useAppSelector } from "store/functions";
 
 const availableChains = [Chain.BITCOIN, Chain.ETHEREUM, Chain.SOLANA];
 const availableCexes = [Cex.BINANCE, Cex.BINANCETR, Cex.KUCOIN, Cex.GATEIO];
@@ -34,7 +34,7 @@ const Home = () => {
     onPlatformClick,
   } = useHome();
 
-  const platform = useAppSelector((state) => state.platform);
+  const platform = AppHooks.useAppSelector((state) => state.platform);
   const chains = utils.chainInfo.map(({ name, image }) => {
     return {
       name,

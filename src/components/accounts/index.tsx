@@ -3,22 +3,22 @@ import { Chain, Cex } from "structures/index";
 import CexService from "services/cex";
 import DexService from "services/dex";
 import InfoService from "services/info";
-import { useAppDispatch, useAppSelector } from "store/functions";
 import utils from "utils/index";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import "./index.scss";
+import AppHooks from "hooks";
 
 const Accounts = () => {
-  const connectedCexes = useAppSelector((state) => state.connectedCexes);
-  const connectedWallets = useAppSelector((state) => state.connectedWallets);
+  const connectedCexes = AppHooks.useAppSelector((state) => state.connectedCexes);
+  const connectedWallets = AppHooks.useAppSelector((state) => state.connectedWallets);
   const [whatToDelete, setWhatToDelete] = useState("");
   const [cexToDelete, setCexToDelete] = useState<Cex | undefined>();
   const [walletToDelete, setWalletToDelete] = useState<Chain | undefined>();
   const [walletAddressToDelete, setWalletAddressToDelete] = useState<string>("");
   const [loading, setLoading] = useState(false);
 
-  const dispatch = useAppDispatch();
+  const dispatch = AppHooks.useAppDispatch();
 
   const resetCexBalance = async () => {
     const availableAccounts = await InfoService.getConnectedAccounts();

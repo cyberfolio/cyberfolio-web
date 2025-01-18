@@ -2,11 +2,10 @@ import { useRef } from "react";
 import "./index.scss";
 
 import AppHooks from "hooks/index";
-import { useAppDispatch } from "store/functions";
 import { Cex, Keys } from "structures/index";
 
 const Index = () => {
-  const dispatch = useAppDispatch();
+  const dispatch = AppHooks.useAppDispatch();
   const modalRef = useRef(null);
 
   AppHooks.useKeypress(Keys.Escape, () => {

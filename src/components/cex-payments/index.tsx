@@ -5,13 +5,13 @@ import utils from "utils/index";
 import classNames from "classnames";
 import toast from "react-hot-toast";
 import "./index.scss";
-import { useAppSelector } from "store/functions";
+import AppHooks from "hooks";
 
 type Props = {
   show: boolean;
 };
 const CexPayments: FC<Props> = ({ show }) => {
-  const evmAddress = useAppSelector((state) => state.evmAddress);
+  const evmAddress = AppHooks.useAppSelector((state) => state.evmAddress);
   const [history, setHistory] = useState<PaymentHistoryResponse[]>([]);
   const [loading, setLoading] = useState(false);
   const [infoMessage, setInfoMessage] = useState("");

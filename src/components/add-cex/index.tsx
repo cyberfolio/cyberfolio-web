@@ -8,7 +8,6 @@ import AppHooks from "hooks";
 import AppServices from "services";
 import AppUtils from "utils";
 
-import { useAppDispatch, useAppSelector } from "store/functions";
 import { Cex, Keys } from "structures";
 
 const AddCex = () => {
@@ -16,8 +15,8 @@ const AddCex = () => {
   const [apiSecret, setApiSecret] = useState("");
   const [passphrase, setPassphrase] = useState("");
   const [loading, setLoading] = useState(false);
-  const { name, open } = useAppSelector((state) => state.isAddCexModalOpen);
-  const dispatch = useAppDispatch();
+  const { name, open } = AppHooks.useAppSelector((state) => state.isAddCexModalOpen);
+  const dispatch = AppHooks.useAppDispatch();
   const modalRef = useRef(null);
 
   const add = async () => {

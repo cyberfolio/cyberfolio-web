@@ -6,12 +6,12 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "pages/home";
 
 import AuthService from "services/auth";
-import { useAppDispatch } from "store/functions";
 import AppComponents from "components";
 import AppUtils from "utils";
+import AppHooks from "hooks";
 
 const App = () => {
-  const dispatch = useAppDispatch();
+  const dispatch = AppHooks.useAppDispatch();
 
   const checkIsAuthenticated = useCallback(async () => {
     try {

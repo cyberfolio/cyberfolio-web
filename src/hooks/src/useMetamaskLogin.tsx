@@ -6,13 +6,13 @@ import { toast } from "react-hot-toast";
 import AppServices from "services";
 import AppUtils from "utils";
 import AppConfig from "config";
-import { useAppDispatch } from "store/functions";
 import { getAccount, signMessage } from "@wagmi/core";
 import { useConnect } from "wagmi";
 import { injected } from "wagmi/connectors";
+import AppHooks from "hooks";
 
 const useMetamaskLogin = () => {
-  const dispatch = useAppDispatch();
+  const dispatch = AppHooks.useAppDispatch();
   const [isConnecting, setIsConnecting] = React.useState(false);
   const { connectAsync } = useConnect();
 

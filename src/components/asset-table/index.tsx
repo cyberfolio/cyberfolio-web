@@ -4,7 +4,7 @@ import "./index.scss";
 import classnames from "classnames";
 import utils from "utils/index";
 import { Cex, CexAsset, Chain, DexAsset } from "structures/index";
-import { useAppSelector } from "store/functions";
+import AppHooks from "hooks";
 
 interface AssetTableProps {
   assets: (DexAsset | CexAsset)[];
@@ -17,7 +17,7 @@ const AssetTable: React.FC<AssetTableProps> = ({ assets, isLoading }) => {
   //     window.open(scanUrl, "_blank");
   //   }
   // };
-  const selectedPlatform = useAppSelector((state) => state.platform);
+  const selectedPlatform = AppHooks.useAppSelector((state) => state.platform);
 
   return (
     <div className="asset-table">
@@ -128,7 +128,14 @@ const AssetTable: React.FC<AssetTableProps> = ({ assets, isLoading }) => {
           })}
         {assets && assets.length === 0 && selectedPlatform && (
           <div className="asset-table__assets__empty">
-            <div className="asset-table__assets__empty__text">No assets in {selectedPlatform.name}</div>
+            <div className="asset-table__assets__empty__text">
+              No assets in {selectedPlatform.name}
+              <img
+                className="asset-table__assets__empty__image"
+                alt={selectedPlatform.name}
+                src={selectedPlatform.image}
+              />
+            </div>
           </div>
         )}
       </div>

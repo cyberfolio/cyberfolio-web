@@ -44,7 +44,13 @@
       @extend .flexCenter;
       height: 35vh;
       color: $fainted-color;
+      &__image {
+        width: auto;
+        height: 25px;
+        margin: 0 10px;
+      }
       &__text {
+        @extend .flexCenter;
         font-size: 20px;
         padding: 20px;
         color: white;
