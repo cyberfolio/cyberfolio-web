@@ -3,7 +3,7 @@ import "./index.scss";
 
 import { toast } from "react-hot-toast";
 
-import utils from "utils/index";
+import AppUtils from "utils/index";
 import InfoService from "services/info";
 import { Cex, Chain } from "structures/index";
 import AppHooks from "hooks";
@@ -65,7 +65,7 @@ const useHome = () => {
 
   useEffect(() => {
     const updateLastUpdateTime = () => {
-      const lastUpdateRes = utils.toReadableDateDifference(new Date(lastAssetUpdate), new Date());
+      const lastUpdateRes = AppUtils.toReadableDateDifference(new Date(lastAssetUpdate), new Date());
       setLastUpdate(lastUpdateRes);
     };
     updateLastUpdateTime();

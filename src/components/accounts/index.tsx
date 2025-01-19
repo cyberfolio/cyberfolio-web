@@ -3,11 +3,11 @@ import { Chain, Cex } from "structures/index";
 import CexService from "services/cex";
 import DexService from "services/dex";
 import InfoService from "services/info";
-import utils from "utils/index";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import "./index.scss";
 import AppHooks from "hooks";
+import AppUtils from "utils/index";
 
 const Accounts = () => {
   const connectedCexes = AppHooks.useAppSelector((state) => state.connectedCexes);
@@ -116,7 +116,7 @@ const Accounts = () => {
             <div className="accounts__account__info">
               <div className="accounts__account__info__title">{connectedCex.name} Account</div>
               <div className="accounts__account__info__item">
-                Net Worth: <strong>{utils.toUsd(connectedCex.netWorth)}</strong>
+                Net Worth: <strong>{AppUtils.toUsd(connectedCex.netWorth)}</strong>
               </div>
             </div>
             <div className="accounts__account__buttons">
@@ -139,10 +139,10 @@ const Accounts = () => {
                 Name: <strong>{connectedWallet.name}</strong>
               </div>
               <div className="accounts__account__info__item">
-                Address: <strong>{connectedWallet.address}</strong>
+                Address: <strong>{AppUtils.truncateEthAddress(connectedWallet.address)}</strong>
               </div>
               <div className="accounts__account__info__item">
-                Net Worth: <strong>{utils.toUsd(connectedWallet.netWorth)}</strong>
+                Net Worth: <strong>{AppUtils.toUsd(connectedWallet.netWorth)}</strong>
               </div>
             </div>
             <div className="accounts__account__buttons">

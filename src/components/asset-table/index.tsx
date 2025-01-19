@@ -2,7 +2,7 @@ import React from "react";
 import "./index.scss";
 
 import classnames from "classnames";
-import utils from "utils/index";
+import AppUtils from "utils/index";
 import { Cex, CexAsset, Chain, DexAsset } from "structures/index";
 import AppHooks from "hooks";
 
@@ -48,7 +48,7 @@ const AssetTable: React.FC<AssetTableProps> = ({ assets, isLoading }) => {
             let price = 0;
             let value = 0;
             if ("chain" in asset) {
-              platformImage = utils.chainInfo.filter((info) => info.name === asset.chain)[0]?.image;
+              platformImage = AppUtils.chainInfo.filter((info) => info.name === asset.chain)[0]?.image;
               chain = asset.chain;
               symbol = asset.symbol;
               scan = asset.scan;
@@ -60,7 +60,7 @@ const AssetTable: React.FC<AssetTableProps> = ({ assets, isLoading }) => {
             }
             if ("cexName" in asset) {
               cexName = asset.cexName;
-              platformImage = utils.cexInfo.filter((info) => info.name === asset.cexName)[0]?.image;
+              platformImage = AppUtils.cexInfo.filter((info) => info.name === asset.cexName)[0]?.image;
               symbol = asset.symbol;
               logo = asset.logo;
               price = asset.price;
@@ -108,18 +108,18 @@ const AssetTable: React.FC<AssetTableProps> = ({ assets, isLoading }) => {
                           className="asset-table__assets__asset__item__chain__logo"
                         />
                       )}
-                      {cexName !== Cex.NO && utils.arrangeCexName(cexName)}
-                      {chain !== Chain.NO && utils.capitalizeFirstLetter(chain)}
+                      {cexName !== Cex.NO && AppUtils.arrangeCexName(cexName)}
+                      {chain !== Chain.NO && AppUtils.capitalizeFirstLetter(chain)}
                     </div>
                   </div>
                 </div>
-                <div className="asset-table__assets__asset__item ">{utils.toUsd(price)}</div>
+                <div className="asset-table__assets__asset__item ">{AppUtils.toUsd(price)}</div>
                 <div className="asset-table__assets__asset__item">{Intl.NumberFormat("en-US").format(balance)}</div>
                 <div className="asset-table__assets__asset__item asset-table__assets__asset__item--center">
                   {walletName} {accountName}
                 </div>
                 <div className="asset-table__assets__asset__item asset-table__assets__asset__item--last">
-                  {utils.toUsd(value)}
+                  {AppUtils.toUsd(value)}
                 </div>
               </a>
             );

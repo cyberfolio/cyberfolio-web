@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import CexService from "services/cex";
 import { PaymentHistoryResponse } from "services/cex/types";
-import utils from "utils/index";
+import AppUtils from "utils/index";
 import classNames from "classnames";
 import toast from "react-hot-toast";
 import "./index.scss";
@@ -65,7 +65,7 @@ const CexPayments: FC<Props> = ({ show }) => {
         {infoMessage && <div className="cex-payments__assets__empty">{infoMessage}</div>}
         {history &&
           history.map((item, index: number) => {
-            const cexLogo = utils.cexInfo.filter((info) => info.name === item.cexName)[0]?.image;
+            const cexLogo = AppUtils.cexInfo.filter((info) => info.name === item.cexName)[0]?.image;
             return (
               <div
                 key={item.orderNo + index}

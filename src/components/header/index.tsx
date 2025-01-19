@@ -3,7 +3,7 @@ import "./index.scss";
 
 import BuyMeACoffee from "assets/src/bmc-logo.png";
 import Logo from "assets/src/logo.png";
-import utils from "utils/index";
+import AppUtils from "utils/index";
 import AppHooks from "hooks/index";
 import InfoService from "services/info";
 import AppConstants from "constants/index";
@@ -78,7 +78,7 @@ const ConnectWallet = () => {
         <div className="metamask-button-text">
           {!evmAddress && !isConnecting && "Connect Wallet"}
           {!evmAddress && isConnecting && "Connecting..."}
-          {evmAddress && !ensName && `${utils.truncateEthAddress(evmAddress)}`}
+          {evmAddress && !ensName && `${AppUtils.truncateEthAddress(evmAddress)}`}
           {evmAddress && ensName && `${ensName}`}
         </div>
       </div>

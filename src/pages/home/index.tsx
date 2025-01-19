@@ -9,7 +9,7 @@ import Assets from "./assets";
 
 import AppComponents from "components";
 import AppHooks from "hooks";
-import utils from "utils/index";
+import AppUtils from "utils/index";
 import { Cex, Chain } from "structures/index";
 import useHome from "./useHome";
 import BlockchainSvg from "assets/src/blockchain.svg";
@@ -38,13 +38,13 @@ const Home = () => {
   const [homeAssetsHeight, setHomeAssetsHeight] = React.useState(0);
 
   const platform = AppHooks.useAppSelector((state) => state.platform);
-  const chains = utils.chainInfo.map(({ name, image }) => {
+  const chains = AppUtils.chainInfo.map(({ name, image }) => {
     return {
       name,
       image,
     };
   });
-  const cexes = utils.cexInfo.map(({ name, image }) => {
+  const cexes = AppUtils.cexInfo.map(({ name, image }) => {
     return {
       name,
       image,
@@ -120,7 +120,7 @@ const Home = () => {
               <div className="home__header__second__first">
                 <div className="home__header__second__first__total-balance">
                   <div className="home__header__second__first__total-balance__label">Net Worth</div>
-                  <div className="home__header__second__first__total-balance__value">{utils.toUsd(netWorth)}</div>
+                  <div className="home__header__second__first__total-balance__value">{AppUtils.toUsd(netWorth)}</div>
                 </div>
 
                 <div className="home__header__second__first__last-update">

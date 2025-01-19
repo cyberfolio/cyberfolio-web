@@ -6,7 +6,7 @@ import classnames from "classnames";
 
 import DexService from "services/dex";
 import AppHooks from "hooks/index";
-import utils from "utils/index";
+import AppUtils from "utils/index";
 import { Chain, Keys } from "structures/index";
 import InfoService from "services/info";
 
@@ -22,7 +22,7 @@ const AddWallet = () => {
 
   const add = async () => {
     try {
-      const isValid = await utils.isValidWalletAddress({ address, chain });
+      const isValid = await AppUtils.isValidWalletAddress({ address, chain });
       if (!isValid) {
         toast.error(`${chain} address is not valid`);
         return;
@@ -36,7 +36,7 @@ const AddWallet = () => {
     }
     try {
       setLoading(true);
-      utils.setAppLoading(true);
+      AppUtils.setAppLoading(true);
       await DexService.addWallet({ name, address, chain });
       const allDexTokens = await DexService.getAllDexTokens();
       dispatch({
@@ -61,7 +61,7 @@ const AddWallet = () => {
       toast.error(e.message);
     } finally {
       setLoading(false);
-      utils.setAppLoading(false);
+      AppUtils.setAppLoading(false);
     }
   };
   AppHooks.useKeypress(Keys.Escape, () => {
