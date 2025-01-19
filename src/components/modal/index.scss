@@ -9,6 +9,7 @@
   top: 0;
   z-index: $modal-dialog-index;
   background-color: rgba(18, 19, 34, 0.7);
+  backdrop-filter: blur(3px);
   align-items: center;
   justify-content: center;
   padding-top: 100px;
