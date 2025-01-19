@@ -12,12 +12,10 @@ interface AssetTableProps {
 }
 
 const AssetTable: React.FC<AssetTableProps> = ({ assets, isLoading }) => {
-  // const openAssetAtScan = (scanUrl: string) => {
-  //   if (scanUrl && utils.isValidHttpUrl(scanUrl)) {
-  //     window.open(scanUrl, "_blank");
-  //   }
-  // };
   const selectedPlatform = AppHooks.useAppSelector((state) => state.platform);
+  const evmAddress = AppHooks.useAppSelector((state) => state.evmAddress);
+
+  const assetss = [...assets];
 
   return (
     <div className="asset-table">
@@ -36,8 +34,8 @@ const AssetTable: React.FC<AssetTableProps> = ({ assets, isLoading }) => {
             </div>
           </div>
         )}
-        {assets &&
-          assets.map((asset, index: number) => {
+        {assetss &&
+          assetss.map((asset, index: number) => {
             let platformImage = "";
             let symbol = "";
             let scan = "";
@@ -126,7 +124,7 @@ const AssetTable: React.FC<AssetTableProps> = ({ assets, isLoading }) => {
               </a>
             );
           })}
-        {assets && assets.length === 0 && selectedPlatform && (
+        {!isLoading && assets && assets.length === 0 && selectedPlatform && evmAddress && (
           <div className="asset-table__assets__empty">
             <div className="asset-table__assets__empty__text">
               No assets in {selectedPlatform.name}

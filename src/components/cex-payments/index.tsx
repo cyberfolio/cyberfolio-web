@@ -62,11 +62,7 @@ const CexPayments: FC<Props> = ({ show }) => {
             </div>
           </div>
         )}
-        {infoMessage && (
-          <div className="cex-payments__assets__loading ">
-            <div className="cex-payments__assets__loading--white">{infoMessage}</div>
-          </div>
-        )}
+        {infoMessage && <div className="cex-payments__assets__empty">{infoMessage}</div>}
         {history &&
           history.map((item, index: number) => {
             const cexLogo = utils.cexInfo.filter((info) => info.name === item.cexName)[0]?.image;

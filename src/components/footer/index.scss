@@ -5,6 +5,7 @@
   width: 100%;
   background-color: $background;
   &__area {
+    padding: 0 20px;
     height: 100%;
     max-width: 1480px;
     display: flex;
@@ -27,8 +28,9 @@
     &__links {
       width: 50%;
       display: flex;
+      justify-content: flex-end;
       align-items: center;
-      justify-content: space-evenly;
+      gap: 100px;
       &__label {
         color: white;
         font-size: 16px;

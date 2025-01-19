@@ -10,6 +10,8 @@
   flex-direction: column;
   z-index: $loading_index;
   background-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(3px);
+
   &__message {
     color: $text-color-dark;
     font-weight: bold;

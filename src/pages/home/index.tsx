@@ -1,3 +1,4 @@
+import React from "react";
 import "./index.scss";
 
 import { Plus } from "react-bootstrap-icons";
@@ -34,6 +35,8 @@ const Home = () => {
     onPlatformClick,
   } = useHome();
 
+  const [homeAssetsHeight, setHomeAssetsHeight] = React.useState(0);
+
   const platform = AppHooks.useAppSelector((state) => state.platform);
   const chains = utils.chainInfo.map(({ name, image }) => {
     return {
@@ -41,13 +44,25 @@ const Home = () => {
       image,
     };
   });
-
   const cexes = utils.cexInfo.map(({ name, image }) => {
     return {
       name,
       image,
     };
   });
+
+  React.useEffect(() => {
+    const onResize = () => {
+      const homeHeaderHeight = document.getElementsByClassName("home__header")[0]?.clientHeight ?? 0;
+      const headerHeight = document.getElementsByClassName("header")[0]?.clientHeight ?? 0;
+      const footerHeight = document.getElementsByClassName("footer")[0]?.clientHeight ?? 0;
+      const homeAssetsHeight = window.innerHeight - (homeHeaderHeight + headerHeight + footerHeight + 50);
+      setHomeAssetsHeight(homeAssetsHeight);
+    };
+    onResize();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
 
   return (
     <div className={classNames("home", !evmAddress && "home--not-connected")}>
@@ -130,10 +145,9 @@ const Home = () => {
             </>
           )}
         </div>
-
-        <div className="home__assets">
-          <Assets />
-        </div>
+      </div>
+      <div className="home__assets" style={{ minHeight: homeAssetsHeight }}>
+        <Assets />
       </div>
       <div className="home__utilities">
         <Utilities />

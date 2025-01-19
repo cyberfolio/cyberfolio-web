@@ -1,7 +1,9 @@
 @import "../../../styles/shared.scss";
 
 .assets {
+  height: 100%;
   &__links {
+    height: 70px;
     display: flex;
     flex-wrap: wrap;
     border-bottom: 1px solid $border;
@@ -28,6 +30,7 @@
     }
   }
   &__table {
+    height: calc(100% - 70px);
     padding: 0 20px;
     padding-top: 20px;
   }
