@@ -5,10 +5,11 @@
   &__links {
     height: 70px;
     display: flex;
-    flex-wrap: wrap;
+    overflow-x: scroll;
     border-bottom: 1px solid $border;
     padding: 0 20px;
     &__link {
+      white-space: nowrap;
       font-size: 14px;
       padding: 20px 30px;
       margin-right: 20px;
