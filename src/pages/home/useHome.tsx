@@ -118,14 +118,6 @@ const useHome = () => {
     }
   };
 
-  const onAddStockClick = () => {
-    const isConnected = isWalletConnected();
-    if (!isConnected) {
-      toast.error("Connect your wallet");
-      return;
-    }
-  };
-
   const onPlatformClick = ({ name, image }: { name: string; image: string }) => {
     dispatch({
       type: "FILTER_ASSETS_BY_PLATFORM",
@@ -149,7 +141,6 @@ const useHome = () => {
     openAddCexModal,
     addMore,
     setIsPlatformDropdownOpen,
-    onAddStockClick,
     onPlatformClick,
   };
 };

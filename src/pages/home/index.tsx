@@ -31,7 +31,6 @@ const Home = () => {
     openAddCexModal,
     addMore,
     setIsPlatformDropdownOpen,
-    onAddStockClick,
     onPlatformClick,
   } = useHome();
 
@@ -109,9 +108,6 @@ const Home = () => {
               </div>
             );
           })}
-          <div className={classNames("home__header__add__wallet")} onClick={() => onAddStockClick()}>
-            Add a Stock <Plus color="white" size={20} />
-          </div>
         </div>
 
         <div className="home__header__second">
