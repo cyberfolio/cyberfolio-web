@@ -10,15 +10,17 @@ Client application where you can track DEX and CEX portfolio, built with React a
 
 ## Getting Started
 
-1. **Clone the repo**  
-   git clone git@github.com:cyberfolio/cyberfolio-web.git
-   cd cyberfolio-web
+1. **Clone the repo**
 
-2. **Install dependencies**  
-   yarn install
+   - `git clone git@github.com:cyberfolio/cyberfolio-web.git`
+   - `cd cyberfolio-web`
 
-3. **Run the app**  
-   yarn dev
+2. **Install dependencies**
+
+   - `yarn install`
+
+3. **Run the app**
+   - `yarn dev`
 
 ## Folder Structure
 
