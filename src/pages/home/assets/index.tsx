@@ -118,12 +118,12 @@ const Assets = () => {
         >
           DEX
         </div>
-        <div
+        {/* <div
           className={classnames("assets__links__link", activeTab === Tab.Stocks && "assets__links__link--active")}
           onClick={() => onTabClick(Tab.Stocks)}
         >
           Stocks
-        </div>
+        </div> */}
         <div
           className={classnames("assets__links__link", activeTab === Tab.Accounts && "assets__links__link--active")}
           onClick={() => onTabClick(Tab.Accounts)}
