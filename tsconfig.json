@@ -15,8 +15,11 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "useUnknownInCatchVariables": false, // TODO: remove this one all error mesages are handled with new method,
     "baseUrl": "./src",
-    "useUnknownInCatchVariables": false // TODO: remove this one all error mesages are handled with new method,
+    "paths": {
+      "@styles/*": ["styles/*"]
+    }
   },
   "include": ["src", ".eslintrc.js", "vite.config.ts"]
 }

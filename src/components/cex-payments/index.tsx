@@ -4,7 +4,7 @@ import { PaymentHistoryResponse } from "services/cex/types";
 import AppUtils from "utils/index";
 import classNames from "classnames";
 import toast from "react-hot-toast";
-import "./index.scss";
+import "./index.module.scss";
 import AppHooks from "hooks";
 
 type Props = {

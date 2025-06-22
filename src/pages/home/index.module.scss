@@ -1,3 +1,6 @@
+@import "@styles/_variables";
+@import "@styles/_shared";
+
 .home {
   display: flex;
   flex-direction: column;
@@ -71,12 +74,13 @@
           flex-direction: column;
           &__label {
             padding-left: 2px;
-            color: darken($text-color-dark, 40%);
+            // TODO: darken the color
+            // color: darken(var(--color-text), 40%);
           }
           &__value {
             font-size: 30px;
             font-weight: 600;
-            color: $text-color-dark;
+            color: var(--color-text);
           }
         }
         &__last-update {
@@ -88,10 +92,11 @@
           &__label {
             padding-left: 2px;
             padding-right: 5px;
-            color: darken($text-color-dark, 40%);
+            // TODO: darken the color
+            // color: darken(var(--color-text), 40%);
             &--value {
               font-weight: 600;
-              color: $text-color-dark;
+              color: var(--color-text);
             }
           }
         }

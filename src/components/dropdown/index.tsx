@@ -1,5 +1,5 @@
 import React from "react";
-import "./index.scss";
+import "./index.module.scss";
 
 import classNames from "classnames";
 import { ChevronDown } from "react-bootstrap-icons";

@@ -1,3 +1,6 @@
+@import "@styles/_variables";
+@import "@styles/_shared";
+
 .asset-table {
   border: 1px solid var(--color-secondary);
   border-radius: 8px;
@@ -15,7 +18,7 @@
       justify-content: flex-start;
       width: 16.6%;
       text-align: center;
-      color: $text-color-dark;
+      color: var(--color-text);
       font-weight: 700;
       font-size: 14px;
       &--first {
@@ -61,7 +64,7 @@
     &__loading {
       @extend .flex-center;
       &--white {
-        color: $text-color-dark;
+        color: var(--color-text);
       }
     }
     &__asset {
@@ -88,7 +91,7 @@
 
       &__item {
         text-align: center;
-        color: $text-color-dark;
+        color: var(--color-text);
         font-size: 13px;
         width: 16.6%;
         display: flex;
@@ -115,7 +118,7 @@
           flex-direction: column;
           color: $fainted-color;
           &__name {
-            color: $text-color-dark;
+            color: var(--color-text);
             font-size: 14px;
             margin-left: 3px;
             padding-bottom: 5px;

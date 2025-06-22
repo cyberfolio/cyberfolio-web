@@ -1,18 +1,17 @@
 import React from "react";
-import "./index.scss";
+import "./index.module.scss";
 
 import { Plus } from "react-bootstrap-icons";
 import classNames from "classnames";
 
-import Assets from "./assets";
-
 import AppComponents from "components";
 import AppHooks from "hooks";
 import AppUtils from "utils";
+import AppAssets from "assets";
 import { Cex, Chain } from "structures/index";
 
 import useHome from "./useHome";
-import AppAssets from "assets";
+import Assets from "./assets";
 
 const availableChains = [Chain.BITCOIN, Chain.ETHEREUM, Chain.SOLANA];
 const availableCexes = [Cex.BINANCE, Cex.BINANCETR, Cex.KUCOIN, Cex.GATEIO];
@@ -133,7 +132,7 @@ const Home = () => {
                 <AppComponents.Dropdown
                   isOpen={isPlatformDropdownOpen}
                   setIsOpen={setIsPlatformDropdownOpen}
-                  items={[...chains, ...cexes, { name: "All Networks", image: AppAssets.BlockChain }]}
+                  items={[...chains, ...cexes, { name: "All Networks", image: AppAssets.Icons.BlockChain }]}
                   onClick={onPlatformClick}
                   selectedItem={platform}
                 />

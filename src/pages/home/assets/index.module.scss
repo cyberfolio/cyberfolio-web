@@ -1,3 +1,6 @@
+@import "@styles/_variables";
+@import "@styles/_shared";
+
 .assets {
   height: 100%;
   &__links {
@@ -11,7 +14,7 @@
       font-size: 14px;
       padding: 20px 30px;
       margin-right: 20px;
-      color: $text-color-dark;
+      color: var(--color-text);
       transition: background-color 0.25s ease;
       border-bottom: 1px solid transparent;
       border-radius: 8px 8px 0 0;

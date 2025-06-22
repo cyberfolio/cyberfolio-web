@@ -1,3 +1,6 @@
+@import "@styles/_variables";
+@import "@styles/_shared";
+
 .chains-dropdown {
   position: absolute;
   width: 280px;
@@ -34,7 +37,7 @@
     }
     &__name {
       font-size: 0.8rem;
-      color: $text-color-dark;
+      color: var(--color-text);
     }
   }
 

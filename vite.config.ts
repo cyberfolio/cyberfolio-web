@@ -13,19 +13,9 @@ export default defineConfig(({ mode }) => {
       },
     },
     plugins: [react(), viteTsconfigPaths({}), svgr({ dimensions: false })],
-    css: {
-      preprocessorOptions: {
-        scss: {
-          additionalData: `
-           @import "src/styles/_variables.scss"; 
-           @import "src/styles/_shared.scss";
-           `,
-        },
-      },
-    },
     resolve: {
       alias: {
-        "@": path.resolve(__dirname, "./src"),
+        "@styles": path.resolve(__dirname, "src/styles"),
       },
     },
     server: {

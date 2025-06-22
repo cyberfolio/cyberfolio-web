@@ -1,3 +1,6 @@
+@import "@styles/_variables";
+@import "@styles/_shared";
+
 .header {
   width: 100%;
   background-color: $background;
@@ -33,7 +36,7 @@
           padding-right: 7px;
         }
         &__text {
-          color: $text-color-dark;
+          color: var(--color-text);
           text-decoration: none;
           font-size: 12px;
         }

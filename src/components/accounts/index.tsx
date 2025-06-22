@@ -5,7 +5,7 @@ import DexService from "services/dex";
 import InfoService from "services/info";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import "./index.scss";
+import "./index.module.scss";
 import AppHooks from "hooks";
 import AppUtils from "utils/index";
 

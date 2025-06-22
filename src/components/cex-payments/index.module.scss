@@ -1,3 +1,6 @@
+@import "@styles/_variables";
+@import "@styles/_shared";
+
 .cex-payments {
   border: 1px solid var(--color-secondary);
   border-radius: 8px;
@@ -20,7 +23,7 @@
       justify-content: flex-start;
       width: 16.6%;
       text-align: center;
-      color: $text-color-dark;
+      color: var(--color-text);
       font-weight: 700;
       font-size: 14px;
       &--first {
@@ -48,13 +51,13 @@
     &__loading {
       @extend .flex-center;
       &--white {
-        color: $text-color-dark;
+        color: var(--color-text);
       }
     }
     &__empty {
       padding: 30px 0;
       @extend .flex-center;
-      color: $text-color-dark;
+      color: var(--color-text);
     }
     &__asset {
       border-bottom: 1px solid var(--color-secondary);
@@ -79,7 +82,7 @@
 
       &__item {
         text-align: center;
-        color: $text-color-dark;
+        color: var(--color-text);
         font-size: 13px;
         width: 16.6%;
         display: flex;
@@ -106,7 +109,7 @@
           flex-direction: row;
           color: $fainted-color;
           &__name {
-            color: $text-color-dark;
+            color: var(--color-text);
             font-size: 14px;
             margin-left: 3px;
             padding-bottom: 5px;

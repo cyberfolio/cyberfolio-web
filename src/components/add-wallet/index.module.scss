@@ -1,3 +1,6 @@
+@import "@styles/_variables";
+@import "@styles/_shared";
+
 .add-wallet-modal {
   display: none;
   position: fixed;
@@ -30,7 +33,7 @@
       @extend .flex-center;
       justify-content: space-between;
       width: 100%;
-      color: $text-color-dark;
+      color: var(--color-text);
       font-weight: bold;
       padding-bottom: 20px;
       &__exit {
@@ -54,7 +57,7 @@
         padding: 0 50px;
         &__label {
           width: 100%;
-          color: $text-color-dark;
+          color: var(--color-text);
           margin-bottom: 5px;
           font-size: 12px;
         }

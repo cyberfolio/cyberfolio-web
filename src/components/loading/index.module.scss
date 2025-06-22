@@ -1,3 +1,6 @@
+@import "@styles/_variables";
+@import "@styles/_shared";
+
 .loading {
   position: absolute;
   width: 100%;
@@ -11,7 +14,7 @@
   backdrop-filter: blur(3px);
 
   &__message {
-    color: $text-color-dark;
+    color: var(--color-text);
     font-weight: bold;
     padding-top: 10px;
     font-size: 20px;
@@ -19,6 +22,6 @@
 }
 
 .fa-arrows-rotate {
-  color: $text-color-dark;
+  color: var(--color-text);
   z-index: $loading_index + 1;
 }

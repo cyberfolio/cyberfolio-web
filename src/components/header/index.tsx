@@ -1,17 +1,13 @@
 import React, { useEffect } from "react";
-import "./index.scss";
+import "./index.module.scss";
 
-import BuyMeACoffee from "assets/src/bmc-logo.png";
-import Logo from "assets/src/logo.png";
 import AppUtils from "utils/index";
 import AppHooks from "hooks/index";
 import InfoService from "services/info";
 import AppConstants from "constants/index";
-import AppAssets from "assets";
 import AppComponents from "components";
 import { useChainId, useConnect } from "wagmi";
-import { c } from "vite/dist/node/types.d-aGj9QkWt";
-import toast from "react-hot-toast";
+import AppAssets from "assets";
 
 const Header = () => {
   const isAuthenticated = AppHooks.useAppSelector((state) => state.evmAddress);
@@ -20,18 +16,18 @@ const Header = () => {
     <div className="header">
       <div className="header__content">
         <div className="header__content__brand">
-          <img src={Logo} className="header__content__brand__image" />
+          <img src={AppAssets.Icons.Logo} className="header__content__brand__image" />
           <div className="header__content__brand__label">Cyberfolio</div>
         </div>
         <div className="header__content__brand">
           {isAuthenticated && (
             <a
-              href={AppConstants.BuyMeACoffee}
+              href={AppAssets.Icons.BuyMeACoffee}
               target="_blank"
               rel="noreferrer"
               className="header__content__brand__bmc"
             >
-              <img src={BuyMeACoffee} className="header__content__brand__bmc__logo" />
+              <img src={AppAssets.Icons.BuyMeACoffee} className="header__content__brand__bmc__logo" />
               <div className="header__content__brand__bmc__text">Buy me a coffee</div>
             </a>
           )}
@@ -98,7 +94,7 @@ const ConnectWallet = () => {
         className={`metamask-button ${isConnecting ? "disabled-button" : ""}`}
         onClick={!evmAddress ? handleConnectWallet : disconnectMetamask}
       >
-        <img className="metamask-button-img" src={AppAssets.Ethereum} alt="metamask" />
+        <img className="metamask-button-img" src={AppAssets.Icons.Ethereum} alt="metamask" />
         {evmAddress ? <span className="connected-Dot"></span> : <></>}
         <div className="metamask-button-text">
           {!evmAddress && !isConnecting && "Connect Wallet"}

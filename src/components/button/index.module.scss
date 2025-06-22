@@ -1,0 +1,27 @@
+@import "@styles/_variables";
+@import "@styles/_shared";
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  min-height: 40px;
+  border: 1px solid var(--color-secondary);
+  border-radius: 8px;
+  background-color: var(--color-secondary);
+  color: var(--color-text);
+  font-weight: 500;
+  font-size: 16px;
+  transition: background-color 0.25s ease;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $button-hover-color;
+  }
+
+  &:disabled {
+    cursor: default;
+    background-color: var(--color-secondary);
+  }
+}

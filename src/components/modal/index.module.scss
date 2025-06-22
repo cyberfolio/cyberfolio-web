@@ -1,3 +1,6 @@
+@import "@styles/_variables";
+@import "@styles/_shared";
+
 .modal {
   display: flex;
   position: fixed;
@@ -38,7 +41,7 @@
       justify-content: space-between;
       width: 90%;
       margin: 0 auto;
-      color: $text-color-dark;
+      color: var(--color-text);
       font-weight: bold;
       padding-bottom: 40px;
     }

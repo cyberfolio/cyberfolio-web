@@ -1,21 +1,9 @@
 import { ethers } from "ethers";
 import * as solanaWeb3 from "@solana/web3.js";
 
-import Bitcoin from "assets/src/bitcoin.svg";
-import Ethereum from "assets/src/ethereum.svg";
-import SmartChain from "assets/src/smartchain.svg";
-import Avalanche from "assets/src/avalanche.svg";
-import Solana from "assets/src/solana.svg";
-import Polkadot from "assets/src/polkadot.svg";
-import Polygon from "assets/src/polygon.svg";
-import Arbitrum from "assets/src/arbitrum.svg";
-import Optimism from "assets/src/optimism.svg";
-import Binance from "assets/src/binance.svg";
-import Kucoin from "assets/src/kucoin.png";
-import Gateio from "assets/src/gateio.svg";
-
 import store from "store/index";
 import { Cex, Chain } from "structures/index";
+import AppAssets from "assets";
 
 const truncateRegex = /^(0x[a-zA-Z0-9]{4})[a-zA-Z0-9]+([a-zA-Z0-9]{4})$/;
 
@@ -28,58 +16,58 @@ const truncateEthAddress = (address: string) => {
 const chainInfo = [
   {
     name: Chain.BITCOIN,
-    image: Bitcoin,
+    image: AppAssets.Icons.Bitcoin,
   },
   {
     name: Chain.ETHEREUM,
-    image: Ethereum,
+    image: AppAssets.Icons.Ethereum,
   },
   {
     name: Chain.BSC,
-    image: SmartChain,
+    image: AppAssets.Icons.SmartChain,
   },
   {
     name: Chain.AVALANCHE,
-    image: Avalanche,
+    image: AppAssets.Icons.Avalanche,
   },
   {
     name: Chain.SOLANA,
-    image: Solana,
+    image: AppAssets.Icons.Solana,
   },
   {
     name: Chain.POLKADOT,
-    image: Polkadot,
+    image: AppAssets.Icons.Polkadot,
   },
   {
     name: Chain.POLYGON,
-    image: Polygon,
+    image: AppAssets.Icons.Polygon,
   },
   {
     name: Chain.ARBITRUM,
-    image: Arbitrum,
+    image: AppAssets.Icons.Arbitrum,
   },
   {
     name: Chain.OPTIMISM,
-    image: Optimism,
+    image: AppAssets.Icons.Optimism,
   },
 ];
 
 const cexInfo = [
   {
     name: Cex.BINANCE,
-    image: Binance,
+    image: AppAssets.Icons.Binance,
   },
   {
     name: Cex.BINANCETR,
-    image: Binance,
+    image: AppAssets.Icons.Binance,
   },
   {
     name: Cex.KUCOIN,
-    image: Kucoin,
+    image: AppAssets.Icons.Kucoin,
   },
   {
     name: Cex.GATEIO,
-    image: Gateio,
+    image: AppAssets.Icons.Gateio,
   },
 ];
 

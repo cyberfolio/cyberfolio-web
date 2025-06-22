@@ -1,3 +1,6 @@
+@import "@styles/_variables";
+@import "@styles/_shared";
+
 .add-cex-modal {
   display: none;
   position: fixed;
@@ -29,7 +32,7 @@
       @extend .flex-center;
       justify-content: space-between;
       width: 100%;
-      color: $text-color-dark;
+      color: var(--color-text);
       font-weight: bold;
       padding-bottom: 20px;
       &__exit {
@@ -42,7 +45,7 @@
       margin-right: 10px;
       word-wrap: break-word;
       font-size: 14px;
-      color: $text-color-dark;
+      color: var(--color-text);
       text-align: center;
     }
     &__info {
@@ -50,7 +53,7 @@
       margin-right: 10px;
       font-size: 13px;
       word-wrap: break-word;
-      color: $text-color-dark;
+      color: var(--color-text);
       text-align: center;
     }
     &__body {
