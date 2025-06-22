@@ -4,17 +4,22 @@ import "./index.scss";
 import { Plus } from "react-bootstrap-icons";
 import classNames from "classnames";
 
-import AppComponents from "components";
-import AppHooks from "hooks";
-import AppUtils from "utils";
-import AppAssets from "assets";
-import { Cex, Chain } from "structures/index";
+import AppComponents from "components/index";
+import AppHooks from "hooks/index";
+import AppUtils from "utils/index";
+import AppAssets from "assets/index";
+import AppStructures from "structures/index";
 
 import useHome from "./useHome";
-import Assets from "./assets";
+import Assets from "./components/assets";
 
-const availableChains = [Chain.BITCOIN, Chain.ETHEREUM, Chain.SOLANA];
-const availableCexes = [Cex.BINANCE, Cex.BINANCETR, Cex.KUCOIN, Cex.GATEIO];
+const availableChains = [AppStructures.Chain.BITCOIN, AppStructures.Chain.ETHEREUM, AppStructures.Chain.SOLANA];
+const availableCexes = [
+  AppStructures.Cex.BINANCE,
+  AppStructures.Cex.BINANCETR,
+  AppStructures.Cex.KUCOIN,
+  AppStructures.Cex.GATEIO,
+];
 
 const Home = () => {
   const {

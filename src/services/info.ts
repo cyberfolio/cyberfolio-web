@@ -1,18 +1,18 @@
 /* eslint-disable no-throw-literal */
 
-import AppConfig from "config";
-import { Chain, Cex } from "structures/index";
+import AppConfig from "config/index";
+import AppStructures from "structures/index";
 
 interface ConnectedWallets {
   name: string;
-  chain: Chain;
+  chain: AppStructures.Chain;
   address: string;
   scan: string;
   netWorth: number;
 }
 
 interface ConnectedCexes {
-  name: Cex;
+  name: AppStructures.Cex;
   netWorth: number;
 }
 

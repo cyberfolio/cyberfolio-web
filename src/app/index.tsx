@@ -6,9 +6,10 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "pages/home";
 
 import AuthService from "services/auth";
-import AppComponents from "components";
-import AppUtils from "utils";
-import AppHooks from "hooks";
+import AppComponents from "components/index";
+import AppUtils from "utils/index";
+import AppHooks from "hooks/index";
+import AppFeatures from "features/index";
 
 const App = () => {
   const dispatch = AppHooks.useAppDispatch();
@@ -44,15 +45,13 @@ const App = () => {
   return (
     <div className="app">
       <AppComponents.Loading />
-      <AppComponents.Header />
-      <AppComponents.AddWallet />
-      <AppComponents.AddCex />
+      <AppFeatures.Header />
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
         </Routes>
       </Router>
-      <AppComponents.Footer />
+      <AppFeatures.Footer />
     </div>
   );
 };

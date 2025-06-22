@@ -1,12 +1,12 @@
-import AppConfig from "config";
-import { Chain, DexAsset } from "structures/index";
+import AppConfig from "config/index";
+import AppStructures from "structures/index";
 
 interface DexTokens {
-  assets: DexAsset[];
+  assets: AppStructures.DexAsset[];
   totalTokenValue: number;
 }
 export default class DexService {
-  static async addWallet({ address, name, chain }: { address: string; name: string; chain: Chain }) {
+  static async addWallet({ address, name, chain }: { address: string; name: string; chain: AppStructures.Chain }) {
     try {
       await AppConfig.Axios.post(
         "dex/add",
@@ -20,7 +20,7 @@ export default class DexService {
     }
   }
 
-  static async getDexTokens({ chain }: { chain: Chain }) {
+  static async getDexTokens({ chain }: { chain: AppStructures.Chain }) {
     try {
       const res = await AppConfig.Axios.get<DexTokens>(`dex/assets/${chain}`, { withCredentials: true });
       return res.data;
@@ -38,7 +38,7 @@ export default class DexService {
     }
   }
 
-  static async deleteWallet({ chain, address }: { chain: Chain; address: string }) {
+  static async deleteWallet({ chain, address }: { chain: AppStructures.Chain; address: string }) {
     try {
       await AppConfig.Axios.post(
         `dex/delete`,

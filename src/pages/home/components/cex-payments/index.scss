@@ -1,11 +1,15 @@
-@import "@styles/_variables";
-@import "@styles/_shared";
+@import "styles/variables";
+@import "styles/shared";
 
-.asset-table {
+.cex-payments {
   border: 1px solid var(--color-secondary);
   border-radius: 8px;
   padding: 0 20px 20px 20px;
-  height: 100%;
+  display: none;
+
+  &--show {
+    display: block;
+  }
 
   &__header {
     display: flex;
@@ -13,6 +17,7 @@
     align-items: center;
     padding: 20px;
     height: 60px;
+
     &__item {
       display: flex;
       justify-content: flex-start;
@@ -40,41 +45,26 @@
   }
   &__assets {
     width: 100%;
-    height: calc(100% - 60px);
     overflow-y: scroll;
+    height: calc(100% - 60px);
     padding-right: 5px;
-    &__empty {
-      @extend .flex-center;
-      height: 100%;
-      color: $fainted-color;
-      padding: 30px 0;
-      &__image {
-        width: auto;
-        height: 25px;
-        margin: 0 10px;
-      }
-      &__text {
-        @extend .flex-center;
-        font-size: 18px;
-        padding: 20px;
-        color: white;
-      }
-    }
-
     &__loading {
       @extend .flex-center;
       &--white {
         color: var(--color-text);
       }
     }
+    &__empty {
+      padding: 30px 0;
+      @extend .flex-center;
+      color: var(--color-text);
+    }
     &__asset {
-      text-decoration: none;
       border-bottom: 1px solid var(--color-secondary);
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 20px;
-      transition: background-color 0.15s;
 
       &--first {
         border-top: 1px solid var(--color-secondary) !important;
@@ -85,6 +75,7 @@
       }
       &:hover {
         cursor: pointer;
+        border-bottom: 1px solid transparent !important;
         border-radius: 8px;
         background-color: $button-hover-color;
       }
@@ -115,7 +106,7 @@
         &__chain {
           @extend .flex-center;
           align-items: flex-start;
-          flex-direction: column;
+          flex-direction: row;
           color: $fainted-color;
           &__name {
             color: var(--color-text);
@@ -123,10 +114,8 @@
             margin-left: 3px;
             padding-bottom: 5px;
           }
-          &__area {
-            @extend .flex-center;
-          }
           &__logo {
+            margin-left: 5px;
             border-radius: 20%;
             width: 15px;
             height: 15px;

@@ -4,10 +4,9 @@ import "./index.scss";
 import AppUtils from "utils/index";
 import AppHooks from "hooks/index";
 import InfoService from "services/info";
-import AppConstants from "constants/index";
-import AppComponents from "components";
+import AppComponents from "components/index";
 import { useChainId, useConnect } from "wagmi";
-import AppAssets from "assets";
+import AppAssets from "assets/index";
 
 const Header = () => {
   const isAuthenticated = AppHooks.useAppSelector((state) => state.evmAddress);
@@ -46,7 +45,7 @@ const ConnectWallet = () => {
   const { connectors, connect } = useConnect();
   const chainId = useChainId();
 
-  const { isConnecting, signAndVerifyMessageV2, disconnectMetamask } = AppHooks.useMetamaskLogin();
+  const { isConnecting, signAndVerifyMessageV2, disconnectMetamask } = AppHooks.useLogin();
 
   const handleConnectWallet = async () => {
     setIsWalletModalOpen(true);
@@ -78,21 +77,25 @@ const ConnectWallet = () => {
         open={isWalletModalOpen}
         title="Select wallet"
         content={
-          <div>
-            {connectors.map((connector) => (
-              <button key={connector.uid} onClick={() => connect({ connector, chainId })}>
-                {connector.name}
-              </button>
-            ))}
+          <div className="wallet-modal-content">
+            {connectors.map((connector) => {
+              return (
+                <AppComponents.Button
+                  key={connector.uid}
+                  text={connector.name}
+                  onClick={() => connect({ connector, chainId })}
+                />
+              );
+            })}
           </div>
         }
-        action={handleConnectWallet}
+        action={signAndVerifyMessageV2}
         close={() => setIsWalletModalOpen(false)}
         loading={isConnecting}
       />
       <div
         className={`metamask-button ${isConnecting ? "disabled-button" : ""}`}
-        onClick={!evmAddress ? handleConnectWallet : disconnectMetamask}
+        onClick={!evmAddress ? signAndVerifyMessageV2 : disconnectMetamask}
       >
         <img className="metamask-button-img" src={AppAssets.Icons.Ethereum} alt="metamask" />
         {evmAddress ? <span className="connected-Dot"></span> : <></>}

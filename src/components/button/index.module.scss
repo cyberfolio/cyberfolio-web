@@ -1,5 +1,5 @@
-@import "@styles/_variables";
-@import "@styles/_shared";
+@import "styles/variables";
+@import "styles/shared";
 
 .button {
   display: flex;
@@ -12,7 +12,7 @@
   background-color: var(--color-secondary);
   color: var(--color-text);
   font-weight: 500;
-  font-size: 16px;
+  font-size: 14px;
   transition: background-color 0.25s ease;
 
   &:hover {
@@ -24,4 +24,8 @@
     cursor: default;
     background-color: var(--color-secondary);
   }
+}
+
+.icon {
+  margin-right: 8px;
 }

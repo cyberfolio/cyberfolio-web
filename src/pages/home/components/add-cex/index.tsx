@@ -4,11 +4,10 @@ import "./index.scss";
 import classnames from "classnames";
 import { toast } from "react-hot-toast";
 
-import AppHooks from "hooks";
-import AppServices from "services";
-import AppUtils from "utils";
-
-import { Cex, Keys } from "structures";
+import AppHooks from "hooks/index";
+import AppServices from "services/index";
+import AppUtils from "utils/index";
+import AppStructures from "structures/index";
 
 const AddCex = () => {
   const [apiKey, setApiKey] = useState("");
@@ -29,7 +28,7 @@ const AddCex = () => {
       AppUtils.setAppLoading(false);
       return;
     }
-    if (name === Cex.KUCOIN && !passphrase) {
+    if (name === AppStructures.Cex.KUCOIN && !passphrase) {
       toast.error("Please enter passphrase.");
       setLoading(false);
       AppUtils.setAppLoading(false);
@@ -69,7 +68,7 @@ const AddCex = () => {
     }
   };
 
-  AppHooks.useKeypress(Keys.Escape, () => {
+  AppHooks.useKeypress(AppStructures.Keys.Escape, () => {
     setApiKey("");
     setApiSecret("");
     setPassphrase("");
@@ -81,7 +80,7 @@ const AddCex = () => {
       type: "OPEN_ADD_CEX_MODAL",
       payload: {
         open: false,
-        name: Cex.NO,
+        name: AppStructures.Cex.NO,
       },
     });
   };
@@ -96,6 +95,8 @@ const AddCex = () => {
             X
           </div>
         </div>
+        {/*eslint-disable-next-line @typescript-eslint/ban-ts-comment*/}
+        {/* @ts-ignore */}
         <a className="add-cex-modal__content__link" href={AppUtils.cexAPIKeyURL[name]} target="_blank" rel="noreferrer">
           Click here to navigate API Creation Link
         </a>
@@ -115,7 +116,7 @@ const AddCex = () => {
             onChange={(e) => setApiSecret(e.target.value)}
             placeholder="Enter Api Secret"
           />
-          {name === Cex.KUCOIN && (
+          {name === AppStructures.Cex.KUCOIN && (
             <input
               className="add-cex-modal__content__body__input"
               value={passphrase}

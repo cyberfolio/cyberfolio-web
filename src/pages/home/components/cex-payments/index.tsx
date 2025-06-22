@@ -5,7 +5,7 @@ import AppUtils from "utils/index";
 import classNames from "classnames";
 import toast from "react-hot-toast";
 import "./index.scss";
-import AppHooks from "hooks";
+import AppHooks from "hooks/index";
 
 type Props = {
   show: boolean;

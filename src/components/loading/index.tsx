@@ -1,4 +1,4 @@
-import AppHooks from "hooks";
+import AppHooks from "hooks/index";
 import "./index.scss";
 
 const Loading = () => {

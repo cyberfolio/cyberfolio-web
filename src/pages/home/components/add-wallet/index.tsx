@@ -7,7 +7,7 @@ import classnames from "classnames";
 import DexService from "services/dex";
 import AppHooks from "hooks/index";
 import AppUtils from "utils/index";
-import { Chain, Keys } from "structures/index";
+import AppStructures from "structures/index";
 import InfoService from "services/info";
 
 const AddWallet = () => {
@@ -64,7 +64,7 @@ const AddWallet = () => {
       AppUtils.setAppLoading(false);
     }
   };
-  AppHooks.useKeypress(Keys.Escape, () => {
+  AppHooks.useKeypress(AppStructures.Keys.Escape, () => {
     close();
     setName("");
     setAddress("");
@@ -75,7 +75,7 @@ const AddWallet = () => {
       type: "OPEN_WALLET_MODAL",
       payload: {
         open: false,
-        chain: Chain.BITCOIN,
+        chain: AppStructures.Chain.BITCOIN,
       },
     });
   };

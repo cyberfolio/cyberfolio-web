@@ -1,7 +1,7 @@
-import { Cex } from "structures/index";
+import AppStructures from "structures/index";
 
 export interface PaymentHistoryResponse {
-  cexName: Cex;
+  cexName: AppStructures.Cex;
   orderNo: number;
   type: string;
   fee: string;

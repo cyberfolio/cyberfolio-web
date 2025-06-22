@@ -1,4 +1,4 @@
-import AppConfig from "config";
+import AppConfig from "config/index";
 
 export default class AuthService {
   static async getUserInfo() {

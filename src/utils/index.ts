@@ -2,8 +2,8 @@ import { ethers } from "ethers";
 import * as solanaWeb3 from "@solana/web3.js";
 
 import store from "store/index";
-import { Cex, Chain } from "structures/index";
-import AppAssets from "assets";
+import AppStructures from "structures/index";
+import AppAssets from "assets/index";
 
 const truncateRegex = /^(0x[a-zA-Z0-9]{4})[a-zA-Z0-9]+([a-zA-Z0-9]{4})$/;
 
@@ -15,58 +15,58 @@ const truncateEthAddress = (address: string) => {
 
 const chainInfo = [
   {
-    name: Chain.BITCOIN,
+    name: AppStructures.Chain.BITCOIN,
     image: AppAssets.Icons.Bitcoin,
   },
   {
-    name: Chain.ETHEREUM,
+    name: AppStructures.Chain.ETHEREUM,
     image: AppAssets.Icons.Ethereum,
   },
   {
-    name: Chain.BSC,
+    name: AppStructures.Chain.BSC,
     image: AppAssets.Icons.SmartChain,
   },
   {
-    name: Chain.AVALANCHE,
+    name: AppStructures.Chain.AVALANCHE,
     image: AppAssets.Icons.Avalanche,
   },
   {
-    name: Chain.SOLANA,
+    name: AppStructures.Chain.SOLANA,
     image: AppAssets.Icons.Solana,
   },
   {
-    name: Chain.POLKADOT,
+    name: AppStructures.Chain.POLKADOT,
     image: AppAssets.Icons.Polkadot,
   },
   {
-    name: Chain.POLYGON,
+    name: AppStructures.Chain.POLYGON,
     image: AppAssets.Icons.Polygon,
   },
   {
-    name: Chain.ARBITRUM,
+    name: AppStructures.Chain.ARBITRUM,
     image: AppAssets.Icons.Arbitrum,
   },
   {
-    name: Chain.OPTIMISM,
+    name: AppStructures.Chain.OPTIMISM,
     image: AppAssets.Icons.Optimism,
   },
 ];
 
 const cexInfo = [
   {
-    name: Cex.BINANCE,
+    name: AppStructures.Cex.BINANCE,
     image: AppAssets.Icons.Binance,
   },
   {
-    name: Cex.BINANCETR,
+    name: AppStructures.Cex.BINANCETR,
     image: AppAssets.Icons.Binance,
   },
   {
-    name: Cex.KUCOIN,
+    name: AppStructures.Cex.KUCOIN,
     image: AppAssets.Icons.Kucoin,
   },
   {
-    name: Cex.GATEIO,
+    name: AppStructures.Cex.GATEIO,
     image: AppAssets.Icons.Gateio,
   },
 ];
@@ -79,13 +79,13 @@ const validateBtcAddress = (address: string) => {
   return true;
 };
 
-const isValidWalletAddress = async ({ address, chain }: { address: string; chain: Chain }) => {
+const isValidWalletAddress = async ({ address, chain }: { address: string; chain: AppStructures.Chain }) => {
   switch (chain) {
-    case Chain.BITCOIN:
+    case AppStructures.Chain.BITCOIN:
       return validateBtcAddress(address);
-    case Chain.ETHEREUM:
+    case AppStructures.Chain.ETHEREUM:
       return ethers.isAddress(address);
-    case Chain.SOLANA:
+    case AppStructures.Chain.SOLANA:
       return isValidSolanaAddress(address);
     default:
       return false;
@@ -107,9 +107,9 @@ const capitalizeFirstLetter = (string: string) => {
   return "";
 };
 
-const arrangeCexName = (cex: Cex) => {
+const arrangeCexName = (cex: AppStructures.Cex) => {
   switch (cex) {
-    case Cex.NO:
+    case AppStructures.Cex.NO:
       return "";
     default:
       return cex.charAt(0).toUpperCase() + cex.slice(1);
@@ -185,12 +185,12 @@ const timestampToReadableDate = (timestamp: number) => {
     date.getSeconds()
   );
 };
-const cexAPIKeyURL = {
-  [Cex.BINANCE]: "https://www.binance.com/en/my/settings/api-management",
-  [Cex.BINANCETR]: "https://www.trbinance.com/usercenter/settings/api-management",
-  [Cex.GATEIO]: "https://www.gate.io/myaccount/apikeys",
-  [Cex.KUCOIN]: "https://www.kucoin.com/account/api?spm=kcWeb.B1assets.person.8",
-  [Cex.NO]: "",
+const cexAPIKeyURL: Record<AppStructures.Cex, string> = {
+  [AppStructures.Cex.BINANCE]: "https://www.binance.com/en/my/settings/api-management",
+  [AppStructures.Cex.BINANCETR]: "https://www.trbinance.com/usercenter/settings/api-management",
+  [AppStructures.Cex.GATEIO]: "https://www.gate.io/myaccount/apikeys",
+  [AppStructures.Cex.KUCOIN]: "https://www.kucoin.com/account/api?spm=kcWeb.B1assets.person.8",
+  [AppStructures.Cex.NO]: "",
 };
 
 const clearState = async () => {

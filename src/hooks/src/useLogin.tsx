@@ -2,22 +2,26 @@ import React from "react";
 
 import { ethers } from "ethers";
 import { toast } from "react-hot-toast";
-
-import AppServices from "services";
-import AppUtils from "utils";
-import AppConfig from "config";
 import { getAccount, signMessage } from "@wagmi/core";
 import { useConnect } from "wagmi";
 import { injected } from "wagmi/connectors";
-import AppHooks from "hooks";
 
-const useMetamaskLogin = () => {
+import AppServices from "services/index";
+import AppUtils from "utils/index";
+import AppConfig from "config/index";
+import AppHooks from "hooks/index";
+
+const useLogin = () => {
   const dispatch = AppHooks.useAppDispatch();
   const [isConnecting, setIsConnecting] = React.useState(false);
-  const { connectAsync } = useConnect();
+  const { connectAsync, connectors } = useConnect();
 
   const signAndVerifyMessageV2 = async () => {
     try {
+      const hasInjectedWallet = typeof window !== "undefined" && typeof window.ethereum !== "undefined";
+      if (!hasInjectedWallet) {
+        throw new Error("Browser wallet is not installed or not available.");
+      }
       setIsConnecting(true);
       const result = await connectAsync({ connector: injected() });
       const evmAddress = result.accounts[0];
@@ -83,4 +87,4 @@ const useMetamaskLogin = () => {
   };
 };
 
-export default useMetamaskLogin;
+export default useLogin;

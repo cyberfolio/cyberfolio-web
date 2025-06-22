@@ -3,8 +3,8 @@ import "./index.scss";
 
 import classNames from "classnames";
 import { ChevronDown } from "react-bootstrap-icons";
-import AppHooks from "hooks";
-import { Keys } from "structures";
+import AppHooks from "hooks/index";
+import AppStructures from "structures/index";
 
 interface DropdownProps {
   isOpen: boolean;
@@ -22,7 +22,7 @@ interface DropdownProps {
 const Dropdown: React.FC<DropdownProps> = ({ isOpen, setIsOpen, items, selectedItem, onClick }) => {
   const dropdownRef = React.useRef<HTMLDivElement>(null);
 
-  AppHooks.useKeypress(Keys.Escape, () => {
+  AppHooks.useKeypress(AppStructures.Keys.Escape, () => {
     setIsOpen(false);
   });
   AppHooks.useOnClickOutside(dropdownRef, () => {

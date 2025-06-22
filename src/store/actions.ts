@@ -1,4 +1,4 @@
-import { Cex, CexAsset, AllNetworks, Chain, DexAsset } from "structures/index";
+import AppStructures from "structures/index";
 import { ConnectedCexPayload, ConnectedWalletPayload } from "./types";
 
 type Actions =
@@ -12,13 +12,13 @@ type Actions =
   | {
       type: "FILTER_ASSETS_BY_PLATFORM";
       payload: {
-        platform: Chain | Cex | AllNetworks;
+        platform: AppStructures.Chain | AppStructures.Cex | AppStructures.AllNetworks;
         image: string;
       };
     }
-  | { type: "OPEN_WALLET_MODAL"; payload: { open: boolean; chain: Chain } }
-  | { type: "OPEN_ADD_CEX_MODAL"; payload: { open: boolean; name: Cex } }
-  | { type: "SET_CEX_ASSETS"; payload: CexAsset[] }
-  | { type: "SET_DEX_ASSETS"; payload: DexAsset[] };
+  | { type: "OPEN_WALLET_MODAL"; payload: { open: boolean; chain: AppStructures.Chain } }
+  | { type: "OPEN_ADD_CEX_MODAL"; payload: { open: boolean; name: AppStructures.Cex } }
+  | { type: "SET_CEX_ASSETS"; payload: AppStructures.CexAsset[] }
+  | { type: "SET_DEX_ASSETS"; payload: AppStructures.DexAsset[] };
 
 export default Actions;

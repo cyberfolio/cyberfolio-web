@@ -10,7 +10,7 @@ import { WagmiProvider } from "wagmi";
 
 import App from "./app";
 import store from "./store";
-import AppConfig from "config";
+import AppConfig from "config/index";
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement as Element);

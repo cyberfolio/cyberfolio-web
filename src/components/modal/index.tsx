@@ -1,5 +1,5 @@
 import AppHooks from "hooks/index";
-import { Keys } from "structures/index";
+import AppStructures from "structures/index";
 import "./index.scss";
 
 type Props = {
@@ -12,7 +12,7 @@ type Props = {
   loading: boolean;
 };
 const Modal: React.FC<Props> = ({ open, title, content, action, close, loading }) => {
-  AppHooks.useKeypress(Keys.Escape, close);
+  AppHooks.useKeypress(AppStructures.Keys.Escape, close);
 
   if (!open) return <></>;
 
@@ -25,7 +25,7 @@ const Modal: React.FC<Props> = ({ open, title, content, action, close, loading }
           </button>
         </div>
         <div className="modal__content__title">{title}</div>
-        {content && <div className="modal__content">{content}</div>}
+        {content && content}
         <div className="modal__content__buttons">
           <button className="modal__content__buttons__yes" onClick={action} disabled={loading}>
             {loading && (

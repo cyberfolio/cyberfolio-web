@@ -2,13 +2,13 @@ import { useRef } from "react";
 import "./index.scss";
 
 import AppHooks from "hooks/index";
-import { Cex, Keys } from "structures/index";
+import AppStructures from "structures/index";
 
 const Index = () => {
   const dispatch = AppHooks.useAppDispatch();
   const modalRef = useRef(null);
 
-  AppHooks.useKeypress(Keys.Escape, () => {
+  AppHooks.useKeypress(AppStructures.Keys.Escape, () => {
     close();
   });
 
@@ -17,7 +17,7 @@ const Index = () => {
       type: "OPEN_ADD_CEX_MODAL",
       payload: {
         open: false,
-        name: Cex.NO,
+        name: AppStructures.Cex.NO,
       },
     });
   };

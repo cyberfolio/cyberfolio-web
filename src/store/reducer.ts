@@ -1,9 +1,36 @@
 import Actions from "./actions";
-import { Cex, AllNetworks, CexAsset, Chain, DexAsset } from "structures/index";
+import AppStructures from "structures/index";
 import { ConnectedCexPayload, ConnectedWalletPayload } from "./types";
-import AppAssets from "assets";
+import AppAssets from "assets/index";
 
-const initialState = {
+interface initialState {
+  loading: {
+    state: boolean;
+    message: string;
+  };
+  evmAddress: string;
+  ensName: string;
+  lastAssetUpdate: string;
+  netWorth: number;
+  platform: {
+    name: AppStructures.Cex | AppStructures.Chain | AppStructures.AllNetworks;
+    image: string;
+  };
+  isWalletModalOpen: {
+    open: boolean;
+    chain: AppStructures.Chain;
+  };
+  isAddCexModalOpen: {
+    open: boolean;
+    name: AppStructures.Cex;
+  };
+  dexAssets: AppStructures.DexAsset[];
+  cexAssets: AppStructures.CexAsset[];
+  connectedCexes: ConnectedCexPayload[];
+  connectedWallets: ConnectedWalletPayload[];
+}
+
+const initialState: initialState = {
   loading: {
     state: false,
     message: "",
@@ -13,19 +40,19 @@ const initialState = {
   lastAssetUpdate: "",
   netWorth: 0,
   platform: {
-    name: AllNetworks.ALLNETWORKS as Cex | Chain | AllNetworks,
+    name: AppStructures.AllNetworks.ALLNETWORKS as AppStructures.Cex | AppStructures.Chain | AppStructures.AllNetworks,
     image: AppAssets.Icons.BlockChain,
   },
   isWalletModalOpen: {
     open: false,
-    chain: Chain.NO,
+    chain: AppStructures.Chain.NO,
   },
   isAddCexModalOpen: {
     open: false,
-    name: Cex.NO,
+    name: AppStructures.Cex.NO,
   },
-  dexAssets: [] as DexAsset[],
-  cexAssets: [] as CexAsset[],
+  dexAssets: [] as AppStructures.DexAsset[],
+  cexAssets: [] as AppStructures.CexAsset[],
   connectedCexes: [] as ConnectedCexPayload[],
   connectedWallets: [] as ConnectedWalletPayload[],
 };

@@ -1,4 +1,4 @@
-import AppConfig from "config";
+import AppConfig from "config/index";
 class StockService {
   static async getInteractiveBrokers() {
     try {

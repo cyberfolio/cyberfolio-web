@@ -1,14 +1,14 @@
-import { Cex, Chain } from "structures/index";
+import AppStructures from "structures/index";
 
 export interface ConnectedWallets {
-  chain: Chain;
+  chain: AppStructures.Chain;
   walletName: string;
   walletAddress: string;
   netWorth: number;
 }
 
 export type ConnectedCexes = {
-  name: Cex;
+  name: AppStructures.Cex;
   netWorth: number;
 };
 export interface ConnectedAccountsResponse {

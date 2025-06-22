@@ -1,4 +1,4 @@
-import AppConfig from "config";
+import AppConfig from "config/index";
 import { ConnectedAccountsResponse } from "./types";
 
 class InfoService {

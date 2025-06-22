@@ -3,7 +3,7 @@ import AppConstants from "constants/index";
 
 import { mainnet, sepolia } from "wagmi/chains";
 import { http, createConfig } from "wagmi";
-import AppUtils from "utils";
+import AppUtils from "utils/index";
 import { injected, metaMask, safe, walletConnect } from "wagmi/connectors";
 
 declare module "wagmi" {

@@ -16,9 +16,31 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "useUnknownInCatchVariables": false, // TODO: remove this one all error mesages are handled with new method,
-    "baseUrl": "./src",
+    "baseUrl": ".", // Important: relative to the tsconfig file
     "paths": {
-      "@styles/*": ["styles/*"]
+      "styles/*": ["src/styles/*"],
+      "assets/*": ["src/assets/*"],
+      "components/*": ["src/components/*"],
+      "config/*": ["src/config/*"],
+      "constants/*": ["src/constants/*"],
+      "features/*": ["src/features/*"],
+      "hooks/*": ["src/hooks/*"],
+      "pages/*": ["src/pages/*"],
+      "services/*": ["src/services/*"],
+      "store/*": ["src/store/*"],
+      "structures/*": ["src/structures/*"],
+      "utils/*": ["src/utils/*"]
+      // assets: path.resolve(__dirname, "src/assets"),
+      // components: path.resolve(__dirname, "src/components"),
+      // config: path.resolve(__dirname, "src/config"),
+      // constants: path.resolve(__dirname, "src/constants"),
+      // hooks: path.resolve(__dirname, "src/hooks"),
+      // pages: path.resolve(__dirname, "src/pages"),
+      // services: path.resolve(__dirname, "src/services"),
+      // store: path.resolve(__dirname, "src/store"),
+      // structures: path.resolve(__dirname, "src/structures"),
+      // styles: path.resolve(__dirname, "src/styles"),
+      // utils: path.resolve(__dirname, "src/utils"),
     }
   },
   "include": ["src", ".eslintrc.js", "vite.config.ts"]

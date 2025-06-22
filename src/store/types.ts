@@ -1,12 +1,12 @@
-import { Cex, Chain } from "structures/index";
+import AppStructures from "structures/index";
 
 export type ConnectedCexPayload = {
-  name: Cex;
+  name: AppStructures.Cex;
   netWorth: number;
 };
 export type ConnectedWalletPayload = {
   name: string;
-  chain: Chain;
+  chain: AppStructures.Chain;
   address: string;
   scan: string;
   netWorth: number;

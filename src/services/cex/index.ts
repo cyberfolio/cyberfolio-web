@@ -1,6 +1,6 @@
-import { CexAsset, Cex } from "structures/index";
+import AppStructures from "structures/index";
 import { PaymentHistoryResponse } from "./types";
-import AppConfig from "config";
+import AppConfig from "config/index";
 
 export default class CexService {
   static async addCex({
@@ -11,7 +11,7 @@ export default class CexService {
   }: {
     apiKey: string;
     apiSecret: string;
-    cexName: Cex;
+    cexName: AppStructures.Cex;
     passphrase: string;
   }) {
     try {
@@ -38,7 +38,7 @@ export default class CexService {
         { withCredentials: true },
       );
       if (res?.data?.assets) {
-        return res.data?.assets as CexAsset[];
+        return res.data?.assets as AppStructures.CexAsset[];
       } else {
         throw new Error("Something went wrong");
       }
@@ -47,7 +47,7 @@ export default class CexService {
     }
   }
 
-  static async deleteCex({ cexName }: { cexName: Cex }) {
+  static async deleteCex({ cexName }: { cexName: AppStructures.Cex }) {
     try {
       await AppConfig.Axios.post(
         `/cex/delete`,

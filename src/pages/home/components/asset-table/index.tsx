@@ -3,11 +3,11 @@ import "./index.scss";
 
 import classnames from "classnames";
 import AppUtils from "utils/index";
-import { Cex, CexAsset, Chain, DexAsset } from "structures/index";
-import AppHooks from "hooks";
+import AppStructures from "structures/index";
+import AppHooks from "hooks/index";
 
 interface AssetTableProps {
-  assets: (DexAsset | CexAsset)[];
+  assets: (AppStructures.DexAsset | AppStructures.CexAsset)[];
   isLoading: boolean;
 }
 
@@ -40,8 +40,8 @@ const AssetTable: React.FC<AssetTableProps> = ({ assets, isLoading }) => {
             let symbol = "";
             let scan = "";
             let logo = "";
-            let cexName = Cex.NO;
-            let chain = Chain.NO;
+            let cexName = AppStructures.Cex.NO;
+            let chain = AppStructures.Chain.NO;
             let balance = 0;
             let walletName = "";
             let accountName = "";
@@ -108,8 +108,8 @@ const AssetTable: React.FC<AssetTableProps> = ({ assets, isLoading }) => {
                           className="asset-table__assets__asset__item__chain__logo"
                         />
                       )}
-                      {cexName !== Cex.NO && AppUtils.arrangeCexName(cexName)}
-                      {chain !== Chain.NO && AppUtils.capitalizeFirstLetter(chain)}
+                      {cexName !== AppStructures.Cex.NO && AppUtils.arrangeCexName(cexName)}
+                      {chain !== AppStructures.Chain.NO && AppUtils.capitalizeFirstLetter(chain)}
                     </div>
                   </div>
                 </div>

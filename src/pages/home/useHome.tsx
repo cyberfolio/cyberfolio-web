@@ -5,8 +5,8 @@ import { toast } from "react-hot-toast";
 
 import AppUtils from "utils/index";
 import InfoService from "services/info";
-import { Cex, Chain } from "structures/index";
-import AppHooks from "hooks";
+import AppStructures from "structures/index";
+import AppHooks from "hooks/index";
 
 const useHome = () => {
   const dispatch = AppHooks.useAppDispatch();
@@ -17,7 +17,7 @@ const useHome = () => {
   const connectedWallets = AppHooks.useAppSelector((state) => state.connectedWallets);
 
   const [isPlatformDropdownOpen, setIsPlatformDropdownOpen] = useState(false);
-  const [hoveredWallet, setHoveredWallet] = useState<Chain | undefined>();
+  const [hoveredWallet, setHoveredWallet] = useState<AppStructures.Chain | undefined>();
   const [lastUpdate, setLastUpdate] = useState<string>();
 
   const isWalletConnected = () => {
@@ -77,7 +77,7 @@ const useHome = () => {
     };
   }, [lastAssetUpdate]);
 
-  const openWalletModal = (chain: Chain) => {
+  const openWalletModal = (chain: AppStructures.Chain) => {
     const isConnected = isWalletConnected();
     if (!isConnected) {
       toast.error("Connect your wallet");
@@ -93,7 +93,7 @@ const useHome = () => {
     });
   };
 
-  const openAddCexModal = (name: Cex) => {
+  const openAddCexModal = (name: AppStructures.Cex) => {
     const isConnected = isWalletConnected();
     if (!isConnected) {
       toast.error("Connect your wallet");
@@ -112,7 +112,7 @@ const useHome = () => {
     }
   };
 
-  const addMore = (chain: Chain) => {
+  const addMore = (chain: AppStructures.Chain) => {
     if (connectedWallets.some((wallet) => wallet.chain === chain)) {
       setHoveredWallet(chain);
     }

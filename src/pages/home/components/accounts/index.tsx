@@ -1,20 +1,20 @@
-import AppComponents from "components";
-import { Chain, Cex } from "structures/index";
+import AppComponents from "components/index";
+import AppStructures from "structures/index";
 import CexService from "services/cex";
 import DexService from "services/dex";
 import InfoService from "services/info";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import "./index.scss";
-import AppHooks from "hooks";
+import AppHooks from "hooks/index";
 import AppUtils from "utils/index";
 
 const Accounts = () => {
   const connectedCexes = AppHooks.useAppSelector((state) => state.connectedCexes);
   const connectedWallets = AppHooks.useAppSelector((state) => state.connectedWallets);
   const [whatToDelete, setWhatToDelete] = useState("");
-  const [cexToDelete, setCexToDelete] = useState<Cex | undefined>();
-  const [walletToDelete, setWalletToDelete] = useState<Chain | undefined>();
+  const [cexToDelete, setCexToDelete] = useState<AppStructures.Cex | undefined>();
+  const [walletToDelete, setWalletToDelete] = useState<AppStructures.Chain | undefined>();
   const [walletAddressToDelete, setWalletAddressToDelete] = useState<string>("");
   const [loading, setLoading] = useState(false);
 
@@ -87,15 +87,15 @@ const Accounts = () => {
 
   const closeDeleteModal = () => {
     setWhatToDelete("");
-    setCexToDelete(Cex.NO);
-    setWalletToDelete(Chain.NO);
+    setCexToDelete(AppStructures.Cex.NO);
+    setWalletToDelete(AppStructures.Chain.NO);
   };
 
-  const onDeleteCexClick = async (name: Cex) => {
+  const onDeleteCexClick = async (name: AppStructures.Cex) => {
     setCexToDelete(name);
     setWhatToDelete(`Are you sure you want to delete ${name} Account`);
   };
-  const onDeleteWalletClick = (name: Chain, walletAddress: string) => {
+  const onDeleteWalletClick = (name: AppStructures.Chain, walletAddress: string) => {
     setWalletToDelete(name);
     setWalletAddressToDelete(walletAddress);
     setWhatToDelete(`Are you sure you want to delete ${name} Wallet`);

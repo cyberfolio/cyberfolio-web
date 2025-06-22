@@ -7,10 +7,12 @@ import { toast } from "react-hot-toast";
 import CexService from "services/cex";
 import DexService from "services/dex";
 
-import AppComponents from "components";
+import AppStructures from "structures/index";
+import AppHooks from "hooks/index";
 
-import { AllNetworks } from "structures/index";
-import AppHooks from "hooks";
+import AssetTable from "pages/home/components/asset-table";
+import CexPayments from "pages/home/components/cex-payments";
+import Accounts from "pages/home/components/accounts";
 
 enum Tab {
   All = "All",
@@ -59,7 +61,7 @@ const Assets = () => {
   }, [dispatch]);
 
   const assetsToShow = useMemo(() => {
-    if (String(platform.name) !== String(AllNetworks.ALLNETWORKS)) {
+    if (String(platform.name) !== String(AppStructures.AllNetworks.ALLNETWORKS)) {
       const filteredDex = dexAssets
         .filter((dexAsset) => String(dexAsset.chain) === String(platform.name))
         .sort((a, b) => b.value - a.value);
@@ -140,10 +142,10 @@ const Assets = () => {
       </div>
       <div className="assets__table">
         {activeTab !== Tab.Accounts && activeTab !== Tab.CexPaymets && (
-          <AppComponents.AssetTable assets={assetsToShow} isLoading={isLoading} />
+          <AssetTable assets={assetsToShow} isLoading={isLoading} />
         )}
-        {activeTab === Tab.Accounts && <AppComponents.Accounts />}
-        <AppComponents.CexPayments show={activeTab === Tab.CexPaymets} />
+        {activeTab === Tab.Accounts && <Accounts />}
+        <CexPayments show={activeTab === Tab.CexPaymets} />
       </div>
     </div>
   );
