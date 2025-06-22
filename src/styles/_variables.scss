@@ -1,7 +1,15 @@
+:root {
+  --color-primary: #d600e7;
+  --color-secondary: #2d2d32;
+  --color-text: #ffffff;
+
+  /* Backgrounds */
+  --color-background: #16161a;
+  --color-overlay: rgba(29, 29, 33, 0.5);
+}
+
 $background: #1d1d21;
 $background-dark: #16161a;
-$border-dark: rgba($background-dark, 0.88);
-$border: #2d2d32;
 $text-color-dark: white;
 $button-hover-color: #29292c;
 $button-active-bg-color: #ffff;
@@ -9,7 +17,6 @@ $fainted-color: #9da0a6;
 $success-color: green;
 $danger-color: #f4212e;
 $tooltip-dark-color: lighten($background-dark, 30);
-$cyberpunk-color: #d600e7;
 
 $header_footer_height: 65;
 $dropdownMenuIndex: 9;

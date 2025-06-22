@@ -1,5 +1,5 @@
 .cex-payments {
-  border: 1px solid $border;
+  border: 1px solid var(--color-secondary);
   border-radius: 8px;
   padding: 0 20px 20px 20px;
   display: none;
@@ -46,25 +46,25 @@
     height: calc(100% - 60px);
     padding-right: 5px;
     &__loading {
-      @extend .flexCenter;
+      @extend .flex-center;
       &--white {
         color: $text-color-dark;
       }
     }
     &__empty {
       padding: 30px 0;
-      @extend .flexCenter;
+      @extend .flex-center;
       color: $text-color-dark;
     }
     &__asset {
-      border-bottom: 1px solid $border;
+      border-bottom: 1px solid var(--color-secondary);
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 20px;
 
       &--first {
-        border-top: 1px solid $border !important;
+        border-top: 1px solid var(--color-secondary) !important;
       }
       &--last {
         border-top: unset !important;
@@ -91,9 +91,9 @@
           margin-right: 5px;
         }
         &__noimage {
-          @extend .flexCenter;
+          @extend .flex-center;
           color: $fainted-color;
-          background-color: $border;
+          background-color: var(--color-secondary);
           font-size: 10px;
           border-radius: 50%;
           width: 32px;
@@ -101,7 +101,7 @@
           margin-right: 3px;
         }
         &__chain {
-          @extend .flexCenter;
+          @extend .flex-center;
           align-items: flex-start;
           flex-direction: row;
           color: $fainted-color;

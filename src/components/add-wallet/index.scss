@@ -27,7 +27,7 @@
     flex-direction: column;
     padding: 20px;
     &__header {
-      @extend .flexCenter;
+      @extend .flex-center;
       justify-content: space-between;
       width: 100%;
       color: $text-color-dark;
@@ -39,7 +39,7 @@
       }
     }
     &__body {
-      @extend .flexCenter;
+      @extend .flex-center;
       flex-direction: column;
       justify-content: flex-end;
       width: 100%;
@@ -60,7 +60,7 @@
         }
         &__input {
           width: 100%;
-          @extend .textInput;
+          @extend .tex-input;
         }
       }
 

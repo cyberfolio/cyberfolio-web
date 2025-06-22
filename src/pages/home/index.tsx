@@ -81,7 +81,7 @@ const Home = () => {
               >
                 {chain} {connectedWallets.some((wallet) => wallet.chain === chain) ? "Connected" : "Wallet"}
                 {connectedWallets.some((wallet) => wallet.chain === chain) ? (
-                  <span className="connectedDotButton"></span>
+                  <span className="connected-dot-button"></span>
                 ) : (
                   <Plus color="white" size={20} />
                 )}
@@ -101,7 +101,7 @@ const Home = () => {
               >
                 {cex} {connectedCexes.some((connectedCex) => connectedCex.name === cex) ? "Connected" : "Account"}
                 {connectedCexes.some((connectedCex) => connectedCex.name === cex) ? (
-                  <span className="connectedDotButton"></span>
+                  <span className="connected-dot-button"></span>
                 ) : (
                   <Plus color="white" size={20} />
                 )}

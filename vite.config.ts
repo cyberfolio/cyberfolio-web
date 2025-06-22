@@ -16,7 +16,10 @@ export default defineConfig(({ mode }) => {
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: `@import "src/styles/index.scss";`,
+          additionalData: `
+           @import "src/styles/_variables.scss"; 
+           @import "src/styles/_shared.scss";
+           `,
         },
       },
     },

@@ -39,7 +39,7 @@ const App = () => {
       }
     };
     checkIsAuthenticated();
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="app">

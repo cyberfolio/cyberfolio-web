@@ -4,7 +4,7 @@
     height: 70px;
     display: flex;
     overflow-x: scroll;
-    border-bottom: 1px solid $border;
+    border-bottom: 1px solid var(--color-secondary);
     padding: 0 20px;
     &__link {
       white-space: nowrap;
@@ -15,8 +15,8 @@
       transition: background-color 0.25s ease;
       border-bottom: 1px solid transparent;
       border-radius: 8px 8px 0 0;
-      @extend .unselectable;
-      @extend .flexCenter;
+      @extend .unselectable !optional;
+      @extend .flex-center !optional;
       &:hover {
         background-color: lighten($background-dark, 20%);
         cursor: pointer;

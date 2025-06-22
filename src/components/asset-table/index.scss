@@ -1,5 +1,5 @@
 .asset-table {
-  border: 1px solid $border;
+  border: 1px solid var(--color-secondary);
   border-radius: 8px;
   padding: 0 20px 20px 20px;
   height: 100%;
@@ -41,7 +41,7 @@
     overflow-y: scroll;
     padding-right: 5px;
     &__empty {
-      @extend .flexCenter;
+      @extend .flex-center;
       height: 100%;
       color: $fainted-color;
       padding: 30px 0;
@@ -51,7 +51,7 @@
         margin: 0 10px;
       }
       &__text {
-        @extend .flexCenter;
+        @extend .flex-center;
         font-size: 18px;
         padding: 20px;
         color: white;
@@ -59,14 +59,14 @@
     }
 
     &__loading {
-      @extend .flexCenter;
+      @extend .flex-center;
       &--white {
         color: $text-color-dark;
       }
     }
     &__asset {
       text-decoration: none;
-      border-bottom: 1px solid $border;
+      border-bottom: 1px solid var(--color-secondary);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -74,7 +74,7 @@
       transition: background-color 0.15s;
 
       &--first {
-        border-top: 1px solid $border !important;
+        border-top: 1px solid var(--color-secondary) !important;
       }
       &--last {
         border-top: unset !important;
@@ -100,9 +100,9 @@
           margin-right: 5px;
         }
         &__noimage {
-          @extend .flexCenter;
+          @extend .flex-center;
           color: $fainted-color;
-          background-color: $border;
+          background-color: var(--color-secondary);
           font-size: 10px;
           border-radius: 50%;
           width: 32px;
@@ -110,7 +110,7 @@
           margin-right: 3px;
         }
         &__chain {
-          @extend .flexCenter;
+          @extend .flex-center;
           align-items: flex-start;
           flex-direction: column;
           color: $fainted-color;
@@ -121,7 +121,7 @@
             padding-bottom: 5px;
           }
           &__area {
-            @extend .flexCenter;
+            @extend .flex-center;
           }
           &__logo {
             border-radius: 20%;

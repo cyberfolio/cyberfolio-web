@@ -95,11 +95,11 @@ const ConnectWallet = () => {
         loading={isConnecting}
       />
       <div
-        className={`metamask-button ${isConnecting ? "disabledbutton" : ""}`}
+        className={`metamask-button ${isConnecting ? "disabled-button" : ""}`}
         onClick={!evmAddress ? handleConnectWallet : disconnectMetamask}
       >
         <img className="metamask-button-img" src={AppAssets.Ethereum} alt="metamask" />
-        {evmAddress ? <span className="connectedDot"></span> : <></>}
+        {evmAddress ? <span className="connected-Dot"></span> : <></>}
         <div className="metamask-button-text">
           {!evmAddress && !isConnecting && "Connect Wallet"}
           {!evmAddress && isConnecting && "Connecting..."}
