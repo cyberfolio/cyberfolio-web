@@ -1,9 +1,8 @@
-@import "./variables.scss";
-
 .disabledbutton {
   pointer-events: none;
   opacity: 0.4;
 }
+
 .connectedDot {
   height: 5px;
   width: 5px;
@@ -11,6 +10,7 @@
   border-radius: 50%;
   display: inline-block;
 }
+
 .connectedDotButton {
   @extend .connectedDot;
   margin: 0 3px 0 7px;
@@ -143,6 +143,7 @@
   left: 50%;
   margin-left: -65px; /* Use half of the width (130/2 = 65), to center the tooltip */
 }
+
 /* To make top arrow */
 .tooltip-bottom::after {
   content: " ";

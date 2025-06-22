@@ -5,12 +5,13 @@ import "./index.scss";
 type Props = {
   title: string;
   open: boolean;
+  content?: React.ReactNode;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   action: () => any;
   close: () => void;
   loading: boolean;
 };
-const Modal: React.FC<Props> = ({ title, open, action, close, loading }) => {
+const Modal: React.FC<Props> = ({ open, title, content, action, close, loading }) => {
   AppHooks.useKeypress(Keys.Escape, close);
 
   if (!open) return <></>;
@@ -24,6 +25,7 @@ const Modal: React.FC<Props> = ({ title, open, action, close, loading }) => {
           </button>
         </div>
         <div className="modal__content__title">{title}</div>
+        {content && <div className="modal__content">{content}</div>}
         <div className="modal__content__buttons">
           <button className="modal__content__buttons__yes" onClick={action} disabled={loading}>
             {loading && (

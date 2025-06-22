@@ -10,8 +10,10 @@ import Polygon from "./src/polygon.svg";
 import SmartChain from "./src/smartchain.svg";
 import Solana from "./src/solana.svg";
 import Gateio from "./src/gateio.svg";
+import BlockChain from "./src/blockchain.svg";
 
 const AppAssets = {
+  BlockChain,
   Ethereum,
   Arbitrum,
   Avalanche,

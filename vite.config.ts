@@ -2,6 +2,7 @@ import svgr from "@svgr/rollup";
 import react from "@vitejs/plugin-react";
 import { defineConfig, loadEnv } from "vite";
 import viteTsconfigPaths from "vite-tsconfig-paths";
+import path from "path";
 
 export default defineConfig(({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
@@ -11,28 +12,19 @@ export default defineConfig(({ mode }) => {
         transformMixedEsModules: true,
       },
     },
-    plugins: [
-      react({
-        babel: {
-          plugins: [
-            [
-              "babel-plugin-styled-components",
-              {
-                displayName: true,
-                fileName: true,
-                meaninglessFileNames: ["index", "styles"],
-                minify: true,
-                transpileTemplateLiterals: false,
-                pure: true,
-                preprocess: false,
-              },
-            ],
-          ],
+    plugins: [react(), viteTsconfigPaths({}), svgr({ dimensions: false })],
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `@import "src/styles/index.scss";`,
         },
-      }),
-      viteTsconfigPaths({}),
-      svgr({ dimensions: false }),
-    ],
+      },
+    },
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "./src"),
+      },
+    },
     server: {
       host: "127.0.0.1",
       port: 4000,

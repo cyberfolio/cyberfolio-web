@@ -1,25 +1,37 @@
-@import "./variables.scss";
-@import "./shared.scss";
+:root {
+  --color-primary: #d600e7;
+  --color-secondary: #2d2d32;
+  --color-text: #ffffff;
+
+  /* Backgrounds */
+  --color-background: #1d1d21;
+  --color-overlay: rgba(29, 29, 33, 0.5);
+}
 
 * {
   box-sizing: border-box;
 }
+
 *::-webkit-scrollbar {
   width: 6px;
 }
+
 *::-webkit-scrollbar-track {
   background: transparent;
   border-radius: 5px;
 }
+
 *::-webkit-scrollbar-thumb {
   background-color: #676a6d;
   border-radius: 14px;
   border: 1px solid #676a6d;
 }
+
 ::-webkit-scrollbar:horizontal {
   height: 5px;
   background-color: transparent;
 }
+
 ::-webkit-scrollbar-thumb:horizontal {
   background: #676a6d;
   border-radius: 14px;
@@ -33,6 +45,7 @@ body {
   background-color: $background;
   overflow-y: scroll;
 }
+
 input,
 select,
 textarea,

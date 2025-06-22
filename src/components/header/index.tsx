@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import "./index.scss";
 
 import BuyMeACoffee from "assets/src/bmc-logo.png";
@@ -8,6 +8,10 @@ import AppHooks from "hooks/index";
 import InfoService from "services/info";
 import AppConstants from "constants/index";
 import AppAssets from "assets";
+import AppComponents from "components";
+import { useChainId, useConnect } from "wagmi";
+import { c } from "vite/dist/node/types.d-aGj9QkWt";
+import toast from "react-hot-toast";
 
 const Header = () => {
   const isAuthenticated = AppHooks.useAppSelector((state) => state.evmAddress);
@@ -39,39 +43,60 @@ const Header = () => {
 };
 
 const ConnectWallet = () => {
+  const [isWalletModalOpen, setIsWalletModalOpen] = React.useState(false);
   const evmAddress = AppHooks.useAppSelector((state) => state.evmAddress);
   const ensName = AppHooks.useAppSelector((state) => state.ensName);
   const dispatch = AppHooks.useAppDispatch();
+  const { connectors, connect } = useConnect();
+  const chainId = useChainId();
 
   const { isConnecting, signAndVerifyMessageV2, disconnectMetamask } = AppHooks.useMetamaskLogin();
 
-  const resolveEnsName = async () => {
-    if (evmAddress && !ensName) {
-      try {
-        const name = await InfoService.getEnsName();
-        dispatch({
-          type: "SET_ENS_NAME",
-          payload: name,
-        });
-      } catch (e) {
-        dispatch({
-          type: "SET_ENS_NAME",
-          payload: "",
-        });
-      }
-    }
+  const handleConnectWallet = async () => {
+    setIsWalletModalOpen(true);
   };
 
   useEffect(() => {
+    const resolveEnsName = async () => {
+      if (evmAddress && !ensName) {
+        try {
+          const name = await InfoService.getEnsName();
+          dispatch({
+            type: "SET_ENS_NAME",
+            payload: name,
+          });
+        } catch (e) {
+          dispatch({
+            type: "SET_ENS_NAME",
+            payload: "",
+          });
+        }
+      }
+    };
     resolveEnsName();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [evmAddress, ensName]);
+  }, [dispatch, ensName, evmAddress]);
 
   return (
     <div className="metamask">
+      <AppComponents.Modal
+        open={isWalletModalOpen}
+        title="Select wallet"
+        content={
+          <div>
+            {connectors.map((connector) => (
+              <button key={connector.uid} onClick={() => connect({ connector, chainId })}>
+                {connector.name}
+              </button>
+            ))}
+          </div>
+        }
+        action={handleConnectWallet}
+        close={() => setIsWalletModalOpen(false)}
+        loading={isConnecting}
+      />
       <div
         className={`metamask-button ${isConnecting ? "disabledbutton" : ""}`}
-        onClick={!evmAddress ? signAndVerifyMessageV2 : disconnectMetamask}
+        onClick={!evmAddress ? handleConnectWallet : disconnectMetamask}
       >
         <img className="metamask-button-img" src={AppAssets.Ethereum} alt="metamask" />
         {evmAddress ? <span className="connectedDot"></span> : <></>}

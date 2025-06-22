@@ -14,11 +14,9 @@ declare module "wagmi" {
 
 const Wagmi = createConfig({
   chains: [mainnet, sepolia],
-  // @ts-ignore
   transports: {
-    ...(AppUtils.isProd
-      ? { [mainnet.id]: http(`${AppConstants.ETHMainnetRPCPRoviderURL}/${import.meta.env.VITE_ALCHEMY_API_KEY}`) }
-      : { [sepolia.id]: http(`${AppConstants.ETHSepholiaRPCPRoviderURL}/${import.meta.env.VITE_ALCHEMY_API_KEY}`) }),
+    [mainnet.id]: http(`${AppConstants.ETHMainnetRPCPRoviderURL}/${import.meta.env.VITE_ALCHEMY_API_KEY}`),
+    [sepolia.id]: http(`${AppConstants.ETHSepholiaRPCPRoviderURL}/${import.meta.env.VITE_ALCHEMY_API_KEY}`),
   },
   connectors: [
     injected(),

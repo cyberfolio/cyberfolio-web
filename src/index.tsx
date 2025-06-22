@@ -1,8 +1,5 @@
-import "./styles/global.scss";
-
-import { StrictMode } from "react";
+import React from "react";
 import { createRoot } from "react-dom/client";
-
 import { Provider } from "react-redux";
 import { Toaster } from "react-hot-toast";
 
@@ -19,10 +16,10 @@ const root = createRoot(rootElement as Element);
 const queryClient = new QueryClient();
 
 root.render(
-  <Provider store={store}>
-    <WagmiProvider config={AppConfig.Wagmi}>
-      <QueryClientProvider client={queryClient}>
-        <StrictMode>
+  <React.StrictMode>
+    <Provider store={store}>
+      <WagmiProvider config={AppConfig.Wagmi}>
+        <QueryClientProvider client={queryClient}>
           <Toaster
             position="top-center"
             reverseOrder={false}
@@ -33,8 +30,8 @@ root.render(
             }}
           />
           <App />
-        </StrictMode>
-      </QueryClientProvider>
-    </WagmiProvider>
-  </Provider>,
+        </QueryClientProvider>
+      </WagmiProvider>
+    </Provider>
+  </React.StrictMode>,
 );
