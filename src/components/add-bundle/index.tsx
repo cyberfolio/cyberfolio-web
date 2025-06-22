@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import "./index.module.scss";
+import "./index.scss";
 
 import AppHooks from "hooks/index";
 import { Cex, Keys } from "structures/index";

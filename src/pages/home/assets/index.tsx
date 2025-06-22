@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
-import "./index.module.scss";
+import "./index.scss";
 
 import classnames from "classnames";
 import { toast } from "react-hot-toast";

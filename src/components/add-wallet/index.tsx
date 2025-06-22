@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import "./index.module.scss";
+import "./index.scss";
 
 import { toast } from "react-hot-toast";
 import classnames from "classnames";

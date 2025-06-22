@@ -1,5 +1,5 @@
 import AppHooks from "hooks";
-import "./index.module.scss";
+import "./index.scss";
 
 const Loading = () => {
   const loading = AppHooks.useAppSelector((state) => state.loading);

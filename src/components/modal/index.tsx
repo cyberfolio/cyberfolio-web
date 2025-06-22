@@ -1,6 +1,6 @@
 import AppHooks from "hooks/index";
 import { Keys } from "structures/index";
-import "./index.module.scss";
+import "./index.scss";
 
 type Props = {
   title: string;

@@ -1,4 +1,4 @@
-import "./index.module.scss";
+import "./index.scss";
 
 import AppConstants from "constants/index";
 

@@ -1,5 +1,5 @@
 import React from "react";
-import "./index.module.scss";
+import "./index.scss";
 
 import classnames from "classnames";
 import AppUtils from "utils/index";

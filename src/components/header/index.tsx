@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "./index.module.scss";
+import "./index.scss";
 
 import AppUtils from "utils/index";
 import AppHooks from "hooks/index";
