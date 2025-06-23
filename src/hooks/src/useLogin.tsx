@@ -14,7 +14,7 @@ import AppHooks from "hooks/index";
 const useLogin = () => {
   const dispatch = AppHooks.useAppDispatch();
   const [isConnecting, setIsConnecting] = React.useState(false);
-  const { connectAsync, connectors } = useConnect();
+  const { connectAsync } = useConnect();
 
   const signAndVerifyMessageV2 = async () => {
     try {

@@ -5,19 +5,22 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 16px;
+  padding: 8px;
   min-height: 40px;
-  border: 1px solid var(--color-secondary);
   border-radius: 8px;
-  background-color: var(--color-secondary);
   color: var(--color-text);
   font-weight: 500;
-  font-size: 14px;
+  font-size: 0.7rem;
   transition: background-color 0.25s ease;
+  background-color: var(--color-secondary);
 
   &:hover {
     cursor: pointer;
     background-color: $button-hover-color;
+
+    .tooltipBottom {
+      visibility: visible;
+    }
   }
 
   &:disabled {
@@ -26,6 +29,37 @@
   }
 }
 
+.successBorder {
+  border: 1px solid var(--color-success);
+}
+
 .icon {
-  margin-right: 8px;
+  margin-left: 3px;
+}
+
+.tooltipBottom {
+  visibility: hidden;
+  width: 130px;
+  background-color: $tooltip-dark-color;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  top: 115%;
+  left: 50%;
+  margin-left: -65px; /* Use half of the width (130/2 = 65), to center the tooltip */
+}
+
+/* To make top arrow */
+.tooltipBottom::after {
+  content: " ";
+  position: absolute;
+  bottom: 100%; /* At the top of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent $tooltip-dark-color transparent;
 }

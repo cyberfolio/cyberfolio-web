@@ -95,7 +95,7 @@
         }
         &__noimage {
           @extend .flex-center;
-          color: $fainted-color;
+          color: var(--color-text-muted);
           background-color: var(--color-secondary);
           font-size: 10px;
           border-radius: 50%;
@@ -107,7 +107,7 @@
           @extend .flex-center;
           align-items: flex-start;
           flex-direction: row;
-          color: $fainted-color;
+          color: var(--color-text-muted);
           &__name {
             color: var(--color-text);
             font-size: 14px;

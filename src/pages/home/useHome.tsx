@@ -77,41 +77,6 @@ const useHome = () => {
     };
   }, [lastAssetUpdate]);
 
-  const openWalletModal = (chain: AppStructures.Chain) => {
-    const isConnected = isWalletConnected();
-    if (!isConnected) {
-      toast.error("Connect your wallet");
-      return;
-    }
-
-    dispatch({
-      type: "OPEN_WALLET_MODAL",
-      payload: {
-        open: true,
-        chain,
-      },
-    });
-  };
-
-  const openAddCexModal = (name: AppStructures.Cex) => {
-    const isConnected = isWalletConnected();
-    if (!isConnected) {
-      toast.error("Connect your wallet");
-      return;
-    }
-
-    if (connectedCexes.some((connectedCex) => connectedCex.name === name)) return;
-    if (evmAddress) {
-      dispatch({
-        type: "OPEN_ADD_CEX_MODAL",
-        payload: {
-          open: true,
-          name,
-        },
-      });
-    }
-  };
-
   const addMore = (chain: AppStructures.Chain) => {
     if (connectedWallets.some((wallet) => wallet.chain === chain)) {
       setHoveredWallet(chain);
@@ -137,8 +102,6 @@ const useHome = () => {
     isPlatformDropdownOpen,
     hoveredWallet,
     lastUpdate,
-    openWalletModal,
-    openAddCexModal,
     addMore,
     setIsPlatformDropdownOpen,
     onPlatformClick,

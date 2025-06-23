@@ -9,17 +9,12 @@
   bottom: 0;
   top: 0;
   z-index: $modal-dialog-index;
-  background-color: rgba(18, 19, 34, 0.7);
   align-items: center;
   justify-content: center;
   padding-top: 100px;
   padding-bottom: 100px;
-  &--active {
-    display: flex;
-    backdrop-filter: blur(3px);
-  }
+
   &__content {
-    box-shadow: 0 4px 18px rgb(7 7 22 / 20%);
     max-width: 550px;
     max-height: 100%;
     background-color: $background;

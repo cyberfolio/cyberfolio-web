@@ -22,29 +22,14 @@
     &__add {
       display: flex;
       align-items: center;
+      gap: 10px;
       justify-content: flex-start;
       flex-wrap: wrap;
       width: 100%;
       max-width: 1480px;
       margin: 0 auto;
-      padding: 0 20px;
-      &__wallet {
-        margin-top: 15px;
-        margin-right: 15px;
-        font-size: 0.7rem;
-        position: relative;
-        @extend .button-borderless;
-        @extend .unselectable;
-        &--active {
-          border: 1px solid $success-color;
-          &__tooltip {
-            @extend .tooltip-bottom;
-          }
-          &:hover .home__header__add__wallet--active__tooltip {
-            visibility: visible;
-          }
-        }
-      }
+      padding: 20px;
+
       &__cex {
         margin-top: 15px;
         margin-right: 15px;
@@ -74,8 +59,7 @@
           flex-direction: column;
           &__label {
             padding-left: 2px;
-            // TODO: darken the color
-            // color: darken(var(--color-text), 40%);
+            color: var(--color-text-muted);
           }
           &__value {
             font-size: 30px;
@@ -92,8 +76,7 @@
           &__label {
             padding-left: 2px;
             padding-right: 5px;
-            // TODO: darken the color
-            // color: darken(var(--color-text), 40%);
+            color: var(--color-text-muted);
             &--value {
               font-weight: 600;
               color: var(--color-text);
